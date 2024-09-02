@@ -8,10 +8,12 @@ import { styled } from '@mui/material/styles';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
+  height: 340, // Fixed height for all cards
   border: '1px solid #ddd',
   borderRadius: '16px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   transition: 'transform 0.3s, box-shadow 0.3s',
+  overflow: 'hidden', // Ensures content does not overflow the card
   '&:hover': {
     transform: 'translateY(-5px)',
     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
@@ -21,11 +23,18 @@ const StyledCard = styled(Card)(({ theme }) => ({
 const StyledCardMedia = styled(CardMedia)(({ theme }) => ({
   borderTopLeftRadius: '16px',
   borderTopRightRadius: '16px',
+  height: 150, // Fixed height for the image
+  objectFit: 'cover', // Ensures the image covers the space nicely
 }));
 
 const StyledCardContent = styled(CardContent)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   padding: '16px',
+  height: 'calc(100% - 140px)', // Adjust height to fit within the fixed card height
+  overflow: 'hidden', // Ensures text does not overflow the content area
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
 }));
 
 export default function CourseCard({ image, text, title }) {
@@ -34,7 +43,6 @@ export default function CourseCard({ image, text, title }) {
       <CardActionArea>
         <StyledCardMedia
           component="img"
-          height="140"
           image={`./images/${image}`}
           alt={title}
         />

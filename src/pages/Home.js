@@ -44,7 +44,7 @@ export const Home = () => {
        },
        {
         image:"training3.jpg",
-        title:"Industrial Training",
+        title:"Industrial Automation Training",
         Description:"We believe that professional training leads to a better future for our students. Our Industrial Training prepares you for the complex challenges you will face in this"
        }
     ]
@@ -64,6 +64,8 @@ export const Home = () => {
               sx={{
                 fontSize: { lg: "3.5rem", xs: "2.2rem" },
                 fontWeight: "600",
+                lineHeight:"99%",
+                overflow:"hidden"
               }}
             >
               Free Online
@@ -95,6 +97,7 @@ export const Home = () => {
                 borderRadius: "20px",
                 marginTop: "20px",
                 display: { xs: "none", lg: "block", md: "block", sm: "none" },
+                marginBottom:"20px"
               }}
             >
               Enroll Now
@@ -104,7 +107,7 @@ export const Home = () => {
             <CardMedia
               component="img"
               image="./images/intro_pic.png"
-              sx={{ width: { lg: "500px", xs: "260px" }, borderRadius: "1px" }}
+              sx={{ width: { lg: "500px", xs: "260px" }, borderRadius: "1px",marginTop:"20px" }}
             />
           </Grid2>
         </Grid2>
@@ -135,12 +138,12 @@ export const Home = () => {
         </Grid2>
         
 
-        <center><Button variant="contained" sx={{borderRadius:"20px",padding:"10px"}}>View All Courses</Button></center>
+        <center><Button variant="contained" sx={{borderRadius:"20px",marginBottom:"20px"}}>View All Courses</Button></center>
       </Box>
       <Box sx={{width:"100vw",marginTop:"50px"}}>
         <h1 style={{textAlign:"center",fontSize:"2.5rem",marginTop:"20px"}}>Our Featured Training</h1>
         
-        <p style={{textAlign:"center",padding:"10px"}}>Being the best software training institute Kolkata, we offer excellent training programs to our candidates.<br/> Preparing them for bright career opportunities, we equip them with the right skills and proper training.</p>
+        <p style={{textAlign:"center",padding:"10px"}}>Being the best software training institute Bihar, we offer excellent training programs to our candidates.<br/> Preparing them for bright career opportunities, we equip them with the right skills and proper training.</p>
 
         <Grid2 container sx={{padding:"20px",justifyContent:"center"}} spacing={3}>
             {item1.map((data,index)=>(

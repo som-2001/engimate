@@ -9,12 +9,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { CardMedia } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const pages = ["Home", "Placement", "Training", "All courses"];
-const settings = ["Gallery", "About", "Contact Us", "Blog"];
+const pages = ["Home", "About", "Our Courses"];
+const settings = ["Placed Students", "Gallery", "Contact Us"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -24,30 +27,30 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
+  const handleNavigate = (path) => {
+    navigate(path);
+    handleCloseNavMenu(); // Close the menu after navigation
+  };
+
   return (
-    <AppBar position="static" >
+    <AppBar position="static" style={{ backgroundColor: "whitesmoke" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Logo for larger screens */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+          <CardMedia
+            component="img"
+            image={"../images/logo.png"}
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "white",
-              textDecoration: "none",
+              width: "150px",
+              height: "auto",
+              display: {
+                xs: "none",
+                sm: "none",
+                md: "block",
+                lg: "block",
+              },
             }}
-          >
-            ENGIMATE
-          </Typography>
+          />
 
-          {/* Mobile Menu Button */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -55,7 +58,7 @@ function ResponsiveAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              sx={{color:"white"}}
+              sx={{ color: "white" }}
             >
               <MenuIcon />
             </IconButton>
@@ -65,9 +68,7 @@ function ResponsiveAppBar() {
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "left",
-               
               }}
-              
               keepMounted
               transformOrigin={{
                 vertical: "top",
@@ -75,44 +76,40 @@ function ResponsiveAppBar() {
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: "block", md: "none" }}}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page} onClick={() => handleNavigate(`/${page.toLowerCase().replace(" ", "-")}`)}>
+                  <Typography textAlign="center" sx={{ color: "black" }}>
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting} onClick={() => handleNavigate(`/${setting.toLowerCase().replace(" ", "-")}`)}>
+                  <Typography textAlign="center" sx={{ color: "black" }}>
+                    {setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
 
-          {/* Logo for smaller screens */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+          <CardMedia
+            component="img"
+            image={"../images/logo.png"}
             sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-              
+              width: "150px",
+              height: "auto",
+              display: {
+                xs: "block",
+                sm: "block",
+                md: "none",
+                lg: "none",
+              },
             }}
-            
-          >
-            ENGIMATE
-          </Typography>
+          />
 
-          {/* Menu items for larger screens */}
           <Box
             sx={{
               flexGrow: 1,
@@ -124,8 +121,8 @@ function ResponsiveAppBar() {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  onClick={() => handleNavigate(`/${page.toLowerCase().replace(" ", "-")}`)}
+                  sx={{ my: 2, color: "black", display: "block" }}
                 >
                   {page}
                 </Button>
@@ -135,8 +132,8 @@ function ResponsiveAppBar() {
               {settings.map((setting) => (
                 <Button
                   key={setting}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  onClick={() => handleNavigate(`/${setting.toLowerCase().replace(" ", "-")}`)}
+                  sx={{ my: 2, color: "black", display: "block" }}
                 >
                   {setting}
                 </Button>
