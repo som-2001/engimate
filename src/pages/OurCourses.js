@@ -276,7 +276,7 @@ export const OurCourses = () => {
           <Grid item xs={12} sm={12} lg={6} md={6}></Grid>
         </Grid>
       </Box>
-      <Container sx={{ padding: "20px" }}>
+      <Container sx={{ padding: "9px" }}>
       
       <Box mb={4}>
           <Typography variant="h3" component="h1" align="center" gutterBottom>
@@ -299,17 +299,21 @@ export const OurCourses = () => {
             </Typography>
             <Grid container spacing={4}>
               {categories[category].map((course) => (
-                <Grid item xs={12} sm={6} md={4} key={course.title}>
+                <Grid item xs={12} sm={6} md={6} lg={4} key={course.title}>
                   <Card
                     sx={{
                       boxShadow: 5,
                       borderRadius: "16px",
                       overflow: "hidden",
+                      height:"260",
+                      
                       transition: "transform 0.3s, box-shadow 0.3s",
                       "&:hover": {
                         transform: "translateY(-5px)",
                         boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
                       },
+                      marginBottom:"10px",
+                      
                     }}
                   >
                     <CardMedia
@@ -319,7 +323,13 @@ export const OurCourses = () => {
                       alt={course.title}
                       sx={{ objectFit: "cover" }}
                     />
-                    <CardContent sx={{ backgroundColor: "#f5f5f5" }}>
+                    <CardContent  sx={{
+                        backgroundColor: "#f5f5f5",
+                        height: "140px", // Ensure the content area fits within the card
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                      }}>
                       <Typography
                         variant="h5"
                         component="div"

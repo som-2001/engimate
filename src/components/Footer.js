@@ -67,12 +67,16 @@ const Footer = () => {
             <FooterLink onClick={(e) => (window.location.href = "/about")}>
               About
             </FooterLink>
-            <FooterLink onClick={(e) => (window.location.href = "/contact")}>
+            <FooterLink onClick={(e) => (window.location.href = "/contact-us")}>
               Contact Us
             </FooterLink>
-            <FooterLink onClick={(e) => (window.location.href = "/gallary")}>
+            <FooterLink onClick={(e) => (window.location.href = "/our-courses")}>
+              Our Courses
+            </FooterLink>
+            <FooterLink onClick={(e) => (window.location.href = "/gallery")}>
               Gallary
             </FooterLink>
+           
           </Grid>
 
           <Grid item xs={12} sm={4}>

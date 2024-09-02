@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import CourseCard from "../components/CourseCard";
 import "../App.css";
 import Footer from "../components/Footer";
+import WhyUs from "../components/WhyUs";
 
 export const Home = () => {
     const item=[
@@ -18,15 +19,15 @@ export const Home = () => {
 
         },
         {
-            image:"ui.jpg",
-            title:"UI/UX Design Full Course",
-            text:"Engimate offers best UI/UX Design full course in Bihar.Learn from the leading industry about this full course..."
+            image:"Reactjs.jpg",
+            title:"Reactjs Full Course",
+            text:"Engimate offers best Reactjs full course in Bihar.Learn from the leading industry about this full course..."
 
         },
         {
-            image:"ui.jpg",
-            title:"UI/UX Design Full Course",
-            text:"Engimate offers best UI/UX Design full course in Bihar.Learn from the leading industry about this full course..."
+            image:"plc.jpg",
+            title:"PLC Full Course",
+            text:"Engimate offers best PLC full course in Bihar.Learn from the leading industry about this full course..."
 
         }
     ]
@@ -65,7 +66,8 @@ export const Home = () => {
                 fontSize: { lg: "3.5rem", xs: "2.2rem" },
                 fontWeight: "600",
                 lineHeight:"99%",
-                overflow:"hidden"
+                overflow:"hidden",
+                marginTop:"30px"
               }}
             >
               Free Online
@@ -99,6 +101,7 @@ export const Home = () => {
                 display: { xs: "none", lg: "block", md: "block", sm: "none" },
                 marginBottom:"20px"
               }}
+              onClick={(e)=>window.location.href="/contact-us"}
             >
               Enroll Now
             </Button>
@@ -119,7 +122,10 @@ export const Home = () => {
               borderRadius: "20px",
               marginTop: "20px",
               display: { xs: "block", lg: "none", md: "none", sm: "block" },
+              marginBottom:"20px"
+
             }}
+            onClick={(e)=>window.location.href="/contact-us"}
           >
             Enroll Now
           </Button>
@@ -138,7 +144,7 @@ export const Home = () => {
         </Grid2>
         
 
-        <center><Button variant="contained" sx={{borderRadius:"20px",marginBottom:"20px"}}>View All Courses</Button></center>
+        <center><Button variant="contained" sx={{borderRadius:"20px",marginBottom:"20px"}} onClick={(e)=>window.location.href="/our-courses"}>View All Courses</Button></center>
       </Box>
       <Box sx={{width:"100vw",marginTop:"50px"}}>
         <h1 style={{textAlign:"center",fontSize:"2.5rem",marginTop:"20px"}}>Our Featured Training</h1>
@@ -154,6 +160,12 @@ export const Home = () => {
         </Grid2>
         
 
+      </Box>
+
+      <Box sx={{width:"100vw",marginTop:"50px"}}>
+      <h1 style={{textAlign:"center",fontSize:"2.5rem",marginTop:"20px"}}>Why Choose us</h1>
+      <p style={{textAlign:"center",padding:"10px",marginBottom:"40px"}}>If you dream of having a great career with a good salary, then Engimate,<br/> the best software training institute is your stop. Enrol on our professional IT courses and get trained by the industry experts.</p>
+        <WhyUs/>
       </Box>
       <Footer/>
     </Box>

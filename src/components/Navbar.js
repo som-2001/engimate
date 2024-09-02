@@ -28,7 +28,12 @@ function ResponsiveAppBar() {
   };
 
   const handleNavigate = (path) => {
-    navigate(path);
+
+    if (String(path) === "/home") {
+      navigate('/');
+    } else {
+      navigate(path);
+    }
     handleCloseNavMenu(); // Close the menu after navigation
   };
 
