@@ -25,7 +25,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" style={{backgroundColor:"#091b24"}}>
+    <AppBar position="static" >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Logo for larger screens */}
@@ -40,7 +40,7 @@ function ResponsiveAppBar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "white",
               textDecoration: "none",
             }}
           >
@@ -48,14 +48,14 @@ function ResponsiveAppBar() {
           </Typography>
 
           {/* Mobile Menu Button */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="open navigation menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              sx={{color:"white"}}
             >
               <MenuIcon />
             </IconButton>
@@ -67,6 +67,7 @@ function ResponsiveAppBar() {
                 horizontal: "left",
                
               }}
+              
               keepMounted
               transformOrigin={{
                 vertical: "top",
@@ -74,7 +75,7 @@ function ResponsiveAppBar() {
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: "block", md: "none" }, width:"290px" }}
+              sx={{ display: { xs: "block", md: "none" }}}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -104,7 +105,9 @@ function ResponsiveAppBar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              
             }}
+            
           >
             ENGIMATE
           </Typography>

@@ -12,8 +12,7 @@ import { MdEmail, MdPhone } from "react-icons/md";
 
 const FooterContainer = styled("footer")({
   padding: "40px 0px 30px 0px",
-  // backgroundColor: '#aeb1b3',
- 
+  backgroundColor: "rgb(48 48 91)",
   color: "white",
   marginTop: "50px",
 });
@@ -122,7 +121,7 @@ const Footer = () => {
               </FooterLink>
             </Box>
             <Box display="flex" alignItems="center" mb={1}>
-              <FaFacebook style={{ marginRight: "8px" }} />
+              <FaFacebook style={{ marginRight: "8px", }} />
               <FooterLink href="#" color="textSecondary">
                 Facebook
               </FooterLink>
@@ -149,23 +148,23 @@ const Footer = () => {
       <Typography
         variant="body1"
         textAlign="center"
-        style={{ marginTop: "20px" }}
+        style={{ marginTop: "20px",color:"white" }}
       >
         NH-83, Boond Vihar Colony, Street no.- 02, Near Jehanabad Court Halt,<br/> Jehanabad, Bihar, India - 804417
       </Typography>
 
-      <Box style={{ marginTop: "10px", display: "flex", gap: "5px",justifyContent:"center" }}>
+      <Box style={{ marginTop: "10px", display: "flex", gap: "5px",justifyContent:"center",}}>
         <span
           onClick={(e)=>window.location.href="/refund-policy"}
           color="textSecondary"
           textAlign="center"
-          style={{cursor:"pointer"}}
+          style={{cursor:"pointer",color:"white" }}
           
         >
           Refund Policy 
         </span>
-        <span>|</span>
-        <span href="#" color="textSecondary" textAlign="center"    style={{cursor:"pointer"}}>
+        <span style={{color:"white" }}>|</span>
+        <span href="#" color="textSecondary" textAlign="center"    style={{cursor:"pointer",color:"white"}}>
            Terms & Condition
         </span>
       </Box>

@@ -30,6 +30,24 @@ export const Home = () => {
 
         }
     ]
+
+    const item1=[
+       {
+        image:"training1.jpg",
+        title:"Job Oriented Training",
+        Description:"Get yourself enrolled in a job-oriented course at Engimate. Gain first-hand experience of working on real-time projects"
+       },
+       {
+        image:"training2.jpg",
+        title:"Pre-Placement Training",
+        Description:"You need to develop specific skills along with software training to get placed during the placement drive on your campus."
+       },
+       {
+        image:"training3.jpg",
+        title:"Industrial Training",
+        Description:"We believe that professional training leads to a better future for our students. Our Industrial Training prepares you for the complex challenges you will face in this"
+       }
+    ]
   return (
     <Box >
       <Navbar />
@@ -117,7 +135,22 @@ export const Home = () => {
         </Grid2>
         
 
-        <center><button id="button">View All Courses</button></center>
+        <center><Button variant="contained" sx={{borderRadius:"20px",padding:"10px"}}>View All Courses</Button></center>
+      </Box>
+      <Box sx={{width:"100vw",marginTop:"50px"}}>
+        <h1 style={{textAlign:"center",fontSize:"2.5rem",marginTop:"20px"}}>Our Featured Training</h1>
+        
+        <p style={{textAlign:"center",padding:"10px"}}>Being the best software training institute Kolkata, we offer excellent training programs to our candidates.<br/> Preparing them for bright career opportunities, we equip them with the right skills and proper training.</p>
+
+        <Grid2 container sx={{padding:"20px",justifyContent:"center"}} spacing={3}>
+            {item1.map((data,index)=>(
+                <Grid2 item lg={3} md={4} sm={12} xs={12}>
+                    <CourseCard image={data.image} title={data.title} text={data.Description}/>
+                </Grid2>
+            ))}
+        </Grid2>
+        
+
       </Box>
       <Footer/>
     </Box>

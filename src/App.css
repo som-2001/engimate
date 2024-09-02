@@ -1,8 +1,8 @@
 *{
   margin: 0;
   padding: 0;
-  background-color: #091b24;
-  color: white;
+  /* background-color: #091b24; */
+  color: black;
   overflow-x: hidden;
 }
 
@@ -12,4 +12,39 @@
   font-size: medium;
   background-color: cadetblue;
   border-radius: 20px;
+}
+::-webkit-scrollbar {
+  width: 1px; /* Width of the scrollbar */
+  height: 1px; /* Height of the scrollbar */
+}
+
+/* Track of the scrollbar */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+  border-radius: 1px;
+  width: 1px; /* Round the corners */
+}
+
+/* Handle of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the handle */
+  border-radius: 1px; /* Round the corners */
+  width: 1px;
+}
+
+/* Handle hover effect */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color when hovered */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width:thin; /* Thin scrollbar */
+  scrollbar-color: #888 #f1f1f1; /* Handle color and track color */
+  scroll-behavior: smooth;
+}
+
+/* For Edge and Internet Explorer */
+body {
+  -ms-overflow-style: none; /* Hide default scrollbar */
 }
