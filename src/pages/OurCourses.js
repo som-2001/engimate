@@ -152,7 +152,7 @@ export const OurCourses = () => {
                 />
                 <CardContent
                   sx={{
-                    backgroundColor: "#f5f5f5",
+                   
                     height: "140px",
                     display: "flex",
                     flexDirection: "column",

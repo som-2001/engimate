@@ -1,14 +1,48 @@
 import React from "react";
-import { Box, Container, Grid, Typography, Button } from "@mui/material";
+import { Box, Container, Grid, Typography, Button, Grid2 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CourseCard from "../components/CourseCard";
 
 // Styled components
 
+const whatWeOffer=[
+  {
+    image:"project.jpg",
+    title:"Comprehensive Courses",
+    text:"Our curriculum spans across critical industries, offering specialized courses in Industrial Automation, Electrical, Mechanical, and Civil Engineering, as well as IT and Software Development. Whether you're interested in mastering the intricacies of automation systems, developing cutting-edge software, we have a course tailored for you."
+  },
+  {
+    image:"experts.jpg",
+    title:"Expert Instructors & Trainers",
+    text:"Our team of instructor/trainers brings years of industry experience and academic knowledge, ensuring that you receive not just theoretical understanding, but also practical insights and hands-on training."
+  },
+  {
+    image:"courses.jpg",
+    title:"Flexible Learning Options",
+    text:"We offer a variety of learning formats to accommodate your schedule and preferences, including online and hybrid courses."
+  }
+]
 
-
+const whatChooseEngimate=[
+  {
+    image:"skills.jpg",
+    title:"Industry-Relevant Skills",
+    text:"Our programs are designed to ensure that you are learning the most current and applicable skills in your field."
+  },
+  {
+    image:"carrier.jpg",
+    title:"Career-Focused Education",
+    text:"We aim to make you job-ready, with a curriculum that includes not just theoretical knowledge but also practical, hands-on experience."
+  },
+  {
+    image:"community.jpg",
+    title:"Supportive Community",
+    text:"At Engimate, you are part of a community of learners and professionals dedicated to growth and success. We offer ongoing support, from enrollment to job placement."
+  }
+]
 
 const ContentSection = styled(Box)({
   padding: "2rem 1rem",
@@ -116,27 +150,22 @@ const About = () => {
           >
             What We Offer
           </Typography>
-          <Typography variant="body1" paragraph>
-            <strong>Comprehensive Courses:</strong> Our curriculum spans across
-            critical industries, offering specialized courses in Industrial
-            Automation, Electrical, Mechanical, and Civil Engineering, as well
-            as IT and Software Development. Whether you're interested in
-            mastering the intricacies of automation systems, designing
-            sustainable infrastructure, or developing cutting-edge software, we
-            have a course tailored for you.
-          </Typography>
-          <Typography variant="body1" paragraph>
-            <strong>Expert Instructors & Trainers:</strong> Our team of
-            instructor/trainers brings years of industry experience and academic
-            knowledge, ensuring that you receive not just theoretical
-            understanding, but also practical insights and hands-on training.
-          </Typography>
-          <Typography variant="body1" paragraph>
-            <strong>Flexible Learning Options:</strong> We offer a variety of
-            learning formats to accommodate your schedule and preferences,
-            including online and hybrid courses.
-          </Typography>
-
+          <Grid2
+          container
+          sx={{ padding: "0px", justifyContent: "center" }}
+          spacing={3}
+        >
+          {whatWeOffer.map((data, index) => (
+            <Grid2 item lg={3} md={4} sm={12} xs={12}>
+              <CourseCard
+                image={data.image}
+                title={data.title}
+                text={data.text}
+              />
+            </Grid2>
+          ))}
+        </Grid2>
+          
           <Typography
             variant="h4"
             gutterBottom
@@ -170,22 +199,22 @@ const About = () => {
           >
             Why Choose Engimate?
           </Typography>
-          <Typography variant="body1" paragraph>
-            <strong>Industry-Relevant Skills:</strong> Our programs are designed
-            to ensure that you are learning the most current and applicable
-            skills in your field.
-          </Typography>
-          <Typography variant="body1" paragraph>
-            <strong>Career-Focused Education:</strong> We aim to make you
-            job-ready, with a curriculum that includes not just theoretical
-            knowledge but also practical, hands-on experience.
-          </Typography>
-          <Typography variant="body1" paragraph>
-            <strong>Supportive Community:</strong> At Engimate, you are part of
-            a community of learners and professionals dedicated to growth and
-            success. We offer ongoing support, from enrollment to job placement.
-          </Typography>
-
+         
+          <Grid2
+          container
+          sx={{ justifyContent: "center" }}
+          spacing={3}
+        >
+          {whatChooseEngimate.map((data, index) => (
+            <Grid2 item lg={3} md={4} sm={12} xs={12}>
+              <CourseCard
+                image={data.image}
+                title={data.title}
+                text={data.text}
+              />
+            </Grid2>
+          ))}
+        </Grid2>
           <Box textAlign="center" mt={4}>
             <Typography variant="h6" marginBottom="5%" marginTop="10%" sx={{  fontSize: { lg: "1.1rem", xs: "1.0rem", md: "0.7rem" },}}>At Engimate, we believe that the right education can transform
             lives. To enhance your skills, advance your career,<br/> and contribute

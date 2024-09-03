@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
-  height: 355, // Fixed height for all cards
+   // Fixed height for all cards
   border: '1px solid #ddd',
   borderRadius: '16px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
@@ -40,7 +40,7 @@ const StyledCardContent = styled(CardContent)(({ theme }) => ({
 
 export default function CourseCard({ image, text, title }) {
   return (
-    <StyledCard>
+    <StyledCard sx={{height: {lg:405,xs:"fit-content",sm:"fit-content",md:405}}}>
       <CardActionArea>
         <StyledCardMedia
           component="img"
