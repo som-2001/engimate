@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid, Card, CardMedia, CardContent, Typography, Container, Box, Button } from "@mui/material";
+import { Grid, Card, CardMedia, CardContent, Typography, Container, Box, Button, CardActions } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -165,15 +165,28 @@ export const OurCourses = () => {
                   <Typography variant="body2" color="text.secondary">
                     {course.description}
                   </Typography>
-                  <Button
+                  
+                </CardContent>
+                <CardActions>
+                <Button
                     variant="standard"
                     color="primary"
-                    sx={{ marginTop: "10px" }}
+                    sx={{
+                      backgroundColor: "#0d47a1", // Matching button color with main heading
+                      color: "#fff",
+                   
+                      fontSize: "1rem",
+                      textTransform: "none",
+                      borderRadius: "50px",
+                      "&:hover": {
+                        backgroundColor: "#08306b", // Darker shade on hover
+                      },
+                    }}
                     onClick={() => handleViewCourses(course.abbreviation)}
                   >
                     View Courses
                   </Button>
-                </CardContent>
+                </CardActions>
               </Card>
             </Grid>
           ))}

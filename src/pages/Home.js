@@ -4,6 +4,7 @@ import CourseCard from "../components/CourseCard";
 import "../App.css";
 import Footer from "../components/Footer";
 import WhyUs from "../components/WhyUs";
+import { OurExpertise } from "../components/OurExpertise";
 
 export const Home = () => {
   const item = [
@@ -67,7 +68,7 @@ export const Home = () => {
             <Typography
               variant="body1"
               sx={{
-                fontSize: { lg: "3.5rem", xs: "2.2rem" },
+                fontSize: "2.5rem",
                 fontWeight: "600",
                 lineHeight: "110%",
                 overflow: "hidden",
@@ -123,8 +124,8 @@ export const Home = () => {
             fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.7rem" },
           }}
         >
-          Our job-oriented IT courses are designed for developing an
-          excellent path for the students.
+          Our job-oriented IT courses are designed for developing an excellent
+          path for the students.
           <br /> Engimate offers Complete Placement Assistance on these popular
           courses. Check it out!
         </Typography>
@@ -144,7 +145,6 @@ export const Home = () => {
             </Grid2>
           ))}
         </Grid2>
-
       </Box>
       <Box sx={{ width: "100vw", marginTop: "50px" }}>
         <h1
@@ -188,6 +188,26 @@ export const Home = () => {
         <h1
           style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px" }}
         >
+          Our Expertise
+        </h1>
+        <Typography
+          variant="body2"
+          sx={{
+            textAlign: "center",
+            padding: "10px",
+            fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.7rem" },
+            marginBottom:"40px"
+          }}
+        >
+          we pride ourselves on offering cutting-edge courses across a diverse range of industries to meet the evolving demands of today’s job market.<br/> Our expertise spans several critical fields, providing you with the knowledge and skills needed to excel in your chosen career path.
+        </Typography>
+        <OurExpertise />
+      </Box>
+
+      <Box sx={{ width: "100vw", marginTop: "50px" }}>
+        <h1
+          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px" }}
+        >
           Why Choose us
         </h1>
         <Typography
@@ -213,7 +233,7 @@ export const Home = () => {
           padding: { xs: "20px", sm: "40px", md: "60px" },
           textAlign: "center",
           borderRadius: "12px",
-         
+
           // boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)", // Soft shadow
           maxWidth: "800px", // Set a maximum width for larger screens
           margin: "auto", // Center the box
@@ -225,8 +245,8 @@ export const Home = () => {
             fontWeight: "bold",
             color: "#0d47a1", // Dark blue color for the main heading
             marginBottom: "16px",
-            fontSize:"2.5rem",
-            marginTop:"60px"
+            fontSize: "2.5rem",
+            marginTop: "60px",
           }}
         >
           Join Us Today!
@@ -262,12 +282,12 @@ export const Home = () => {
             padding: "10px 24px",
             fontSize: "1rem",
             textTransform: "none",
-            borderRadius:"50px",
+            borderRadius: "50px",
             "&:hover": {
               backgroundColor: "#08306b", // Darker shade on hover
             },
           }}
-          onClick={(e)=>window.location.href="/our-courses"}
+          onClick={(e) => (window.location.href = "/our-courses")}
         >
           Explore Courses
         </Button>

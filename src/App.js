@@ -6,6 +6,7 @@ import { Contact } from "./pages/Contact";
 import { Gallary } from "./pages/Gallary";
 import { RefundPolicy } from "./pages/RefundPolicy";
 import CourseList from "./components/CourseList";
+import About from "./pages/About";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/gallery" element={<Gallary />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/courses/:category" element={<CourseList />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   
