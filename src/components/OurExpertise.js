@@ -15,19 +15,19 @@ const expertise = [
     description: "Gain hands-on experience in electrical systems, circuit design, microcontroller, embedded system, power distribution, and safety protocols.",
   },
   {
-    image: "Mechanical.jpg",
+    image: "mechanical.jpg",
     title: "Mechanical Engineering",
     abbreviation: "ME",
     description: "Explore the fundamentals of mechanical design, CAD/CAM software, thermodynamics, and advanced manufacturing processes.",
   },
   {
-    image: "Civil.jpg",
+    image: "civil.jpg",
     title: "Civil Engineering",
     abbreviation: "CE",
     description: "Learn the essentials of structural analysis, construction management, and sustainable building practices.",
   },
   {
-    image: "Cse.jpg",
+    image: "cse.jpg",
     title: "IT and Software Development",
     abbreviation: "ITSD",
     description: "Equip yourself with the skills needed in today’s tech-driven world, including programming languages, software development, and IT infrastructure management.",

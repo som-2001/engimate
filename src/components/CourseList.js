@@ -16,7 +16,7 @@ const courses = {
   CSE: [
     {
       title: "MERN Stack",
-      image: "/images/mern.jpg",
+      image: "/images/MERN.jpg",
       description:
         "Full stack development with MongoDB, Express, React, and Node.js.",
     },

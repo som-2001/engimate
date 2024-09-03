@@ -21,7 +21,7 @@ export const Home = () => {
         "Engimate offers best UI/UX Design full course in Bihar.Learn from the leading industry about this full course...",
     },
     {
-      image: "Reactjs.jpg",
+      image: "reactjs.jpg",
       title: "Reactjs Full Course",
       text:
         "Engimate offers best Reactjs full course in Bihar.Learn from the leading industry about this full course...",
