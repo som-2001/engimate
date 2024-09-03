@@ -7,7 +7,7 @@ import {
   CardContent,
   Typography,
   Box,
-
+  Container,
 } from "@mui/material";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
@@ -205,25 +205,23 @@ const courses = {
     },
   ],
 };
-
 const CourseList = () => {
   const { category } = useParams();
   const selectedCourses = courses[category];
 
   return (
-<Box>
-  <Navbar />
-  <Box
+    <Box>
+      <Navbar />
+      <Box
         sx={{
           width: "100vw",
           textAlign: "center",
-          backgroundImage:
-            "url(./images/courses.jpg)",
+          backgroundImage: "url(../images/courses.jpg)",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          paddingTop: "2vw",
-          paddingBottom: "15vw",
+          paddingTop: { xs: "4vw", md: "2vw" },
+          paddingBottom: { xs: "20vw", md: "15vw" },
           position: "relative",
           "&::before": {
             content: '""',
@@ -232,7 +230,7 @@ const CourseList = () => {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.4)", // Overlay with opacity
+            backgroundColor: "rgba(0, 0, 0, 0.5)", // Increased opacity for better readability
             zIndex: 1,
           },
         }}
@@ -246,110 +244,110 @@ const CourseList = () => {
             padding: { xs: "20px", sm: "20px", md: "50px" },
           }}
         >
-          <Grid item xs={12} sm={12} lg={6} md={6}>
+          <Grid item xs={12} lg={6}>
             <Typography
               variant="h1"
               sx={{
-                fontSize: {
-                  xs: "2rem",
-                  sm: "2.4rem",
-                  md: "2.6rem",
-                  lg: "2.6rem",
-                },
+                fontSize: { xs: "2.2rem", sm: "2.4rem", md: "3rem" },
                 marginTop: { xs: "20px", md: "50px" },
                 fontWeight: "bold",
-                color:"white"
+                color: "white",
               }}
             >
               Our Courses
             </Typography>
             <Typography
               sx={{
-                fontSize: {
-                  xs: "1rem",
-                  sm: "1.1rem",
-                  md: "1.2rem",
-                  lg: "1.2rem",
-                },
+                fontSize: { xs: "1.1rem", sm: "1.2rem", md: "1.4rem" },
                 marginTop: "10px",
                 fontWeight: "500",
-                padding: { xs: "10px", sm: "10px", md: "0px" },
-                color:"white"
+                color: "white",
+                maxWidth: "90%",
               }}
             >
-              Discover our expertly crafted courses designed to equip you with the skills needed to excel in today's competitive job market.
+              Discover our expertly crafted courses designed to equip you with
+              the skills needed to excel in today's competitive job market.
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={12} lg={6} md={6}></Grid>
         </Grid>
       </Box>
-  <Box sx={{ padding: "20px" }}>
-    <Typography variant="h4" align="center" gutterBottom>
-      Courses
-    </Typography>
-    <Grid container spacing={4}>
-      {selectedCourses.map((course, index) => (
-        <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
-          <Card
-             sx={{
-                boxShadow: 5,
-                borderRadius: "16px",
-                overflow: "hidden",
-                height: "auto",
-                transition: "transform 0.3s, box-shadow 0.3s",
-                "&:hover": {
-                  transform: "translateY(-5px)",
-                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-                },
-                marginBottom: "10px",
-              }}
-          >
-            <CardMedia
-              component="img"
-              height="240"
-              image={course.image}
-              alt={course.title}
-              sx={{
-                objectFit: "cover",
-                filter: "brightness(0.9)",
-                transition: "filter 0.4s",
-                "&:hover": {
-                  filter: "brightness(1.1)",
-                },
-              }}
-            />
-            <CardContent
-               sx={{
-                backgroundColor: "#f5f5f5",
-                height: "140px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
-            >
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{ fontWeight: "bold", color: "#333" }}
-              >
-                {course.title}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-               
-              >
-                {course.description}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
-  </Box>
-  <Footer />
-</Box>
 
+      <Container maxWidth="lg" sx={{ paddingTop: "40px", paddingBottom: "40px" }}>
+        <Box sx={{ textAlign: "center", marginBottom: "40px" }}>
+          <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: "10px" }}>
+            Our IT Courses
+          </Typography>
+          <Typography variant="body1" sx={{ maxWidth: "800px", margin: "auto", fontSize: { xs: "1rem", md: "1.2rem" } }}>
+            Explore All Industry-Leading IT Courses by Engimate and
+            Get Placed! Skill up with new IT courses training or improve your
+            technical knowledge with the best IT courses. Industry-leading
+            courses developed with expertise and experience to help learners stay ahead in
+            technological innovation.
+          </Typography>
+        </Box>
+
+        <Grid container spacing={4} justifyContent="center">
+          {selectedCourses.map((course, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card
+                sx={{
+                  boxShadow: 6,
+                  borderRadius: "20px",
+                  overflow: "hidden",
+                  marginBottom:"30px",
+                  transition: "transform 0.3s, box-shadow 0.3s",
+                  "&:hover": {
+                    transform: "translateY(-10px)",
+                    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
+                  },
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={course.image}
+                  alt={course.title}
+                  sx={{
+                    objectFit: "cover",
+                    filter: "brightness(0.85)",
+                    transition: "filter 0.4s",
+                    "&:hover": {
+                      filter: "brightness(1.0)",
+                    },
+                  }}
+                />
+                <CardContent
+                  sx={{
+                    backgroundColor: "#fff",
+                    height: "150px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{ fontWeight: "bold", color: "#333" }}
+                  >
+                    {course.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ marginTop: "10px", color: "#666" }}
+                  >
+                    {course.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+      <Footer />
+    </Box>
   );
 };
 

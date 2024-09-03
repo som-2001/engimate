@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Grid, Card, CardMedia, CardContent, Typography, Container, Box, Button, CardActions } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { ArrowRightAlt } from "@mui/icons-material";
 
 const categories = [
   {
@@ -171,20 +172,10 @@ export const OurCourses = () => {
                 <Button
                     variant="standard"
                     color="primary"
-                    sx={{
-                      backgroundColor: "#0d47a1", // Matching button color with main heading
-                      color: "#fff",
-                   
-                      fontSize: "1rem",
-                      textTransform: "none",
-                      borderRadius: "50px",
-                      "&:hover": {
-                        backgroundColor: "#08306b", // Darker shade on hover
-                      },
-                    }}
+                    
                     onClick={() => handleViewCourses(course.abbreviation)}
                   >
-                    View Courses
+                    View Courses <ArrowRightAlt/> 
                   </Button>
                 </CardActions>
               </Card>
