@@ -89,7 +89,7 @@ export const OurCourses = () => {
                 color:"white"
               }}
             >
-              Our Courses
+              Our Domains
             </Typography>
             <Typography
               sx={{
@@ -105,7 +105,7 @@ export const OurCourses = () => {
                 color:"white"
               }}
             >
-              Discover our expertly crafted courses designed to equip you with the skills needed to excel in today's competitive job market.
+              Discover our expertly crafted domains designed to equip you with the skills needed to excel in today's competitive job market.
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12} lg={6} md={6}></Grid>
