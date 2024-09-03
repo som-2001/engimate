@@ -18,13 +18,13 @@ const categories = [
     description: "Electrical and Electronics Engineering Courses",
   },
   {
-    image: "Mechanical.jpg",
+    image: "mechanical.jpg",
     title: "Mechanical Engineering",
     abbreviation:"Mechanical",
     description: "Mechanical Engineering Courses",
   },
   {
-    image: "Civil.jpg",
+    image: "civil.jpg",
     title: "Civil Engineering",
     abbreviation:"Civil",
     description: "Civil Engineering Courses",
