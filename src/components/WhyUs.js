@@ -23,21 +23,21 @@ const StyledCard = styled(Card)({
 
 const WhyUs = () => {
   const images = [
-    "training4.jpg",
-    "matlab.jpg",
+    "industry_oriented_courses.jpg",
     "experts.jpg",
+    "training4.jpg",
     "project.jpg",
-    "industry_oriented_courses.jpg"
+    "placement.jpg",
   ];
 
-  const Cards = ["Best Training Institute", "Outstanding Placement Record", "Industry-Experts as Trainers", "Real-Time Projects", "Industry-Oriented Course Modules"];
+  const Cards = ["Industry-Aligned Curriculum", "Experienced Instructors", "Hands-On Training", " Flexible Learning Options", "Career Support"];
 
   const Tagline = [
-    'Engimate offers top-notch job-oriented IT courses Bihar. Having the best interest of our students in mind, we offer professional courses, industry experts, the latest infrastructure, and real-time projects for our candidates.',
-    'Engimate, the best IT training institute in Bihar, provides Complete Placement Assistance to its candidates. We offer assistance for job placement in our job-oriented courses. Your career is our priority, and we are dedicated to helping you build it.',
-    "Engimate, the best software IT training institute in Bihar, provides its students with proper training from industry experts. Having hands-on experience, our industry experts provide you with comprehensive training and prepare you for the competitive market landscape.",
-    'Work on real-time projects with our trainers. Our professionals guide you to handle real-time projects. We prepare you for the market, train you to handle the live projects, and understand the pressure. Our trainers are here to help to get prepared for the market.',
-    'Our industry-oriented course modules are designed by the professionals of the market. Our software training professionals curate the course modules, according to the current industry trends. We help you to gain an in-depth understanding of the sector.'
+    'Our courses are designed in collaboration with industry experts to ensure relevance and practical applicability.',
+    'Learn from seasoned professionals with years of experience in their respective fields.',
+    "Our approach emphasizes practical knowledge with real-world projects and lab work.",
+    'We offer both in-person and online courses to fit your schedule and learning style.',
+    'We provide job placement assistance, helping you transition from learning to earning with confidence.'
   ];
 
   return (

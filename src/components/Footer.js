@@ -144,18 +144,18 @@ const Footer = () => {
         align="center"
         color="text.secondary"
         mt={2}
-        sx={{ color: "white", fontSize: "1.0rem" }}
+        sx={{ color: "white", fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.8rem" }, }}
       >
         © Copyright {new Date().getFullYear()}. All Rights Reserved.
       </Typography>
 
-      <Typography
-        variant="body1"
+      {/* <Typography
+        variant="h6"
         textAlign="center"
-        style={{ marginTop: "20px",color:"white" }}
+        sx={{ marginTop: "20px",color:"white",fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.9rem" }, }}
       >
         NH-83, Boond Vihar Colony, Street no.- 02, Near Jehanabad Court Halt,<br/> Jehanabad, Bihar, India - 804417
-      </Typography>
+      </Typography> */}
 
       <Box style={{ marginTop: "10px", display: "flex", gap: "5px",justifyContent:"center",}}>
         <span

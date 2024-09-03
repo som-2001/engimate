@@ -18,6 +18,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
     transform: 'translateY(-5px)',
     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
   },
+  marginBottom:"20px"
 }));
 
 const StyledCardMedia = styled(CardMedia)(({ theme }) => ({
