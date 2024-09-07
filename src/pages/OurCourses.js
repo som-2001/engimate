@@ -115,14 +115,14 @@ export const OurCourses = () => {
       <Container sx={{ padding: "9px" }}>
         <Box mb={4}>
           
-          <Typography variant="h6" align="center" gutterBottom sx={{ marginTop:"20px", fontWeight: "600",fontSize: { lg: "1.8em", xs: "1.25rem",sm:"1.5rem",md:"1.8rem" } }}>
-            Explore All Industry-Leading IT Courses by Engimate and Get Placed!
+          <Typography variant="h6" align="center" gutterBottom sx={{ marginTop:"20px", fontWeight: "600",fontSize: { lg: "1.8em", xs: "1.25rem",sm:"1.5rem",md:"1.8rem",color: "#1976D2" } }}>
+            Explore All Industry-Leading IT & Industrial Automation Courses by Engimate and Get Placed!
           </Typography>
           <Typography variant="body1" sx={{textAlign:"center",padding:"10px",fontSize: { lg: "1.1rem", xs: "0.9rem",md:"0.7rem" }}} align="center" paragraph>
-            Skill up with new IT courses training or improve your technical knowledge with the best IT courses in Bihar offered by Engimate. Industry-leading courses developed with expertise and experience to help learners stay ahead in technological innovation.
+            Skill up with new IT & Industrial Automation courses training or improve your technical knowledge with the best courses offered by Engimate. Industry-leading courses developed with expertise and experience to help learners stay ahead in technological innovation.
           </Typography>
-          <Typography variant="h6" align="center" paragraph sx={{ fontWeight: "600" }}>
-            Explore our wide range of IT courses today and get placed!
+          <Typography variant="h6" align="center" paragraph sx={{ fontWeight: "600",color: "#1976D2" }}>
+            Explore our wide range of IT & Industrial Automation courses today and get placed!
           </Typography>
         </Box>
 

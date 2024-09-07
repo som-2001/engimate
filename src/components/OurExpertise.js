@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Card, CardMedia, CardContent, Typography, Container, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const expertise = [
   {
@@ -7,35 +8,41 @@ const expertise = [
     title: "Industrial Automation",
     abbreviation: "IA",
     description: "Master the latest in automation technologies with courses that cover PLC, SCADA, DCS, HMI, and more.",
+    link:"/courses/EE"
   },
   {
     image: "Electrical & Electronics.jpg",
     title: "Electrical & Electronics Engineering",
     abbreviation: "EEE",
     description: "Gain hands-on experience in electrical systems, circuit design, microcontroller, embedded system, power distribution, and safety protocols.",
+    link:"/courses/EE"
   },
   {
     image: "mechanical.jpg",
     title: "Mechanical Engineering",
     abbreviation: "ME",
     description: "Explore the fundamentals of mechanical design, CAD/CAM software, thermodynamics, and advanced manufacturing processes.",
+    link:"/courses/Mechanical"
   },
   {
     image: "civil.jpg",
     title: "Civil Engineering",
     abbreviation: "CE",
     description: "Learn the essentials of structural analysis, construction management, and sustainable building practices.",
+    link:"/courses/Civil"
   },
   {
     image: "cse.jpg",
     title: "IT and Software Development",
     abbreviation: "ITSD",
     description: "Equip yourself with the skills needed in today’s tech-driven world, including programming languages, software development, and IT infrastructure management.",
+    link:"/courses/CSE"
   },
 ];
 
 export const OurExpertise = () => {
  
+  const navigate=useNavigate();
 
   return (
     <Box>
@@ -47,6 +54,7 @@ export const OurExpertise = () => {
           {expertise.map((course, index) => (
             <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <Card
+              onClick={(e)=>navigate(course.link)}
                 sx={{
                   boxShadow: 5,
                   borderRadius: "16px",

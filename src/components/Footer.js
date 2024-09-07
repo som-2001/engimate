@@ -12,6 +12,7 @@ import { MdEmail, MdPhone } from "react-icons/md";
 
 const FooterContainer = styled("footer")({
   padding: "40px 0px 30px 0px",
+  // backgroundColor: '#aeb1b3',
   backgroundColor: "rgb(48 48 91)",
   color: "white",
   marginTop: "50px",
@@ -67,16 +68,12 @@ const Footer = () => {
             <FooterLink onClick={(e) => (window.location.href = "/about")}>
               About
             </FooterLink>
-            <FooterLink onClick={(e) => (window.location.href = "/contact-us")}>
+            <FooterLink onClick={(e) => (window.location.href = "/contact")}>
               Contact Us
             </FooterLink>
-            <FooterLink onClick={(e) => (window.location.href = "/our-courses")}>
-              Our Courses
-            </FooterLink>
-            <FooterLink onClick={(e) => (window.location.href = "/gallery")}>
+            <FooterLink onClick={(e) => (window.location.href = "/gallary")}>
               Gallary
             </FooterLink>
-           
           </Grid>
 
           <Grid item xs={12} sm={4}>
@@ -125,7 +122,7 @@ const Footer = () => {
               </FooterLink>
             </Box>
             <Box display="flex" alignItems="center" mb={1}>
-              <FaFacebook style={{ marginRight: "8px", }} />
+              <FaFacebook style={{ marginRight: "8px" }} />
               <FooterLink href="#" color="textSecondary">
                 Facebook
               </FooterLink>
@@ -144,31 +141,31 @@ const Footer = () => {
         align="center"
         color="text.secondary"
         mt={2}
-        sx={{ color: "white", fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.8rem" }, }}
+        sx={{ color: "white", fontSize: "1.0rem" }}
       >
         © Copyright {new Date().getFullYear()}. All Rights Reserved.
       </Typography>
 
-      {/* <Typography
-        variant="h6"
+      <Typography
+        variant="body1"
         textAlign="center"
-        sx={{ marginTop: "20px",color:"white",fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.9rem" }, }}
+        style={{ marginTop: "20px" }}
       >
         NH-83, Boond Vihar Colony, Street no.- 02, Near Jehanabad Court Halt,<br/> Jehanabad, Bihar, India - 804417
-      </Typography> */}
+      </Typography>
 
-      <Box style={{ marginTop: "10px", display: "flex", gap: "5px",justifyContent:"center",}}>
+      <Box style={{ marginTop: "10px", display: "flex", gap: "5px",justifyContent:"center" }}>
         <span
           onClick={(e)=>window.location.href="/refund-policy"}
           color="textSecondary"
           textAlign="center"
-          style={{cursor:"pointer",color:"white" }}
+          style={{cursor:"pointer"}}
           
         >
           Refund Policy 
         </span>
-        <span style={{color:"white" }}>|</span>
-        <span href="#" color="textSecondary" textAlign="center"    style={{cursor:"pointer",color:"white"}}>
+        <span>|</span>
+        <span href="#" color="textSecondary" textAlign="center"    style={{cursor:"pointer"}}>
            Terms & Condition
         </span>
       </Box>
