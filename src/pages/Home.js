@@ -6,8 +6,6 @@ import Footer from "../components/Footer";
 import WhyUs from "../components/WhyUs";
 import { OurExpertise } from "../components/OurExpertise";
 import PopularCard from "../components/PopularCard";
-import { useNavigate } from "react-router-dom";
-
 export const Home = () => {
   const item = [
     {
@@ -301,6 +299,7 @@ export const Home = () => {
                 lineHeight: "110%",
                 overflow: "hidden",
                 marginTop: "30px",
+                color: "#1976D2"
               }}
             >
               Welcome to Engimate!
@@ -340,7 +339,7 @@ export const Home = () => {
       </Box>
       <Box style={{ width: "100vw", marginTop: "50px" }}>
         <h1
-          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px" }}
+          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px",color: "#1976D2" }}
         >
           Our Popular courses
         </h1>
@@ -377,7 +376,7 @@ export const Home = () => {
       </Box>
       <Box sx={{ width: "100vw", marginTop: "50px" }}>
         <h1
-          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px" }}
+          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px",color: "#1976D2" }}
         >
           Our Featured Training
         </h1>
@@ -415,7 +414,7 @@ export const Home = () => {
 
       <Box sx={{ width: "100vw", marginTop: "50px" }}>
         <h1
-          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px" }}
+          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px",color: "#1976D2" }}
         >
           Our Expertise
         </h1>
@@ -435,7 +434,7 @@ export const Home = () => {
 
       <Box sx={{ width: "100vw", marginTop: "50px" }}>
         <h1
-          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px" }}
+          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px",color: "#1976D2" }}
         >
           Why Choose us
         </h1>

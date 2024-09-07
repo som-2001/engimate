@@ -1,6 +1,6 @@
 import { Box, Button, Container, Divider, Grid, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 const item = [
@@ -253,11 +253,12 @@ const item = [
   ];
 
 export const Course=()=>{
-    const { name } = useParams(); // Get the name from the route parameters
+    const { name } = useParams(); 
     const [result, setResult] = useState(null);
-    const navigate=useNavigate();
+    
 
     useEffect(() => {
+      window.scrollTo(0,0);
       const matchedItem = item.find((course) => course.title === name);
       if (matchedItem) {
         setResult(matchedItem);
@@ -362,7 +363,7 @@ export const Course=()=>{
                   controls
                   style={{ width: "100%", height: "auto", borderRadius: "15px" }}
                 >
-                  <source src={`../images/${result?.video}`} type="video/mp4" />
+                  <source src="https://videos.pexels.com/video-files/5147975/5147975-uhd_2732_1440_25fps.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
                 <Box
@@ -381,7 +382,7 @@ export const Course=()=>{
                       fontSize: "1.2rem",
                     }}
                   >
-                    Rs:{result?.price}
+                    ₹:{result?.price}
                   </Typography>
                 </Box>
                 <Box
@@ -397,15 +398,27 @@ export const Course=()=>{
                   <Button
                     variant="contained"
                     color="primary"
-                    sx={{ width: "95%" }}
+                    sx={{
+                      backgroundColor: "#0d47a1", // Matching button color with main heading
+                      color: "#fff",
+                      width:"95%",
+                      padding: "10px 24px",
+                      fontSize: "1rem",
+                      textTransform: "none",
+                      borderRadius: "50px",
+                      "&:hover": {
+                        backgroundColor: "#08306b", // Darker shade on hover
+                      },
+                      marginBottom:"5px"
+                    }}
                   >
                     Add to Cart
                   </Button>
                   <Button
                     variant="contained"
                     color="secondary"
-                    sx={{ width: "95%" }}
-                    onClick={(e)=>navigate("https://lyss.in/payment")}
+                    sx={{ width: "95%",borderRadius:"50px",padding: "10px 24px", }}
+                    onClick={(e)=>window.location.href="https://lyss.in/payment"}
                   >
                     Buy Now
                   </Button>
@@ -430,7 +443,7 @@ export const Course=()=>{
             >
               What You'll Learn
             </Typography>
-            {result?.learn?.length>0 && <Grid container spacing={4}>
+            {result?.learn?.length>0 && <Grid container spacing={2}>
               {result?.learn?.map((item, index) => (
                 <Grid item xs={12} sm={6} md={12} lg={6} key={index}>
                   <Typography

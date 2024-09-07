@@ -135,9 +135,8 @@ const Footer = () => {
             </Box>
           </Grid>
         </FooterGrid>
-      </Container>
-      <Typography
-        variant="h6"
+        <Typography
+        variant="body1"
         align="center"
         color="text.secondary"
         mt={2}
@@ -149,7 +148,7 @@ const Footer = () => {
       <Typography
         variant="body1"
         textAlign="center"
-        style={{ marginTop: "20px" }}
+        sx={{ marginTop: "20px",display:{md:"none",sm:"block",xs:"block",lg:"block"}}}
       >
         NH-83, Boond Vihar Colony, Street no.- 02, Near Jehanabad Court Halt,<br/> Jehanabad, Bihar, India - 804417
       </Typography>
@@ -170,6 +169,8 @@ const Footer = () => {
         </span>
       </Box>
 
+      </Container>
+     
     </FooterContainer>
   );
 };

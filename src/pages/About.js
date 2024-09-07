@@ -63,7 +63,7 @@ const About = () => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          paddingTop: "2vw",
+          paddingTop: "5vw",
           paddingBottom: "15vw",
           position: "relative",
           "&::before": {
@@ -130,11 +130,11 @@ const About = () => {
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ fontWeight: "bold", mb: 2 }}
+            sx={{ fontWeight: "bold", mb: 2,color: "#1976D2" }}
           >
             Who We Are
           </Typography>
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1" paragraph sx={{marginBottom:"50px"}}>
             Founded on the principles of excellence and innovation, Engimate has
             become a trusted name in professional training and development. We
             understand that the rapidly evolving technological landscape
@@ -146,13 +146,13 @@ const About = () => {
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ fontWeight: "bold", mb: 2 }}
+            sx={{ fontWeight: "bold", mb: 2,color: "#1976D2" }}
           >
             What We Offer
           </Typography>
           <Grid2
           container
-          sx={{ padding: "0px", justifyContent: "center" }}
+          sx={{ padding: "0px", justifyContent: "center",marginBottom:"50px" }}
           spacing={3}
         >
           {whatWeOffer.map((data, index) => (
@@ -169,11 +169,11 @@ const About = () => {
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ fontWeight: "bold", mb: 2 }}
+            sx={{ fontWeight: "bold", mb: 2,color: "#1976D2", }}
           >
             Our Vision
           </Typography>
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1" paragraph sx={{marginBottom:"50px"}}>
             To be a leading provider of professional education and training,
             producing industry-ready professionals who are equipped to
             contribute meaningfully to their fields and drive innovation.
@@ -182,11 +182,11 @@ const About = () => {
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ fontWeight: "bold", mb: 2 }}
+            sx={{ fontWeight: "bold", mb: 2,color: "#1976D2" }}
           >
             Our Mission
           </Typography>
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1" paragraph sx={{marginBottom:"50px"}}>
             To deliver high-quality, relevant, and accessible education that
             empowers individuals to achieve their career goals, meet industry
             demands, and lead in their respective fields.
@@ -195,7 +195,7 @@ const About = () => {
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ fontWeight: "bold", mb: 2 }}
+            sx={{ fontWeight: "bold", mb: 2 ,color: "#1976D2",marginBottom:"50px"}}
           >
             Why Choose Engimate?
           </Typography>

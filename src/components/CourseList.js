@@ -302,22 +302,22 @@ const courses = {
         {
           title: "Course Description",
           content:
-            "The course focuses on how to implement complex decision flows and finite-state machines using Stateflow and provides a general understanding of how to accelerate the design process for closed-loop control systems using MATLAB. Also it offers the good understanding of modelling and analyzing electrical systems.",
+            ["The course focuses on how to implement complex decision flows and finite-state machines using Stateflow and provides a general understanding of how to accelerate the design process for closed-loop control systems using MATLAB. Also it offers the good understanding of modelling and analyzing electrical systems.",]
         },
         {
           title: "Course Objectives",
           content:
-            "This course gives guidance on key features of widely used toolboxes in simulink, help transform concepts to a complete model, verify and evaluate the system behaviour in different user environments. It allows the attendees to explore the more advanced features of MATLAB in a unified manner and help learners 'future-proof' themselves and remain relevant for the rapidly evolving technology from industry perspective.",
+            ["This course gives guidance on key features of widely used toolboxes in simulink, help transform concepts to a complete model, verify and evaluate the system behaviour in different user environments. It allows the attendees to explore the more advanced features of MATLAB in a unified manner and help learners 'future-proof' themselves and remain relevant for the rapidly evolving technology from industry perspective.",]
         },
         {
           title: "Roles in Industry",
           content:
-            "Matlab is a widely used tool in electrical engineering. It can be used to enhance and accelerate some processes. such as magnetic field measurements,model based development, Auto code generation through model based development and m scripts. Tool creation for testing and development through m scripts.",
+            ["Matlab is a widely used tool in electrical engineering. It can be used to enhance and accelerate some processes. such as magnetic field measurements,model based development, Auto code generation through model based development and m scripts. Tool creation for testing and development through m scripts.",]
         },
         {
           title: "Course Highlights",
           content:
-            "Simulink modelling,Model Based Designing,Masks and Subsystems,Component and board placement,Lookup table editor and breakpoints,Stateflow modelling,Hierarchical state machines,Blind, Parallel state machines,Events in state machines,Functions in state machines,Truth tables and State transition tables,Control systems stability analysis,Controller implementation – P, PI, PID,Frequency response estimation",
+            ["Simulink modelling","Model Based Designing","Masks and Subsystems","Component and board placement","Lookup table editor and breakpoints","Stateflow modelling","Hierarchical state machines","Parallel state machines","Events in state machines","Functions in state machines","Truth tables and State transition tables","Control systems stability analysis","Controller implementation – P, PI, PID,Frequency response estimation"]
         },
       ],
     },
@@ -405,22 +405,22 @@ const courses = {
         {
           title: "Course Description",
           content:
-            "It incudes the OrCAD Capture, OrCAD PSpice and OrCAD PCB Editor. Virtually every electronic product is constructed with one or more printed-circuit boards (PCBs). The PCBs hold the ICs and other components and implement the interconnections between them.The ideal PCB design starts with the discovery that a PCB is needed and continues through the final production boards. OrCAD Capture is the industry standard solution for designing and developing PCBs because of its intuitive schematic editing, project management, extensive compatibility, and cost-effectiveness.PSpice is a SPICE analog circuit and digital logic simulation program. PSpice processes circuits and executes simulation. PSpice creates an output file to store the simulation results. PSpice supports the following types of analyses: DC Analysis - for circuits with time-invariant sources.OrCAD PCB Editor contains a full-featured PCB editor based on Allegro technology. Its extensive feature set addresses a wide range of today's design challenges and manufacturability concerns such as intelligent placement and routing, constraint management, creating dynamic shapes, and design reuse.",
+            ["It incudes the OrCAD Capture, OrCAD PSpice and OrCAD PCB Editor. Virtually every electronic product is constructed with one or more printed-circuit boards (PCBs). The PCBs hold the ICs and other components and implement the interconnections between them.The ideal PCB design starts with the discovery that a PCB is needed and continues through the final production boards. OrCAD Capture is the industry standard solution for designing and developing PCBs because of its intuitive schematic editing, project management, extensive compatibility, and cost-effectiveness.PSpice is a SPICE analog circuit and digital logic simulation program. PSpice processes circuits and executes simulation. PSpice creates an output file to store the simulation results. PSpice supports the following types of analyses: DC Analysis - for circuits with time-invariant sources.OrCAD PCB Editor contains a full-featured PCB editor based on Allegro technology. Its extensive feature set addresses a wide range of today's design challenges and manufacturability concerns such as intelligent placement and routing, constraint management, creating dynamic shapes, and design reuse.",]
         },
         {
           title: "Course Objectives",
           content:
-            "To do PCB design and its simulation. PCB (Printed Circuit Board) designing is an integral part of each electronics product and this program is designed to make students capable to design their own projects PCB up to industrial grade.",
+            ["To do PCB design and its simulation. PCB (Printed Circuit Board) designing is an integral part of each electronics product and this program is designed to make students capable to design their own projects PCB up to industrial grade.",]
         },
         {
           title: "Roles in Industry",
           content:
-            "A PCB designer is primarily in charge of designing and developing Printed Circuit Boards (PCBs).Design and develop Printed Circuit Boards Prepare documents for PCB assembly, schematics, and fabrications using CAD software Design layouts to develop high-speed and reliable circuitsDevelop digital or analog designs Work on the routing layout Analyze and resolve any design-related issue Provide support to PCB engineering and manufacturing teams Provide revisions based on the specifications of customers and engineers",
+            ["A PCB designer is primarily in charge of designing and developing Printed Circuit Boards (PCBs).Design and develop Printed Circuit Boards Prepare documents for PCB assembly, schematics, and fabrications using CAD software Design layouts to develop high-speed and reliable circuitsDevelop digital or analog designs Work on the routing layout Analyze and resolve any design-related issue Provide support to PCB engineering and manufacturing teams Provide revisions based on the specifications of customers and engineers",]
         },
         {
           title: "Course Highlights",
           content:
-            "Schematic Modification for PCB Design,Design Rule Check,Pad Designer,Package Symbol & Package symbol wizard,Netlist creation,Component and board placement,Mechanical symbol placement,Manual and Automatic routing, Constraint Manager and X section,Blind, Buried, and through-hole VIA,Artwork/Gerber file creation,Plot Generation,PCB Fabrication Process",
+            ["Schematic Modification for PCB Design","Design Rule Check","Pad Designer","Package Symbol & Package symbol wizard,","Netlist creation","Component and board placement","Mechanical symbol placement","Manual and Automatic routing" ,"Constraint Manager and X section","Blind, Buried, and through-hole VIA,","Artwork/Gerber file creation","Plot Generation","PCB Fabrication Process",]
         },
       ],
     },
@@ -924,6 +924,7 @@ const courses = {
         "Sweep features and blend techniques",
         "Assembly modeling and constraints"
     ],
+
       course_description: [
         {
           "title": "Course Description",
@@ -1248,67 +1249,754 @@ const courses = {
       title: "AutoCAD Civil 3D",
       image: "/images/autocad_civil.jpg",
       description: "Design and draft civil infrastructure projects.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Learn AutoCAD Civil 3D from scratch to a professional level with the help of real life example Project. For Civil Engineers , Surveyor & Road Designers",
+      learn: [
+        "Introduction to Civil Engineering and AutoCAD Civil 3D",
+        "Working Environment Setup and Template Creation",
+        "Point Data Management and Styles",
+        "Surface Creation and Analysis",
+        "Survey Techniques and LiDAR Data Handling",
+        "Surface Analysis and Earthwork Calculation",
+        "Alignment Design and Customization",
+        "Parcel Creation and Editing",
+        "Corridor Design and Surface Creation",
+        "Junction Design, Quantity Takeoff, and Criteria Customization"
+    ],
+      course_description: [
+        {
+          title: "Course Description",
+          content: ["Autodesk Civil 3D software is a vertical design and documentation solution for civil engineering and architect professionals alike to plan, design, and manage civil engineering projects. Civil 3D supports BIM (Building Information Modeling) with integrated features to improve drafting, design, and construction documentation. You can develop highways, pipelines, import topographic points, create surfaces, analyze volumes for cutting and filling material, and perform storm analysis. Civil 3D enhances collaboration and workflow efficiencies from design to production, permitting faster development of alternatives via model-based design tools.",]
+        },
+        {
+          title: "Course Objectives",
+          content: ["The AutoCAD Civil 3D training course is designed for surveyors and civil engineers. The dynamic design functionality of the software permits rapid development of alternatives via model-based design tools. Students can learn ways to organize project data, create & analyze surfaces, create parcel layouts, road corridors, and layout networks.",]
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "Land surveying",
+            "Highway designing",
+            "Civil infrastructure projects, including roads and highways",
+            "Land development",
+            "Rail",
+            "Airports",
+            "Water management",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Navigate AutoCAD Civil 3D user interface",
+            "Create point groups and work with survey figures",
+            "Create, edit, and analyze surfaces",
+            "LiDAR Survey",
+            "Make and edit alignments",
+            "Create grading solutions",
+            "Perform quantity takeoff and earthwork calculation",
+            "Designing Roundabout, Corridor, Junction, and Pipe Network",
+          ],
+        },
+      ]
     },
     {
       title: "STAAD Pro",
       image: "/images/staadpro.jpg",
       description: "Structural analysis and design software.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Learn STAAD Pro V8i or Connect Edition like a Professional. Start from the basis and finish mastering Structural Analysis and Design For Civil Engineers, Architect & Structural Designers",
+      learn: [
+        "Working with coordinate systems in STAAD.Pro",
+        "Overview of Structural Analysis and Design principles",
+        "Calculation of shear forces and bending moments",
+        "Introduction to STAAD.Pro V8i and its editor",
+        "Creating and managing projects",
+        "Model generation, node, and member creation",
+        "Model editing tools and transformations",
+        "Support, material, and member property specification",
+        "Loading analysis and load combinations",
+        "Concrete and steel design in STAAD.Pro"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: ["This course introduces engineers to using STAAD.Pro software for structural modeling, analysis, and design. You will learn fast and better techniques for building and checking complex models. This program is a great time saver for people who are accustomed to doing laborious hand calculations, spreadsheets, and large-scale simplifications of complex stress analysis and design situations.",]
+        },
+        {
+          title: "Course Objectives",
+          content: ["The course is designed to offer students and professionals all the essentials to learn and use STAAD.Pro V8i. The enrolled candidates will learn to master the application and will be empowered to deliver high-quality products and services.",]
+        },
+        {
+          title: "Roles in Industry",
+          content: ["Knowledge of BIM and Revit technologies will help you create a rewarding career in architecture, construction, engineering, or interior design.", "Opportunities for individuals with training and experience in Revit include Revit technician, BIM coordinator, structural draftsperson, architectural technologist, and entry-level roles across related fields."]
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Introduction to STAAD.Pro",
+            "Geometry creation",
+            "Constants, Supports, and Specifications",
+            "Seismology",
+            "Member truss",
+            "Water tank analysis",
+            "Foundation design",
+            "Concrete Design",
+            "Steel Design",
+            "Report generation",
+          ],
+        },
+      ],
     },
     {
       title: "Revit Architecture",
       image: "/images/revit_architecture.jpg",
       description:
         "BIM software for architecture, engineering, and construction.",
+        price: 5000,
+        video: "video.mp4",
+        card_description:
+          "Learn the concepts, tools and workflows to allow you work confidently inside Autodesk Revit, a BIM design platform.For Architects and Civil Engineers",
+        learn: [
+          "Introduction to BIM and Autodesk Revit",
+          "Understanding Revit's file types and interface",
+          "Working with levels and grids",
+          "Creating building elements and drawing plans",
+          "Mastering wall creation and modification",
+          "Utilizing modify tools effectively",
+          "Designing doors, windows, and floors",
+          "Roof and ceiling modeling techniques",
+          "Adding openings and dimensions",
+          "Creating views, schedules, and lighting"
+      ],
+        course_description:[
+          {
+            title: "Course Description",
+            content: [
+              "This course introduces you to the Revit Architecture software platform for Building Information Modeling (BIM) that supports the design, drawings, and schedules required for a building project. Using drawing tools, editing elements, levels, and grids, you will learn to create full 3D architectural project models and set them up in working drawings. Most of the course is focused on design development tools - building the 3D model with walls, windows, doors, floors, roofs, stairs, creating reflected ceiling plans and furniture plans. The course concludes with adding views and annotation to the sheets to create a set of construction documents.",
+            ],
+          },
+          {
+            title: "Course Objectives",
+            content: [
+              "Understand the concept and workflow of Building Information Modeling (BIM).",
+              "Use design principles, techniques, and Revit drawing tools to create 3D architectural project models.",
+              "Set up sheets and views to create construction documents.",
+              "Employ Revit tools to enable work-sharing and project team collaboration.",
+              "Use site and structural design tools for space planning, massing, visualization, and rendering to create large-scale building projects.",
+            ],
+          },
+          {
+            title: "Roles in Industry",
+            content: [
+              "Knowledge of BIM and Revit technologies will help you create a rewarding career in architecture, construction, engineering, or interior design.",
+              "Opportunities for individuals with training and experience in Revit include Revit technician, BIM coordinator, structural draftsperson, architectural technologist, and entry-level roles across related fields.",
+            ],
+          },
+          {
+            title: "Course Highlights",
+            content: [
+              "Building information modeling.",
+              "Exploring User Interface.",
+              "Working with Revit Elements.",
+              "Conceptual modeling using massing.",
+              "Presenting the model of a building.",
+              "Creating railing and stairs.",
+              "Using editing commands for adding walls.",
+              "Managing view, documentation, and schedules.",
+              "Controlling visibility of objects.",
+            ],
+          },
+        ]
     },
     {
       title: "SketchUp",
       image: "/images/sketchup.jpg",
       description: "3D modeling software for design and architecture.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Learn the practical skills & techniques required to create a Modern Home with Sketchup.For Architects, Interior Designer & Civil Engineer",
+      learn: [
+        "Introduction to SketchUp and its interface",
+        "Creating multiple views using scenes",
+        "Configuring toolbars and the tray",
+        "Fundamentals of using the Line tool",
+        "Softening and smoothing edges in models",
+        "Practical application through mini projects",
+        "Advanced modeling techniques like push/pull, eraser, and offset",
+        "Navigating the SketchUp environment",
+        "Working with materials, styles, and animations",
+        "Drawing basics including rectangles, circles, and polygons"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "The popular 3D modeling and design tool in the world, SketchUp users model everything from treehouses to intricate, energy-efficient buildings. SketchUp is both intuitive and powerful for professionals and creatives of all kinds.",
+            "The suite of tools within the program enhances workflows across a variety of industries including architecture, engineering, construction, woodworking, and interior design.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "SketchUp is a highly in-demand, popular, easy-to-use software by Architects and modelers across the world. A lot of innovative companies make use of this software for creating compelling building models for quick construction.",
+            "So, it makes this an excellent opportunity to learn the software, solve the most complex modeling challenges, prepare construction documents, and fill the skill gap.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "SketchUp allows architects and designers to draw shapes and lines. It permits moving the surfaces back and forth for turning them into 3D forms quickly and accurately. With SketchUp, you will be able to play and create anything that you like or desire.",
+            "The capability of SketchUp is extended to the presentations of the model using LayOut. The option of LayOut in SketchUp helps in adding model views to pages, applying drawing scales, and inserting dimensions, graphics, and callouts. The amendments made to the SketchUp model reflect automatically in LayOut, which helps in saving a lot of time, effort, and energy.",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Generate clear, visual RFI graphics.",
+            "Create dimensionally accurate, highly-detailed 3D models.",
+            "Develop various approaches in building model development.",
+            "Export-import CAD as well as other data types.",
+            "Create sequencing animations of the project.",
+            "Create attractive documents for project communication.",
+          ],
+        },
+      ],
     },
     {
       title: "ETABS",
       image: "/images/etabs.jpg",
       description: "Integrated software for building analysis and design.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "ETABS is a highly efficient analysis and design program developed especially for building systems. It is loaded with an integrated system with an ability to handle the largest and most complex building models and configurations.For Civil Engineers , Design Engineers<, Architects & Structural Designers",
+      learn: [
+        "Introduction to Structural Analysis and Design",
+        "Workflow and Modeling Basics in ETabs",
+        "Grid and Storey System, Material, Beams, Columns, and Slabs",
+        "Model Editing Tools and Techniques",
+        "Load Assignments and Meshing of Slabs",
+        "Seismic Loads and Load Combinations",
+        "Structural Analysis and Design",
+        "Reinforcement Detailing for Beams, Columns, and Slabs",
+        "Staircase Modeling and Shear Wall Design",
+        "Time History Analysis, Response Spectrum Analysis, Steel Frame Design, and Detailing"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "ETABS offers a single user interface to perform modeling, analysis, design, and reporting.",
+            "It provides powerful CAD-like drawing tools in a graphical and object-based interface, significantly increasing productivity for structural engineers in the building industry.",
+            "The software offers significant savings in time and efficiency over general-purpose programs.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "Modeling: Learn to create models quickly and interpret results efficiently while working with physical member-based objects.",
+            "Concrete Frame Design & Detailing: Applicable to line objects, the program determines the appropriate design procedure during analysis.",
+            "Steel Frame Design & Detailing: Detail steel member selection, drift optimization, and stress checking using various design code algorithms.",
+            "Steel Connection Design: Seamlessly integrated steel connection design within the program.",
+            "Composite Beam: Define auto select-section properties for composite beams to determine their sizes during analysis.",
+            "Dynamic Analysis: Explore various options from response spectrum analysis to large deformation nonlinear time analysis.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "ETABS training helps you gain recognition in the CAD/CAM industry as an efficient civil engineer, offering the potential for a lucrative salary package.",
+            "ETABS is widely used by civil designers, engineers, and architects across the globe and is one of the most popular civil design tools in the building industry.",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Model creation and result reporting.",
+            "Push-over analysis.",
+            "Response Spectrum Analysis.",
+            "Response History Analysis.",
+            "Concrete Frame Design and Detailing.",
+            "Steel Frame Design and Detailing.",
+            "Working with Composite Beam.",
+            "Dynamic Analysis.",
+          ],
+        },
+      ]
     },
     {
       title: "Lumion",
       image: "/images/lumion.jpg",
       description: "Real-time 3D rendering software for architects.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Learn all the essentials of Lumion while creating photorealistic interior and exterior rendering projects For Architects , Civil Engineers & Interior Designers",
+      learn: [
+        "Introduction to Lumion and its Features",
+        "Importing and Handling 3D Models in Lumion",
+        "Applying and Creating Materials for Realism",
+        "Creating Exterior Scenes with Terrain and Elements",
+        "Mastering Lighting Techniques in Lumion",
+        "Non-Photorealistic Rendering with Lumion",
+        "Rendering Still Images with Photo Mode",
+        "Advanced Artistic Options and Effects in Lumion"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "Lumion makes the rendering process simple and enjoyable from the moment you turn on the software. It is architectural rendering software that makes it easy to convey how your projects will translate into real-life experiences and emotions.",
+            "Lumion seamlessly integrates into any design process, creating a uniquely satisfying workflow. Surround your design with majestic mountains, idyllic waterfronts, captivating forests, energetic cities, and sleepy suburbs.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "Understanding and handling architectural CAD drawings and modeling projects from minimal sketches is a premium skill in architecture.",
+            "As visual presentation becomes increasingly important in the market, the emphasis on Lumion skills continues to grow.",
+            "Demonstrating nuanced Lumion skills such as texturing, lighting, camera animation, rendering, and walk-through visualizations can help candidates distinguish themselves, leading to career growth in the architectural domain.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "Architects' favorite tool for high-quality preview effects, fine-detail nature, and displacement mapping.",
+            "Preferred for its diverse set of assets, including a wide variety of trees, human characters, animals, props, lighting, and furniture.",
+            "Widely used to introduce environments such as simple landscapes, forests, tropical environments, mountains, and suburbs around a building design.",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Importing and Handling 3D Models",
+            "Applying and Creating Materials",
+            "Exterior Scene with Lumion",
+            "Lighting in Lumion",
+            "Realistic Visualizations",
+            "Non-photorealistic Visualizations",
+            "Animation",
+            "Walk-through Visualizations",
+          ],
+        },
+      ],
     },
     {
       title: "Advanced Rendering with V-Ray",
       image: "/images/vray.jpg",
       description: "High-quality rendering software for 3D visuals.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Create Beautiful Photorealistic Renderings with V-Ray in 3ds Max .For Architects , Civil Engineers & Interior Designers",
+      learn: [
+        "V-Ray fundamentals and rendering techniques",
+        "V-Ray rendering engines and their capabilities",
+        "Image sampling techniques for quality output",
+        "Effective use of V-Ray lights and settings",
+        "Mastering V-Ray physical camera settings",
+        "Creating realistic materials with V-Ray",
+        "Aerial perspective for atmospheric effects",
+        "Utilizing V-Ray displacement for detail",
+        "Harnessing V-Ray render elements for control",
+        "Global Illumination for various scene types"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "V-Ray is a biased computer-generated imagery rendering software application. It provides powerful 3D rendering capabilities, offering both lightning-fast interactive and heavyweight production rendering.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "Render images with high quality using V-Ray.",
+            "Utilize rendering plugins for architects and designers effectively.",
+            "Easily randomize textures, explore in real-time with zero setups, and apply blur and sharpen effects directly from the VFB (V-Ray Frame Buffer).",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "Learn V-Ray for various platforms such as SketchUp, 3DS MAX, and Revit Architecture.",
+            "Apply real-time rendering techniques.",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "VFB Overview",
+            "Coat and Sheen Layers",
+            "Light Mix and Composite",
+            "Improved Sun and Sky",
+            "Material Library",
+            "Randomization Options",
+          ],
+        },
+      ],
     },
     {
       title: "ANSYS Civil",
       image: "/images/ansys_civil.jpg",
       description: "Engineering simulation software for civil applications.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Learn Ansys Civil from beginner to advanced level with practical examples.For Architects , Civil Engineers & Interior Designers",
+      learn: [
+        "Finite element analysis fundamentals for civil engineering",
+        "Structural analysis using ANSYS software tools",
+        "Modeling and simulating complex structural systems",
+        "Stress and deformation analysis in civil engineering projects",
+        "Fluid flow simulations for hydraulic design",
+        "Heat transfer analysis for building materials",
+        "Dynamic response of structures to loads",
+        "Geotechnical simulations for soil behavior",
+        "Practical application of ANSYS in civil projects",
+        "Advanced meshing techniques for accurate results"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "ANSYS has extensive applications in Civil Engineering, helping engineers generate numerical simulations for structural, thermal, and other problems. It is the industry-preferred tool for engineers interested in CFD (Computational Fluid Dynamics) and structural applications. This course introduces the concepts of CFD and FEA (Finite Element Analysis) and helps you develop various projects using ANSYS.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "Combine proficiency with contemporary structural design practices for a strong foundation in both design literacy and real-time design competencies.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "Structural Analysis",
+            "Thermal Analysis, Slab Designing, Bridge Designing",
+            "Steel Designing",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "CivilFEM Setup",
+            "Element Type – Beam",
+            "Material Explorer",
+            "Loads",
+            "Concrete Design",
+            "Slab Design",
+            "Bridge Design",
+            "Seismic Design",
+            "Steel Design",
+          ],
+        },
+      ]
     },
     {
       title: "3ds Max for Engineering & Architecture",
       image: "/images/3dsmax.jpg",
       description: "3D modeling, animation, and rendering software.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Learn 3ds Max to start modeling, texturing, lighting and rendering things from imagination. Everything you need to create stunning, professional exterior renderings with 3ds Max .For Architects , Civil Engineers & Interior Designers",
+      learn: [
+        "File formats for images and animations",
+        "UI customization and viewport controls",
+        "Introduction to 3Ds Max and project workflow",
+        "Creating and modifying 3D objects",
+        "Selection and transforming object techniques",
+        "Using coordinate systems and pivot points",
+        "Grouping and hierarchy management",
+        "Applying deformers and modifiers",
+        "Advanced poly and spline modeling",
+        "Material creation and advanced rendering techniques"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "3ds MAX is one of the most powerful designing software that provides comprehensive 3D modeling, rendering, animation, and composing solutions for different industries. Developed by Autodesk Media and Entertainment, it offers rich modeling capabilities, a flexible plugin architecture, and is compatible with Microsoft Windows.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "Learn and master 3ds MAX software tool.",
+            "Understand the basics of 3D modeling and texturing.",
+            "Gain skills in 3D rendering.",
+            "Increase productivity and performance with advanced techniques.",
+            "Enhance overall productivity and proficiency in 3ds MAX.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "Widely used by architects and civil engineers to create 3D visualizations for their designs.",
+            "Capable of rendering designs with photorealistic models.",
+            "Provides controls to create highly realistic product models.",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Introduction to 3ds MAX",
+            "Manipulating Objects",
+            "Learning 2D Shapes",
+            "Conversion from 2D to 3D",
+            "Modeling 3D Assets",
+            "Advanced Materials",
+            "Lights, Cameras, and Animation",
+          ],
+        },
+      ]
     },
     {
       title: "Revit Structure",
       image: "/images/revit_structure.jpg",
       description: "BIM software for structural engineering.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Get ready to work on real projects - sample files included! Also suitable for Revit 2017, 2018, 2019 or 2020 For Civil Engineers , Design Engineers, Structural Designers & Steel Detailer",
+      learn: [
+        "Introduction to Autodesk Revit Structure and GUI",
+        "Creating and Modifying Levels, View Templates, and Grids",
+        "Modeling Structural Columns, Beams, and Framing",
+        "Steel Modeling and Structural Foundations",
+        "Structural Slabs, Openings, and Reinforcement",
+        "Structural Analysis and Analytical Models",
+        "Scheduling, Family Creation, and File Export",
+        "Advanced Family Creation and File Exporting",
+        "Final Project in Revit Structure",
+        "Creating Views, Details, and Construction Documents"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "Revit Structure helps structural engineers develop a physical and analytical model of a building structure. This model is utilized to create construction documentation, shop drawings, and fabrication drawings. The course involves creating a 3D structural model through hands-on exercises using both imperial and metric units to represent real-world structural design projects.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "Develop a physical and analytical model of a building structure using Revit Structure.",
+            "Create construction documentation, shop drawings, and fabrication drawings.",
+            "Conduct structural analysis of the analytical model, including structural material properties, boundary conditions, and structural loads.",
+            "Understand the placement and dimension calculation of beams, slabs, and rebars.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "Create and manage views and annotations, work with revisions, and set up and manage sheets.",
+            "Use workflows and processes such as worksharing, phasing, design options, and project management.",
+            "Work with structural components, selection sets, and element materials.",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Introduction of Revit® Structure",
+            "Revit Structure Basics",
+            "Starting a Design",
+            "Structure Creation",
+            "Structural Foundation",
+            "Reinforcement",
+            "Viewing the Building Model",
+            "Insert",
+            "Using Dimensions and Constraints",
+            "Detailing and Drafting",
+            "Construction Documentation",
+            "Presenting the Building Model",
+          ],
+        },
+      ],
     },
     {
       title: "AutoCAD Civil 3D",
       image: "/images/autocad_civil3d.jpg",
       description: "Civil engineering design and documentation software.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Learn AutoCAD Civil 3D from scratch to a professional level with the help of real life example Project.For Civil Engineers , Surveyor & Road Designers",
+      learn: [
+        "Introduction to Civil Engineering and AutoCAD Civil 3D",
+        "Working Environment Setup and Template Creation",
+        "Point Data Management and Styles",
+        "Surface Creation and Analysis",
+        "Survey Techniques and LiDAR Data Handling",
+        "Surface Analysis and Earthwork Calculation",
+        "Alignment Design and Customization",
+        "Parcel Creation and Editing",
+        "Corridor Design and Surface Creation",
+        "Junction Design, Quantity Takeoff, and Criteria Customization"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "Autodesk Civil 3D software is a vertical design and documentation solution for civil engineering and architectural professionals to plan, design, and manage civil engineering projects. Civil 3D supports BIM (Building Information Modeling) with integrated features to enhance drafting, design, and construction documentation. It allows the development of highways, pipelines, topographic points, and surfaces, as well as analyzing volumes for cutting and filling material, and performing storm analysis. The software enhances collaboration and workflow efficiencies from design to production, permitting faster development of alternatives via model-based design tools.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "The AutoCAD Civil 3D training course is designed for those with a background in surveying and civil engineering. The dynamic design functionality of the software allows for the rapid development of design alternatives via model-based tools. Students will learn to organize project data, create and analyze surfaces, and design parcel layouts, road corridors, and network layouts.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "Land surveying",
+            "Highway designing",
+            "Workflows on various civil infrastructure projects, including roads, highways, land development, rail, airports, and water projects.",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Navigate AutoCAD Civil 3D user interface",
+            "Create point groups and work with survey figures",
+            "Create, edit, and analyze surfaces",
+            "LiDAR Survey",
+            "Make and edit alignments",
+            "Create grading solutions",
+            "Perform quantity takeoff and earthwork calculation",
+            "Design Roundabouts, Corridors, Junctions, and Pipe Networks",
+          ],
+        },
+      ],
     },
     {
       title: "MxRoad",
       image: "/images/mxroad.jpg",
       description: "Advanced road design software.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "MX Road is an advanced string based modeling tool that enables the rapid and accurate design of all types of roads.for Highway Engineers, Road Designers, Land Surveyors, CAD Technicians, and Infrastructure Profession",
+      learn: [
+        "Introduction to MXROAD and Key Features",
+        "Project Setup and Survey Input Methods",
+        "Point Selection and Model Analysis",
+        "Editing Models and String Naming Conventions",
+        "Horizontal and Vertical Design",
+        "Alignment Methods and Best Fit Alignment",
+        "Road Design, Super Elevation, and Reports",
+        "Junction Design and Earthwork Design",
+        "Pavement and Subgrade Design",
+        "Final Drawings Management and Cross Sections"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "MX Road is a string-based modeling tool that enables rapid and accurate design for all types of roads. It supports 3D modeling, construction-driven engineering, and various analyses within a single application. MX Road enhances design quality by integrating traditional engineering workflows, including profiles and cross-sections, with advanced 3D modeling technology.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "This course aims to help you master various features of MX Road, such as the Interoperable Database for creating and annotating 3D project models. It will also cover digital terrain model creation and its integration with Google Earth.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "MX Road is essential for transportation and civil design projects, offering comprehensive support for survey and data acquisition. Key functions include:",
+            "Ensuring that projects are engineered with precision for 3D models",
+            "Allowing information sharing across teams, locations, and disciplines while maintaining security and accuracy",
+            "Enabling design-time visualization to view designs on the fly, reducing the need for additional software and staff",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Design 2D and 3D drainage systems",
+            "Visualize information-rich models with mapping",
+            "Create horizontal and vertical alignments",
+            "Automate the production of contract drawings",
+            "Design storm drainage, water, and sewer systems",
+            "Pavement and subgrade design",
+            "Road and junction design",
+          ],
+        },
+      ],
     },
     {
       title: "BIM Concepts",
       image: "/images/bim.jpg",
       description: "Building Information Modeling concepts for construction.",
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "The guide to learn the basics to understand the BIM concept.For civil Engineers",
+      learn: [
+        "Understand the methods and strategies to implement BIM in engineering projects",
+        "Understand what is meant by BIM Levels",
+        "Understand what is meant by BIM Level of Development",
+        "Determine what LOD you need for your project",
+        "Understand what is meant by EIR (Employer Information Request) for BIM",
+        "Know about the latest codes and standards used in BIM",
+        "Understand BIM Tools & Software",
+        "Understand BIM Concepts & Modern Technologies"
+    ],
+      course_description:[
+        {
+          title: "Course Description",
+          content: [
+            "This course introduces Building Information Modeling (BIM) concepts and practices essential for modern construction and architecture professionals. BIM is a collaborative process that allows stakeholders to digitally manage building and infrastructure projects throughout their lifecycle. Students will explore fundamental BIM principles, including 3D modeling, data management, visualization, and collaboration tools. The course covers the integration of BIM into architectural design, engineering, construction, and facility management processes. Practical applications and case studies will provide insights into how BIM enhances efficiency, accuracy, and communication in the construction industry. By the end of the course, students will have a foundational understanding of BIM workflows and be prepared to apply BIM concepts in real-world projects.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "Understand the principles and benefits of Building Information Modeling (BIM).",
+            "Explore BIM software tools and their applications in architecture, engineering, and construction.",
+            "Gain hands-on experience in creating and managing BIM models.",
+            "Analyze case studies to evaluate the impact of BIM on project delivery and collaboration.",
+            "Develop skills in BIM-based coordination, clash detection, and project visualization.",
+            "Discuss industry trends and future directions in BIM technology and practices.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "BIM Manager/Coordinator: Oversees the implementation and execution of BIM on projects.",
+            "BIM Architect: Uses BIM software to create architectural designs and models.",
+            "BIM Engineer: Uses BIM to design and analyze structural, mechanical, electrical, plumbing, and civil systems.",
+            "BIM Project Manager: Uses BIM for project planning, scheduling, and sequencing.",
+            "BIM Modeler: Creates and maintains BIM models based on design inputs from architects and engineers.",
+            "BIM Consultant: Provides consultancy services to firms adopting BIM processes.",
+            "Legal and Contractual Specialist: Helps develop BIM execution plans (BEPs) and contractual frameworks.",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Introduction to BIM",
+            "BIM Standards & Compliances",
+            "BIM and Modern Technologies",
+            "LOD (Level of Development)",
+            "BIM Tools & Software",
+            "BIM Fundamentals",
+            "Practical Application of BIM",
+            "BIM in Project Management",
+            "BIM for Sustainability",
+            "Building a Career in BIM",
+            "BIM Implementation",
+          ],
+        },
+      ],
     },
   ],
 };
@@ -1402,7 +2090,7 @@ const CourseList = () => {
         <Box sx={{ textAlign: "center", marginBottom: "40px" }}>
           <Typography
             variant="h4"
-            sx={{ fontWeight: "bold", marginBottom: "10px", }}
+            sx={{ fontWeight: "bold", marginBottom: "10px",color: "#1976D2" }}
           >
             Our Courses
           </Typography>

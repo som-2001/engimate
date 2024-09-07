@@ -6,16 +6,21 @@ import {
   Divider,
   Button,
 } from "@mui/material";
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { IoIosCheckmark } from "react-icons/io";
 
 const CourseDetail = () => {
   const location = useLocation();
-  const navigate=useNavigate();
+
   const { course } = location.state || {}; // Access the passed course details
 
+  useEffect(()=>{
+
+    window.scrollTo(0,0);
+  },[]);
   return (
     <Box>
       <Navbar />
@@ -133,7 +138,7 @@ const CourseDetail = () => {
                     fontSize: "1.2rem",
                   }}
                 >
-                  Rs:{course?.price}
+                  ₹:{course?.price}
                 </Typography>
               </Box>
               <Box
@@ -149,15 +154,27 @@ const CourseDetail = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  sx={{ width: "95%" }}
+                  sx={{
+                    backgroundColor: "#0d47a1", // Matching button color with main heading
+                    color: "#fff",
+                    width:"95%",
+                    padding: "10px 24px",
+                    fontSize: "1rem",
+                    textTransform: "none",
+                    borderRadius: "50px",
+                    "&:hover": {
+                      backgroundColor: "#08306b", // Darker shade on hover
+                    },
+                    marginBottom:"5px"
+                  }}
                 >
                   Add to Cart
                 </Button>
                 <Button
                   variant="contained"
                   color="secondary"
-                  sx={{ width: "95%" }}
-                  onClick={(e)=>navigate("https://lyss.in/payment")}
+                  sx={{ width: "95%",borderRadius:"50px",padding: "10px 24px", }}
+                  onClick={(e)=>window.location.href="https://lyss.in/payment"}
                 >
                   Buy Now
                 </Button>
@@ -177,7 +194,7 @@ const CourseDetail = () => {
               fontWeight: "bold",
               marginBottom: "25px",
               textAlign: "center",
-            
+            color: "#1976D2"
             }}
           >
             What You'll Learn
@@ -196,7 +213,7 @@ const CourseDetail = () => {
                     textAlign: "center",
                   }}
                 >
-                  {item}
+                 <IoIosCheckmark /> {item}
                 </Typography>
               </Grid>
             ))}

@@ -13,7 +13,7 @@ import { CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const pages = ["Home", "About", "Our Courses"];
-const settings = ["Placed Students", "Gallery", "Contact Us"];
+const settings = ["Placed Students", "Gallery", "Contact Us","Login"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -44,6 +44,7 @@ function ResponsiveAppBar() {
           <CardMedia
             component="img"
             image={"../images/logo.png"}
+            onClick={(e)=>navigate('/')}
             sx={{
               width: "150px",
               height: "auto",
@@ -63,7 +64,7 @@ function ResponsiveAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              sx={{ color: "white" }}
+             
             >
               <MenuIcon />
             </IconButton>
@@ -103,6 +104,7 @@ function ResponsiveAppBar() {
           <CardMedia
             component="img"
             image={"../images/logo.png"}
+            onClick={(e)=>navigate('/')}
             sx={{
               width: "150px",
               height: "auto",

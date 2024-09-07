@@ -9,6 +9,8 @@ import CourseList from "./components/CourseList";
 import About from "./pages/About";
 import CourseDetail from "./components/CourseDetail";
 import { Course } from "./components/Course";
+import { Login } from "./pages/Login";
+import { RegisterPage } from "./pages/RegisterPage";
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/course-detail" element={<CourseDetail />} />
         <Route path="/course/:name" element={<Course/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<RegisterPage/>}/>
       </Routes>
     </Router>
   

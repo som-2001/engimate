@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Grid, Card, CardMedia, CardContent, Typography, Container, Box, Button, CardActions } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -33,10 +32,9 @@ const categories = [
 ];
 
 export const OurCourses = () => {
-  const navigate = useNavigate();
 
   const handleViewCourses = (category) => {
-    navigate(`/courses/${category}`);
+    window.location.href=`/courses/${category}`;
   };
 
   return (
