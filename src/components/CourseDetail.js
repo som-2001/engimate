@@ -114,7 +114,7 @@ const CourseDetail = () => {
                 controls
                 style={{ width: "100%", height: "auto", borderRadius: "15px" }}
               >
-                <source src={`../images/${course?.video}`} type="video/mp4" />
+                <source src='https://videos.pexels.com/video-files/5147975/5147975-uhd_2732_1440_25fps.mp4' type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <Box
