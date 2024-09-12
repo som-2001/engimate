@@ -96,8 +96,8 @@ const Footer = () => {
             </Box>
             <Box display="flex" alignItems="center" mb={1}>
               <MdPhone style={{ marginRight: "8px" }} />
-              <FooterLink href="tel:+91 06114469461" color="textSecondary">
-                +91 06114469461
+              <FooterLink href="tel:+91 7905682392" color="textSecondary">
+                +91 7905682392
               </FooterLink>
             </Box>
             <Box display="flex" alignItems="center" mb={1}>
