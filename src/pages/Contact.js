@@ -284,7 +284,7 @@ import {
                   </Box>
                 </Typography>
                 <Typography variant="body1" color="textSecondary">
-                  +91 06114469461
+                  +91 7905682392
                 </Typography>
               </Box>
             </Grid>

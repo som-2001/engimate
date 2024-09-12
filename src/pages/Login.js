@@ -9,15 +9,14 @@ import {
   } from "@mui/material";
   import Navbar from "../components/Navbar";
   import Footer from "../components/Footer";
-  import { RiLockPasswordFill } from "react-icons/ri";
   import { CgProfile } from "react-icons/cg";
-  import { useState } from "react";
-  import { FaEye, FaEyeSlash } from "react-icons/fa";
+  
+
 import { useNavigate } from "react-router-dom";
 
   
   export const Login = () => {
-    const [hide, setHide] = useState(false);
+    
     const navigate=useNavigate();
     // const navigate=useNavigate();
   
@@ -57,7 +56,7 @@ import { useNavigate } from "react-router-dom";
               <img
                 src="https://blog.ahgora.com/wp-content/uploads/2020/04/Como-fazer-a-gestao-do-trabalho-home-office-de-um-modo-eficaz.jpg"
                 alt="Registration"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover",marginTop:"10%" }}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -126,37 +125,7 @@ import { useNavigate } from "react-router-dom";
                     />
                   </Box>
   
-                  <Box sx={{ mb: 2 }} id="hero4">
-                    <TextField
-                      type={hide ? "text" : "password"}
-                     
-                      placeholder="Password..."
-                      fullWidth
-                      variant="outlined"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <RiLockPasswordFill />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            {hide ? (
-                              <FaEyeSlash
-                                className="cursor-pointer"
-                                onClick={() => setHide(!hide)}
-                              />
-                            ) : (
-                              <FaEye
-                                className="cursor-pointer"
-                                onClick={() => setHide(!hide)}
-                              />
-                            )}
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Box>
+                  
 
                   <Box sx={{ mb: 2 }} id="hero4">
                     <Typography variant="body1" textAlign="center" fontSize="0.9rem">New to Engimate? <span onClick={(e)=>navigate('/register')} style={{cursor:"pointer"}}>Register now.</span></Typography>
@@ -179,7 +148,7 @@ import { useNavigate } from "react-router-dom";
                         marginBottom:"20px"
                       }}
                     >
-                      Login
+                      Send OTP
                     </Button>
                   </center>
                 </Box>
