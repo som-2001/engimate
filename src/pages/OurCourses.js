@@ -9,25 +9,25 @@ const categories = [
     image: "cse.jpg",
     title: "Computer Science & Engineering",
     abbreviation:"CSE",
-    description: "Computer Science and Engineering Courses",
+    description: "Unlock the potential of modern technology with our Computer Science and Engineering courses.",
   },
   {
     image: "Electrical & Electronics.jpg",
     title: "Electrical & Electronics",
     abbreviation:"EE",
-    description: "Electrical and Electronics Engineering Courses",
+    description: "Unlock the potential of modern technology with our Electrical and Electronics Engineering Courses",
   },
   {
     image: "mechanical.jpg",
     title: "Mechanical Engineering",
     abbreviation:"Mechanical",
-    description: "Mechanical Engineering Courses",
+    description: "Unlock the potential of modern technology with our Mechanical Engineering Courses",
   },
   {
     image: "civil.jpg",
     title: "Civil Engineering",
     abbreviation:"Civil",
-    description: "Civil Engineering Courses",
+    description: "Unlock the potential of modern technology with our Civil Engineering Courses",
   },
 ];
 
@@ -144,7 +144,7 @@ export const OurCourses = () => {
               >
                 <CardMedia
                   component="img"
-                  height="240"
+                  height="280"
                   image={`../images/${course.image}`}
                   alt={course.title}
                   sx={{ objectFit: "cover" }}

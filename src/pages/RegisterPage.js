@@ -16,7 +16,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { MdOutlineLocalPhone } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -24,10 +23,7 @@ import { FaCodeBranch } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 export const RegisterPage = () => {
-  
-  const navigate = useNavigate();
-
-  // Validation schema
+ 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email format").required("Email is required"),
@@ -108,7 +104,7 @@ export const RegisterPage = () => {
                 component="form"
                 onSubmit={handleSubmit(onSubmit)}
                 sx={{
-                  width: { xs: "90%", sm: "80%", md: "90%" },
+                  width: { xs: "100%", sm: "90%", md: "90%" },
                   mt: 4,
                 }}
               >
@@ -239,8 +235,8 @@ export const RegisterPage = () => {
                
                 <Box sx={{ mb: 2 }} id="hero4">
                   <Typography variant="body1" textAlign="center" fontSize="0.9rem">
-                    Have an account?{" "}
-                    <span onClick={(e) => navigate("/login")} style={{ cursor: "pointer" }}>
+                   Already Have an account?{" "}
+                    <span onClick={(e) => window.location.href="/login"} style={{ cursor: "pointer",textDecoration:"underline" }}>
                       Login now.
                     </span>
                   </Typography>
@@ -262,6 +258,7 @@ export const RegisterPage = () => {
                       "&:hover": {
                         backgroundColor: "#08306b",
                       },
+                      marginBottom:"20px"
                     }}
                   >
                     Register

@@ -216,8 +216,8 @@ const About = () => {
           ))}
         </Grid2>
           <Box textAlign="center" mt={4}>
-            <Typography variant="h6" marginBottom="5%" marginTop="10%" sx={{  fontSize: { lg: "1.1rem", xs: "1.0rem", md: "0.7rem" },}}>At Engimate, we believe that the right education can transform
-            lives. To enhance your skills, advance your career,<br/> and contribute
+            <Typography variant="h6" marginBottom="5%" marginTop="10%" sx={{  fontSize: { lg: "1.1rem", xs: "1.0rem", md: "0.7rem" },textAlign:"justify"}}>At Engimate, we believe that the right education can transform
+            lives. To enhance your skills, advance your career, and contribute
             to the technology and engineering advancements of the future.</Typography>
             <Button
               variant="contained"

@@ -70,7 +70,7 @@ export const OurExpertise = () => {
               >
                 <CardMedia
                   component="img"
-                  height="240"
+                  height="280"
                   image={`../images/${course.image}`}
                   alt={course.title}
                   sx={{ objectFit: "cover" }}

@@ -66,7 +66,7 @@ import { useNavigate } from "react-router-dom";
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
-                  mt: { xs: 0, sm: 3, md: 5 },
+                  mt: { xs: -5, sm: 3, md: 5 },
                   px: { xs: 2, sm: 4, md: 6 },
                 }}
               >
@@ -88,7 +88,7 @@ import { useNavigate } from "react-router-dom";
                   id="hero1"
                   className="header"
                 >
-                  Welcome to Engimate
+                  Welcome Back!
                 </Typography>
                 <Typography
                   id="hero2"
@@ -101,7 +101,7 @@ import { useNavigate } from "react-router-dom";
                 </Typography>
                 <Box
                   sx={{
-                    width: { xs: "90%", sm: "80%", md: "70%" },
+                    width: { xs: "100%", sm: "80%", md: "70%" },
                     mt: 4,
                   }}
                 >
@@ -128,7 +128,7 @@ import { useNavigate } from "react-router-dom";
                   
 
                   <Box sx={{ mb: 2 }} id="hero4">
-                    <Typography variant="body1" textAlign="center" fontSize="0.9rem">New to Engimate? <span onClick={(e)=>navigate('/register')} style={{cursor:"pointer"}}>Register now.</span></Typography>
+                    <Typography variant="body1" textAlign="center" fontSize="0.9rem">New to Engimate? <span onClick={(e)=>navigate('/register')} style={{cursor:"pointer",textDecoration:"underline" }}>Register now.</span></Typography>
                   </Box>
                   <center>
                     <Button
@@ -145,7 +145,7 @@ import { useNavigate } from "react-router-dom";
                         "&:hover": {
                           backgroundColor: "#08306b", // Darker shade on hover
                         },
-                        marginBottom:"20px"
+                        marginBottom:"30px"
                       }}
                     >
                       Send OTP
