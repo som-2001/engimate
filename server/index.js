@@ -10,12 +10,18 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
+// static routes
+app.use("/uploads", express.static("uploads"));
 
 //importing routes
 import userRoutes from "./routes/user.js";
+import coursesRoutes from "./routes/courses.js";
+import adminRoutes from "./routes/admin.js";
 
 // using routes
 app.use("/api", userRoutes);
+app.use("/api", coursesRoutes);
+app.use("/api", adminRoutes);
 const startserver = async () => {
   try {
     await connectDb();

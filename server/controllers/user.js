@@ -98,7 +98,7 @@ export const verifyLoginOtp = TryCatch(async (req, res) => {
   const { email, otp } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(400).json({ message: "User not found" });
+    return res.status(400).json({ message: "User not found with this email" });
   }
   if (user.otp !== otp.toString()) {
     return res.status(400).json({ message: "Invalid OTP" });
@@ -107,8 +107,8 @@ export const verifyLoginOtp = TryCatch(async (req, res) => {
     return res.status(400).json({ message: "OTP has Expired" });
   }
   const token = jwt.sign(
-    { email: user.email, role: user.role },
-    process.env.ACTIVATION_SECRET,
+    { email: user.email, _id: user.id, role: user.role },
+    process.env.JWT_SECRET,
     {
       expiresIn: "1h",
     },
@@ -118,7 +118,18 @@ export const verifyLoginOtp = TryCatch(async (req, res) => {
   await user.save();
 
   res.status(200).json({
-    message: "login successfull",
+    message: "login successful",
     token,
+  });
+});
+
+export const myProfile = TryCatch(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!req.user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json({
+    message: "profile retrieved successfully",
+    user,
   });
 });
