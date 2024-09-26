@@ -5,6 +5,14 @@ const Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  caption: {
+    type: String,
+    required: true,
+  },
+  concepts_list: {
+    type: String,
+    required: true,
+  },
   course_description: {
     type: String,
     required: true,
@@ -35,7 +43,7 @@ const Schema = new mongoose.Schema({
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref:"User",
+    ref: "User",
     required: true,
   },
   createdAt: {
