@@ -106,7 +106,7 @@ const sendMail = async (email, subject, data) => {
     <div class="container">
         <!-- Header Section -->
         <div class="header">
-            <h1>Engimate</h1>
+            <h1>YANTRAVED</h1>
         </div>
 
         <!-- Content Section -->
@@ -126,8 +126,8 @@ const sendMail = async (email, subject, data) => {
 
         <!-- Footer Section -->
         <div class="footer">
-            <p>If you have any issues, please contact our support team at <a href="mailto:support@engimate.com">support@engimate.com</a>.</p>
-            <p>Thank you,<br>Engimate Team</p>
+            <p>If you have any issues, please contact our support team at <a href="mailto:support@YANTRAVED.com">support@YANTRAVED.com</a>.</p>
+            <p>Thank you,<br>YANTRAVED Team</p>
         </div>
     </div>
 </body>

@@ -2103,7 +2103,7 @@ const CourseList = () => {
             }}
           >
             Explore All Industry-Leading IT & Industrial Automation Courses by
-            Engimate and Get Placed! Skill up with new IT & Industrial
+            YANTRAVED and Get Placed! Skill up with new IT & Industrial
             Automation courses training or improve your technical knowledge with
             the best courses. Industry-leading courses developed with expertise
             and experience to help learners stay ahead in technological

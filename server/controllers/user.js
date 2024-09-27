@@ -40,7 +40,7 @@ export const register = TryCatch(async (req, res) => {
     username: name,
     otp: otp,
   };
-  sendmail(email, "your Verfication OTP for engimate", data);
+  sendmail(email, "your Verfication OTP for YANTRAVED", data);
 
   res.status(200).json({
     message: "OTP send to you mail",
@@ -84,7 +84,7 @@ export const requestLoginOtp = TryCatch(async (req, res) => {
   const data = { username: user.name, otp: otp };
 
   try {
-    await sendmail(user.email, "Your Login OTP for Engimate", data);
+    await sendmail(user.email, "Your Login OTP for YANTRAVED", data);
   } catch (error) {
     return res
       .status(500)

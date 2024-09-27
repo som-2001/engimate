@@ -128,7 +128,7 @@ import { useNavigate } from "react-router-dom";
                   
 
                   <Box sx={{ mb: 2 }} id="hero4">
-                    <Typography variant="body1" textAlign="center" fontSize="0.9rem">New to Engimate? <span onClick={(e)=>navigate('/register')} style={{cursor:"pointer",textDecoration:"underline" }}>Register now.</span></Typography>
+                    <Typography variant="body1" textAlign="center" fontSize="0.9rem">New to YANTRAVED? <span onClick={(e)=>navigate('/register')} style={{cursor:"pointer",textDecoration:"underline" }}>Register now.</span></Typography>
                   </Box>
                   <center>
                     <Button
