@@ -302,7 +302,7 @@ export const Home = () => {
                 color: "#1976D2"
               }}
             >
-              Welcome to YANTRAVED
+              Welcome to YANTRAVED!
             </Typography>
             <Typography
               variant="body2"
