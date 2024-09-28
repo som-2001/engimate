@@ -1,11 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDb } from "./database/db.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 
+app.use(
+  cors({
+    origin: "*", // Allows all origins
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+  }),
+);
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Server is running");
