@@ -11,6 +11,7 @@ import CourseDetail from "./components/CourseDetail";
 import { Course } from "./components/Course";
 import { Login } from "./pages/Login";
 import { RegisterPage } from "./pages/RegisterPage";
+import VerifyEmail from "./pages/VerifyEmail";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/contact-us" element={<Contact/>}/>
         <Route path="/our-courses" element={<OurCourses />} />
         <Route path="/gallery" element={<Gallary />} />

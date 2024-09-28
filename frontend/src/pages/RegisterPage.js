@@ -21,9 +21,14 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaCodeBranch } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { URL } from "../components/BaseUrl";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export const RegisterPage = () => {
  
+  const navigate=useNavigate();
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email format").required("Email is required"),
@@ -41,8 +46,37 @@ export const RegisterPage = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    // Submit form data
+    
+    let data1 = JSON.stringify({
+    
+      "email": data.email,
+      "name": data.name,
+      "phone_number": data.phone,
+      "course_enrolled": data.course,
+      "specialization": data.specialization
+
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: `${URL}/register`,
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data1
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(response.data);
+      sessionStorage.setItem("activationToken",response.data.activationToken);
+      navigate("/verify-email");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
   };
 
   return (
