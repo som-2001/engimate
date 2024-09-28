@@ -40,7 +40,7 @@ const whatChooseEngimate=[
   {
     image:"community.jpg",
     title:"Supportive Community",
-    text:"At Engimate, you are part of a community of learners and professionals dedicated to growth and success. We offer ongoing support, from enrollment to job placement."
+    text:"At YANTRAVED, you are part of a community of learners and professionals dedicated to growth and success. We offer ongoing support, from enrollment to job placement."
   }
 ]
 
@@ -135,7 +135,7 @@ const About = () => {
             Who We Are
           </Typography>
           <Typography variant="body1" paragraph sx={{marginBottom:"50px"}}>
-            Founded on the principles of excellence and innovation, Engimate has
+            Founded on the principles of excellence and innovation, YANTRAVED has
             become a trusted name in professional training and development. We
             understand that the rapidly evolving technological landscape
             requires a new breed of professionals—individuals who are not just
@@ -197,7 +197,7 @@ const About = () => {
             gutterBottom
             sx={{ fontWeight: "bold", mb: 2 ,color: "#1976D2",marginBottom:"50px"}}
           >
-            Why Choose Engimate?
+            Why Choose YANTRAVED?
           </Typography>
          
           <Grid2
@@ -216,7 +216,7 @@ const About = () => {
           ))}
         </Grid2>
           <Box textAlign="center" mt={4}>
-            <Typography variant="h6" marginBottom="5%" marginTop="10%" sx={{  fontSize: { lg: "1.1rem", xs: "1.0rem", md: "0.7rem" },textAlign:"justify"}}>At Engimate, we believe that the right education can transform
+            <Typography variant="h6" marginBottom="5%" marginTop="10%" sx={{  fontSize: { lg: "1.1rem", xs: "1.0rem", md: "0.7rem" },textAlign:"justify"}}>At YANTRAVED, we believe that the right education can transform
             lives. To enhance your skills, advance your career, and contribute
             to the technology and engineering advancements of the future.</Typography>
             <Button

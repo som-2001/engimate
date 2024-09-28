@@ -89,7 +89,7 @@ export const RegisterPage = () => {
                 id="hero1"
                 className="header"
               >
-                Welcome to Engimate
+                Welcome to YANTRAVED
               </Typography>
               <Typography
                 id="hero2"

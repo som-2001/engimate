@@ -261,7 +261,7 @@ export const Home = () => {
       image: "training1.jpg",
       title: "Job Oriented Training",
       Description:
-        "Get yourself enrolled in a job-oriented course at Engimate. Gain first-hand experience of working on real-time projects",
+        "Get yourself enrolled in a job-oriented course at YANTRAVED. Gain first-hand experience of working on real-time projects",
     },
     {
       image: "training2.jpg",
@@ -302,7 +302,7 @@ export const Home = () => {
                 color: "#1976D2"
               }}
             >
-              Welcome to Engimate!
+              Welcome to YANTRAVED!
             </Typography>
             <Typography
               variant="body2"
@@ -315,7 +315,7 @@ export const Home = () => {
               }}
             >
               Empowering the Future with Expertise in Industrial Automation and
-              Engineering At Engimate,
+              Engineering At YANTRAVED,
               <br /> we are dedicated to bridging the gap between industry needs
               and skilled professionals.
               <br /> With a focus on IT, Industrial Automation, Electrical,
@@ -353,7 +353,7 @@ export const Home = () => {
         >
           Our job-oriented IT & Industrial Automation courses are designed for developing an excellent
           path for the students.
-          <br /> Engimate offers Complete Placement Assistance on these popular
+          <br /> YANTRAVED offers Complete Placement Assistance on these popular
           courses. Check it out!
         </Typography>
 
@@ -448,7 +448,7 @@ export const Home = () => {
           }}
         >
           If you dream of having a great career with a good salary, then
-          Engimate,
+          YANTRAVED,
           <br /> the best software training institute is your stop. Enrol on our
           professional IT & Industrial Automation courses and get trained by the industry experts.
         </Typography>
@@ -488,7 +488,7 @@ export const Home = () => {
           }}
         >
           Whether you are a fresh graduate looking to jumpstart your career or a
-          professional seeking to upgrade your skills, Engimate is your partner
+          professional seeking to upgrade your skills, YANTRAVED is your partner
           in success.
         </Typography>
         <Typography
