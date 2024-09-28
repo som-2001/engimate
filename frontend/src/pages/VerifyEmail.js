@@ -25,7 +25,7 @@ const VerifyEmail = () => {
     
     let data1 = JSON.stringify({
         "activationToken": sessionStorage.getItem("activationToken"),
-        "otp": data.otp
+        "otp": parseInt(data.otp)
       });
       
       let config = {
@@ -68,6 +68,7 @@ const VerifyEmail = () => {
         <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
           <TextField
             label="OTP"
+            type='number'
             variant="outlined"
             fullWidth
             {...register('otp')}

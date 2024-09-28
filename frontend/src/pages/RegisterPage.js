@@ -26,8 +26,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 export const RegisterPage = () => {
- 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -46,53 +45,41 @@ export const RegisterPage = () => {
   });
 
   const onSubmit = (data) => {
-    
-    let data1 = JSON.stringify({
-    
-      "email": data.email,
-      "name": data.name,
-      "phone_number": data.phone,
-      "course_enrolled": data.course,
-      "specialization": data.specialization
-
-    });
-    
-    let config = {
-      method: 'post',
-      maxBodyLength: Infinity,
-      url: `${URL}/register`,
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data1
+    const postData = {
+      email: data.email,
+      name: data.name,
+      phone_number: data.phone,
+      course_enrolled: data.course,
+      specialization: data.specialization,
     };
-    
-    axios.request(config)
-    .then((response) => {
-      console.log(response.data);
-      sessionStorage.setItem("activationToken",response.data.activationToken);
-      navigate("/verify-email");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    
+
+    axios
+      .post(`${URL}/register`, postData, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .then((response) => {
+        sessionStorage.setItem("activationToken", response.data.activationToken);
+        navigate("/verify-email");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <Box sx={{ backgroundColor: "white" }}>
       <Navbar />
-      <Box>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Grid
           container
           spacing={4}
-          sx={{  alignItems: "center", px: { xs: 2, sm: 3, md: 4 } }}
+          sx={{ alignItems: "center", px: { xs: 2, sm: 3, md: 4 } }}
         >
           <Grid item xs={12} md={6} sx={{ display: { xs: "none", md: "block" } }}>
             <img
               src="https://blog.ahgora.com/wp-content/uploads/2020/04/Como-fazer-a-gestao-do-trabalho-home-office-de-um-modo-eficaz.jpg"
               alt="Registration"
-              style={{ width: "100%", height: "100%", objectFit: "cover",marginTop:"25%" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", marginTop: "25%" }}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -111,7 +98,7 @@ export const RegisterPage = () => {
                 src="../images/logo.png"
                 alt="Logo"
                 sx={{
-                  width: { xs: "60%", sm: "50%", md: "45%", lg: "45%" },
+                  width: { xs: "60%", sm: "50%", md: "45%" },
                   height: "auto",
                   mt: { xs: "5%", md: "0%" },
                 }}
@@ -120,29 +107,18 @@ export const RegisterPage = () => {
                 variant="body2"
                 align="center"
                 sx={{ mb: 1, fontSize: { xs: "1.5rem", md: "1.8rem" } }}
-                id="hero1"
                 className="header"
               >
                 Welcome to YANTRAVED
               </Typography>
               <Typography
-                id="hero2"
                 variant="body1"
                 sx={{ fontWeight: "600" }}
-                className="header"
                 align="center"
               >
                 An Online Learning Platform
               </Typography>
-              <Box
-                component="form"
-                onSubmit={handleSubmit(onSubmit)}
-                sx={{
-                  width: { xs: "100%", sm: "90%", md: "90%" },
-                  mt: 4,
-                }}
-              >
-            
+              <Box sx={{ width: { xs: "100%", sm: "90%", md: "90%" }, mt: 4 }}>
                 <Box sx={{ mb: 2 }}>
                   <Controller
                     name="name"
@@ -191,7 +167,6 @@ export const RegisterPage = () => {
                   />
                 </Box>
 
-               
                 <Box sx={{ mb: 2 }}>
                   <Controller
                     name="phone"
@@ -227,11 +202,10 @@ export const RegisterPage = () => {
                           {...field}
                           labelId="course-label"
                           label="Course"
-                          defaultValue=""
                         >
-                          <MenuItem value="B.Tech">B.Tech</MenuItem>
-                          <MenuItem value="M.Tech">M.Tech</MenuItem>
-                          <MenuItem value="B.Sc.">B.Sc.</MenuItem>
+                          <MenuItem value="B.tech">B.Tech</MenuItem>
+                          <MenuItem value="M.tech">M.Tech</MenuItem>
+                          <MenuItem value="B.sc.">B.Sc.</MenuItem>
                         </Select>
                       )}
                     />
@@ -241,7 +215,6 @@ export const RegisterPage = () => {
                   </FormControl>
                 </Box>
 
-                
                 <Box sx={{ mb: 2 }}>
                   <Controller
                     name="specialization"
@@ -266,17 +239,18 @@ export const RegisterPage = () => {
                   />
                 </Box>
 
-               
-                <Box sx={{ mb: 2 }} id="hero4">
+                <Box sx={{ mb: 2 }}>
                   <Typography variant="body1" textAlign="center" fontSize="0.9rem">
-                   Already Have an account?{" "}
-                    <span onClick={(e) => window.location.href="/login"} style={{ cursor: "pointer",textDecoration:"underline" }}>
+                    Already Have an account?{" "}
+                    <span
+                      onClick={() => window.location.href = "/login"}
+                      style={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
                       Login now.
                     </span>
                   </Typography>
                 </Box>
 
-                
                 <center>
                   <Button
                     type="submit"
@@ -292,7 +266,7 @@ export const RegisterPage = () => {
                       "&:hover": {
                         backgroundColor: "#08306b",
                       },
-                      marginBottom:"20px"
+                      marginBottom: "20px",
                     }}
                   >
                     Register
@@ -302,7 +276,7 @@ export const RegisterPage = () => {
             </Box>
           </Grid>
         </Grid>
-      </Box>
+      </form>
       <Footer />
     </Box>
   );
