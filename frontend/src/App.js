@@ -11,7 +11,7 @@ import CourseDetail from "./components/CourseDetail";
 import { Course } from "./components/Course";
 import { Login } from "./pages/Login";
 import { RegisterPage } from "./pages/RegisterPage";
-import VerifyEmail from "./pages/VerifyEmail";
+import {VerifyEmail} from "./pages/VerifyEmail";
 
 
 function App() {

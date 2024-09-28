@@ -11,6 +11,7 @@ import {
   FormControl,
   InputLabel,
   FormHelperText,
+  CircularProgress,
 } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -23,11 +24,15 @@ import { FaCodeBranch } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { URL } from "../components/BaseUrl";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import axios from 'axios';
+import { useState } from "react";
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
-
+  const [load,setLoad]=useState(false);
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email format").required("Email is required"),
@@ -45,6 +50,10 @@ export const RegisterPage = () => {
   });
 
   const onSubmit = (data) => {
+
+    console.log("seesgs");
+    setLoad(true);
+
     const postData = {
       email: data.email,
       name: data.name,
@@ -58,17 +67,28 @@ export const RegisterPage = () => {
         headers: { 'Content-Type': 'application/json' },
       })
       .then((response) => {
+        setLoad(false);
         sessionStorage.setItem("activationToken", response.data.activationToken);
-        navigate("/verify-email");
+        toast.success("Otp has been sent to your email", { autoClose: 3000 });
+        setInterval(()=>{
+          navigate("/verify-email");
+        },3000)
+       
       })
       .catch((error) => {
+        setLoad(false);
         console.log(error);
+        toast.error(error?.response?.data?.message,{autoClose:3000});
       });
   };
 
+  
   return (
     <Box sx={{ backgroundColor: "white" }}>
       <Navbar />
+     
+      <ToastContainer  />
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid
           container
@@ -254,6 +274,7 @@ export const RegisterPage = () => {
                 <center>
                   <Button
                     type="submit"
+                    disabled={load}
                     variant="contained"
                     sx={{
                       backgroundColor: "#0d47a1",
@@ -269,7 +290,7 @@ export const RegisterPage = () => {
                       marginBottom: "20px",
                     }}
                   >
-                    Register
+                    {load ? <CircularProgress  size={30} />:<span>Register</span>}
                   </Button>
                 </center>
               </Box>
