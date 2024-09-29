@@ -15,19 +15,19 @@ const categories = [
     image: "Electrical & Electronics.jpg",
     title: "Electrical & Electronics",
     abbreviation:"EE",
-    description: "Unlock the potential of modern technology with our Electrical and Electronics Engineering Courses",
+    description: "Unlock the potential of modern technology with our Electrical and Electronics Engineering Course",
   },
   {
     image: "mechanical.jpg",
     title: "Mechanical Engineering",
     abbreviation:"Mechanical",
-    description: "Unlock the potential of modern technology with our Mechanical Engineering Courses",
+    description: "Unlock the potential of modern technology with our Mechanical Engineering Course",
   },
   {
     image: "civil.jpg",
     title: "Civil Engineering",
     abbreviation:"Civil",
-    description: "Unlock the potential of modern technology with our Civil Engineering Courses",
+    description: "Unlock the potential of modern technology with our Civil Engineering Course",
   },
 ];
 
@@ -124,7 +124,7 @@ export const OurCourses = () => {
           </Typography>
         </Box>
 
-        {/* Courses Cards Section */}
+        {/* Course Cards Section */}
         <Grid container spacing={4}>
           {categories.map((course, index) => (
             <Grid item xs={12} sm={6} md={6} lg={4} key={index}>

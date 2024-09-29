@@ -9,7 +9,11 @@ const Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  concepts_list: {
+  card_description: {
+    type: String,
+    required: true,
+  },
+  learn: {
     type: String,
     required: true,
   },
@@ -51,4 +55,4 @@ const Schema = new mongoose.Schema({
     default: Date.now(),
   },
 });
-export const Courses = mongoose.model("Courses", Schema);
+export const Course = mongoose.model("Courses", Schema);

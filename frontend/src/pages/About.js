@@ -11,7 +11,7 @@ import CourseCard from "../components/CourseCard";
 const whatWeOffer=[
   {
     image:"project.jpg",
-    title:"Comprehensive Courses",
+    title:"Comprehensive Course",
     text:"Our curriculum spans across critical industries, offering specialized courses in Industrial Automation, Electrical, Mechanical, and Civil Engineering, as well as IT and Software Development. Whether you're interested in mastering the intricacies of automation systems, developing cutting-edge software, we have a course tailored for you."
   },
   {

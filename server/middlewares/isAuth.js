@@ -31,11 +31,11 @@ export const isAuth = async (req, res, next) => {
     //console.log("JWT_SECRET: ", process.env.JWT_SECRET);
   }
 };
-export const isAdmin = (req, res, next) => {
+export const isAdminOrInstructor = (req, res, next) => {
   try {
-    if (req.user.role !== "admin")
+    if (req.user.role !== "admin" && req.user.role !== "instructor")
       return res.status(403).json({
-        message: "you are not admin",
+        message: "You do not have the required permissions.",
       });
     next();
   } catch (error) {
