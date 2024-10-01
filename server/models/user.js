@@ -49,9 +49,24 @@ const schema = new mongoose.Schema(
         ref: "Course",
       },
     ],
+    referral_code: {
+      type: String,
+      unique: true,
+    },
+    referred_by: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    referred_users: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     otp: {
       type: String,
     },
+
     otpExpiration: {
       type: Date,
     },
@@ -74,4 +89,16 @@ schema.post("save", function (error, doc, next) {
     next();
   }
 });
+const generateUniqueReferralCode = async (name) => {
+  const randomString = crypto.randomBytes(3).toString("hex"); // 6 character random string
+  const referralCode = `${name.slice(0, 3).toUpperCase()}-${randomString}`; // Use first 3 letters of name + random string
+
+  const existingUser = await mongoose
+    .model("User")
+    .findOne({ referral_code: referralCode });
+  if (existingUser) {
+    return await generateUniqueReferralCode(name);
+  }
+  return referralCode;
+};
 export const User = mongoose.model("User", schema);
