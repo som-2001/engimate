@@ -12,7 +12,7 @@ import { uploadFiles } from "../middlewares/multer.js";
 const router = express.Router();
 
 router.post(
-  "/course/add",
+  "/courses/add",
   isAuth,
   isAdminOrInstructor,
   uploadFiles,
