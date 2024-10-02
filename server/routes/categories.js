@@ -11,7 +11,7 @@ import { uploadFiles } from "../middlewares/multer.js";
 const router = express.Router();
 
 router.post(
-  "/category/add",
+  "/categories/add",
   isAuth,
   isAdminOrInstructor,
   uploadFiles,
@@ -19,5 +19,5 @@ router.post(
 );
 router.delete("/category/:id", isAuth, isAdminOrInstructor, deleteCategory);
 router.get("/category/:id", getSingleCategory);
-router.get("/category/all", getAllCategories);
+router.get("/categories/all", getAllCategories);
 export default router;
