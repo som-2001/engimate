@@ -3,8 +3,13 @@ import dotenv from "dotenv";
 import { connectDb } from "./database/db.js";
 import cors from "cors";
 import { v4 as uuidv4 } from "uuid";
+import Razorpay from "razorpay";
 
 dotenv.config();
+export const instance = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
 const app = express();
 const port = process.env.PORT || 8000;
 
@@ -26,11 +31,13 @@ app.use("/uploads", express.static("uploads"));
 import userRoutes from "./routes/user.js";
 import coursesRoutes from "./routes/courses.js";
 import adminRoutes from "./routes/admin.js";
+import categoryRoutes from "./routes/categories.js";
 
 // using routes
 app.use("/api", userRoutes);
 app.use("/api", coursesRoutes);
 app.use("/api", adminRoutes);
+app.use("/api", categoryRoutes);
 const startserver = async () => {
   try {
     await connectDb();

@@ -4,9 +4,22 @@ import jwt from "jsonwebtoken";
 import sendmail from "../middlewares/sendmail.js";
 import TryCatch from "../middlewares/trycatch.js";
 
-export const register = TryCatch(async (req, res) => {
-  const { email, name, phone_number, course_enrolled, specialization } =
-    req.body;
+export const registerUser = TryCatch(async (req, res) => {
+  const {
+    email,
+    name,
+    phone_number,
+    course_enrolled,
+    specialization,
+    referral_code,
+  } = req.body;
+  let referrer = null;
+  if (referral_code) {
+    referrer = await User.findOne({ referral_code });
+    if (!referrer) {
+      return res.status(400).json({ message: "Invalid referral code" });
+    }
+  }
   let user = await User.findOne({ email });
   if (user)
     return res.status(400).json({
@@ -22,6 +35,7 @@ export const register = TryCatch(async (req, res) => {
     course_enrolled,
     specialization,
     otpExpiration: Date.now() + 5 * 60 * 1000,
+    referred_by: referrer ? referrer._id : null,
   };
   const activationToken = jwt.sign(
     {
@@ -31,6 +45,7 @@ export const register = TryCatch(async (req, res) => {
       phone_number,
       course_enrolled,
       specialization,
+      referred_by: referrer ? referrer._id : null,
     },
     process.env.ACTIVATION_SECRET,
     { expiresIn: "5m" },
@@ -66,6 +81,7 @@ export const verifyUser = TryCatch(async (req, res) => {
     phone_number: verify.phone_number,
     course_enrolled: verify.course_enrolled,
     specialization: verify.specialization,
+    referred_by: verify.referred_by,
   });
   res.status(201).json({ message: "User registered successfully." });
 });
@@ -133,3 +149,4 @@ export const myProfile = TryCatch(async (req, res) => {
     user,
   });
 });
+
