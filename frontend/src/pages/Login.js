@@ -20,6 +20,7 @@ import axios from "axios";
 import { URL } from "../components/BaseUrl";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {jwtDecode} from 'jwt-decode';
 
 // Define your Yup validation schema
 const validationSchema = Yup.object().shape({
@@ -69,7 +70,11 @@ export const Login = () => {
         sessionStorage.setItem("token",response.data.token);
         // You can handle successful login here (e.g., navigate to dashboard)
         setInterval(()=>{
-          navigate('/dashboard');
+          if(jwtDecode(response.data.token).role==='admin' || jwtDecode(response.data.token).role==='instructor')
+            navigate('/dashboard');
+          else{
+            navigate('/user-dashboard');
+          }
         },2000);  
       }
     } catch (error) {

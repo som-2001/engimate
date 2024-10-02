@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { MdOutlineLocalPhone } from "react-icons/md";
+import { MdOutlineLocalPhone, MdQrCode } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
@@ -33,6 +33,8 @@ import { useState } from "react";
 export const RegisterPage = () => {
   const navigate = useNavigate();
   const [load,setLoad]=useState(false);
+  const [referral_code,setReferral_code]=useState('');
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email format").required("Email is required"),
@@ -60,6 +62,7 @@ export const RegisterPage = () => {
       phone_number: data.phone,
       course_enrolled: data.course,
       specialization: data.specialization,
+      referral_code:referral_code
     };
 
     axios
@@ -203,6 +206,29 @@ export const RegisterPage = () => {
                           startAdornment: (
                             <InputAdornment position="start">
                               <MdOutlineLocalPhone />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                  />
+                </Box>
+
+                <Box sx={{ mb: 2 }}>
+                  <Controller
+                    name="Referal code"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        placeholder="Referal Code"
+                        onChange={(e)=>setReferral_code(e.target.value)}
+                        fullWidth
+                        variant="outlined"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <MdQrCode />
                             </InputAdornment>
                           ),
                         }}

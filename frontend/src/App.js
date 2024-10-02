@@ -12,7 +12,9 @@ import { Course } from "./components/Course";
 import { Login } from "./pages/Login";
 import { RegisterPage } from "./pages/RegisterPage";
 import {VerifyEmail} from "./pages/VerifyEmail";
-import { Dashboard } from "./pages/Dashboard";
+import Dashboard from "./pages/Dashboard";
+
+
 
 
 function App() {
