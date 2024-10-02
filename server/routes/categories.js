@@ -1,5 +1,10 @@
 import express from "express";
-import {addCategory, deleteCategory, getAllCategories} from "../controllers/category.js";
+import {
+  addCategory,
+  deleteCategory,
+  getAllCategories,
+  getSingleCategory,
+} from "../controllers/category.js";
 import { isAdminOrInstructor, isAuth } from "../middlewares/isAuth.js";
 import { uploadFiles } from "../middlewares/multer.js";
 
@@ -12,7 +17,7 @@ router.post(
   uploadFiles,
   addCategory,
 );
-router.delete("/category/:id",isAuth,isAdminOrInstructor, deleteCategory)
-router.get("/category/:id",)
+router.delete("/category/:id", isAuth, isAdminOrInstructor, deleteCategory);
+router.get("/category/:id", getSingleCategory);
 router.get("/category/all", getAllCategories);
 export default router;
