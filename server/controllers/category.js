@@ -20,7 +20,7 @@ export const addCategory = Trycatch(async (req, res) => {
 
   res.status(201).json({
     message: "new category added successfully",
-    newCategory,
+    category,
   });
 });
 
