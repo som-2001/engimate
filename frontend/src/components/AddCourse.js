@@ -1,32 +1,34 @@
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import axios from "axios";
 import {
   TextField,
   Button,
   Box,
   Grid,
-  Paper,
-  Typography,
+
   FormControl,
   InputLabel,
   MenuItem,
   Select,
-  FormHelperText
-} from '@mui/material';
+  FormHelperText,
+} from "@mui/material";
+import { BaseUrl } from "./BaseUrl";
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required('Title is required'),
-  course_description: Yup.string().required('Course description is required'),
-  course_objective: Yup.string().required('Course objective is required'),
-  roles_in_industry: Yup.string().required('Roles in industry are required'),
-  course_highlights: Yup.string().required('Course highlights are required'),
-  price: Yup.number().required('Price is required').min(1, 'Price must be greater than 0'),
-  category: Yup.string().required('Category is required'),
-  image: Yup.mixed().required('Image is required'),
+  title: Yup.string().required("Title is required"),
+  course_description: Yup.string().required("Course description is required"),
+  course_objective: Yup.string().required("Course objective is required"),
+  roles_in_industry: Yup.string().required("Roles in industry are required"),
+  course_highlights: Yup.string().required("Course highlights are required"),
+  price: Yup.number()
+    .required("Price is required")
+    .min(1, "Price must be greater than 0"),
+  category: Yup.string().required("Category is required"),
+  image: Yup.mixed().required("Image is required"),
 });
 
 export const AddCourse = () => {
@@ -40,41 +42,57 @@ export const AddCourse = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  const [result, setResult] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${BaseUrl}/categories/all`).then((res) => {
+      setResult(res?.data?.categories);
+    });
+  }, []);
+
   const onSubmit = async (data) => {
     const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('course_description', data.course_description);
-    formData.append('course_objective', data.course_objective);
-    formData.append('roles_in_industry', data.roles_in_industry);
-    formData.append('course_highlights', data.course_highlights);
-    formData.append('price', data.price);
-    formData.append('category', data.category);
-    formData.append('image', data.image[0]);
+    formData.append("title", data.title);
+    formData.append("course_description", data.course_description);
+    formData.append("course_objective", data.course_objective);
+    formData.append("roles_in_industry", data.roles_in_industry);
+    formData.append("course_highlights", data.course_highlights);
+    formData.append("price", data.price);
+    formData.append("category", data.category);
+    formData.append("file", data.image[0]);
 
     try {
-      const response = await axios.post(`/course/add`, formData, {
+      const response = await axios.post(`${BaseUrl}/courses/add`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
+          "Authorization":`Bearer ${sessionStorage.getItem("token")}`
+
         },
       });
-      console.log('Course added successfully:', response.data);
+      console.log("Course added successfully:", response.data);
       reset(); // Reset form fields on success
     } catch (error) {
-      console.error('Error adding course:', error);
+      console.error("Error adding course:", error);
     }
   };
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-      <Paper sx={{ padding: 2, width: '100%', maxWidth: 700 }}>
-       
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "80vh",
+      }}
+    >
+      <Box sx={{  width: "100%", maxWidth: 700 }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Controller
                 name="title"
                 control={control}
-                defaultValue=""
+                margin="normal"
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -194,9 +212,14 @@ export const AddCourse = () => {
                   defaultValue=""
                   render={({ field }) => (
                     <Select {...field} fullWidth>
-                      <MenuItem value="Web Development">Web Development</MenuItem>
-                      <MenuItem value="Data Science">Data Science</MenuItem>
-                      <MenuItem value="Design">Design</MenuItem>
+                      {result.map((category) => (
+                        <MenuItem
+                          key={category._id}
+                          value={category._id}
+                        >
+                          {category.category_name}
+                        </MenuItem>
+                      ))}
                     </Select>
                   )}
                 />
@@ -212,7 +235,7 @@ export const AddCourse = () => {
                     type="file"
                     hidden
                     accept="image/*"
-                    onChange={(e) => setValue('image', e.target.files)}
+                    onChange={(e) => setValue("image", e.target.files)}
                   />
                 </Button>
                 <FormHelperText>{errors.image?.message}</FormHelperText>
@@ -220,15 +243,18 @@ export const AddCourse = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
                 Submit
               </Button>
             </Grid>
           </Grid>
         </form>
-      </Paper>
+      </Box>
     </Box>
   );
 };
-
-

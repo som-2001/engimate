@@ -8,7 +8,6 @@ import {
   Button,
   Box,
   Grid,
-  Paper,
   MenuItem,
   Select,
   FormHelperText,
@@ -54,7 +53,7 @@ export const AddLecture = () => {
         minHeight: "70vh",
       }}
     >
-      <Paper sx={{ padding: 2, width: "100%", maxWidth: 600 }}>
+      <Box sx={{width: "100%", maxWidth: 600 }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -149,7 +148,7 @@ export const AddLecture = () => {
             </Grid>
           </Grid>
         </form>
-      </Paper>
+      </Box>
     </Box>
   );
 };

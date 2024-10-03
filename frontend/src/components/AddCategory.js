@@ -8,7 +8,7 @@ import {
   Button,
   Box,
   Grid,
-  Paper,
+  
   FormHelperText,
   FormControl,
 } from "@mui/material";
@@ -57,7 +57,7 @@ export const AddCategory = () => {
         minHeight: "70vh",
       }}
     >
-      <Paper sx={{ padding: 2, width: "100%", maxWidth: 600 }}>
+      <Box sx={{ padding: 0, width: "100%", maxWidth: 600 }}>
        
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
@@ -126,7 +126,7 @@ export const AddCategory = () => {
             </Grid>
           </Grid>
         </form>
-      </Paper>
+      </Box>
     </Box>
   );
 };
