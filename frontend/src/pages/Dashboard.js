@@ -8,7 +8,8 @@ import {
   Dashboard as DashboardIcon,
   ShoppingCart as ShoppingCartIcon,
   BarChart as BarChartIcon,
-  Menu as MenuIcon
+  Menu as MenuIcon,
+  Category as CategoryIcon
 } from '@mui/icons-material';
 import { DashboardHome } from '../components/DashboardHome';
 import { AddLecture } from '../components/AddLecture';
@@ -22,7 +23,7 @@ const drawerWidth = 240;
 const NAV_ITEMS = [
   { text: 'Dashboard', icon: <DashboardIcon />, content: <DashboardHome/>,heading:"Dashboard" },
   { text: 'Add Lecture', icon: <ShoppingCartIcon />, content: <AddLecture/>,heading:"Add Lecture" },
-  { text: 'Add Category', icon: <BarChartIcon />, content: <AddCategory/>,heading:"Add Category" },
+  { text: 'Add Category', icon: <CategoryIcon />, content: <AddCategory/>,heading:"Add Category" },
   { text: 'Add Course', icon: <BarChartIcon />, content: <AddCourse/>,heading:"Add Course" },
 ];
 
@@ -81,7 +82,7 @@ function Dashboard() {
       </Toolbar>
       <List>
         {NAV_ITEMS.map((item, index) => (
-          <ListItem button key={index} onClick={() => handleNavigationClick(item.content,item.heading)}>
+          <ListItem button key={index} style={{cursor:"pointer"}} onClick={() => handleNavigationClick(item.content,item.heading)}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItem>

@@ -7,7 +7,7 @@ export const addCategory = Trycatch(async (req, res) => {
   const image = req.file;
   const createdBy = req.user._id;
 
-  if (!category_name || !description || !image || !createdBy) {
+  if (!category_name || !description || !image ) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
