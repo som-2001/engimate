@@ -21,12 +21,12 @@ const drawerWidth = 240;
 
 const NAV_ITEMS = [
   { text: 'Dashboard', icon: <DashboardIcon />, content: <DashboardHome/>,heading:"Dashboard" },
-  { text: 'Add Lecture', icon: <ShoppingCartIcon />, content: <AddLecture/>,heading:"Add Lecture" },
-  { text: 'Add Category', icon: <BarChartIcon />, content: <AddCategory/>,heading:"Add Category" },
-  { text: 'Add Course', icon: <BarChartIcon />, content: <AddCourse/>,heading:"Add Course" },
+  { text: 'Refer & Earn', icon: <ShoppingCartIcon />, content: <AddLecture/>,heading:"Refer & Earn" },
+  { text: 'Categories', icon: <BarChartIcon />, content: <AddCategory/>,heading:"Categories" },
+  { text: 'Your Courses', icon: <BarChartIcon />, content: <AddCourse/>,heading:"Your Courses" },
 ];
 
-function Dashboard() {
+function UserDashboard() {
 
   const navigate=useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -156,4 +156,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default UserDashboard;

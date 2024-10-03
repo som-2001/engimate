@@ -15,7 +15,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaCodeBranch } from "react-icons/fa";
 import { URL } from "../components/BaseUrl";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,7 +22,7 @@ import axios from 'axios';
 import { useState } from "react";
 
 export const VerifyEmail = () => {
-  const navigate = useNavigate();
+  
   const [load,setLoad]=useState(false);
   const schema = yup.object().shape({
     otp: yup.string().required('OTP is required')
@@ -62,7 +61,7 @@ export const VerifyEmail = () => {
         setLoad(false);
         toast.success('OTP Verified',{autoClose:3000});
         setInterval(()=>{
-          navigate("/login");
+          window.location.href="/login";
         },3000);
       })
       .catch((error) => {

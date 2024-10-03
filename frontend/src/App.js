@@ -13,6 +13,7 @@ import { Login } from "./pages/Login";
 import { RegisterPage } from "./pages/RegisterPage";
 import {VerifyEmail} from "./pages/VerifyEmail";
 import Dashboard from "./pages/Dashboard";
+import UserDashboard from "./pages/UserDashboard";
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/courses/:category" element={<CourseList />} />
         <Route path="/about" element={<About />} />
+        <Route path="/user-dashboard" element={<UserDashboard/>}/>
         <Route path="/course-detail" element={<CourseDetail />} />
         <Route path="/course/:name" element={<Course/>}/>
         <Route path="/login" element={<Login/>}/>
