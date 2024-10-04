@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import * as crypto from "crypto";
 
 const schema = new mongoose.Schema(
   {
@@ -75,6 +76,17 @@ const schema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+schema.pre("save", async function (next) {
+  if (!this.referral_code) {
+    try {
+      this.referral_code = await generateUniqueReferralCode(this.name);
+    } catch (error) {
+      return next(error);
+    }
+  }
+  next();
+});
 
 schema.post("save", function (error, doc, next) {
   if (error.name === "MongoServerError" && error.code === 11000) {
