@@ -12,12 +12,16 @@ import {
   FormHelperText,
   FormControl,
 } from "@mui/material";
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BaseUrl } from "./BaseUrl";
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
   category_name: Yup.string().required("Category name is required"),
   description: Yup.string().required("Description is required"),
   file: Yup.mixed().required("File is required"),
+ 
 });
 
 export const AddCategory = () => {
@@ -38,11 +42,15 @@ export const AddCategory = () => {
     formData.append("file", data.file[0]);
 
     try {
-      const response = await axios.post(`/api/category/add/`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      const response = await axios.post(`${BaseUrl}/categories/add/`, formData, {
+        headers: { "Content-Type": "multipart/form-data",
+          "Authorization":`Bearer ${sessionStorage.getItem("token")}`
+         },
       });
       console.log("Category added successfully:", response.data);
+      toast.success(response.data.message, { autoClose: 3000 });
       reset(); // Reset form fields on success
+
     } catch (error) {
       console.error("Error adding category:", error);
     }
@@ -57,6 +65,8 @@ export const AddCategory = () => {
         minHeight: "70vh",
       }}
     >
+       <ToastContainer />
+
       <Box sx={{ padding: 0, width: "100%", maxWidth: 600 }}>
        
         <form onSubmit={handleSubmit(onSubmit)} noValidate>

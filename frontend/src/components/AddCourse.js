@@ -16,13 +16,18 @@ import {
   FormHelperText,
 } from "@mui/material";
 import { BaseUrl } from "./BaseUrl";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
+  learn:Yup.string().required("Learn is required"),
+  card_description:Yup.string().required("Card description is required"),
   course_description: Yup.string().required("Course description is required"),
   course_objective: Yup.string().required("Course objective is required"),
   roles_in_industry: Yup.string().required("Roles in industry are required"),
+  caption:Yup.string().required("Caption is required"),
   course_highlights: Yup.string().required("Course highlights are required"),
   price: Yup.number()
     .required("Price is required")
@@ -53,8 +58,11 @@ export const AddCourse = () => {
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("title", data.title);
+    formData.append("caption",data.caption);
+    formData.append("card_description", data.card_description);
     formData.append("course_description", data.course_description);
     formData.append("course_objective", data.course_objective);
+    formData.append("learn",data.learn);
     formData.append("roles_in_industry", data.roles_in_industry);
     formData.append("course_highlights", data.course_highlights);
     formData.append("price", data.price);
@@ -70,6 +78,7 @@ export const AddCourse = () => {
         },
       });
       console.log("Course added successfully:", response.data);
+      toast.success(response.data.message, { autoClose: 3000 });
       reset(); // Reset form fields on success
     } catch (error) {
       console.error("Error adding course:", error);
@@ -85,6 +94,7 @@ export const AddCourse = () => {
         minHeight: "80vh",
       }}
     >
+      <ToastContainer/>
       <Box sx={{  width: "100%", maxWidth: 700 }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
@@ -101,6 +111,63 @@ export const AddCourse = () => {
                     variant="outlined"
                     error={!!errors.title}
                     helperText={errors.title?.message}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Controller
+                name="card_description"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    fullWidth
+                    label="Card Description"
+                    variant="outlined"
+                    multiline
+                    rows={4}
+                    error={!!errors.card_description}
+                    helperText={errors.card_description?.message}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Controller
+                name="learn"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    fullWidth
+                    label="Learn"
+                    variant="outlined"
+                    multiline
+                    rows={4}
+                    error={!!errors.learn}
+                    helperText={errors.learn?.message}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Controller
+                name="caption"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    fullWidth
+                    label="Caption"
+                    variant="outlined" 
+                    error={!!errors.caption}
+                    helperText={errors.caption?.message}
                   />
                 )}
               />

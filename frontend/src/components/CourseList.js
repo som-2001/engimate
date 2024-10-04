@@ -21,7 +21,7 @@ const courses = {
       video: "video.mp4",
       description:
         "Full stack development with MongoDB, Express, React, and Node.js.",
-        card_description:
+      card_description:
         "MERN Full Stack Web development React projects & Web Application with React JS, NodeJS, Express JS, Mongodb: Mern Stack For IT & Computer science Engineers",
       learn: [
         "MERN Full Stack Web Application with React & Web Development",
@@ -34,20 +34,22 @@ const courses = {
         "User Inputs, Forms and Events in React with Redux, hooks and context",
         "Learn the key concepts of the NodeJS",
         "Learn how to build backend API using node and express",
-        "Learn about Redux (Best state management tool)"
+        "Learn about Redux (Best state management tool)",
       ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": "Embark on a comprehensive journey into the world of Full Stack Development with our MERN (MongoDB, Express.js, React, Node.js) stack course. This hands-on program is designed to equip you with the skills and knowledge needed to create dynamic and scalable web applications. MERN is a free and open-source JavaScript software stack for building dynamic websites and web applications. Because all components of the MERN stack support programs that are written in JavaScript, MERN applications can be written in one language for both server-side and client-side execution environments."
+          title: "Course Description",
+          content:
+            "Embark on a comprehensive journey into the world of Full Stack Development with our MERN (MongoDB, Express.js, React, Node.js) stack course. This hands-on program is designed to equip you with the skills and knowledge needed to create dynamic and scalable web applications. MERN is a free and open-source JavaScript software stack for building dynamic websites and web applications. Because all components of the MERN stack support programs that are written in JavaScript, MERN applications can be written in one language for both server-side and client-side execution environments.",
         },
         {
-          "title": "Course Objective",
-          "content": "The main objective of this course is to provide comprehensive knowledge on MongoDB, Express.js, React, and Node.js. This includes gaining a solid understanding of HTML, CSS, and JavaScript to build a strong foundation for web development, backend development proficiency, frontend development mastery, and integration and full stack connectivity. By the end of this course, participants will emerge as proficient Full Stack Developers, equipped with the skills and knowledge necessary to tackle the challenges of modern web development using the MERN stack."
+          title: "Course Objective",
+          content:
+            "The main objective of this course is to provide comprehensive knowledge on MongoDB, Express.js, React, and Node.js. This includes gaining a solid understanding of HTML, CSS, and JavaScript to build a strong foundation for web development, backend development proficiency, frontend development mastery, and integration and full stack connectivity. By the end of this course, participants will emerge as proficient Full Stack Developers, equipped with the skills and knowledge necessary to tackle the challenges of modern web development using the MERN stack.",
         },
         {
-          "title": "Roles in Industry",
-          "content": [
+          title: "Roles in Industry",
+          content: [
             "Full Stack Developer",
             "Frontend Developer",
             "Backend Developer",
@@ -57,22 +59,21 @@ const courses = {
             "DevOps Engineer",
             "Technical Lead",
             "Entrepreneur/Startup Developer",
-            "Freelance Developer"
-          ]
+            "Freelance Developer",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Introduction to Hyper Text Markup Language (HTML5)",
             "Introduction to Cascading Style Sheets (CSS), Bootstrap, JavaScript, jQuery, JSON",
             "MongoDB",
             "Express JS",
             "React JS",
-            "Node JS"
-          ]
-        }
-      ]
-      
+            "Node JS",
+          ],
+        },
+      ],
     },
     {
       title: "UI/UX",
@@ -114,16 +115,16 @@ const courses = {
             "Purpose-built to create and modify electrical control systems.",
             "The comprehensive symbols libraries and tools help boost productivity by automating control engineering tasks.",
             "With AutoCAD Electrical, you can efficiently create, modify, and document electrical control systems with an industry-specific toolset for electrical design.",
-            "AutoCAD Electrical features include Electrical documentation, Electrical Schematic design, and Electrical control design."
-          ]
+            "AutoCAD Electrical features include Electrical documentation, Electrical Schematic design, and Electrical control design.",
+          ],
         },
         {
           title: "Course Objectives",
           content: [
             "The AutoCAD Electrical course will focus on the overview of AutoCAD Electrical with emphasis on naming conventions;",
             "The use of symbols and their libraries, generation, and insertion of PLC layout modules, and organization of PLC database files.",
-            "The course will also teach students about generating a bill of materials reporting, creating PLC I/O drawings from spreadsheets, wire numbering, and component tagging."
-          ]
+            "The course will also teach students about generating a bill of materials reporting, creating PLC I/O drawings from spreadsheets, wire numbering, and component tagging.",
+          ],
         },
         {
           title: "Roles in Industry",
@@ -131,8 +132,8 @@ const courses = {
             "Designing electrical symbols",
             "Draw ordering lists",
             "Place relay coils and contractors",
-            "Drawing required schematic diagrams"
-          ]
+            "Drawing required schematic diagrams",
+          ],
         },
         {
           title: "Course Highlights",
@@ -144,10 +145,10 @@ const courses = {
             "Automated wire numbering",
             "Schematic design tools",
             "Compelling visuals and presentations of Panel Layout module",
-            "Project management to allow the designers to collaborate and work with team members and other personnel"
-          ]
-        }
-      ]
+            "Project management to allow the designers to collaborate and work with team members and other personnel",
+          ],
+        },
+      ],
     },
     {
       title: "PLC",
@@ -173,16 +174,16 @@ const courses = {
             "PLC or Programmable Logic Controller is an industrial digital computer and its course makes you ready for the mechanical automation process in manufacturing units and construction buildings.",
             "You can use your expertise for dynamic development, subsequent control, counters and timers, programming ease, and control.",
             "PLC is generally used in industries which helps to eliminate the hard wiring compared with standard relay control circuits, improving productivity.",
-            "PLC is a robust industrial computer which is essentially a designed task of reading field tools and controlling actuators."
-          ]
+            "PLC is a robust industrial computer which is essentially a designed task of reading field tools and controlling actuators.",
+          ],
         },
         {
           title: "Course Objectives",
           content: [
             "To understand the generic architecture and constituent components of a Programmable Logic Controller.",
             "To develop a software program using modern engineering tools and techniques for PLC and SCADA.",
-            "To apply knowledge gained about PLCs and SCADA systems to real-life industrial applications."
-          ]
+            "To apply knowledge gained about PLCs and SCADA systems to real-life industrial applications.",
+          ],
         },
         {
           title: "Roles in Industry",
@@ -193,8 +194,8 @@ const courses = {
             "Nuclear energy plants",
             "Automatic parking systems",
             "Robotics & automation industries",
-            "Bottle filling plants"
-          ]
+            "Bottle filling plants",
+          ],
         },
         {
           title: "Course Highlights",
@@ -210,10 +211,10 @@ const courses = {
             "Copper shaping",
             "Artwork/Gerber file creation",
             "Plot Generation",
-            "PCB Fabrication Process"
-          ]
-        }
-      ]
+            "PCB Fabrication Process",
+          ],
+        },
+      ],
     },
     {
       title: "SCADA",
@@ -236,16 +237,16 @@ const courses = {
             "It is the control system that manages computers, networked data communications, and graphical user interfaces.",
             "It benefits real-time detection of faults in machinery and decreases the number of defects in the end result.",
             "The course on SCADA will help you to understand Hardware, Software, and Services.",
-            "SCADA is essentially a piece of software installed on a PC/Computer which acts as a Human Machine Interface."
-          ]
+            "SCADA is essentially a piece of software installed on a PC/Computer which acts as a Human Machine Interface.",
+          ],
         },
         {
           title: "Course Objectives",
           content: [
             "To understand the generic architecture and constituent components of a Programmable Logic Controller.",
             "To develop a software program using modern engineering tools and techniques for PLC and SCADA.",
-            "To apply knowledge gained about PLCs and SCADA systems to real-life industrial applications."
-          ]
+            "To apply knowledge gained about PLCs and SCADA systems to real-life industrial applications.",
+          ],
         },
         {
           title: "Roles in Industry",
@@ -256,8 +257,8 @@ const courses = {
             "Nuclear energy plants",
             "Automatic parking systems",
             "Robotics & automation industries",
-            "Bottle filling plants"
-          ]
+            "Bottle filling plants",
+          ],
         },
         {
           title: "Course Highlights",
@@ -273,10 +274,10 @@ const courses = {
             "Copper shaping",
             "Artwork/Gerber file creation",
             "Plot Generation",
-            "PCB Fabrication Process"
-          ]
-        }
-      ]
+            "PCB Fabrication Process",
+          ],
+        },
+      ],
     },
     {
       title: "MATLAB Electrical",
@@ -301,23 +302,39 @@ const courses = {
       course_description: [
         {
           title: "Course Description",
-          content:
-            ["The course focuses on how to implement complex decision flows and finite-state machines using Stateflow and provides a general understanding of how to accelerate the design process for closed-loop control systems using MATLAB. Also it offers the good understanding of modelling and analyzing electrical systems.",]
+          content: [
+            "The course focuses on how to implement complex decision flows and finite-state machines using Stateflow and provides a general understanding of how to accelerate the design process for closed-loop control systems using MATLAB. Also it offers the good understanding of modelling and analyzing electrical systems.",
+          ],
         },
         {
           title: "Course Objectives",
-          content:
-            ["This course gives guidance on key features of widely used toolboxes in simulink, help transform concepts to a complete model, verify and evaluate the system behaviour in different user environments. It allows the attendees to explore the more advanced features of MATLAB in a unified manner and help learners 'future-proof' themselves and remain relevant for the rapidly evolving technology from industry perspective.",]
+          content: [
+            "This course gives guidance on key features of widely used toolboxes in simulink, help transform concepts to a complete model, verify and evaluate the system behaviour in different user environments. It allows the attendees to explore the more advanced features of MATLAB in a unified manner and help learners 'future-proof' themselves and remain relevant for the rapidly evolving technology from industry perspective.",
+          ],
         },
         {
           title: "Roles in Industry",
-          content:
-            ["Matlab is a widely used tool in electrical engineering. It can be used to enhance and accelerate some processes. such as magnetic field measurements,model based development, Auto code generation through model based development and m scripts. Tool creation for testing and development through m scripts.",]
+          content: [
+            "Matlab is a widely used tool in electrical engineering. It can be used to enhance and accelerate some processes. such as magnetic field measurements,model based development, Auto code generation through model based development and m scripts. Tool creation for testing and development through m scripts.",
+          ],
         },
         {
           title: "Course Highlights",
-          content:
-            ["Simulink modelling","Model Based Designing","Masks and Subsystems","Component and board placement","Lookup table editor and breakpoints","Stateflow modelling","Hierarchical state machines","Parallel state machines","Events in state machines","Functions in state machines","Truth tables and State transition tables","Control systems stability analysis","Controller implementation – P, PI, PID,Frequency response estimation"]
+          content: [
+            "Simulink modelling",
+            "Model Based Designing",
+            "Masks and Subsystems",
+            "Component and board placement",
+            "Lookup table editor and breakpoints",
+            "Stateflow modelling",
+            "Hierarchical state machines",
+            "Parallel state machines",
+            "Events in state machines",
+            "Functions in state machines",
+            "Truth tables and State transition tables",
+            "Control systems stability analysis",
+            "Controller implementation – P, PI, PID,Frequency response estimation",
+          ],
         },
       ],
     },
@@ -349,22 +366,22 @@ const courses = {
             "The steady and progressive research in this field gave the industry more efficient, high-performance, and low-power consumption microcontrollers.",
             "The AVR, PIC, and ARM are prime examples of this.",
             "The new age microcontrollers are getting smarter and richer by including the latest communication protocols like USB, I2C, SPI, Ethernet, CAN, etc.",
-            "At the end of the course, students will be able to work as System design engineers and embedded engineers with good knowledge of Microcontroller based design."
-          ]
+            "At the end of the course, students will be able to work as System design engineers and embedded engineers with good knowledge of Microcontroller based design.",
+          ],
         },
         {
           title: "Course Objectives",
           content: [
             "The course is designed to provide in-depth knowledge of the Advanced microcontrollers in the field of embedded systems.",
             "The course gives equal emphasis to hardware and software, enabling us to face challenges in the design and development of state-of-the-art embedded systems.",
-            "The training program enables the aspirants to work on the Architecture, Pin diagram, Input/Output interfacing, Exposure to embedded C programming and also to set up & customize a microcontroller development environment."
-          ]
+            "The training program enables the aspirants to work on the Architecture, Pin diagram, Input/Output interfacing, Exposure to embedded C programming and also to set up & customize a microcontroller development environment.",
+          ],
         },
         {
           title: "Roles in Industry",
           content: [
-            "Various Sectors in which you will get Microcontroller Jobs are Medical Electronics, Aerospace, Automobiles, Defence, Toys, Consumer Electronics, Food industry, Telecommunication, Industrial machines, Space, Agriculture And Construction."
-          ]
+            "Various Sectors in which you will get Microcontroller Jobs are Medical Electronics, Aerospace, Automobiles, Defence, Toys, Consumer Electronics, Food industry, Telecommunication, Industrial machines, Space, Agriculture And Construction.",
+          ],
         },
         {
           title: "Course Highlights",
@@ -376,10 +393,10 @@ const courses = {
             "Interfacing LPC21xx with LCD, Keypad, ADC, UART",
             "Interfacing Wireless protocols - GSM, GPS, Bluetooth, RFID, Zigbee with LPC21xx",
             "Hands-on development boards",
-            "PWM generation in PIC18F4550"
-          ]
-        }
-      ]
+            "PWM generation in PIC18F4550",
+          ],
+        },
+      ],
     },
     {
       title: "PCB Designing using ORCAD",
@@ -404,23 +421,39 @@ const courses = {
       course_description: [
         {
           title: "Course Description",
-          content:
-            ["It incudes the OrCAD Capture, OrCAD PSpice and OrCAD PCB Editor. Virtually every electronic product is constructed with one or more printed-circuit boards (PCBs). The PCBs hold the ICs and other components and implement the interconnections between them.The ideal PCB design starts with the discovery that a PCB is needed and continues through the final production boards. OrCAD Capture is the industry standard solution for designing and developing PCBs because of its intuitive schematic editing, project management, extensive compatibility, and cost-effectiveness.PSpice is a SPICE analog circuit and digital logic simulation program. PSpice processes circuits and executes simulation. PSpice creates an output file to store the simulation results. PSpice supports the following types of analyses: DC Analysis - for circuits with time-invariant sources.OrCAD PCB Editor contains a full-featured PCB editor based on Allegro technology. Its extensive feature set addresses a wide range of today's design challenges and manufacturability concerns such as intelligent placement and routing, constraint management, creating dynamic shapes, and design reuse.",]
+          content: [
+            "It incudes the OrCAD Capture, OrCAD PSpice and OrCAD PCB Editor. Virtually every electronic product is constructed with one or more printed-circuit boards (PCBs). The PCBs hold the ICs and other components and implement the interconnections between them.The ideal PCB design starts with the discovery that a PCB is needed and continues through the final production boards. OrCAD Capture is the industry standard solution for designing and developing PCBs because of its intuitive schematic editing, project management, extensive compatibility, and cost-effectiveness.PSpice is a SPICE analog circuit and digital logic simulation program. PSpice processes circuits and executes simulation. PSpice creates an output file to store the simulation results. PSpice supports the following types of analyses: DC Analysis - for circuits with time-invariant sources.OrCAD PCB Editor contains a full-featured PCB editor based on Allegro technology. Its extensive feature set addresses a wide range of today's design challenges and manufacturability concerns such as intelligent placement and routing, constraint management, creating dynamic shapes, and design reuse.",
+          ],
         },
         {
           title: "Course Objectives",
-          content:
-            ["To do PCB design and its simulation. PCB (Printed Circuit Board) designing is an integral part of each electronics product and this program is designed to make students capable to design their own projects PCB up to industrial grade.",]
+          content: [
+            "To do PCB design and its simulation. PCB (Printed Circuit Board) designing is an integral part of each electronics product and this program is designed to make students capable to design their own projects PCB up to industrial grade.",
+          ],
         },
         {
           title: "Roles in Industry",
-          content:
-            ["A PCB designer is primarily in charge of designing and developing Printed Circuit Boards (PCBs).Design and develop Printed Circuit Boards Prepare documents for PCB assembly, schematics, and fabrications using CAD software Design layouts to develop high-speed and reliable circuitsDevelop digital or analog designs Work on the routing layout Analyze and resolve any design-related issue Provide support to PCB engineering and manufacturing teams Provide revisions based on the specifications of customers and engineers",]
+          content: [
+            "A PCB designer is primarily in charge of designing and developing Printed Circuit Boards (PCBs).Design and develop Printed Circuit Boards Prepare documents for PCB assembly, schematics, and fabrications using CAD software Design layouts to develop high-speed and reliable circuitsDevelop digital or analog designs Work on the routing layout Analyze and resolve any design-related issue Provide support to PCB engineering and manufacturing teams Provide revisions based on the specifications of customers and engineers",
+          ],
         },
         {
           title: "Course Highlights",
-          content:
-            ["Schematic Modification for PCB Design","Design Rule Check","Pad Designer","Package Symbol & Package symbol wizard,","Netlist creation","Component and board placement","Mechanical symbol placement","Manual and Automatic routing" ,"Constraint Manager and X section","Blind, Buried, and through-hole VIA,","Artwork/Gerber file creation","Plot Generation","PCB Fabrication Process",]
+          content: [
+            "Schematic Modification for PCB Design",
+            "Design Rule Check",
+            "Pad Designer",
+            "Package Symbol & Package symbol wizard,",
+            "Netlist creation",
+            "Component and board placement",
+            "Mechanical symbol placement",
+            "Manual and Automatic routing",
+            "Constraint Manager and X section",
+            "Blind, Buried, and through-hole VIA,",
+            "Artwork/Gerber file creation",
+            "Plot Generation",
+            "PCB Fabrication Process",
+          ],
         },
       ],
     },
@@ -452,24 +485,24 @@ const courses = {
             "The course gives an understanding of the operation performed on different images and signals using image processing and signal processing toolbox.",
             "The course also provides information on how to create, train, visualize and simulate neural networks as well as design and simulate fuzzy logic systems.",
             "Real-time applications play a very important role.",
-            "This course gives exposure to the students to work on different hardware like Arduino, Raspberry Pi, Android sensors, UART, and IoT-based applications."
-          ]
+            "This course gives exposure to the students to work on different hardware like Arduino, Raspberry Pi, Android sensors, UART, and IoT-based applications.",
+          ],
         },
         {
           title: "Course Objectives",
           content: [
             "This course gives guidance on the key features of widely used toolboxes in Simulink, helps to transform concepts into a complete model and verifies and evaluates the system behavior in different user environments.",
             "It also allows the attendees to explore the more advanced features of MATLAB like Simulink modeling, Internet of Things (IoT), HDL coder, and Various hardware interfacing with MATLAB in a unified manner.",
-            "Helps learners 'future-proof' themselves and remain relevant for the rapidly evolving technology from an industrial perspective."
-          ]
+            "Helps learners 'future-proof' themselves and remain relevant for the rapidly evolving technology from an industrial perspective.",
+          ],
         },
         {
           title: "Roles in Industry",
           content: [
             "Signal processing",
             "MATLAB Developer",
-            "Power system modeling and simulation"
-          ]
+            "Power system modeling and simulation",
+          ],
         },
         {
           title: "Course Highlights",
@@ -480,10 +513,10 @@ const courses = {
             "Developing applications using GUI environment",
             "Fuzzy Logic Toolbox",
             "Neural Networks Toolbox",
-            "Interfacing Arduino with MATLAB - Script and Simulink"
-          ]
-        }
-      ]
+            "Interfacing Arduino with MATLAB - Script and Simulink",
+          ],
+        },
+      ],
     },
     {
       title: "Advanced Microcontroller",
@@ -512,16 +545,16 @@ const courses = {
             "The steady and progressive research in this field gave the industry more efficient, high-performance, and low-power consumption microcontrollers.",
             "The AVR, PIC, and ARM are prime examples of this.",
             "The new age microcontrollers are getting smarter and richer by including the latest communication protocols like USB, I2C, SPI, Ethernet, CAN, etc.",
-            "At the end of the course, students will be able to work as System design engineers and embedded engineers with good knowledge of Microcontroller based design."
-          ]
+            "At the end of the course, students will be able to work as System design engineers and embedded engineers with good knowledge of Microcontroller based design.",
+          ],
         },
         {
           title: "Course Objectives",
           content: [
             "The course is designed to provide in-depth knowledge of the Advanced microcontrollers in the field of embedded systems.",
             "The course gives equal emphasis to hardware and software, enabling us to face challenges in the design and development of state-of-the-art embedded systems.",
-            "The training program enables the aspirants to work on the Architecture, Pin diagram, Input/Output interfacing, Exposure to embedded C programming and also to set up & customize a microcontroller development environment."
-          ]
+            "The training program enables the aspirants to work on the Architecture, Pin diagram, Input/Output interfacing, Exposure to embedded C programming and also to set up & customize a microcontroller development environment.",
+          ],
         },
         {
           title: "Roles in Industry",
@@ -538,8 +571,8 @@ const courses = {
             "Industrial machines",
             "Space",
             "Agriculture",
-            "Construction"
-          ]
+            "Construction",
+          ],
         },
         {
           title: "Course Highlights",
@@ -552,10 +585,10 @@ const courses = {
             "Interfacing LPC21xx with LCD, Keypad, ADC, UART",
             "Interfacing Wireless protocols - GSM, GPS, Bluetooth, RFID, Zigbee with LPC21xx",
             "Hands-on development boards",
-            "PWM generation in PIC18F4550"
-          ]
-        }
-      ]
+            "PWM generation in PIC18F4550",
+          ],
+        },
+      ],
     },
     {
       title: "Industrial Automation Concepts",
@@ -575,7 +608,6 @@ const courses = {
         "Understand the communication protocols of modern Automation",
         "Learn about system Integration",
         "Learn about Interlocking",
-        
       ],
       course_description: [
         {
@@ -587,8 +619,8 @@ const courses = {
             "It covers safety mechanisms and the evolution of control systems, with a focus on key technologies like PLCs, SCADA, HMI, VFDs, and DCS.",
             "Students will learn about communication protocols, data integration, and the strategic implementation of automation technologies.",
             "Practical case studies, system integration strategies, and safety compliance are discussed, along with insights into the future of automation, emerging technologies, and career pathways in automation engineering.",
-            "The course also includes practical applications using AutoCAD Electrical for designing automation projects."
-          ]
+            "The course also includes practical applications using AutoCAD Electrical for designing automation projects.",
+          ],
         },
         {
           title: "Course Objectives",
@@ -597,8 +629,8 @@ const courses = {
             "It begins with an introduction to automation, exploring its role, history, and types, followed by a detailed study of the architectural elements like sensors, controllers, and actuators.",
             "The course covers various input and output field devices, safety mechanisms, and the evolution of control systems, including key technologies like PLCs, SCADA, HMI, VFDs, and DCS.",
             "It delves into practical aspects like PLC memory mapping, communication protocols, and the integration of technologies like IoT in industrial automation.",
-            "Additionally, the course addresses system integration strategies, safety standards, and the future of automation, with a focus on emerging technologies, sustainable practices, and career pathways in the field."
-          ]
+            "Additionally, the course addresses system integration strategies, safety standards, and the future of automation, with a focus on emerging technologies, sustainable practices, and career pathways in the field.",
+          ],
         },
         {
           title: "Roles in Industry",
@@ -606,8 +638,8 @@ const courses = {
             "Industrial automation is used to enhance operational efficiency, improve product quality, and reduce costs by minimizing human intervention.",
             "It allows for precise control and monitoring of processes, leading to increased production rates and consistency.",
             "Automation also enhances safety by reducing the risk of human error and ensures compliance with stringent quality and safety standards.",
-            "Additionally, it helps in optimizing resource utilization and reducing downtime through predictive maintenance and real-time data analysis."
-          ]
+            "Additionally, it helps in optimizing resource utilization and reducing downtime through predictive maintenance and real-time data analysis.",
+          ],
         },
         {
           title: "Course Highlights",
@@ -621,10 +653,10 @@ const courses = {
             "VFD configuration and uses",
             "DCS basics and differences",
             "Communication protocols and IoT",
-            "Integration and safety practices"
-          ]
-        }
-      ]
+            "Integration and safety practices",
+          ],
+        },
+      ],
     },
     {
       title: "Automotive Embedded Systems",
@@ -652,8 +684,8 @@ const courses = {
           content: [
             "Automotive embedded systems are crucial in modern vehicles to enhance efficiency, safety (e.g., brake systems, airbag systems, electronic stability programs), and driver assistance (e.g., navigation, night vision, blind-spot detection). They also help in complying with legal necessities, such as reducing pollutant emissions through intelligent engine control.",
             "As modern cars become increasingly complex, the demands on diagnostics, maintenance, and repair grow. There is a noticeable shortage of qualified automotive technicians with advanced skills. The need for skilled technicians will continue to rise as vehicles become more sophisticated.",
-            "This course offers practical training in automotive electronics with a focus on embedded systems in vehicles, addressing the growing need for expertise in this field."
-          ]
+            "This course offers practical training in automotive electronics with a focus on embedded systems in vehicles, addressing the growing need for expertise in this field.",
+          ],
         },
         {
           title: "Course Objectives",
@@ -661,16 +693,16 @@ const courses = {
             "The automotive industry is one of the largest economies globally, producing around 70 million cars annually and contributing significantly to government revenues worldwide.",
             "The primary objective of this course is to provide a comprehensive understanding of the technology necessary for designing and implementing embedded systems in automotive applications using appropriate hardware and software tools.",
             "As the industry increasingly relies on electronics, electrical, electronics, and computer engineers are in high demand. These engineers work on electronics, controls, safety systems, infotainment systems, and vehicle-to-vehicle communication.",
-            "The course covers a range of topics relevant to the industry, preparing participants for various roles in the automotive sector."
-          ]
+            "The course covers a range of topics relevant to the industry, preparing participants for various roles in the automotive sector.",
+          ],
         },
         {
           title: "Roles in Industry",
           content: [
             "Technological advancements in electronics and telecommunications have led to the development of advanced automotive systems. Automotive embedded systems are typically microcontroller-based with real-time computational capabilities.",
             "Applications include infotainment and telematics, Advanced Driver Assistance Systems (ADAS), airbags, head-up displays, electronic brake systems, power steering, and active suspension.",
-            "Some of the job roles include: Embedded Test Engineer (System Testing), Embedded Software System Designer (Automotive Powertrain), Embedded Hardware Engineer (R&D)."
-          ]
+            "Some of the job roles include: Embedded Test Engineer (System Testing), Embedded Software System Designer (Automotive Powertrain), Embedded Hardware Engineer (R&D).",
+          ],
         },
         {
           title: "Course Highlights",
@@ -687,9 +719,9 @@ const courses = {
             "Local Interconnect Network (LIN)",
             "FlexRay",
             "Introduction to Diagnostic",
-            "Unified Diagnostic Service (UDS) protocol"
-          ]
-        }
+            "Unified Diagnostic Service (UDS) protocol",
+          ],
+        },
       ],
     },
   ],
@@ -716,12 +748,14 @@ const courses = {
       ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["Learn how to produce 2D drawings using AutoCAD software. In this course, you will be introduced to AutoCAD’s layout and user interface, commands, system variables, initial settings, and basic techniques for creating, editing, organizing, and printing drawings."]
+          title: "Course Description",
+          content: [
+            "Learn how to produce 2D drawings using AutoCAD software. In this course, you will be introduced to AutoCAD’s layout and user interface, commands, system variables, initial settings, and basic techniques for creating, editing, organizing, and printing drawings.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Understand AutoCAD’s workspace and user interface",
             "Execute commands in AutoCAD to open, view, navigate, edit, print, and save a drawing",
             "Create drawing, editing, and viewing tools to create an object",
@@ -729,25 +763,26 @@ const courses = {
             "Use reusable symbols (Blocks)",
             "Create perspective drawings",
             "Prepare a layout for printing or plotting",
-            "Add and edit text, hatching, and dimensions"
-          ]
+            "Add and edit text, hatching, and dimensions",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": ["It is used to design and develop civil engineering drawings.",
-             "It gathers information to prepare and present reports on the projects. It also manages and directs staff at the project sites."]
+          title: "Roles in Industry",
+          content: [
+            "It is used to design and develop civil engineering drawings.",
+            "It gathers information to prepare and present reports on the projects. It also manages and directs staff at the project sites.",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Drawing theory",
             "Constructing and editing 2D geometry",
             "Drawing objects, correcting errors, object verification, measurement, and controlling graphic display",
-            "Using grids, text, layers, and object symbology"
-          ]
-        }
-      ]
-      
+            "Using grids, text, layers, and object symbology",
+          ],
+        },
+      ],
     },
     {
       title: "Creo Parametric",
@@ -757,7 +792,7 @@ const courses = {
       video: "video.mp4",
       card_description:
         "This comprehensive course elevates your knowledge and skills on the process of product development by utilizing PTC CREO PARAMETRIC as a virtual CAD tool. With a help of an interesting project, the instructor guides you the process of converting a conceptual product into a functional assembly. During this process, you learn and understand how engineering companies are tackling the product development journey. After understanding the information and gaining the engineering skills from this course, you can apply them confidently on other products. Develop them and show them as your Portfolio.For Mechnaical, Automobile Engineers",
-      learn:  [
+      learn: [
         "Introduction to CREO and Mouse Control",
         "Understanding Views and File Commands",
         "Sketcher: Visualization and Sketch Tools",
@@ -767,36 +802,39 @@ const courses = {
         "Boolean Operations and Drafting",
         "Creating Patterns and Applying Materials",
         "Assembly: Theory, Constraints, and Exploded Views",
-        "Surface Design, Generative Sheet Metal, and Drafting"
-    ],
+        "Surface Design, Generative Sheet Metal, and Drafting",
+      ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["With Creo training, Design Engine will empower manufacturers, engineers, and designers to gain a different perspective by presenting new ways to think about and explore design iterations."]
+          title: "Course Description",
+          content: [
+            "With Creo training, Design Engine will empower manufacturers, engineers, and designers to gain a different perspective by presenting new ways to think about and explore design iterations.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Develop a product design virtually using Creo",
-            "Utilize Creo’s capabilities for sketching, modeling, validation of design, and visualization of product design"
-          ]
+            "Utilize Creo’s capabilities for sketching, modeling, validation of design, and visualization of product design",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": ["Creo is a versatile 3D modeling application suitable for a range of industry needs, from advanced design to manufacturing and virtual prototyping.", 
-            "It offers basic features for efficient product design, faster time to market, quality assurance, minimal errors, maximum efficiency, and reduced rework."]
+          title: "Roles in Industry",
+          content: [
+            "Creo is a versatile 3D modeling application suitable for a range of industry needs, from advanced design to manufacturing and virtual prototyping.",
+            "It offers basic features for efficient product design, faster time to market, quality assurance, minimal errors, maximum efficiency, and reduced rework.",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Creo’s 2D Solutions: Creo’s Sketch, Layout, and Schematics products for quick sketching, complex system diagramming, and detailed engineering concept drawings",
             "Creo’s 3D Solutions: Creo’s Parametric, Direct, and Options Modular for creating 3D models by both advanced and casual CAD users",
             "Assembly: Creo’s assembly environment for managing large assemblies with ease",
-            "Visualization: Creo’s visualization module for visualizing product data in various media formats"
-          ]
-        }
-      ]
-      
+            "Visualization: Creo’s visualization module for visualizing product data in various media formats",
+          ],
+        },
+      ],
     },
     {
       title: "CATIA",
@@ -816,28 +854,34 @@ const courses = {
         "Sheet metal design and manufacturing preparation",
         "Wireframe and surface design concepts",
         "Drafting, drawing creation, and annotations",
-        "Real-time rendering and project hints"
-    ],
+        "Real-time rendering and project hints",
+      ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["CATIA stands for Computer Aided Three-dimensional Interactive Application. It is one of the leading 3D software solutions used across multiple industries, including aerospace, automotive, and consumer products. Developed by Dassault Systèmes, CATIA is a multi-platform 3D software suite that encompasses CAD, CAM, and CAE capabilities."]
+          title: "Course Description",
+          content: [
+            "CATIA stands for Computer Aided Three-dimensional Interactive Application. It is one of the leading 3D software solutions used across multiple industries, including aerospace, automotive, and consumer products. Developed by Dassault Systèmes, CATIA is a multi-platform 3D software suite that encompasses CAD, CAM, and CAE capabilities.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Learn the implementation of solid modeling using CATIA",
             "Gain hands-on experience with real-world projects",
-            "Cover topics including part design, assembly, drafting, wireframe & surface design, and Generative Sheetmetal Design workbenches"
-          ]
+            "Cover topics including part design, assembly, drafting, wireframe & surface design, and Generative Sheetmetal Design workbenches",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": ["CATIA is widely used in the automotive and aerospace industries for product and tool designing.", "Its comprehensive process coverage and inherent associativity among its applications help shorten the time to market.", "CATIA's integrated analysis, simulation, synthesis, and optimization applications support product engineering validation, ensuring product quality and market acceptance."]
+          title: "Roles in Industry",
+          content: [
+            "CATIA is widely used in the automotive and aerospace industries for product and tool designing.",
+            "Its comprehensive process coverage and inherent associativity among its applications help shorten the time to market.",
+            "CATIA's integrated analysis, simulation, synthesis, and optimization applications support product engineering validation, ensuring product quality and market acceptance.",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Assembly Modeling",
             "Mechanical Designing",
             "Shape Designing",
@@ -846,11 +890,10 @@ const courses = {
             "Machining",
             "Digital Mockup",
             "Machining Simulation",
-            "Ergonomics Design and Analysis"
-          ]
-        }
-      ]
-      
+            "Ergonomics Design and Analysis",
+          ],
+        },
+      ],
     },
     {
       title: "SolidWorks",
@@ -869,27 +912,33 @@ const courses = {
         "Proficiency in surface modeling",
         "Bottom-up assembly design techniques & Top-down assembly design and management",
         "Bill of Materials (BOM) and balloon tools usage",
-        "Sheet metal design principles and applications & Weldment design for structural projects"
-    ],
+        "Sheet metal design principles and applications & Weldment design for structural projects",
+      ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["SOLIDWORKS teaches you how to use SOLIDWORKS mechanical design automation software to build parametric models of parts and assemblies, and how to create drawings of those parts and assemblies. The course covers Part Modeling and Assembly Modeling to complete your knowledge of solid modeling tools and techniques. For designs requiring complex or organic shapes, Advanced Surfacing Modeling introduces surface modeling techniques."]
+          title: "Course Description",
+          content: [
+            "SOLIDWORKS teaches you how to use SOLIDWORKS mechanical design automation software to build parametric models of parts and assemblies, and how to create drawings of those parts and assemblies. The course covers Part Modeling and Assembly Modeling to complete your knowledge of solid modeling tools and techniques. For designs requiring complex or organic shapes, Advanced Surfacing Modeling introduces surface modeling techniques.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Equip students and professionals with the essentials needed to become a certified SOLIDWORKS associate",
-            "Help individuals use the software confidently to design and draft innovative projects"
-          ]
+            "Help individuals use the software confidently to design and draft innovative projects",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": ["SOLIDWORKS is used internationally by millions of companies.", "It provides designers the ability to import data, store it securely while maintaining flexibility and accessibility.", "Designers and engineers consider SOLIDWORKS as an innovative solution to meet project challenges."]
+          title: "Roles in Industry",
+          content: [
+            "SOLIDWORKS is used internationally by millions of companies.",
+            "It provides designers the ability to import data, store it securely while maintaining flexibility and accessibility.",
+            "Designers and engineers consider SOLIDWORKS as an innovative solution to meet project challenges.",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "CAD Modeling and Animation – Develop 3D animated models of product designs",
             "Assembly Design – Design parts and assemble them",
             "Sheet Metal Design – Design parts to be fabricated from sheet metal",
@@ -898,11 +947,10 @@ const courses = {
             "Weldment Design – Model welded structures with standard structural members",
             "Tolerance Analysis – Analyze the tolerance level of individual parts and their collective operation",
             "CAD Library – Enhance productivity using a CAD library",
-            "Interference Check – Ensure all parts fit and operate according to requirements"
-          ]
-        }
-      ]
-      
+            "Interference Check – Ensure all parts fit and operate according to requirements",
+          ],
+        },
+      ],
     },
     {
       title: "NX CAD",
@@ -922,34 +970,36 @@ const courses = {
         "Revolve feature creation",
         "Datum features and their types",
         "Sweep features and blend techniques",
-        "Assembly modeling and constraints"
-    ],
+        "Assembly modeling and constraints",
+      ],
 
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["The NX CAD Designers course provides professional instruction in product model design, detailing, assembly modeling, and the basics of the master model concept. Unigraphics NX, owned by Siemens PLM Software, offers integrated and advanced CAD, CAE, and CAM solutions."]
+          title: "Course Description",
+          content: [
+            "The NX CAD Designers course provides professional instruction in product model design, detailing, assembly modeling, and the basics of the master model concept. Unigraphics NX, owned by Siemens PLM Software, offers integrated and advanced CAD, CAE, and CAM solutions.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Introduce assembly modeling in a real-life context, including both student-modeled and pre-created part models",
-            "Reinforce understanding of the flexibility of solid modeling and assembly tools in product development collaboration"
-          ]
+            "Reinforce understanding of the flexibility of solid modeling and assembly tools in product development collaboration",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": [
+          title: "Roles in Industry",
+          content: [
             "Seamless integration with other CAD systems",
             "Ability to handle complex products",
             "Visual analytics enhance decision-making",
             "Reduces development time by over 30%",
-            "Increases annual production of new products"
-          ]
+            "Increases annual production of new products",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Open and examine NX models",
             "Create and edit basic assembly structures",
             "Create and edit drawings",
@@ -957,22 +1007,21 @@ const courses = {
             "Create component patterns",
             "Define revision identifiers",
             "Apply top-down assembly modeling",
-            "Manage assembly arrangements"
-          ]
-        }
-      ]
-      
+            "Manage assembly arrangements",
+          ],
+        },
+      ],
     },
     {
       title: "HyperMesh",
       image: "/images/hypermesh.jpg",
       description:
         "Finite element pre-processor for high-performance analysis.",
-        price: 5000,
+      price: 5000,
       video: "video.mp4",
       card_description:
         "Learn the practical skills & techniques required to create a Modern Home with Sketchup.For Mechanical and Automobile Engineers",
-      learn:[
+      learn: [
         "Introduction to FEM concepts",
         "Basics of meshing techniques",
         "Geometry preparation for meshing",
@@ -982,32 +1031,34 @@ const courses = {
         "Shell meshing and surface-based meshing",
         "Tetra and hex-penta mesh creation",
         "Hypermesh user interface navigation",
-        "File handling and panel usage"
-    ],
+        "File handling and panel usage",
+      ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["Hypermesh software is a leading multi-disciplinary finite element pre-processor, used for managing the generation of large and complex models, from CAD geometry import to solver file preparation. Developed by Altair Engineering, it is a standard tool for creating innovative products more efficiently."]
+          title: "Course Description",
+          content: [
+            "Hypermesh software is a leading multi-disciplinary finite element pre-processor, used for managing the generation of large and complex models, from CAD geometry import to solver file preparation. Developed by Altair Engineering, it is a standard tool for creating innovative products more efficiently.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Work with CAE (Computer Aided Engineering) simulation software for creating finite element models.",
             "Generate high-quality meshes efficiently.",
-            "Utilize geometry editing tools for CAD model design and meshing processes."
-          ]
+            "Utilize geometry editing tools for CAD model design and meshing processes.",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": [
+          title: "Roles in Industry",
+          content: [
             "Perform 2D and 3D shape optimization, and 1D and 2D size optimization.",
             "Prepare models for analysis and geometry for meshing.",
-            "Achieve high accuracy results."
-          ]
+            "Achieve high accuracy results.",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Introduction to FEM",
             "Brief on Meshing",
             "Basic interaction with HyperMesh",
@@ -1020,11 +1071,10 @@ const courses = {
             "Analysis Setup",
             "Hypermesh Solver Interfaces",
             "Post process setup",
-            "Review, Test and Project Discussion"
-          ]
-        }
-      ]
-      
+            "Review, Test and Project Discussion",
+          ],
+        },
+      ],
     },
     {
       title: "GD&T",
@@ -1044,43 +1094,44 @@ const courses = {
         "Understanding Least Material Condition (LMC) of a feature of size",
         "Concept of virtual condition & Concept of bonus tolerance",
         "Planar datums and their significance",
-        "Modifiers and symbols used in GD & T"
-    ],
+        "Modifiers and symbols used in GD & T",
+      ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["Geometric Dimensioning and Tolerancing (GD&T) is a symbolic language used to define the geometry of mechanical parts. It includes dimensions, symbols, definitions, rules, and conventions that illustrate the functional requirements of design features. GD&T enables clear communication among mechanical engineers, fabricators, and designers regarding the design model."]
+          title: "Course Description",
+          content: [
+            "Geometric Dimensioning and Tolerancing (GD&T) is a symbolic language used to define the geometry of mechanical parts. It includes dimensions, symbols, definitions, rules, and conventions that illustrate the functional requirements of design features. GD&T enables clear communication among mechanical engineers, fabricators, and designers regarding the design model.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Understand the fundamentals of the GD&T language.",
             "Comprehend Geometric Tolerancing.",
-            "Assist in becoming a certified GD&T associate."
-          ]
+            "Assist in becoming a certified GD&T associate.",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": [
+          title: "Roles in Industry",
+          content: [
             "GD&T is an international language providing precise specification and interpretation for global design models.",
             "Datum features in GD&T offer additional tolerance.",
             "Facilitates and simplifies gaging requirements.",
-            "Allows for critical-to-function features of mechanical parts."
-          ]
+            "Allows for critical-to-function features of mechanical parts.",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Differences between ASME and ISO Standards",
             "Practical problem solving with real-world examples",
             "Gauging Methods and Implications",
             "Explanation and Implication of using GD&T symbols",
             "Basic and Advanced GD&T Training",
-            "Comprehensive Study-Material"
-          ]
-        }
-      ]
-      
+            "Comprehensive Study-Material",
+          ],
+        },
+      ],
     },
     {
       title: "ANSYS Workbench",
@@ -1090,7 +1141,7 @@ const courses = {
       video: "video.mp4",
       card_description:
         "The Ansys Workbench platform lets you integrate data across engineering simulations to create more accurate models more efficiently.For Mechanical and Automobile Engineers",
-      learn:[
+      learn: [
         "Introduction to CAE and ANSYS Workbench",
         "Understanding system requirements and project creation",
         "Units and sketching in ANSYS Design Modeler",
@@ -1100,38 +1151,39 @@ const courses = {
         "Examples of cantilever beams and pressure vessels",
         "Natural frequency analysis and mode shapes",
         "Buckling loads and various column types",
-        "Thermal analysis, stress, and heat transfer applications"
-    ],
+        "Thermal analysis, stress, and heat transfer applications",
+      ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["ANSYS Mechanical is a finite element analysis tool used to analyze and solve complex mechanical problems. It predicts the behavior of components in manufacturing and real-world environments. ANSYS supports global engineering simulation by delivering high-quality products developed faster through an information-based process."]
+          title: "Course Description",
+          content: [
+            "ANSYS Mechanical is a finite element analysis tool used to analyze and solve complex mechanical problems. It predicts the behavior of components in manufacturing and real-world environments. ANSYS supports global engineering simulation by delivering high-quality products developed faster through an information-based process.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Explain the basics of ANSYS, Finite Element Modeling (FEM), and Finite Element Analysis (FEA).",
             "Elevate learning through stages including pre-processor, solution, and post-processor.",
-            "Conduct advanced structural analysis through hands-on sessions."
-          ]
+            "Conduct advanced structural analysis through hands-on sessions.",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": [
-            "Used across various industries to analyze performance parameters like signal integrity, electromagnetic interference, thermal issues, and mechanical failure."
-          ]
+          title: "Roles in Industry",
+          content: [
+            "Used across various industries to analyze performance parameters like signal integrity, electromagnetic interference, thermal issues, and mechanical failure.",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Validate product performance from manufacturing units.",
             "Simulate structural aspects including linear static analysis of single parts and complex assemblies.",
             "Perform fluid flow analysis to assess the impact on products during manufacturing and in real-world applications.",
-            "Contribute to product success, integrity, smart product design, and reduced time-to-market."
-          ]
-        }
-      ]
-      
+            "Contribute to product success, integrity, smart product design, and reduced time-to-market.",
+          ],
+        },
+      ],
     },
     {
       title: "NX CAM",
@@ -1150,32 +1202,34 @@ const courses = {
         "Operation Navigator and editing operations",
         "Geometry and tool groups in CAM",
         "Visualizing and analyzing tool paths",
-        "Various machining operations and techniques"
-    ],
+        "Various machining operations and techniques",
+      ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["NX CAM provides a comprehensive set of NC programming capabilities within a single CAM system and an integrated suite of manufacturing applications. These applications support part modeling, tool design, and inspection programming, all leveraging proven NX technology."]
+          title: "Course Description",
+          content: [
+            "NX CAM provides a comprehensive set of NC programming capabilities within a single CAM system and an integrated suite of manufacturing applications. These applications support part modeling, tool design, and inspection programming, all leveraging proven NX technology.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Perform 2, 3, and 5-axis milling and additive manufacturing such as 3D printing.",
             "Quickly program parts with complex geometries using the shortest tools to save time and reduce errors.",
-            "Utilize mold, die, and electrode machining to produce high-quality products and decrease time to market."
-          ]
+            "Utilize mold, die, and electrode machining to produce high-quality products and decrease time to market.",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": [
+          title: "Roles in Industry",
+          content: [
             "NX CAM is utilized across various industries including aerospace, automotive, medical devices, mold and die, and machinery.",
             "It caters to both small machine shops and large teams of manufacturing engineers.",
-            "Siemens software solutions are trusted by leading organizations globally."
-          ]
+            "Siemens software solutions are trusted by leading organizations globally.",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Tool and machining data libraries",
             "Accessing manufacturing wizards",
             "Shop documentation",
@@ -1183,10 +1237,10 @@ const courses = {
             "Templates",
             "Integrated verification and simulation",
             "Tool path optimization",
-            "Automated NC code generation"
-          ]
-        }
-      ]
+            "Automated NC code generation",
+          ],
+        },
+      ],
     },
     {
       title: "Mastercam",
@@ -1196,7 +1250,7 @@ const courses = {
       video: "video.mp4",
       card_description:
         "Learn Mastercam in a Professional way. Become an expert in CAD CAM, CNC Programming, 3D modeling, plans...For Mechanical, Automobile Engineers",
-      learn:[
+      learn: [
         "Mastercam interface and navigation basics",
         "Creating 2D sketches and geometry",
         "Proficiency in 2D toolpath generation",
@@ -1206,42 +1260,41 @@ const courses = {
         "Multiaxis machining and indexing",
         "Mastercam customization and automation",
         "Problem-solving and troubleshooting skills",
-        "Advanced toolpath strategies and optimization"
-    ],
+        "Advanced toolpath strategies and optimization",
+      ],
       course_description: [
         {
-          "title": "Course Description",
-          "content": ["Mastercam is a computer-aided manufacturing (CAM) software program used by manufacturing professionals, including machinists and CNC programmers. This software assists users in producing mechanical drawings of machine parts, operating CNC lathes and mills, and creating 3D wireframe models. The course covers MasterCAM 2018 and 2019, designed for both beginners and seasoned users. Beginners can start from scratch with lecture one, while advanced users can focus on specific topics without revisiting basic concepts."]
+          title: "Course Description",
+          content: [
+            "Mastercam is a computer-aided manufacturing (CAM) software program used by manufacturing professionals, including machinists and CNC programmers. This software assists users in producing mechanical drawings of machine parts, operating CNC lathes and mills, and creating 3D wireframe models. The course covers MasterCAM 2018 and 2019, designed for both beginners and seasoned users. Beginners can start from scratch with lecture one, while advanced users can focus on specific topics without revisiting basic concepts.",
+          ],
         },
         {
-          "title": "Course Objectives",
-          "content": [
+          title: "Course Objectives",
+          content: [
             "Mastercam offers both CAD and CAM functionality to drive CNC machines efficiently, enhancing productivity.",
             "CAM involves using software and computer-controlled machinery to automate the manufacturing process.",
-            "The course provides training in generating toolpaths, a critical component for CAM systems to function effectively."
-          ]
+            "The course provides training in generating toolpaths, a critical component for CAM systems to function effectively.",
+          ],
         },
         {
-          "title": "Roles in Industry",
-          "content": [
+          title: "Roles in Industry",
+          content: [
             "Mastercam is a Windows-based CAD/CAM solution used for 2 through 5-axis milling/routing, turning, mill-turn, 2 & 4 axis wire EDM, and 2D and 3D design.",
             "It serves various industries including aerospace, automotive, energy, medical, die/mold, composites, and consumer products.",
-            "CAM software is essential for developing programs for CNC machines such as milling and turning machines, as well as for cutting-edge machining and additive manufacturing."
-          ]
+            "CAM software is essential for developing programs for CNC machines such as milling and turning machines, as well as for cutting-edge machining and additive manufacturing.",
+          ],
         },
         {
-          "title": "Course Highlights",
-          "content": [
+          title: "Course Highlights",
+          content: [
             "Manufacturing Process",
             "Fundamentals of Mastercam",
             "Creating 3D Models",
-            "Milling 3D"
-          ]
-        }
-      ]
-      
-     
-      
+            "Milling 3D",
+          ],
+        },
+      ],
     },
   ],
   Civil: [
@@ -1263,16 +1316,20 @@ const courses = {
         "Alignment Design and Customization",
         "Parcel Creation and Editing",
         "Corridor Design and Surface Creation",
-        "Junction Design, Quantity Takeoff, and Criteria Customization"
-    ],
+        "Junction Design, Quantity Takeoff, and Criteria Customization",
+      ],
       course_description: [
         {
           title: "Course Description",
-          content: ["Autodesk Civil 3D software is a vertical design and documentation solution for civil engineering and architect professionals alike to plan, design, and manage civil engineering projects. Civil 3D supports BIM (Building Information Modeling) with integrated features to improve drafting, design, and construction documentation. You can develop highways, pipelines, import topographic points, create surfaces, analyze volumes for cutting and filling material, and perform storm analysis. Civil 3D enhances collaboration and workflow efficiencies from design to production, permitting faster development of alternatives via model-based design tools.",]
+          content: [
+            "Autodesk Civil 3D software is a vertical design and documentation solution for civil engineering and architect professionals alike to plan, design, and manage civil engineering projects. Civil 3D supports BIM (Building Information Modeling) with integrated features to improve drafting, design, and construction documentation. You can develop highways, pipelines, import topographic points, create surfaces, analyze volumes for cutting and filling material, and perform storm analysis. Civil 3D enhances collaboration and workflow efficiencies from design to production, permitting faster development of alternatives via model-based design tools.",
+          ],
         },
         {
           title: "Course Objectives",
-          content: ["The AutoCAD Civil 3D training course is designed for surveyors and civil engineers. The dynamic design functionality of the software permits rapid development of alternatives via model-based design tools. Students can learn ways to organize project data, create & analyze surfaces, create parcel layouts, road corridors, and layout networks.",]
+          content: [
+            "The AutoCAD Civil 3D training course is designed for surveyors and civil engineers. The dynamic design functionality of the software permits rapid development of alternatives via model-based design tools. Students can learn ways to organize project data, create & analyze surfaces, create parcel layouts, road corridors, and layout networks.",
+          ],
         },
         {
           title: "Roles in Industry",
@@ -1299,7 +1356,7 @@ const courses = {
             "Designing Roundabout, Corridor, Junction, and Pipe Network",
           ],
         },
-      ]
+      ],
     },
     {
       title: "STAAD Pro",
@@ -1319,20 +1376,27 @@ const courses = {
         "Model editing tools and transformations",
         "Support, material, and member property specification",
         "Loading analysis and load combinations",
-        "Concrete and steel design in STAAD.Pro"
-    ],
-      course_description:[
+        "Concrete and steel design in STAAD.Pro",
+      ],
+      course_description: [
         {
           title: "Course Description",
-          content: ["This course introduces engineers to using STAAD.Pro software for structural modeling, analysis, and design. You will learn fast and better techniques for building and checking complex models. This program is a great time saver for people who are accustomed to doing laborious hand calculations, spreadsheets, and large-scale simplifications of complex stress analysis and design situations.",]
+          content: [
+            "This course introduces engineers to using STAAD.Pro software for structural modeling, analysis, and design. You will learn fast and better techniques for building and checking complex models. This program is a great time saver for people who are accustomed to doing laborious hand calculations, spreadsheets, and large-scale simplifications of complex stress analysis and design situations.",
+          ],
         },
         {
           title: "Course Objectives",
-          content: ["The course is designed to offer students and professionals all the essentials to learn and use STAAD.Pro V8i. The enrolled candidates will learn to master the application and will be empowered to deliver high-quality products and services.",]
+          content: [
+            "The course is designed to offer students and professionals all the essentials to learn and use STAAD.Pro V8i. The enrolled candidates will learn to master the application and will be empowered to deliver high-quality products and services.",
+          ],
         },
         {
           title: "Roles in Industry",
-          content: ["Knowledge of BIM and Revit technologies will help you create a rewarding career in architecture, construction, engineering, or interior design.", "Opportunities for individuals with training and experience in Revit include Revit technician, BIM coordinator, structural draftsperson, architectural technologist, and entry-level roles across related fields."]
+          content: [
+            "Knowledge of BIM and Revit technologies will help you create a rewarding career in architecture, construction, engineering, or interior design.",
+            "Opportunities for individuals with training and experience in Revit include Revit technician, BIM coordinator, structural draftsperson, architectural technologist, and entry-level roles across related fields.",
+          ],
         },
         {
           title: "Course Highlights",
@@ -1356,61 +1420,61 @@ const courses = {
       image: "/images/revit_architecture.jpg",
       description:
         "BIM software for architecture, engineering, and construction.",
-        price: 5000,
-        video: "video.mp4",
-        card_description:
-          "Learn the concepts, tools and workflows to allow you work confidently inside Autodesk Revit, a BIM design platform.For Architects and Civil Engineers",
-        learn: [
-          "Introduction to BIM and Autodesk Revit",
-          "Understanding Revit's file types and interface",
-          "Working with levels and grids",
-          "Creating building elements and drawing plans",
-          "Mastering wall creation and modification",
-          "Utilizing modify tools effectively",
-          "Designing doors, windows, and floors",
-          "Roof and ceiling modeling techniques",
-          "Adding openings and dimensions",
-          "Creating views, schedules, and lighting"
+      price: 5000,
+      video: "video.mp4",
+      card_description:
+        "Learn the concepts, tools and workflows to allow you work confidently inside Autodesk Revit, a BIM design platform.For Architects and Civil Engineers",
+      learn: [
+        "Introduction to BIM and Autodesk Revit",
+        "Understanding Revit's file types and interface",
+        "Working with levels and grids",
+        "Creating building elements and drawing plans",
+        "Mastering wall creation and modification",
+        "Utilizing modify tools effectively",
+        "Designing doors, windows, and floors",
+        "Roof and ceiling modeling techniques",
+        "Adding openings and dimensions",
+        "Creating views, schedules, and lighting",
       ],
-        course_description:[
-          {
-            title: "Course Description",
-            content: [
-              "This course introduces you to the Revit Architecture software platform for Building Information Modeling (BIM) that supports the design, drawings, and schedules required for a building project. Using drawing tools, editing elements, levels, and grids, you will learn to create full 3D architectural project models and set them up in working drawings. Most of the course is focused on design development tools - building the 3D model with walls, windows, doors, floors, roofs, stairs, creating reflected ceiling plans and furniture plans. The course concludes with adding views and annotation to the sheets to create a set of construction documents.",
-            ],
-          },
-          {
-            title: "Course Objectives",
-            content: [
-              "Understand the concept and workflow of Building Information Modeling (BIM).",
-              "Use design principles, techniques, and Revit drawing tools to create 3D architectural project models.",
-              "Set up sheets and views to create construction documents.",
-              "Employ Revit tools to enable work-sharing and project team collaboration.",
-              "Use site and structural design tools for space planning, massing, visualization, and rendering to create large-scale building projects.",
-            ],
-          },
-          {
-            title: "Roles in Industry",
-            content: [
-              "Knowledge of BIM and Revit technologies will help you create a rewarding career in architecture, construction, engineering, or interior design.",
-              "Opportunities for individuals with training and experience in Revit include Revit technician, BIM coordinator, structural draftsperson, architectural technologist, and entry-level roles across related fields.",
-            ],
-          },
-          {
-            title: "Course Highlights",
-            content: [
-              "Building information modeling.",
-              "Exploring User Interface.",
-              "Working with Revit Elements.",
-              "Conceptual modeling using massing.",
-              "Presenting the model of a building.",
-              "Creating railing and stairs.",
-              "Using editing commands for adding walls.",
-              "Managing view, documentation, and schedules.",
-              "Controlling visibility of objects.",
-            ],
-          },
-        ]
+      course_description: [
+        {
+          title: "Course Description",
+          content: [
+            "This course introduces you to the Revit Architecture software platform for Building Information Modeling (BIM) that supports the design, drawings, and schedules required for a building project. Using drawing tools, editing elements, levels, and grids, you will learn to create full 3D architectural project models and set them up in working drawings. Most of the course is focused on design development tools - building the 3D model with walls, windows, doors, floors, roofs, stairs, creating reflected ceiling plans and furniture plans. The course concludes with adding views and annotation to the sheets to create a set of construction documents.",
+          ],
+        },
+        {
+          title: "Course Objectives",
+          content: [
+            "Understand the concept and workflow of Building Information Modeling (BIM).",
+            "Use design principles, techniques, and Revit drawing tools to create 3D architectural project models.",
+            "Set up sheets and views to create construction documents.",
+            "Employ Revit tools to enable work-sharing and project team collaboration.",
+            "Use site and structural design tools for space planning, massing, visualization, and rendering to create large-scale building projects.",
+          ],
+        },
+        {
+          title: "Roles in Industry",
+          content: [
+            "Knowledge of BIM and Revit technologies will help you create a rewarding career in architecture, construction, engineering, or interior design.",
+            "Opportunities for individuals with training and experience in Revit include Revit technician, BIM coordinator, structural draftsperson, architectural technologist, and entry-level roles across related fields.",
+          ],
+        },
+        {
+          title: "Course Highlights",
+          content: [
+            "Building information modeling.",
+            "Exploring User Interface.",
+            "Working with Revit Elements.",
+            "Conceptual modeling using massing.",
+            "Presenting the model of a building.",
+            "Creating railing and stairs.",
+            "Using editing commands for adding walls.",
+            "Managing view, documentation, and schedules.",
+            "Controlling visibility of objects.",
+          ],
+        },
+      ],
     },
     {
       title: "SketchUp",
@@ -1430,9 +1494,9 @@ const courses = {
         "Advanced modeling techniques like push/pull, eraser, and offset",
         "Navigating the SketchUp environment",
         "Working with materials, styles, and animations",
-        "Drawing basics including rectangles, circles, and polygons"
-    ],
-      course_description:[
+        "Drawing basics including rectangles, circles, and polygons",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -1485,9 +1549,9 @@ const courses = {
         "Structural Analysis and Design",
         "Reinforcement Detailing for Beams, Columns, and Slabs",
         "Staircase Modeling and Shear Wall Design",
-        "Time History Analysis, Response Spectrum Analysis, Steel Frame Design, and Detailing"
-    ],
-      course_description:[
+        "Time History Analysis, Response Spectrum Analysis, Steel Frame Design, and Detailing",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -1527,7 +1591,7 @@ const courses = {
             "Dynamic Analysis.",
           ],
         },
-      ]
+      ],
     },
     {
       title: "Lumion",
@@ -1545,9 +1609,9 @@ const courses = {
         "Mastering Lighting Techniques in Lumion",
         "Non-Photorealistic Rendering with Lumion",
         "Rendering Still Images with Photo Mode",
-        "Advanced Artistic Options and Effects in Lumion"
-    ],
-      course_description:[
+        "Advanced Artistic Options and Effects in Lumion",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -1604,9 +1668,9 @@ const courses = {
         "Aerial perspective for atmospheric effects",
         "Utilizing V-Ray displacement for detail",
         "Harnessing V-Ray render elements for control",
-        "Global Illumination for various scene types"
-    ],
-      course_description:[
+        "Global Illumination for various scene types",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -1659,9 +1723,9 @@ const courses = {
         "Dynamic response of structures to loads",
         "Geotechnical simulations for soil behavior",
         "Practical application of ANSYS in civil projects",
-        "Advanced meshing techniques for accurate results"
-    ],
-      course_description:[
+        "Advanced meshing techniques for accurate results",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -1696,7 +1760,7 @@ const courses = {
             "Steel Design",
           ],
         },
-      ]
+      ],
     },
     {
       title: "3ds Max for Engineering & Architecture",
@@ -1716,9 +1780,9 @@ const courses = {
         "Grouping and hierarchy management",
         "Applying deformers and modifiers",
         "Advanced poly and spline modeling",
-        "Material creation and advanced rendering techniques"
-    ],
-      course_description:[
+        "Material creation and advanced rendering techniques",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -1755,7 +1819,7 @@ const courses = {
             "Lights, Cameras, and Animation",
           ],
         },
-      ]
+      ],
     },
     {
       title: "Revit Structure",
@@ -1775,9 +1839,9 @@ const courses = {
         "Scheduling, Family Creation, and File Export",
         "Advanced Family Creation and File Exporting",
         "Final Project in Revit Structure",
-        "Creating Views, Details, and Construction Documents"
-    ],
-      course_description:[
+        "Creating Views, Details, and Construction Documents",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -1838,9 +1902,9 @@ const courses = {
         "Alignment Design and Customization",
         "Parcel Creation and Editing",
         "Corridor Design and Surface Creation",
-        "Junction Design, Quantity Takeoff, and Criteria Customization"
-    ],
-      course_description:[
+        "Junction Design, Quantity Takeoff, and Criteria Customization",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -1894,9 +1958,9 @@ const courses = {
         "Road Design, Super Elevation, and Reports",
         "Junction Design and Earthwork Design",
         "Pavement and Subgrade Design",
-        "Final Drawings Management and Cross Sections"
-    ],
-      course_description:[
+        "Final Drawings Management and Cross Sections",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -1948,9 +2012,9 @@ const courses = {
         "Understand what is meant by EIR (Employer Information Request) for BIM",
         "Know about the latest codes and standards used in BIM",
         "Understand BIM Tools & Software",
-        "Understand BIM Concepts & Modern Technologies"
-    ],
-      course_description:[
+        "Understand BIM Concepts & Modern Technologies",
+      ],
+      course_description: [
         {
           title: "Course Description",
           content: [
@@ -2090,7 +2154,7 @@ const CourseList = () => {
         <Box sx={{ textAlign: "center", marginBottom: "40px" }}>
           <Typography
             variant="h4"
-            sx={{ fontWeight: "bold", marginBottom: "10px",color: "#1976D2" }}
+            sx={{ fontWeight: "bold", marginBottom: "10px", color: "#1976D2" }}
           >
             Our Courses
           </Typography>

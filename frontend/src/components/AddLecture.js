@@ -14,6 +14,10 @@ import {
   InputLabel,
   FormControl,
 } from "@mui/material";
+import { BaseUrl } from "./BaseUrl";
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -22,7 +26,9 @@ const validationSchema = Yup.object().shape({
   video_url: Yup.string()
     .url("Enter a valid URL")
     .required("Video URL is required"),
+  course:Yup.string().required("Course is required")
 });
+
 
 export const AddLecture = () => {
   const {
@@ -34,11 +40,28 @@ export const AddLecture = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  const [result,setResult]=React.useState([]);
+
+  React.useEffect(() => {
+    axios.get(`${BaseUrl}/course/all`).then((res) => {
+      setResult(res?.data?.courses);
+    });
+  }, []);
+
   const onSubmit = async (data) => {
+
     try {
-      const response = await axios.post(`/course/1`, data); // Replace 1 with the course id dynamically
-      console.log("Lecture added successfully:", response.data);
-      reset(); // Reset form fields on success
+      axios.post(`${BaseUrl}/course/${data.course}`, {title:data.title ,description:data.description,video_url:data.video_url},{
+        headers: {
+          "Content-Type": 'application/json',
+          "Authorization":`Bearer ${sessionStorage.getItem("token")}`
+
+        },
+      }).then(res=>{
+        console.log("Lecture added successfully:", res?.data?.message);
+        toast.success(res.data.message, { autoClose: 3000 });
+        reset(); // Reset form fields on success
+      });
     } catch (error) {
       console.error("Error adding lecture:", error);
     }
@@ -53,6 +76,8 @@ export const AddLecture = () => {
         minHeight: "70vh",
       }}
     >
+      <ToastContainer/>
+
       <Box sx={{width: "100%", maxWidth: 600 }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
@@ -123,11 +148,16 @@ export const AddLecture = () => {
                     name="course"
                     control={control}
                     render={({ field }) => (
-                      <Select {...field} labelId="course-label" label="Course">
-                        <MenuItem value="B.tech">B.Tech</MenuItem>
-                        <MenuItem value="M.tech">M.Tech</MenuItem>
-                        <MenuItem value="B.sc.">B.Sc.</MenuItem>
-                      </Select>
+                      <Select {...field} fullWidth>
+                      {result.map((course) => (
+                        <MenuItem
+                          key={course._id}
+                          value={course._id}
+                        >
+                          {course.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
                     )}
                   />
                   {errors.course && (
