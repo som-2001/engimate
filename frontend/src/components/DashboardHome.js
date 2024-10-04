@@ -56,7 +56,7 @@ export const DashboardHome = () => {
   if (loadCourse || loadCategory) {
     return (
       <center>
-        <Box sx={{ marginTop: "30%" }}>
+        <Box sx={{ marginTop: "25%" }}>
           <CircularProgress size={30} />
         </Box>
       </center>
@@ -232,9 +232,9 @@ export const DashboardHome = () => {
                     marginBottom: "10px",
                     cursor: "pointer",
                   }}
-                  onClick={lectureShow}
+                  onClick={(e)=>window.open(data?.video_url,"_blank")}
                 >
-                  <iframe src={data?.video_url} title={data?._id}/>
+                  <iframe src={data?.video_url} width="100%" height="250" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title={data?._id}/>
                   <CardContent
                     sx={{
                       backgroundColor: "#f5f5f5",
