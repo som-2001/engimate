@@ -11,6 +11,7 @@ import {
   
   FormHelperText,
   FormControl,
+  CircularProgress,
 } from "@mui/material";
 import { toast,ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,6 +36,8 @@ export const AddCategory = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  const [load,setLoad]=React.useState(false);
+
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("category_name", data.category_name);
@@ -42,16 +45,22 @@ export const AddCategory = () => {
     formData.append("file", data.file[0]);
 
     try {
+      setLoad(true);
       const response = await axios.post(`${BaseUrl}/categories/add/`, formData, {
         headers: { "Content-Type": "multipart/form-data",
           "Authorization":`Bearer ${sessionStorage.getItem("token")}`
          },
       });
+
+      if(response){
+        setLoad(false);
+      }
       console.log("Category added successfully:", response.data);
       toast.success(response.data.message, { autoClose: 3000 });
       reset(); // Reset form fields on success
 
     } catch (error) {
+      setLoad(false);
       console.error("Error adding category:", error);
     }
   };
@@ -82,6 +91,28 @@ export const AddCategory = () => {
                     fullWidth
                     label="Category Name"
                     variant="outlined"
+                    InputProps={{
+                      sx: {
+                        borderRadius: "22px", // Customize border radius
+                        
+                        '&:hover': {
+                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                        },
+                      },
+                    }}
+                    sx={{
+                      borderRadius: "22px", // Outer border radius
+                      
+                      '& .MuiOutlinedInput-root': {
+                        
+                        '&:hover fieldset': {
+                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        },
+                      },
+                    }}
                     error={!!errors.category_name}
                     helperText={errors.category_name?.message}
                   />
@@ -102,6 +133,28 @@ export const AddCategory = () => {
                     variant="outlined"
                     multiline
                     rows={4}
+                    InputProps={{
+                      sx: {
+                        borderRadius: "22px", // Customize border radius
+                  
+                        '&:hover': {
+                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                        },
+                      },
+                    }}
+                    sx={{
+                      borderRadius: "22px", // Outer border radius
+                      
+                      '& .MuiOutlinedInput-root': {
+                       
+                        '&:hover fieldset': {
+                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        },
+                      },
+                    }}
                     error={!!errors.description}
                     helperText={errors.description?.message}
                   />
@@ -111,7 +164,19 @@ export const AddCategory = () => {
 
             <Grid item xs={12}>
               <FormControl fullWidth error={!!errors.file}>
-                <Button component="label" variant="contained" color="primary">
+                <Button component="label" variant="contained" color="primary"
+                 sx={{
+                  backgroundColor: "#0d47a1",
+                  color: "#fff",
+                  padding: "10px 24px",
+                  fontSize: "1rem",
+                  textTransform: "none",
+                  borderRadius: "50px",
+                  "&:hover": {
+                    backgroundColor: "#08306b",
+                  },
+                  
+                }}>
                   Upload File
                   <input
                     type="file"
@@ -125,14 +190,28 @@ export const AddCategory = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <Button
+            <center><Button
                 type="submit"
+                disabled={load}
                 variant="contained"
                 color="primary"
                 fullWidth
+                sx={{
+                  backgroundColor: "#0d47a1",
+                  color: "#fff",
+                  width: "60%",
+                  padding: "10px 24px",
+                  fontSize: "1rem",
+                  textTransform: "none",
+                  borderRadius: "50px",
+                  "&:hover": {
+                    backgroundColor: "#08306b",
+                  },
+                  marginTop: "30px",
+                }}
               >
-                Submit
-              </Button>
+                {load ? <CircularProgress size={30}/> :<span>Submit</span>}
+              </Button></center>
             </Grid>
           </Grid>
         </form>

@@ -2074,7 +2074,7 @@ const CourseList = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{overflowX:"hidden"}}>
       <Navbar />
       <Box
         sx={{

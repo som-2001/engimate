@@ -22,7 +22,7 @@ const CourseDetail = () => {
     window.scrollTo(0,0);
   },[]);
   return (
-    <Box>
+    <Box sx={{overflowX:"hidden"}}>
       <Navbar />
 
       {/* Hero Section */}

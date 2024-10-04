@@ -38,7 +38,7 @@ export const OurCourses = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{overflowX:"hidden"}}>
       <Navbar />
       <Box
         sx={{

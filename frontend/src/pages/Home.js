@@ -281,9 +281,9 @@ export const Home = () => {
 
 
   return (
-    <Box>
+    <Box sx={{overflowX:"hidden"}}>
       <Navbar />
-      <Box style={{ width: "100vw" }}>
+      <Box style={{ width: "100vw", }}>
         <Grid2
           container
           justifyContent="center"

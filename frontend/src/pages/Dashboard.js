@@ -181,7 +181,7 @@ function Dashboard() {
             {selectedHeader}
           </Typography>
           <center>
-            <Divider sx={{ marginBottom: "50px", width: { lg: "8%", xs: "30%", sm: "8%", md: "8%" }, backgroundColor: "blue" }} />
+            <Divider sx={{ marginBottom: "50px", width: { lg: "8%", xs: "30%", sm: "18%", md: "8%" }, backgroundColor: "blue" }} />
           </center>
           {selectedContent}
         </Box>

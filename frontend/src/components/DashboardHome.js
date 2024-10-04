@@ -160,6 +160,19 @@ export const DashboardHome = () => {
               <Button
                 variant="contained"
                 color="primary"
+                sx={{
+                  backgroundColor: "#0d47a1",
+                  color: "#fff",
+                  width: "60%",
+                  padding: "10px 24px",
+                  fontSize: "1rem",
+                  textTransform: "none",
+                  borderRadius: "50px",
+                  "&:hover": {
+                    backgroundColor: "#08306b",
+                  },
+                  marginBottom: "20px",
+                }}
                 onClick={loadMoreCourses}
               >
                 Load More Courses
@@ -228,6 +241,19 @@ export const DashboardHome = () => {
               <Button
                 variant="contained"
                 color="primary"
+                sx={{
+                  backgroundColor: "#0d47a1",
+                  color: "#fff",
+                  width: {lg:"20%",xs:"60%",sm:"60%",md:"20%"},
+                  padding: "10px 24px",
+                  fontSize: "1rem",
+                  textTransform: "none",
+                  borderRadius: "50px",
+                  "&:hover": {
+                    backgroundColor: "#08306b",
+                  },
+                  marginBottom: "20px",
+                }}
                 onClick={loadMoreCategories}
               >
                 Load More Categories
@@ -286,11 +312,11 @@ export const DashboardHome = () => {
                 <IconButton
                   sx={{
                     position: "absolute",
-                    top: "50%",
+                    top: "30%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
-                    color: "white",
-                    fontSize: "60px",
+                    color: "red",
+                    fontSize: "3.187rem",
                   }}
                   onClick={() => handleVideoPlay(index)} // Play video on click
                 >

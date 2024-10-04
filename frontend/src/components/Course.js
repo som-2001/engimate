@@ -266,7 +266,7 @@ export const Course=()=>{
     }, [name]);
   
     return (
-        <Box>
+        <Box sx={{overflowX:"hidden"}}>
         <Navbar />
   
         {/* Hero Section */}
