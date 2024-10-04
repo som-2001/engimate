@@ -7,14 +7,16 @@ export const addCategory = Trycatch(async (req, res) => {
   const image = req.file;
   const createdBy = req.user._id;
 
-  if (!category_name || !description || !image ) {
+  if (!category_name || !description || !image) {
     return res.status(400).json({ error: "All fields are required" });
   }
+
+  const base64Image = `data:${image.mimetype};base64,${image.buffer.toString("base64")}`;
 
   const category = await Category.create({
     category_name,
     description,
-    image: image?.path,
+    image: base64Image,
     createdBy,
   });
 
