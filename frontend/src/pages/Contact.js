@@ -17,10 +17,31 @@ import {
     MdSubject,
   } from "react-icons/md";
  import "../App.css";
+import { useNavigate } from "react-router-dom";
+import React from "react";
+import { jwtDecode } from "jwt-decode";
+import UserNavbar from "../components/userNavbar";
 
   
   export const Contact = () => {
    
+   const navigate=useNavigate();
+
+    React.useEffect(() => {
+      const token = sessionStorage?.getItem("token");
+  
+      if (token) {
+        const decodedToken = jwtDecode(token);
+  
+        // Check if token is expired
+        if (decodedToken.exp < Math.floor(Date.now() / 1000)) {
+          sessionStorage.removeItem("token"); // Clear expired token
+          navigate("/login");
+        }
+      } else {
+        navigate("/login");
+      }
+    }, [navigate]);
   
     return (
       <Box
@@ -32,7 +53,7 @@ import {
         }}
       >
        
-        <Navbar />
+       {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
         <Box
         sx={{
           width: "100vw",
@@ -192,9 +213,16 @@ import {
                 <Button
                   variant="contained"
                   sx={{
-                    width: { lg: "30%", md: "40%", xs: "50%", sm: "40%" },
-                    borderRadius: "25px",
-                    marginBottom:"20px"
+                    backgroundColor: "#0d47a1",
+                    color: "#fff",
+
+                    padding: "10px 24px",
+                    fontSize: "1rem",
+                    textTransform: "none",
+                    borderRadius: "50px",
+                    "&:hover": {
+                      backgroundColor: "#08306b",
+                    },
                   }}
                 >
                   Send Message

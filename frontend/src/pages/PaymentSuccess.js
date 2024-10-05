@@ -2,14 +2,34 @@ import { Box, Typography, Button } from "@mui/material";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import UserNavbar from "../components/userNavbar";
+import { useNavigate } from "react-router-dom";
+import React from "react";
+import { jwtDecode } from "jwt-decode";
 
 export const PaymentSuccess = () => {
+  const navigate = useNavigate();
 
-  
+  React.useEffect(() => {
+    const token = sessionStorage?.getItem("token");
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+
+      // Check if token is expired
+      if (decodedToken.exp < Math.floor(Date.now() / 1000)) {
+        sessionStorage.removeItem("token"); // Clear expired token
+        navigate("/login");
+      }
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   return (
     <Box sx={{ overflowX: "hidden" }}>
-      <Navbar />
-    
+      {sessionStorage.getItem("token") ? <UserNavbar /> : <Navbar />}
+
       <Box
         sx={{
           textAlign: "center",
@@ -33,7 +53,9 @@ export const PaymentSuccess = () => {
             color: "gray",
           }}
         >
-         Thank you for your payment.<br/>Your transaction was successful, and your payment has been processed.
+          Thank you for your payment.
+          <br />
+          Your transaction was successful, and your payment has been processed.
         </Typography>
 
         <Button
@@ -41,7 +63,7 @@ export const PaymentSuccess = () => {
           sx={{
             backgroundColor: "#0d47a1",
             color: "#fff",
-            width: {xs:"80%",lg:"20%",sm:"40%",md:"40%"},
+            width: { xs: "80%", lg: "20%", sm: "40%", md: "40%" },
             padding: "10px 24px",
             fontSize: "1rem",
             textTransform: "none",
@@ -49,7 +71,7 @@ export const PaymentSuccess = () => {
             "&:hover": {
               backgroundColor: "#08306b",
             },
-            marginTop:"40px",
+            marginTop: "40px",
             marginBottom: "20px",
           }}
         >

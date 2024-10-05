@@ -13,11 +13,11 @@ import { Login } from "./pages/Login";
 import { RegisterPage } from "./pages/RegisterPage";
 import {VerifyEmail} from "./pages/VerifyEmail";
 import Dashboard from "./pages/Dashboard";
-import UserDashboard from "./pages/UserDashboard";
+import {UserDashboard} from "./pages/UserDashboard";
 import { PaymentSuccess } from "./pages/PaymentSuccess";
-
-
-
+import { MyCourse } from "./pages/MyCourse";
+import { AllCourses } from "./components/AllCourses";
+import { Lectures } from "./pages/Lectures";
 
 function App() {
   return (
@@ -27,8 +27,11 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/contact-us" element={<Contact/>}/>
+        <Route path="/my-course" element={<MyCourse/>}/>
         <Route path="/our-courses" element={<OurCourses />} />
+        <Route path="/all-courses" element={<AllCourses />} />
         <Route path="/gallery" element={<Gallary />} />
+        <Route path="/lectures/:id" element={<Lectures/>}/>
         <Route path="/paymentSuccess/:id" element={<PaymentSuccess/>}/>
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/courses/:id" element={<CourseList />} />

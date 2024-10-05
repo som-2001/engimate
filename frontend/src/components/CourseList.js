@@ -14,6 +14,8 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import axios from "axios";
 import { BaseUrl } from "./BaseUrl";
+import UserNavbar from "./userNavbar";
+import { jwtDecode } from "jwt-decode";
 
 
 const CourseList = () => {
@@ -26,6 +28,22 @@ const CourseList = () => {
     navigate(`/course-detail/${id}`);
   };
 
+  React.useEffect(() => {
+    const token = sessionStorage?.getItem("token");
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+
+      // Check if token is expired
+      if (decodedToken.exp < Math.floor(Date.now() / 1000)) {
+        sessionStorage.removeItem("token"); // Clear expired token
+        navigate("/login");
+      } 
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   useEffect(() => {
     axios.get(`${BaseUrl}/course-category/${id}`).then((res) => {
       setSelectedCourses(res.data.category);
@@ -36,7 +54,7 @@ const CourseList = () => {
   if (load) {
     return (
       <center>
-        <Navbar />
+         {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
         <Box
           sx={{
             marginTop: { xs: "55%", sm: "45%", md: "25%", lg: "20%" },
@@ -51,7 +69,7 @@ const CourseList = () => {
   }
   return (
     <Box sx={{ overflowX: "hidden" }}>
-      <Navbar />
+      {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
       <Box
         sx={{
           width: "100vw",

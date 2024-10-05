@@ -16,14 +16,31 @@ import { BaseUrl } from "./BaseUrl";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import UserNavbar from "./userNavbar";
 
 const CourseDetail = () => {
   const [course, setCourse] = useState(null);
   const [load, setLoad] = useState(true);
   const [paymentLoad, setPaymentLoad] = useState(false);
   const id = window.location.href.split("/course-detail/")[1];
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
+  React.useEffect(() => {
+    const token = sessionStorage?.getItem("token");
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+
+      // Check if token is expired
+      if (decodedToken.exp < Math.floor(Date.now() / 1000)) {
+        sessionStorage.removeItem("token"); // Clear expired token
+        navigate("/login");
+      }
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,7 +61,7 @@ const CourseDetail = () => {
   if (load) {
     return (
       <center>
-        <Navbar />
+         {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
         <Box
           sx={{
             marginTop: { xs: "55%", sm: "45%", md: "25%", lg: "20%" },
@@ -150,7 +167,7 @@ const CourseDetail = () => {
 
   return (
     <Box sx={{ overflowX: "hidden" }}>
-      <Navbar />
+       {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
       {/* Hero Section */}
       <ToastContainer />
       <Box
