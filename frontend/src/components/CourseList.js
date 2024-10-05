@@ -49,7 +49,7 @@ const CourseList = () => {
       setSelectedCourses(res.data.category);
       setLoad(false);
     });
-  }, []);
+  }, [id]);
 
   if (load) {
     return (

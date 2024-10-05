@@ -2,7 +2,6 @@ import {
   Box,
   Card,
   CardContent,
-  CardMedia,
   CircularProgress,
   Container,
   Grid,
@@ -15,7 +14,7 @@ import axios from "axios";
 import UserNavbar from "../components/userNavbar";
 import Footer from "../components/Footer";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const Lectures = () => {
   const { id } = useParams();
@@ -48,7 +47,7 @@ export const Lectures = () => {
       .catch((error) => {
         console.error("Error fetching categories", error);
       });
-  }, []);
+  }, [id]);
 
   if (loadLecture) {
     return (
