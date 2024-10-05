@@ -132,7 +132,7 @@ function Dashboard() {
             >
               <MenuIcon />
             </IconButton>
-            <img src='./images/logo.png' alt='' style={{ width: "150px" }} />
+            <img src='./images/logo.png' alt='' style={{ width: "150px" }} onClick={(e)=>window.location.href="/"}/>
             <IconButton color="inherit" onClick={toggleDarkMode}>
               <WbSunnyRounded />
             </IconButton>

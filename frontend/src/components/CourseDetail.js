@@ -5,14 +5,15 @@ import {
   Container,
   Divider,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { IoIosCheckmark } from "react-icons/io";
 import axios from "axios";
 import { BaseUrl } from "./BaseUrl";
+
 
 const CourseDetail = () => {
  
@@ -33,10 +34,34 @@ const CourseDetail = () => {
   }, [id]);
 
   const parseStringToArray = (str) => {
-    return str?.replace(/(^"|"$)/g, "").split('",\n        "');
+    return str?.replace(/(^"|"$)/g, "").split(",\n");
   };
 
-  if (load) return <div>Loading...</div>;
+  if (load) {
+    return (
+      <center>
+        <Navbar/>
+        <Box sx={{ marginTop: { xs: "55%", sm: "45%", md: "25%", lg: "20%" },marginBottom:"20%" }}>
+          <CircularProgress size={30} />
+        </Box>
+        <Footer/>
+      </center>
+    );
+  }
+
+  const MakePayment=(id)=>{
+    axios.post(`${BaseUrl}/course/checkout/${id}`,{},{
+      headers:{
+        "Authorization":`Bearer ${sessionStorage.getItem("token")}`
+      }
+    }).then(res=>{
+        axios.post(`${BaseUrl}/verifypayment/${res.data.id}`,{},{
+          headers:{
+            "Authorization":`Bearer ${sessionStorage.getItem("token")}`
+          }
+        })
+    })
+  }
 
   return (
     <Box sx={{ overflowX: "hidden" }}>
@@ -184,9 +209,8 @@ const CourseDetail = () => {
                   variant="contained"
                   color="secondary"
                   sx={{ width: "95%", borderRadius: "50px", padding: "10px 24px" }}
-                  onClick={() =>
-                    window.location.href = "https://lyss.in/payment"
-                  }
+                  onClick={(e)=>MakePayment(course?._id)}
+                  
                 >
                   Buy Now
                 </Button>
