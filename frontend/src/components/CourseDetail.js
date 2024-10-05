@@ -13,13 +13,17 @@ import Footer from "./Footer";
 import { IoIosCheckmark } from "react-icons/io";
 import axios from "axios";
 import { BaseUrl } from "./BaseUrl";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const CourseDetail = () => {
- 
   const [course, setCourse] = useState(null);
   const [load, setLoad] = useState(true);
+  const [paymentLoad, setPaymentLoad] = useState(false);
   const id = window.location.href.split("/course-detail/")[1];
+  const navigate=useNavigate();
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,33 +44,115 @@ const CourseDetail = () => {
   if (load) {
     return (
       <center>
-        <Navbar/>
-        <Box sx={{ marginTop: { xs: "55%", sm: "45%", md: "25%", lg: "20%" },marginBottom:"20%" }}>
+        <Navbar />
+        <Box
+          sx={{
+            marginTop: { xs: "55%", sm: "45%", md: "25%", lg: "20%" },
+            marginBottom: "20%",
+          }}
+        >
           <CircularProgress size={30} />
         </Box>
-        <Footer/>
+        <Footer />
       </center>
     );
   }
 
-  const MakePayment=(id)=>{
-    axios.post(`${BaseUrl}/course/checkout/${id}`,{},{
-      headers:{
-        "Authorization":`Bearer ${sessionStorage.getItem("token")}`
-      }
-    }).then(res=>{
-        axios.post(`${BaseUrl}/verifypayment/${res.data.id}`,{},{
-          headers:{
-            "Authorization":`Bearer ${sessionStorage.getItem("token")}`
-          }
-        })
-    })
-  }
+  const MakePayment = (id) => {
+    setPaymentLoad(true);
+    axios
+      .post(
+        `${BaseUrl}/course/checkout/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        const options = {
+          key: "rzp_test_xR9MFUWgZJnmPN",
+          amount: res.data.order.amount,
+          currency: "INR",
+          name: "Yantraved",
+          description: "Test Transaction",
+          image: "https://engimate-pt2s.vercel.app/images/logo.png",
+          order_id: res.data.order.id,
+          // callback_url:`${BaseUrl}/verifypayment/${res.data.order.id}`,
+          handler: function (response) {
+            // Extract the fields from the response
+            const {
+              razorpay_payment_id,
+              razorpay_order_id,
+              razorpay_signature,
+            } = response;
+
+            // Log the response for debugging purposes
+            console.log(response);
+
+            // Make sure the token exists and is valid
+            const token = sessionStorage.getItem("token");
+
+            // Post to backend with verification data
+            axios
+              .post(
+                `${BaseUrl}/verifypayment/${id}`, // Sending order.id to verify with the backend
+                {
+                  razorpay_payment_id,
+                  razorpay_order_id,
+                  razorpay_signature,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              )
+              .then((res) => {
+                // Log the response from the server
+                navigate(`/paymentSuccess/${res.data.message}`);
+                // if(res.data.message==='course purchased successfully')
+                console.log(res.data);
+              })
+              .catch((error) => {
+                // Handle any errors during the Axios request
+                console.error("Payment verification error:", error);
+              });
+          },
+          prefill: {
+            name: "Someswar gorai",
+            email: "somgorai726@gmail.com",
+            contact: 7718456257,
+          },
+          notes: {
+            address: "Bankura",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        setPaymentLoad(false);
+        var rzp1 = new window.Razorpay(options);
+        document.getElementById("rzp-button1").onclick = function (e) {
+          rzp1.open();
+        };
+      })
+      .catch((error) => {
+        setPaymentLoad(false);
+        console.log(error);
+
+        if (error?.response?.data?.message)
+          toast.error(error?.response?.data?.message, { autoClose: 3000 });
+      });
+  };
 
   return (
     <Box sx={{ overflowX: "hidden" }}>
       <Navbar />
       {/* Hero Section */}
+      <ToastContainer />
       <Box
         sx={{
           width: "100vw",
@@ -208,11 +294,16 @@ const CourseDetail = () => {
                 <Button
                   variant="contained"
                   color="secondary"
-                  sx={{ width: "95%", borderRadius: "50px", padding: "10px 24px" }}
-                  onClick={(e)=>MakePayment(course?._id)}
-                  
+                  disabled={paymentLoad}
+                  sx={{
+                    width: "95%",
+                    borderRadius: "50px",
+                    padding: "10px 24px",
+                  }}
+                  onClick={(e) => MakePayment(course?._id)}
+                  id="rzp-button1"
                 >
-                  Buy Now
+                  {paymentLoad ? <CircularProgress size={30} /> : "Buy Now"}
                 </Button>
               </Box>
             </Box>

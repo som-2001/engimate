@@ -14,6 +14,7 @@ import { RegisterPage } from "./pages/RegisterPage";
 import {VerifyEmail} from "./pages/VerifyEmail";
 import Dashboard from "./pages/Dashboard";
 import UserDashboard from "./pages/UserDashboard";
+import { PaymentSuccess } from "./pages/PaymentSuccess";
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/contact-us" element={<Contact/>}/>
         <Route path="/our-courses" element={<OurCourses />} />
         <Route path="/gallery" element={<Gallary />} />
+        <Route path="/paymentSuccess/:id" element={<PaymentSuccess/>}/>
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/courses/:id" element={<CourseList />} />
         <Route path="/about" element={<About />} />
