@@ -6,25 +6,41 @@ import {
   Divider,
   Button,
 } from "@mui/material";
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { IoIosCheckmark } from "react-icons/io";
+import axios from "axios";
+import { BaseUrl } from "./BaseUrl";
 
 const CourseDetail = () => {
-  const location = useLocation();
+ 
+  const [course, setCourse] = useState(null);
+  const [load, setLoad] = useState(true);
+  const id = window.location.href.split("/course-detail/")[1];
 
-  const { course } = location.state || {}; // Access the passed course details
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
-  useEffect(()=>{
+  useEffect(() => {
+    axios.get(`${BaseUrl}/course-category/${id}`).then((res) => {
+      setCourse(res.data.category[0]); // Assuming the API returns an array
+      console.log(res.data.category[0]);
+      setLoad(false);
+    });
+  }, [id]);
 
-    window.scrollTo(0,0);
-  },[]);
+  const parseStringToArray = (str) => {
+    return str?.replace(/(^"|"$)/g, "").split('",\n        "');
+  };
+
+  if (load) return <div>Loading...</div>;
+
   return (
-    <Box sx={{overflowX:"hidden"}}>
+    <Box sx={{ overflowX: "hidden" }}>
       <Navbar />
-
       {/* Hero Section */}
       <Box
         sx={{
@@ -91,7 +107,7 @@ const CourseDetail = () => {
                 textShadow: "1px 1px 3px rgba(0,0,0,0.5)",
               }}
             >
-              {course?.card_description}
+              {course?.caption}
             </Typography>
           </Grid>
 
@@ -115,30 +131,24 @@ const CourseDetail = () => {
                 padding: "20px",
               }}
             >
-              <video
-                controls
+              <img
+                src={course?.image}
+                alt={course?.title}
                 style={{ width: "100%", height: "auto", borderRadius: "15px" }}
-              >
-                <source src='https://videos.pexels.com/video-files/5147975/5147975-uhd_2732_1440_25fps.mp4' type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              />
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "flex-start",
                   alignItems: "start",
+                  marginTop: "20px",
                 }}
               >
                 <Typography
                   variant="body1"
-                  style={{
-                    marginTop: "20px",
-                    color: "black",
-                    marginLeft: "10px",
-                    fontSize: "1.2rem",
-                  }}
+                  sx={{ color: "black", fontSize: "1.2rem" }}
                 >
-                  ₹:{course?.price}
+                  ₹{course?.price}
                 </Typography>
               </Box>
               <Box
@@ -155,17 +165,17 @@ const CourseDetail = () => {
                   variant="contained"
                   color="primary"
                   sx={{
-                    backgroundColor: "#0d47a1", // Matching button color with main heading
+                    backgroundColor: "#0d47a1",
                     color: "#fff",
-                    width:"95%",
+                    width: "95%",
                     padding: "10px 24px",
                     fontSize: "1rem",
                     textTransform: "none",
                     borderRadius: "50px",
                     "&:hover": {
-                      backgroundColor: "#08306b", // Darker shade on hover
+                      backgroundColor: "#08306b",
                     },
-                    marginBottom:"5px"
+                    marginBottom: "5px",
                   }}
                 >
                   Add to Cart
@@ -173,8 +183,10 @@ const CourseDetail = () => {
                 <Button
                   variant="contained"
                   color="secondary"
-                  sx={{ width: "95%",borderRadius:"50px",padding: "10px 24px", }}
-                  onClick={(e)=>window.location.href="https://lyss.in/payment"}
+                  sx={{ width: "95%", borderRadius: "50px", padding: "10px 24px" }}
+                  onClick={() =>
+                    window.location.href = "https://lyss.in/payment"
+                  }
                 >
                   Buy Now
                 </Button>
@@ -194,66 +206,85 @@ const CourseDetail = () => {
               fontWeight: "bold",
               marginBottom: "25px",
               textAlign: "center",
-            color: "#1976D2"
+              color: "#1976D2",
             }}
           >
             What You'll Learn
           </Typography>
-          {course?.learn?.length>0 && <Grid container spacing={4}>
-            {course?.learn?.map((item, index) => (
-              <Grid item xs={12} sm={6} md={12} lg={6} key={index}>
-                <Typography
-                  sx={{
-                    fontSize: "1.0rem",
-                    color: "#333",
-                    backgroundColor: "#f5f5f5",
-                    padding: "15px",
-                    borderRadius: "10px",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    textAlign: "center",
-                  }}
-                >
-                 <IoIosCheckmark /> {item}
-                </Typography>
-              </Grid>
-            ))}
-          </Grid>}
+          {course?.learn && (
+            <Grid container spacing={4}>
+              {parseStringToArray(course.learn).map((item, index) => (
+                <Grid item xs={12} sm={6} md={12} lg={6} key={index}>
+                  <Typography
+                    sx={{
+                      fontSize: "1.0rem",
+                      color: "#333",
+                      backgroundColor: "#f5f5f5",
+                      padding: "15px",
+                      borderRadius: "10px",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      textAlign: "center",
+                    }}
+                  >
+                    <IoIosCheckmark /> {item}
+                  </Typography>
+                </Grid>
+              ))}
+            </Grid>
+          )}
         </Box>
 
         <Divider />
 
         {/* Course Description Section */}
-        <Box sx={{padding:"5%"}}>
+        <Box sx={{ padding: "5%" }}>
           <Typography
             variant="h4"
-            sx={{ fontWeight: "bold", marginBottom: "5%", color: "#1976D2",}}
+            sx={{ fontWeight: "bold", marginBottom: "5%", color: "#1976D2" }}
           >
             Description
           </Typography>
-          {course?.course_description?.map((section, index) => (
-            <Box key={index} mb={5}>
-              <Typography
-                variant="h5"
-                sx={{
-                  fontWeight: "bold",
-                  marginBottom: "10px",
-                  color: "#1976D2",
-                }}
-              >
-                {section?.title}
-              </Typography>
-              <Typography variant="body1">
-                {section?.title === "Roles in Industry" ||
-                section?.title === "Course Highlights"
-                  ? section?.content?.map((line, index) => (
-                      <span key={index}>
-                        <li>{line}</li>
-                      </span>
-                    ))
-                  : section?.content}
-              </Typography>
-            </Box>
-          ))}
+          <Typography variant="body1" paragraph>
+            {course?.course_description}
+          </Typography>
+
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: "bold", marginBottom: "5%", color: "#1976D2" }}
+          >
+            Objective
+          </Typography>
+          <Typography variant="body1" paragraph>
+            {course?.course_objective}
+          </Typography>
+
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: "bold", marginBottom: "5%", color: "#1976D2" }}
+          >
+            Roles in Industry
+          </Typography>
+          <ul>
+            {parseStringToArray(course?.roles_in_industry)?.map(
+              (role, index) => (
+                <li key={index}>{role}</li>
+              )
+            )}
+          </ul>
+
+          <Typography
+            variant="h4"
+            sx={{ fontWeight: "bold", marginBottom: "5%", color: "#1976D2" }}
+          >
+            Course Highlights
+          </Typography>
+          <ul>
+            {parseStringToArray(course?.course_highlights)?.map(
+              (highlight, index) => (
+                <li key={index}>{highlight}</li>
+              )
+            )}
+          </ul>
         </Box>
       </Container>
 

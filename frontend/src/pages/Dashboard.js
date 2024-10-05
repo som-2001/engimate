@@ -121,7 +121,7 @@ function Dashboard() {
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1 ,backgroundColor:"whitesmoke"}} >
+        <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1 ,backgroundColor:"white"}} >
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <IconButton
               color="inherit"

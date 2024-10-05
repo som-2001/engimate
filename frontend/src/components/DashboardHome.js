@@ -137,7 +137,7 @@ export const DashboardHome = () => {
                   />
                   <CardContent
                     sx={{
-                      backgroundColor: "#f5f5f5",
+                      
                       height: "170px",
                       display: "flex",
                       flexDirection: "column",
@@ -218,7 +218,7 @@ export const DashboardHome = () => {
                   />
                   <CardContent
                     sx={{
-                      backgroundColor: "#f5f5f5",
+                      
                       height: "170px",
                       display: "flex",
                       flexDirection: "column",
@@ -256,7 +256,7 @@ export const DashboardHome = () => {
                 }}
                 onClick={loadMoreCategories}
               >
-                Load More Categories
+                Load More
               </Button>
             </Box>
           )}

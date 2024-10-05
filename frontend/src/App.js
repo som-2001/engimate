@@ -29,10 +29,10 @@ function App() {
         <Route path="/our-courses" element={<OurCourses />} />
         <Route path="/gallery" element={<Gallary />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
-        <Route path="/courses/:category" element={<CourseList />} />
+        <Route path="/courses/:id" element={<CourseList />} />
         <Route path="/about" element={<About />} />
         <Route path="/user-dashboard" element={<UserDashboard/>}/>
-        <Route path="/course-detail" element={<CourseDetail />} />
+        <Route path="/course-detail/:id" element={<CourseDetail />} />
         <Route path="/course/:name" element={<Course/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
