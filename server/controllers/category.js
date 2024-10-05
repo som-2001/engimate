@@ -1,6 +1,7 @@
 import Trycatch from "../middlewares/trycatch.js";
 import { Category } from "../models/category.js";
 import courses from "../routes/courses.js";
+import { Course } from "../models/course.js";
 
 export const addCategory = Trycatch(async (req, res) => {
   const { category_name, description } = req.body;
@@ -54,6 +55,13 @@ export const deleteCategory = Trycatch(async (req, res) => {
 
 export const getSingleCategory = Trycatch(async (req, res) => {
   const category = await Category.findById(req.params.id);
+  res.json({
+    category,
+  });
+});
+
+export const getCourseByCategory = Trycatch(async (req, res) => {
+  const category = await Course.find({ category: req.params.id });
   res.json({
     category,
   });
