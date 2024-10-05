@@ -1,42 +1,44 @@
-import React from "react";
-import { Grid, Card, CardMedia, CardContent, Typography, Container, Box, Button, CardActions } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Grid, Card, CardMedia, CardContent, Typography, Container, Box, Button, CardActions, CircularProgress } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ArrowRightAlt } from "@mui/icons-material";
+import axios from "axios";
+import { BaseUrl } from "../components/BaseUrl";
 
-const categories = [
-  {
-    image: "cse.jpg",
-    title: "Computer Science & Engineering",
-    abbreviation:"CSE",
-    description: "Unlock the potential of modern technology with our Computer Science and Engineering courses.",
-  },
-  {
-    image: "Electrical & Electronics.jpg",
-    title: "Electrical & Electronics",
-    abbreviation:"EE",
-    description: "Unlock the potential of modern technology with our Electrical and Electronics Engineering Course",
-  },
-  {
-    image: "mechanical.jpg",
-    title: "Mechanical Engineering",
-    abbreviation:"Mechanical",
-    description: "Unlock the potential of modern technology with our Mechanical Engineering Course",
-  },
-  {
-    image: "civil.jpg",
-    title: "Civil Engineering",
-    abbreviation:"Civil",
-    description: "Unlock the potential of modern technology with our Civil Engineering Course",
-  },
-];
+
 
 export const OurCourses = () => {
 
-  const handleViewCourses = (category) => {
-    window.location.href=`/courses/${category}`;
+  const handleViewCourses = (id) => {
+    window.location.href=`/courses/${id}`;
   };
 
+  const [categories,setCategories]=useState([]);
+  const [loadCategory,setLoadCategory]=useState(true);
+
+  useEffect(()=>{
+    try {
+      axios.get(`${BaseUrl}/categories/all`).then((res) => {
+        setLoadCategory(false);
+        setCategories(res.data.categories);
+      });
+    } catch (error) {
+      console.error("Error fetching categories", error);
+    }
+  },[]);
+
+  if (loadCategory) {
+    return (
+      <center>
+        <Navbar/>
+        <Box sx={{ marginTop: { xs: "55%", sm: "45%", md: "25%", lg: "20%" },marginBottom:"20%" }}>
+          <CircularProgress size={30} />
+        </Box>
+        <Footer/>
+      </center>
+    );
+  }
   return (
     <Box sx={{overflowX:"hidden"}}>
       <Navbar />
@@ -145,7 +147,7 @@ export const OurCourses = () => {
                 <CardMedia
                   component="img"
                   height="280"
-                  image={`../images/${course.image}`}
+                  image={`${course.image}`}
                   alt={course.title}
                   sx={{ objectFit: "cover" }}
                 />
@@ -158,11 +160,11 @@ export const OurCourses = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h5" component="div" sx={{ fontWeight: "bold", color: "#333" }}>
-                    {course.title}
+                  <Typography variant="h6" component="div" sx={{ fontWeight: "bold", color: "#333" }}>
+                    {course?.category_name}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {course.description}
+                  <Typography variant="body2" color="text.secondary" marginTop="20px">
+                    {course?.description}
                   </Typography>
                   
                 </CardContent>
@@ -171,7 +173,7 @@ export const OurCourses = () => {
                     variant="standard"
                     color="primary"
                     
-                    onClick={() => handleViewCourses(course.abbreviation)}
+                    onClick={() => handleViewCourses(course?._id)}
                   >
                     View Courses <ArrowRightAlt/> 
                   </Button>
