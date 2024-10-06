@@ -72,7 +72,7 @@ export const deleteLecture = Trycatch(async (req, res) => {
       message: "Lecture not found",
     });
   }
-  await lecture.deleteOne;
+  await lecture.deleteOne();
   res.json({
     message: "lecture Deleted successfully",
   });
