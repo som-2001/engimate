@@ -4,6 +4,7 @@ import {
   CardContent,
   CircularProgress,
   Container,
+  Divider,
   Grid,
   IconButton,
   Typography,
@@ -51,28 +52,193 @@ export const Lectures = () => {
 
   if (loadLecture) {
     return (
+      <center style={{overflowX:"hidden"}}>
+      <UserNavbar />
+      <Box
+      sx={{
+        width: "100vw",
+        textAlign: "center",
+        backgroundImage: "url(../images/my_course.png)",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        paddingTop: "2vw",
+        paddingBottom: "15vw",
+        position: "relative",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.6)", // Overlay with opacity
+          zIndex: 1,
+        },
+      }}
+    >
+      <Grid
+        container
+        sx={{
+          position: "relative",
+          zIndex: 2,
+          color: "white",
+          padding: { xs: "20px", sm: "20px", md: "50px" },
+        }}
+      >
+        <Grid item xs={12} sm={12} lg={6} md={6}>
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: {
+                xs: "2rem",
+                sm: "2.4rem",
+                md: "2.6rem",
+                lg: "2.6rem",
+              },
+              marginTop: { xs: "20px", md: "50px" },
+              fontWeight: "bold",
+              color: "white",
+            }}
+          >
+            Lectures
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: {
+                xs: "1rem",
+                sm: "1.1rem",
+                md: "1.2rem",
+                lg: "1.2rem",
+              },
+              marginTop: "10px",
+              fontWeight: "500",
+              padding: { xs: "10px", sm: "10px", md: "0px" },
+              color: "white",
+            }}
+          >
+            Explore a dynamic environment where technology meets creativity, providing you with a vibrant and engaging platform to master new concepts.
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={12} lg={6} md={6}></Grid>
+      </Grid>
+    </Box>
+    <Container maxWidth="lg" sx={{ paddingY: "3rem" }}>
+      <Typography
+        variant="h4"
+        align="center"
+        sx={{
+          fontWeight: "bold",
+          marginBottom: "2rem",
+          color: "#333",
+          fontSize: { xs: "1.8rem", md: "2.5rem" },
+        }}
+      >
+        Lectures
+      </Typography>
+
       <center>
-        <UserNavbar />
-        <Box
+        <Divider
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: "50px",
-            marginBottom: "50px",
+            backgroundColor: "blue",
+            width: { lg: "10vw", xs: "30vw", md: "15vw",sm:"20vw" },
+            fontWeight: "700",
+            marginTop:"10px",
+            marginBottom:"40px"
           }}
-        >
-          <CircularProgress size={40} sx={{ marginY: "20vh" }} />
-        </Box>
-        <Footer />
+        />
       </center>
+  
+    </Container>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "50px",
+          marginBottom: "50px",
+        }}
+      >
+        <CircularProgress size={40} sx={{ marginY: "20vh" }} />
+      </Box>
+      <Footer />
+    </center>
     );
   }
 
   return (
-    <Box sx={{ backgroundColor: "#f0f4f8", minHeight: "100vh" }}>
+    <Box sx={{ backgroundColor: "#f0f4f8", minHeight: "100vh",overflowX:"hidden" }}>
       <UserNavbar />
+      <Box
+        sx={{
+          width: "100vw",
+          textAlign: "center",
+          backgroundImage: "url(../images/my_course.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          paddingTop: "2vw",
+          paddingBottom: "15vw",
+          position: "relative",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.6)", // Overlay with opacity
+            zIndex: 1,
+          },
+        }}
+      >
+        <Grid
+          container
+          sx={{
+            position: "relative",
+            zIndex: 2,
+            color: "white",
+            padding: { xs: "20px", sm: "20px", md: "50px" },
+          }}
+        >
+          <Grid item xs={12} sm={12} lg={6} md={6}>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: {
+                  xs: "2rem",
+                  sm: "2.4rem",
+                  md: "2.6rem",
+                  lg: "2.6rem",
+                },
+                marginTop: { xs: "20px", md: "50px" },
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
+              Lectures
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: {
+                  xs: "1rem",
+                  sm: "1.1rem",
+                  md: "1.2rem",
+                  lg: "1.2rem",
+                },
+                marginTop: "10px",
+                fontWeight: "500",
+                padding: { xs: "10px", sm: "10px", md: "0px" },
+                color: "white",
+              }}
+            >
+              Explore a dynamic environment where technology meets creativity, providing you with a vibrant and engaging platform to master new concepts.
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12} lg={6} md={6}></Grid>
+        </Grid>
+      </Box>
 
       <Container maxWidth="lg" sx={{ paddingY: "3rem" }}>
         <Typography
@@ -87,11 +253,21 @@ export const Lectures = () => {
         >
           Lectures
         </Typography>
-
+<center>
+          <Divider
+            sx={{
+              backgroundColor: "blue",
+              width: { lg: "10vw", xs: "30vw", md: "15vw",sm:"20vw" },
+              fontWeight: "700",
+              marginTop:"10px",
+              marginBottom:"40px"
+            }}
+          />
+        </center>
         <Box>
           <Grid container spacing={2}>
             {lectures?.map((data, index) => (
-              <Grid item xs={12} sm={12} md={4} key={index}>
+              <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card
                   sx={{
                     boxShadow: 5,

@@ -53,8 +53,104 @@ export const MyCourse = () => {
 
   if (load) {
     return (
-      <center>
+      <center style={{overflowX:"hidden"}}>
         <UserNavbar />
+        <Box
+        sx={{
+          width: "100vw",
+          textAlign: "center",
+          backgroundImage: "url(../images/my_course.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          paddingTop: "2vw",
+          paddingBottom: "15vw",
+          position: "relative",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.6)", // Overlay with opacity
+            zIndex: 1,
+          },
+        }}
+      >
+        <Grid
+          container
+          sx={{
+            position: "relative",
+            zIndex: 2,
+            color: "white",
+            padding: { xs: "20px", sm: "20px", md: "50px" },
+          }}
+        >
+          <Grid item xs={12} sm={12} lg={6} md={6}>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: {
+                  xs: "2rem",
+                  sm: "2.4rem",
+                  md: "2.6rem",
+                  lg: "2.6rem",
+                },
+                marginTop: { xs: "20px", md: "50px" },
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
+              My Courses
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: {
+                  xs: "1rem",
+                  sm: "1.1rem",
+                  md: "1.2rem",
+                  lg: "1.2rem",
+                },
+                marginTop: "10px",
+                fontWeight: "500",
+                padding: { xs: "10px", sm: "10px", md: "0px" },
+                color: "white",
+              }}
+            >
+              Explore a dynamic environment where technology meets creativity, providing you with a vibrant and engaging platform to master new concepts.
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12} lg={6} md={6}></Grid>
+        </Grid>
+      </Box>
+      <Container maxWidth="lg" sx={{ paddingY: "3rem" }}>
+        <Typography
+          variant="h4"
+          align="center"
+          sx={{
+            fontWeight: "bold",
+            marginBottom: "2rem",
+            color: "#333",
+            fontSize: { xs: "1.8rem", md: "2.5rem" },
+          }}
+        >
+          My Courses
+        </Typography>
+
+        <center>
+          <Divider
+            sx={{
+              backgroundColor: "blue",
+              width: { lg: "10vw", xs: "30vw", md: "15vw",sm:"20vw" },
+              fontWeight: "700",
+              marginTop:"10px",
+              marginBottom:"40px"
+            }}
+          />
+        </center>
+    
+      </Container>
         <Box
           sx={{
             display: "flex",
@@ -172,7 +268,7 @@ export const MyCourse = () => {
           <Divider
             sx={{
               backgroundColor: "blue",
-              width: { lg: "10vw", xs: "70vw", md: "40vw" },
+              width: { lg: "10vw", xs: "30vw", md: "15vw",sm:"20vw" },
               fontWeight: "700",
               marginTop:"10px",
               marginBottom:"40px"
