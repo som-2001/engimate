@@ -22,6 +22,10 @@ const ReferEarn = () => {
   const [copied, setCopied] = useState(false);
 
 
+  const wpShareButton=()=>{
+    const url=`https://wa.me/?text=${encodeURIComponent(referralLink)}`;
+    window.open(url,'_blank');
+  }
   useEffect(()=>{
     axios.get(`${BaseUrl}/user/profile`,{
         headers:{
@@ -152,7 +156,7 @@ const ReferEarn = () => {
               sx={{
                 backgroundColor: "#0d47a1",
                 color: "#fff",
-                width: "60%",
+                width: {lg:"60%",md:"60%",sm:"60%",xs:"80%"},
                 padding: "10px 24px",
                 fontSize: "1rem",
                 textTransform: "none",
@@ -163,6 +167,7 @@ const ReferEarn = () => {
                 marginTop:"20px",
                 marginBottom: "10px",
               }}
+              onClick={wpShareButton}
             >
               Share with Friends
             </Button>

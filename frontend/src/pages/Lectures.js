@@ -9,19 +9,20 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BaseUrl } from "../components/BaseUrl";
 import axios from "axios";
 import UserNavbar from "../components/userNavbar";
 import Footer from "../components/Footer";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 export const Lectures = () => {
   const { id } = useParams();
   const [lectures, setLectures] = useState([]);
   const [loadLecture, setLoadLecture] = useState(true);
-
+  const navigate=useNavigate();
   const [activeVideo, setActiveVideo] = useState(null); // Track which video is being played
 
   const handleVideoPlay = (index) => {
@@ -33,6 +34,22 @@ export const Lectures = () => {
     const videoid = url.split("v=")[1];
     return videoid;
   };
+
+  React.useEffect(() => {
+    const token = sessionStorage?.getItem("token");
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+
+      // Check if token is expired
+      if (decodedToken.exp < Math.floor(Date.now() / 1000)) {
+        sessionStorage.removeItem("token"); // Clear expired token
+        navigate("/login");
+      }
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     axios

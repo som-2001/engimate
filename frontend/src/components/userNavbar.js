@@ -57,6 +57,7 @@ function UserNavbar() {
                 md: "block",
                 lg: "block",
               },
+              cursor:"pointer"
             }}
           />
 
@@ -117,6 +118,7 @@ function UserNavbar() {
                 md: "none",
                 lg: "none",
               },
+              cursor:"pointer"
             }}
           />
 

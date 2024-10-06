@@ -54,6 +54,7 @@ function ResponsiveAppBar() {
                 md: "block",
                 lg: "block",
               },
+              cursor:"pointer"
             }}
           />
 
@@ -114,6 +115,7 @@ function ResponsiveAppBar() {
                 md: "none",
                 lg: "none",
               },
+              cursor:"pointer"
             }}
           />
 

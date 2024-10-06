@@ -130,6 +130,7 @@ export const Login = () => {
                   height: "auto",
                   marginBottom: "20px",
                   mt: { xs: "5%", md: "0%" },
+                  cursor:"pointer"
                 }}
               />
               <Typography

@@ -23,7 +23,7 @@ export const OurExpertise = () => {
     } catch (error) {
       console.error("Error fetching categories", error);
     }
-  },[]);
+  },[navigate]);
 
   if (loadCategory) {
     return (

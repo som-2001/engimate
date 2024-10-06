@@ -124,6 +124,7 @@ export const RegisterPage = () => {
                   width: { xs: "60%", sm: "50%", md: "45%" },
                   height: "auto",
                   mt: { xs: "5%", md: "0%" },
+                  cursor:"pointer"
                 }}
               />
               <Typography
