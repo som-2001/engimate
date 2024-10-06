@@ -73,7 +73,9 @@ function Dashboard() {
   const handleNavigationClick = (content, heading) => {
     setSelectedContent(content); // Update content based on the selected item
     setSelectedHeader(heading);
-
+    if(heading==='Dashboard'){
+      window.location.reload();
+    }
     if (mobileOpen) {
       setMobileOpen(false); // Close the drawer on mobile after selection
     }

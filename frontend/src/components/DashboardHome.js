@@ -9,10 +9,18 @@ import {
   Button,
   CircularProgress,
   IconButton,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  DialogContentText,
+  Dialog,
+  
 } from "@mui/material";
 import axios from "axios";
 import { BaseUrl } from "./BaseUrl";
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const DashboardHome = () => {
   const [courses, setCourses] = useState([]);
@@ -25,6 +33,8 @@ export const DashboardHome = () => {
   const [hide, setHide] = useState(true);
   const [lectures, setLectures] = useState([]);
   const [activeVideo, setActiveVideo] = useState(null); // Track which video is being played
+  const [openDialog, setOpenDialog] = useState(false); // For the confirmation dialog
+  const [selectedLecture, setSelectedLecture] = useState(null); // Track the lecture to delete
 
   const handleVideoPlay = (index) => {
     setActiveVideo(index); // Set the clicked video index as active
@@ -50,6 +60,9 @@ export const DashboardHome = () => {
     }
   }, []);
 
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
   // Function to handle loading more items
   const loadMoreCourses = () => {
     setVisibleCourses((prevVisible) => prevVisible + 4); // Load 4 more courses
@@ -100,9 +113,30 @@ export const DashboardHome = () => {
     const videoid=url.split("v=")[1];
     return videoid;
   }
+  const handleDeleteClick = (id) => {
+    setSelectedLecture(id);
+    setOpenDialog(true);
+  };
+   const confirmDelete = () => {
+    if (selectedLecture) {
+      axios.delete(`${BaseUrl}/lecture/${selectedLecture}`, {
+        headers: {
+          "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      }).then(res => {
+        toast.success(res.data.message, { autoClose: 3000 });
+        setLectures((prevLectures) => prevLectures.filter(item => item._id !== selectedLecture));
+        setOpenDialog(false); // Close dialog after deletion
+      }).catch(error => {
+        console.error("Error deleting lecture", error);
+        toast.success(error.res.data.message, { autoClose: 3000 });
+      });
+    }
+  };
   return (
     <Box p={0}>
       {/* Courses Section */}
+      <ToastContainer/>
       {hide ? (
         <Box>
           <Typography variant="h5" style={{ marginBottom: "30px" }}>
@@ -327,8 +361,8 @@ export const DashboardHome = () => {
 
             <CardContent
               sx={{
-                backgroundColor: "#f5f5f5",
-                height: "170px",
+             
+                height: "130px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
@@ -339,10 +373,50 @@ export const DashboardHome = () => {
                 {data?.description}
               </Typography>
             </CardContent>
+            
+              <Button sx={{
+                  backgroundColor: "#0d47a1",
+                  color: "#fff",
+                  width: "60%",
+                  padding: "10px 24px",
+                  fontSize: "1rem",
+                  textTransform: "none",
+                  borderRadius: "50px",
+                  "&:hover": {
+                    backgroundColor: "#08306b",
+                  },
+                  marginBottom:"10px",
+                  marginLeft:"10px"
+                }}
+                onClick={(e)=>handleDeleteClick(data?._id)}
+              >Delete</Button>
+            
           </Card>
         </Grid>
       ))}
           </Grid>
+
+          <Dialog
+            open={openDialog}
+            onClose={handleCloseDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to delete this lecture? This action cannot be undone.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog} color="primary">
+                No
+              </Button>
+              <Button onClick={confirmDelete} color="secondary" autoFocus>
+                Yes, Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Box>
       )}
     </Box>
