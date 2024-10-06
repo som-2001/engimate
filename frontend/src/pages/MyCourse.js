@@ -40,7 +40,6 @@ export const MyCourse = () => {
 
   useEffect(() => {
 
-    console.log(process.env.REACT_APP_RAZORPAY_SECRET_KEY);
     axios
       .get(`${BaseUrl}/mycourses`, {
         headers: {

@@ -16,25 +16,45 @@ import Footer from "../components/Footer";
 import { BaseUrl } from "../components/BaseUrl";
 import axios from "axios";
 import FAQReferEarn from "../components/FAQ";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const ReferEarn = () => {
-  const [referralLink, setReferralLink] = useState('');
+  const [referralLink, setReferralLink] = useState("");
   const [copied, setCopied] = useState(false);
+  const navigate = useNavigate();
 
+  React.useEffect(() => {
+    const token = sessionStorage?.getItem("token");
 
-  const wpShareButton=()=>{
-    const url=`https://wa.me/?text=${encodeURIComponent(referralLink)}`;
-    window.open(url,'_blank');
-  }
-  useEffect(()=>{
-    axios.get(`${BaseUrl}/user/profile`,{
-        headers:{
-            "Authorization":`Bearer ${sessionStorage.getItem('token')}`
-        }
-    }).then(res=>{
+    if (token) {
+      const decodedToken = jwtDecode(token);
+
+      // Check if token is expired
+      if (decodedToken.exp < Math.floor(Date.now() / 1000)) {
+        sessionStorage.removeItem("token"); // Clear expired token
+        navigate("/login");
+      }
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  const wpShareButton = () => {
+    const url = `https://wa.me/?text=${encodeURIComponent(referralLink)}`;
+    window.open(url, "_blank");
+  };
+  useEffect(() => {
+    axios
+      .get(`${BaseUrl}/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
         setReferralLink(res.data.user.referral_code);
-    })
-  },[]);
+      });
+  }, []);
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink);
     setCopied(true);
@@ -42,11 +62,10 @@ const ReferEarn = () => {
   };
 
   return (
-    <Box sx={{ overflowX:"hidden"}}>
+    <Box sx={{ overflowX: "hidden" }}>
       <UserNavbar />
       <Box
         sx={{
-         
           width: "100vw",
           textAlign: "center",
           backgroundImage: "url(../images/referEarn.png)",
@@ -108,7 +127,8 @@ const ReferEarn = () => {
                 color: "white",
               }}
             >
-              Earn cash upto ₹1000 in your bank account for <b>Every Friend</b> you refer.
+              Earn cash upto ₹1000 in your bank account for <b>Every Friend</b>{" "}
+              you refer.
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12} lg={6} md={6}></Grid>
@@ -156,7 +176,7 @@ const ReferEarn = () => {
               sx={{
                 backgroundColor: "#0d47a1",
                 color: "#fff",
-                width: {lg:"60%",md:"60%",sm:"60%",xs:"80%"},
+                width: { lg: "60%", md: "60%", sm: "60%", xs: "80%" },
                 padding: "10px 24px",
                 fontSize: "1rem",
                 textTransform: "none",
@@ -164,7 +184,7 @@ const ReferEarn = () => {
                 "&:hover": {
                   backgroundColor: "#08306b",
                 },
-                marginTop:"20px",
+                marginTop: "20px",
                 marginBottom: "10px",
               }}
               onClick={wpShareButton}
@@ -184,7 +204,7 @@ const ReferEarn = () => {
           </Typography>
         </Box> */}
 
-        <FAQReferEarn/>
+        <FAQReferEarn />
       </Box>
       <Footer />
     </Box>
