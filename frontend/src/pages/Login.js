@@ -71,9 +71,9 @@ export const Login = () => {
         // You can handle successful login here (e.g., navigate to dashboard)
         setInterval(()=>{
           if(jwtDecode(response.data.token).role==='admin' || jwtDecode(response.data.token).role==='instructor')
-            navigate('/dashboard');
+            window.location.href='/dashboard';
           else{
-            navigate('/user-dashboard');
+            window.location.href='/user-dashboard';
           }
         },2000);  
       }

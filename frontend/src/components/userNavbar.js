@@ -34,15 +34,14 @@ function UserNavbar() {
 
   const handleNavigate = (path) => {
 
-    console.log(path);
     if (String(path) === "/home") {
-      navigate('/');
+      window.location.href='/';
     }else if(String(path)==="/log-out"){
       setOpenDialog(true);
     }else if(String(path)==="/refer-& earn"){
-      navigate('/refer-earn')
+      window.location.href='/refer-earn'
     }else {
-      navigate(path);
+      window.location.href=`${path}`;
     }
     handleCloseNavMenu(); // Close the menu after navigation
   };
@@ -174,7 +173,7 @@ function UserNavbar() {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Logout"}</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
                 Are you sure you want to Logout?
@@ -184,7 +183,7 @@ function UserNavbar() {
               <Button onClick={handleCloseDialog} color="primary">
                 No
               </Button>
-              <Button onClick={Logout} color="secondary" autoFocus>
+              <Button onClick={Logout} color="primary" autoFocus>
                 Yes, Logout
               </Button>
             </DialogActions>
