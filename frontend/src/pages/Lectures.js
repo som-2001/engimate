@@ -282,8 +282,8 @@ export const Lectures = () => {
           />
         </center>
         <Box>
-          <Grid container spacing={2}>
-            {lectures?.map((data, index) => (
+          <Grid container spacing={2} justifyContent="center">
+            {lectures?.length===0?<Typography variant="body1" marginTop="10%" marginBottom="5%" >No Lectures are added yet.</Typography>:lectures?.map((data, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card
                   sx={{

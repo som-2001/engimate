@@ -53,7 +53,13 @@ const ReferEarn = () => {
       })
       .then((res) => {
         setReferralLink(res.data.user.referral_code);
-      });
+      }).catch((error)=>{
+        console.log(error);
+        if(error?.reponse?.data?.message==='login first or token expired')
+        {
+          window.location.href='/login';
+        }
+      })
   }, []);
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink);

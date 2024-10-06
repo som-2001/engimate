@@ -57,7 +57,7 @@ export const OurCourses = () => {
 
   if (loadCategory) {
     return (
-      <center>
+      <center style={{ overflowX: "hidden" }}>
         <Navbar />
         <Box
           sx={{
@@ -65,6 +65,125 @@ export const OurCourses = () => {
             marginBottom: "20%",
           }}
         >
+          <Box
+            sx={{
+              width: "100vw",
+              textAlign: "center",
+              backgroundImage: "url(./images/courses.jpg)",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              paddingTop: "2vw",
+              paddingBottom: "15vw",
+              position: "relative",
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                backgroundColor: "rgba(0, 0, 0, 0.4)", // Overlay with opacity
+                zIndex: 1,
+              },
+            }}
+          >
+            <Grid
+              container
+              sx={{
+                position: "relative",
+                zIndex: 2,
+                color: "white",
+                padding: { xs: "20px", sm: "20px", md: "50px" },
+              }}
+            >
+              <Grid item xs={12} sm={12} lg={6} md={6}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: {
+                      xs: "2rem",
+                      sm: "2.4rem",
+                      md: "2.6rem",
+                      lg: "2.6rem",
+                    },
+                    marginTop: { xs: "20px", md: "50px" },
+                    fontWeight: "bold",
+                    color: "white",
+                  }}
+                >
+                  Our Domains
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: {
+                      xs: "1rem",
+                      sm: "1.1rem",
+                      md: "1.2rem",
+                      lg: "1.2rem",
+                    },
+                    marginTop: "10px",
+                    fontWeight: "500",
+                    padding: { xs: "10px", sm: "10px", md: "0px" },
+                    color: "white",
+                  }}
+                >
+                  Discover our expertly crafted domains designed to equip you
+                  with the skills needed to excel in today's competitive job
+                  market.
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={12} lg={6} md={6}></Grid>
+            </Grid>
+          </Box>
+          <Container sx={{ padding: "9px" }}>
+            <Box mb={4}>
+              <Typography
+                variant="h6"
+                align="center"
+                gutterBottom
+                sx={{
+                  marginTop: "20px",
+                  fontWeight: "600",
+                  fontSize: {
+                    lg: "1.8em",
+                    xs: "1.25rem",
+                    sm: "1.5rem",
+                    md: "1.8rem",
+                    color: "#1976D2",
+                  },
+                }}
+              >
+                Explore All Industry-Leading IT & Industrial Automation Courses
+                by YANTRAVED and Get Placed!
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  textAlign: "center",
+                  padding: "10px",
+                  fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.7rem" },
+                }}
+                align="center"
+                paragraph
+              >
+                Skill up with new IT & Industrial Automation courses training or
+                improve your technical knowledge with the best courses offered
+                by YANTRAVED. Industry-leading courses developed with expertise
+                and experience to help learners stay ahead in technological
+                innovation.
+              </Typography>
+              <Typography
+                variant="h6"
+                align="center"
+                paragraph
+                sx={{ fontWeight: "600", color: "#1976D2" }}
+              >
+                Explore our wide range of IT & Industrial Automation courses
+                today and get placed!
+              </Typography>
+            </Box>
+          </Container>
           <CircularProgress size={30} />
         </Box>
         <Footer />
