@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectDb } from "./database/db.js";
 import cors from "cors";
-import { v4 as uuidv4 } from "uuid";
 import Razorpay from "razorpay";
 
 dotenv.config();
@@ -52,22 +51,4 @@ const startserver = async () => {
   }
 };
 
-app.post("/createOrder", async (req, res) => {
-  const { amount, userId } = req.body;
-  const orderId = uuidv4();
-
-  const order = { orderId, amount, userId, status: "pending" };
-
-  const redirectUrl = `process.env.LYSS_REDIRECT_URL?order_id=${orderId}&amount=${amount}`;
-  res.redirect(redirectUrl);
-});
-
-app.post("/api/order/update", async (req, res) => {
-  const { order_id, status } = req.body;
-  res.status(200).json({
-    message: "Order status updated successfully",
-    order_id,
-    status,
-  });
-});
 startserver();
