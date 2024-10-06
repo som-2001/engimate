@@ -18,6 +18,7 @@ import { PaymentSuccess } from "./pages/PaymentSuccess";
 import { MyCourse } from "./pages/MyCourse";
 import { AllCourses } from "./components/AllCourses";
 import { Lectures } from "./pages/Lectures";
+import ReferEarn from "./pages/ReferEarn";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/all-courses" element={<AllCourses />} />
         <Route path="/gallery" element={<Gallary />} />
         <Route path="/lectures/:id" element={<Lectures/>}/>
+        <Route path="/refer-earn" element={<ReferEarn/>}/>
         <Route path="/paymentSuccess/:id" element={<PaymentSuccess/>}/>
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/courses/:id" element={<CourseList />} />

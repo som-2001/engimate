@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["My Course", "All Courses", "Refer Earn"];
+const pages = ["My Course", "All Courses", "Refer & Earn"];
 const settings = ["Home", "Contact Us","Log out"];
 
 function UserNavbar() {
@@ -29,8 +29,11 @@ function UserNavbar() {
 
   const handleNavigate = (path) => {
 
+    console.log(path);
     if (String(path) === "/home") {
       navigate('/');
+    }else if(String(path)==="/refer-& earn"){
+      navigate('/refer-earn')
     }else {
       navigate(path);
     }
