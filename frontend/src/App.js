@@ -19,6 +19,7 @@ import { MyCourse } from "./pages/MyCourse";
 import { AllCourses } from "./components/AllCourses";
 import { Lectures } from "./pages/Lectures";
 import ReferEarn from "./pages/ReferEarn";
+import { Profile } from "./pages/Profile";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/course-detail/:id" element={<CourseDetail />} />
         <Route path="/course/:name" element={<Course/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/profile" element={<Profile/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
       </Routes>
     </Router>

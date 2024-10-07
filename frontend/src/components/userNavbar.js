@@ -11,10 +11,12 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import "react-toastify/dist/ReactToastify.css";
 
 const pages = ["My Course", "All Courses", "Refer & Earn"];
-const settings = ["Home", "Contact Us","Log out"];
+const settings = ["Home", "Contact Us"];
 
 function UserNavbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -55,6 +57,7 @@ function UserNavbar() {
  }
   return (
     <AppBar position="static" style={{ backgroundColor: "whitesmoke" }}>
+      <ToastContainer/>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <CardMedia
@@ -115,7 +118,9 @@ function UserNavbar() {
                   </Typography>
                 </MenuItem>
               ))}
+             
             </Menu>
+            <Typography sx={{color:"black",marginTop:"12px",cursor:"pointer"}} onClick={(e)=>window.location.href='/profile'}>Hi, {sessionStorage.getItem('name').split(' ')[0]}</Typography>
           </Box>
 
           <CardMedia
@@ -163,7 +168,10 @@ function UserNavbar() {
                   {setting}
                 </Button>
               ))}
+              <Typography sx={{color:"black",marginTop:"22px",fontWeight:"600",cursor:"pointer"}}onClick={(e)=>window.location.href='/profile'}>Hi, {sessionStorage.getItem('name')}</Typography>
+              <AccountCircleIcon sx={{color:"black",marginTop:"20px",fontSize:"1.6rem",cursor:"pointer"}} onClick={(e)=>window.location.href='/profile'}/>
             </Box>
+            
           </Box>
         </Toolbar>
 
