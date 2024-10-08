@@ -28,6 +28,8 @@ const ReferEarn = () => {
     const token = sessionStorage?.getItem("token");
 
     if (token) {
+
+
       const decodedToken = jwtDecode(token);
 
       // Check if token is expired
@@ -146,12 +148,12 @@ const ReferEarn = () => {
         <Typography variant="h4" gutterBottom>
           Refer & Earn
         </Typography>
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="body1" gutterBottom sx={{padding:2}}>
           Refer your friends and earn rewards when they sign up and make a
           purchase.
         </Typography>
 
-        <Card elevation={3} sx={{ p: 2, mt: 4,backgroundColor:"#fdfafa" }}>
+        <Card  sx={{ p: 2, mt: 4,backgroundColor:"#fdfafa",borderRadius:"15px" }}>
           <CardContent>
             <Typography variant="h6" gutterBottom marginBottom="20px">
               Your Referral Code

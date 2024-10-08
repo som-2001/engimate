@@ -20,8 +20,34 @@ import { AllCourses } from "./components/AllCourses";
 import { Lectures } from "./pages/Lectures";
 import ReferEarn from "./pages/ReferEarn";
 import { Profile } from "./pages/Profile";
+// import { useEffect } from "react";
 
 function App() {
+  
+//   useEffect(() => {
+//     // Disable right-click context menu
+//     const handleContextMenu = (event) => {
+//         event.preventDefault();
+//     };
+
+//     // Disable specific keyboard shortcuts
+//     const handleKeyDown = (event) => {
+//         if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+//             event.preventDefault();
+           
+//         }
+//     };
+
+//     // Attach event listeners
+//     document.addEventListener('contextmenu', handleContextMenu);
+//     document.addEventListener('keydown', handleKeyDown);
+
+//     // Cleanup event listeners on unmount
+//     return () => {
+//         document.removeEventListener('contextmenu', handleContextMenu);
+//         document.removeEventListener('keydown', handleKeyDown);
+//     };
+// }, []);
   return (
     <Router>
       <Routes>

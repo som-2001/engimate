@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import WhyUs from "../components/WhyUs";
 import { OurExpertise } from "../components/OurExpertise";
 import PopularCard from "../components/PopularCard";
+import UserNavbar from "../components/userNavbar";
 export const Home = () => {
   const item = [
     {
@@ -282,7 +283,7 @@ export const Home = () => {
 
   return (
     <Box sx={{overflowX:"hidden"}}>
-      <Navbar />
+      {sessionStorage.getItem('token')?(<UserNavbar />):<Navbar/>}
       <Box style={{ width: "100vw", }}>
         <Grid2
           container
