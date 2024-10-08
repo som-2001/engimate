@@ -15,8 +15,8 @@ import { toast,ToastContainer } from "react-toastify";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "react-toastify/dist/ReactToastify.css";
 
-const pages = ["My Course", "All Courses", "Refer & Earn"];
-const settings = ["Home", "Contact Us"];
+const pages = ["My Course", "All Courses", "Refer & Earn","Contact Us"];
+const settings = [];
 
 function UserNavbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

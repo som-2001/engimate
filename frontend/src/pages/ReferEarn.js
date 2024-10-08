@@ -151,7 +151,7 @@ const ReferEarn = () => {
           purchase.
         </Typography>
 
-        <Card elevation={3} sx={{ p: 2, mt: 4 }}>
+        <Card elevation={3} sx={{ p: 2, mt: 4,backgroundColor:"#fdfafa" }}>
           <CardContent>
             <Typography variant="h6" gutterBottom marginBottom="20px">
               Your Referral Code

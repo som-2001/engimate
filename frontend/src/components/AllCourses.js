@@ -342,7 +342,19 @@ export const AllCourses = () => {
                 <CardActions>
                   <Button
                     variant="standard"
-                    color="primary"
+                    sx={{
+                      backgroundColor: "#0d47a1",
+                      color: "#fff",
+                      width: "95%",
+                      padding: "10px 24px",
+                      fontSize: "1rem",
+                      textTransform: "none",
+                      borderRadius: "50px",
+                      "&:hover": {
+                        backgroundColor: "#08306b",
+                      },
+                      marginBottom: "5px",
+                    }}
                     onClick={() => handleViewCourses(course?._id)}
                   >
                     View Courses <ArrowRightAlt />

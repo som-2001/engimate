@@ -31,12 +31,12 @@ const FAQReferEarn = () => {
   ];
 
   return (
-    <Container sx={{ marginTop: 4 }}>
+    <Container sx={{ marginTop: 4,backgroundColor:"#fdfafa",p:4,borderRadius:"20px" }}>
       <Typography variant="h4" gutterBottom>
         FAQs
       </Typography>
       {faqs.map((faq, index) => (
-        <Accordion key={index} sx={{marginBottom:"40px",backgroundColor:"whitesmoke"}}>
+        <Accordion key={index} sx={{marginBottom:"40px",backgroundColor:"#e9f5ff"}}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>{faq.question}</Typography>
           </AccordionSummary>
