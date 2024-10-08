@@ -172,7 +172,7 @@ export const DashboardHome = () => {
                   <CardContent
                     sx={{
                       
-                      height: "170px",
+                      height: "140px",
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
@@ -181,7 +181,9 @@ export const DashboardHome = () => {
                   >
                     <Typography variant="h6" sx={{ marginBottom:"10px"}}>{data?.title}</Typography>
                     <Typography variant="body2" color="textSecondary">
-                      {data?.card_description}
+                    {data.card_description.length > 70
+                        ? `${data.card_description.slice(0, 70)}...`
+                        : data.card_description}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -262,8 +264,8 @@ export const DashboardHome = () => {
                   >
                     <Typography variant="h6" sx={{ marginBottom:"10px"}}>{data?.category_name}</Typography>
                     <Typography variant="body2" color="textSecondary">
-                    {data?.description.length > 150
-                        ? `${data?.description.slice(0, 150)}...`
+                    {data?.description.length > 100
+                        ? `${data?.description.slice(0, 100)}...`
                         : data?.description}
                     </Typography>
                   </CardContent>
