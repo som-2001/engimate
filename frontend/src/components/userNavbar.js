@@ -120,7 +120,7 @@ function UserNavbar() {
               ))}
              
             </Menu>
-            <Typography sx={{color:"black",marginTop:"12px",cursor:"pointer"}} onClick={(e)=>window.location.href='/profile'}>Hi, {sessionStorage.getItem('name').split(' ')[0]}</Typography>
+            <Typography sx={{color:"black",marginTop:"12px",cursor:"pointer"}} onClick={(e)=>window.location.href='/profile'}>Hi, {sessionStorage?.getItem('name')?.split(' ')[0]}</Typography>
           </Box>
 
           <CardMedia
