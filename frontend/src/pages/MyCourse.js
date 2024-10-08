@@ -17,6 +17,7 @@ import UserNavbar from "../components/userNavbar";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import FAQPurchasedCourses from "../components/FAQPurchasedCourses";
 
 export const MyCourse = () => {
   const [result, setResult] = useState([]);
@@ -415,6 +416,7 @@ export const MyCourse = () => {
             ))
           )}
         </Grid>
+        <FAQPurchasedCourses/>
       </Container>
       <Footer />
     </Box>

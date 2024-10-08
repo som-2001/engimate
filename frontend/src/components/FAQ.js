@@ -1,5 +1,12 @@
 import React from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Container } from '@mui/material';
+import { 
+  Accordion, 
+  AccordionSummary, 
+  AccordionDetails, 
+  Typography, 
+  Container, 
+  Box 
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const FAQReferEarn = () => {
@@ -31,17 +38,17 @@ const FAQReferEarn = () => {
   ];
 
   return (
-    <Container sx={{ marginTop: 4,backgroundColor:"#fdfafa",p:4,borderRadius:"20px" }}>
-      <Typography variant="h4" gutterBottom>
-        FAQs
+    <Container sx={{ marginTop: 4, backgroundColor: "#f9f9f9", p: {lg:4,md:4,sm:4,xs:2}, borderRadius: "20px",  }}>
+      <Typography variant="h6" sx={{ fontWeight: 700, marginBottom: 2, color: "#333",textAlign:"center",fontSize:{lg:"1.6rem",md:"1.6rem",sm:"1.6rem",xs:"1.2rem" }}}>
+        FAQs for Refer & Earn
       </Typography>
       {faqs.map((faq, index) => (
-        <Accordion key={index} sx={{marginBottom:"40px",backgroundColor:"#e9f5ff"}}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>{faq.question}</Typography>
+        <Accordion key={index} sx={{ marginBottom: 2, backgroundColor: "#e3f2fd", borderRadius: "10px", boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)" }}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: "#0d47a1" }} />} sx={{ backgroundColor: "#bbdefb", borderRadius: "10px 10px 0 0", '&:hover': { backgroundColor: "#90caf9" } }}>
+            <Typography sx={{ fontWeight: 600, color: "#0d47a1" }}>{faq.question}</Typography>
           </AccordionSummary>
-          <AccordionDetails sx={{backgroundColor:"#ffffff"}}>
-            <Typography>{faq.answer}</Typography>
+          <AccordionDetails sx={{ backgroundColor: "#ffffff", borderRadius: "0 0 10px 10px" }}>
+            <Typography sx={{ color: "#555" }}>{faq.answer}</Typography>
           </AccordionDetails>
         </Accordion>
       ))}
