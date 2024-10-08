@@ -22,7 +22,9 @@ import UserNavbar from "./userNavbar";
 const CourseDetail = () => {
   const [course, setCourse] = useState(null);
   const [load, setLoad] = useState(true);
+
   const [paymentLoad, setPaymentLoad] = useState(false);
+  const [profile,setProfile]=useState([]);
   const id = window.location.href.split("/course-detail/")[1];
   const navigate = useNavigate();
 
@@ -47,15 +49,31 @@ const CourseDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/course-category/${id}`).then((res) => {
-      setCourse(res.data.category[0]); // Assuming the API returns an array
-      console.log(res.data.category[0]);
+    axios.get(`${BaseUrl}/course/${id}`).then((res) => {
+      setCourse(res.data.course); // Assuming the API returns an array
+      console.log(res.data.course);
       setLoad(false);
     });
+    axios
+      .get(`${BaseUrl}/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.user);
+        setProfile(res.data.user);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error?.response?.data?.message === "login first or token expired") {
+          window.location.href = "/login";
+        }
+      });
   }, [id]);
 
   const parseStringToArray = (str) => {
-    return str?.replace(/(^"|"$)/g, "").split(",\n");
+    return str?.split("\n");
   };
 
   if (load) {
@@ -138,12 +156,12 @@ const CourseDetail = () => {
               });
           },
           prefill: {
-            name: "Someswar gorai",
-            email: "somgorai726@gmail.com",
-            contact: 7718456257,
+            name: profile?.name,
+            email: profile?.email,
+            contact: profile?.phone_number,
           },
           notes: {
-            address: "Bankura",
+            address: "India",
           },
           theme: {
             color: "#3399cc",
@@ -289,7 +307,7 @@ const CourseDetail = () => {
                   gap: "10px",
                 }}
               >
-                <Button
+                {/* <Button
                   variant="contained"
                   color="primary"
                   sx={{
@@ -307,15 +325,23 @@ const CourseDetail = () => {
                   }}
                 >
                   Add to Cart
-                </Button>
+                </Button> */}
                 <Button
                   variant="contained"
                   color="secondary"
                   disabled={paymentLoad}
                   sx={{
-                    width: "95%",
-                    borderRadius: "50px",
+                    backgroundColor: "#0d47a1", // Matching button color with main heading
+                    color: "#fff",
+                    width:"95%",
                     padding: "10px 24px",
+                    fontSize: "1rem",
+                    textTransform: "none",
+                    borderRadius: "50px",
+                    "&:hover": {
+                      backgroundColor: "#08306b", // Darker shade on hover
+                    },
+                    marginBottom:"5px"
                   }}
                   onClick={(e) => MakePayment(course?._id)}
                   id="rzp-button1"

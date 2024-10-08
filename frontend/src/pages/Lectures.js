@@ -26,6 +26,7 @@ export const Lectures = () => {
   const [lectures, setLectures] = useState([]);
   const [loadLecture, setLoadLecture] = useState(true);
   const navigate = useNavigate();
+  
   const [activeVideo, setActiveVideo] = useState(null); // Track which video is being played
 
   const handleChange = (event, newValue) => {
@@ -76,11 +77,20 @@ export const Lectures = () => {
         },
       })
       .then((res) => {
+        
         setLoadLecture(false);
         setLectures(res.data.lectures);
       })
       .catch((error) => {
         console.error("Error fetching categories", error);
+        if(error?.response?.data?.message==='login first or token expired')
+          {
+            if(sessionStorage?.getItem("token"))
+            {
+              sessionStorage?.removeItem("token");
+            }
+            navigate('/login');
+        }
       });
   }, [id]);
 
@@ -285,7 +295,7 @@ export const Lectures = () => {
                             </IconButton>
                           </>
                         )}
-                        <CardContent sx={{ padding: "16px" }}>
+                        <CardContent sx={{ padding: "16px",height:"80px" }}>
                           <Typography
                             variant="h6"
                             sx={{ fontWeight: "bold", marginBottom: "12px" }}
@@ -293,7 +303,9 @@ export const Lectures = () => {
                             {data.title}
                           </Typography>
                           <Typography variant="body2" color="textSecondary">
-                            {data.description}
+                          {data?.description.length > 80
+                        ? `${data?.description.slice(0, 80)}...`
+                        : data?.description}
                           </Typography>
                         </CardContent>
                       </Card>

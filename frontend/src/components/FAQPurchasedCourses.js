@@ -5,7 +5,6 @@ import {
   AccordionDetails, 
   Typography, 
   Container, 
-  Box 
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 

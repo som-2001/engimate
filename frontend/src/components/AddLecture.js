@@ -18,6 +18,7 @@ import {
 import { BaseUrl } from "./BaseUrl";
 import { toast,ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 
 // Validation schema using Yup
@@ -43,17 +44,20 @@ export const AddLecture = () => {
 
   const [result,setResult]=React.useState([]);
   const [load,setLoad]=React.useState(false);
-
+  const [key,setKey]=React.useState(false);
+  const navigate=useNavigate();
 
   React.useEffect(() => {
     axios.get(`${BaseUrl}/course/all`).then((res) => {
       setResult(res?.data?.courses);
-    });
+    }).catch(error=>{
+      console.log(error);
+    })
   }, []);
 
   const onSubmit = async (data) => {
 
-    try {
+    
       setLoad(true);
       axios.post(`${BaseUrl}/course/${data.course}`, {title:data.title ,description:data.description,video_url:data.video_url},{
         headers: {
@@ -63,14 +67,23 @@ export const AddLecture = () => {
         },
       }).then(res=>{
         setLoad(false);
+        setKey(true);
         console.log("Lecture added successfully:", res?.data?.message);
         toast.success(res.data.message, { autoClose: 3000 });
         reset(); // Reset form fields on success
-      });
-    } catch (error) {
-      setLoad(false);
-      console.error("Error adding lecture:", error);
-    }
+      }).catch (error=>{
+        setLoad(false);
+        toast.error(error?.response?.data?.message, { autoClose: 3000 });
+        if(error?.response?.data?.message==='login first or token expired')
+        {
+          if(sessionStorage?.getItem("token"))
+          {
+            sessionStorage?.removeItem("token");
+          }
+          navigate('/login');
+        }
+      })
+    
   };
 
   return (
@@ -220,7 +233,7 @@ export const AddLecture = () => {
                     name="course"
                     control={control}
                     render={({ field }) => (
-                      <Select {...field} fullWidth
+                      <Select {...field} fullWidth key={key}
                       InputProps={{
                         sx: {
                           borderRadius: "22px", // Customize border radius
@@ -265,6 +278,7 @@ export const AddLecture = () => {
               <center><Button
                 type="submit"
                 variant="contained"
+                disabled={load}
                 color="primary"
                 fullWidth
                 sx={{

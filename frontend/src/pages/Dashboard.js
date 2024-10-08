@@ -6,7 +6,6 @@ import {
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import {
   Dashboard as DashboardIcon,
-  ShoppingCart as ShoppingCartIcon,
   BarChart as BarChartIcon,
   Menu as MenuIcon,
   Category as CategoryIcon,
@@ -18,14 +17,23 @@ import { AddCategory } from '../components/AddCategory';
 import { AddCourse } from '../components/AddCourse';
 import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import QuizIcon from '@mui/icons-material/Quiz';
+import BookIcon from '@mui/icons-material/Book';
+import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
+import { Addpdf } from '../components/Addpdf';
+import { AddDpp } from '../components/AddDpp';
+import { AddExam } from '../components/AddExam';
 const drawerWidth = 280;
 
 const NAV_ITEMS = [
   { text: 'Dashboard', icon: <DashboardIcon />, content: <DashboardHome />, heading: "Dashboard" },
-  { text: 'Add Lecture', icon: <ShoppingCartIcon />, content: <AddLecture />, heading: "Add Lecture" },
+  { text: 'Add Lecture', icon: <VideoCameraFrontIcon />, content: <AddLecture />, heading: "Add Lecture" },
   { text: 'Add Category', icon: <CategoryIcon />, content: <AddCategory />, heading: "Add Category" },
   { text: 'Add Course', icon: <BarChartIcon />, content: <AddCourse />, heading: "Add Course" },
+  { text: 'Upload Pdfs', icon: <PictureAsPdfIcon />, content: <Addpdf />, heading: "Upload Pdfs" },
+  { text: 'Upload Dpps', icon: <BookIcon />, content: <AddDpp />, heading: "Upload Dpps" },
+  { text: 'Upload Exam Form', icon: <QuizIcon />, content: <AddExam />, heading: "Upload Exam Form" }
 ];
 
 function Dashboard() {

@@ -16,6 +16,7 @@ import {
 import { toast,ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BaseUrl } from "./BaseUrl";
+import { useNavigate } from "react-router-dom";
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -37,28 +38,38 @@ export const AddCategory = () => {
   });
 
   const [load,setLoad]=React.useState(false);
+  const navigate=useNavigate();
+  const [name,setName]=React.useState('');
+  
 
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("category_name", data.category_name);
     formData.append("description", data.description);
     formData.append("file", data.file[0]);
-
+    
     try {
       setLoad(true);
-      const response = await axios.post(`${BaseUrl}/categories/add/`, formData, {
+      axios.post(`${BaseUrl}/categories/add/`, formData, {
         headers: { "Content-Type": "multipart/form-data",
           "Authorization":`Bearer ${sessionStorage.getItem("token")}`
          },
-      });
-
-      if(response){
+      }).then(res=>{
         setLoad(false);
-      }
-      console.log("Category added successfully:", response.data);
-      toast.success(response.data.message, { autoClose: 3000 });
-      reset(); // Reset form fields on success
-
+        setName('');
+        console.log("Category added successfully:", res.data);
+        toast.success(res.data.message, { autoClose: 3000 });
+        reset(); // Reset form fields on success
+      }).catch(error=>{
+        if(error?.response?.data?.message==='login first or token expired')
+          {
+            if(sessionStorage?.getItem("token"))
+            {
+              sessionStorage?.removeItem("token");
+            }
+            navigate('/login');
+          }
+      })
     } catch (error) {
       setLoad(false);
       console.error("Error adding category:", error);
@@ -182,9 +193,13 @@ export const AddCategory = () => {
                     type="file"
                     accept="image/*"
                     hidden
-                    onChange={(e) => setValue("file", e.target.files)}
+                    onChange={(e) => {setValue("file", e.target.files)
+                     
+                      setName(e.target.files[0].name)
+                    }}
                   />
                 </Button>
+                {name!=='' && <span style={{fontWeight:100,fontSize:"0.9rem",marginTop:"5px",marginLeft:'10px'}}>File name:- {name}</span>}
                 <FormHelperText>{errors.file?.message}</FormHelperText>
               </FormControl>
             </Grid>

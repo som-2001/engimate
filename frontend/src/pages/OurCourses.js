@@ -18,6 +18,7 @@ import axios from "axios";
 import { BaseUrl } from "../components/BaseUrl";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import UserNavbar from "../components/userNavbar";
 
 export const OurCourses = () => {
   const handleViewCourses = (id) => {
@@ -58,10 +59,9 @@ export const OurCourses = () => {
   if (loadCategory) {
     return (
       <center style={{ overflowX: "hidden" }}>
-        <Navbar />
+        {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
         <Box
           sx={{
-            marginTop: { xs: "55%", sm: "45%", md: "25%", lg: "20%" },
             marginBottom: "20%",
           }}
         >
@@ -184,7 +184,7 @@ export const OurCourses = () => {
               </Typography>
             </Box>
           </Container>
-          <CircularProgress size={30} />
+          <CircularProgress size={30} sx={{marginTop:"10%",marginBottom:"10%"}}/>
         </Box>
         <Footer />
       </center>
@@ -192,7 +192,7 @@ export const OurCourses = () => {
   }
   return (
     <Box sx={{ overflowX: "hidden" }}>
-      <Navbar />
+      {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
       <Box
         sx={{
           width: "100vw",
@@ -355,7 +355,9 @@ export const OurCourses = () => {
                     color="text.secondary"
                     marginTop="20px"
                   >
-                    {course?.description}
+                    {course.description.length > 150
+                        ? `${course.description.slice(0, 150)}...`
+                        : course.description}
                   </Typography>
                 </CardContent>
                 <CardActions>

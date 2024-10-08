@@ -81,7 +81,9 @@ export const OurExpertise = () => {
                     {course.category_name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" marginTop="10px">
-                    {course.description}
+                  {course.description.length > 150
+                        ? `${course.description.slice(0, 150)}...`
+                        : course.description}
                   </Typography>
                  
                 </CardContent>

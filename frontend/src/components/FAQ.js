@@ -4,8 +4,7 @@ import {
   AccordionSummary, 
   AccordionDetails, 
   Typography, 
-  Container, 
-  Box 
+  Container,  
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 

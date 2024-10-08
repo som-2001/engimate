@@ -336,7 +336,9 @@ export const AllCourses = () => {
                     color="text.secondary"
                     marginTop="20px"
                   >
-                    {course?.description}
+                    {course.description.length > 150
+                        ? `${course.description.slice(0, 150)}...`
+                        : course.description}
                   </Typography>
                 </CardContent>
                 <CardActions>

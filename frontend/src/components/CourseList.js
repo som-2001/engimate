@@ -277,7 +277,7 @@ const CourseList = () => {
                     boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
                   },
                 }}
-                onClick={() => handleCardClick(course.category)}
+                onClick={() => handleCardClick(course._id)}
               >
                 <CardMedia
                   component="img"
@@ -315,7 +315,9 @@ const CourseList = () => {
                     color="text.secondary"
                     sx={{ marginTop: "10px", color: "#666" }}
                   >
-                    {course?.card_description}
+                    {course.card_description.length > 150
+                        ? `${course.card_description.slice(0, 150)}...`
+                        : course.card_description}
                   </Typography>
                 </CardContent>
               </Card>

@@ -18,6 +18,7 @@ import {
 import { BaseUrl } from "./BaseUrl";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -48,7 +49,10 @@ export const AddCourse = () => {
   });
 
   const [load, setLoad] = useState(false);
+  const [key,setKey]=useState(false);
+  const [name,setName]=useState('');
   const [result, setResult] = useState([]);
+  const navigate=useNavigate();
 
   useEffect(() => {
     axios.get(`${BaseUrl}/categories/all`).then((res) => {
@@ -72,18 +76,34 @@ export const AddCourse = () => {
 
     try {
       setLoad(true);
-      const response = await axios.post(`${BaseUrl}/courses/add`, formData, {
+      axios.post(`${BaseUrl}/courses/add`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
-      });
+      }).then(response=>{
+
+      setName('');
+      setKey(true);
       console.log("Course added successfully:", response.data);
       toast.success(response.data.message, { autoClose: 3000 });
+
       if (response) {
         setLoad(false);
       }
       reset(); // Reset form fields on success
+    }).catch (error=>{
+      setLoad(false);
+      toast.error(error?.response?.data?.message, { autoClose: 3000 });
+      if(error?.response?.data?.message==='login first or token expired')
+      {
+        if(sessionStorage?.getItem("token"))
+        {
+          sessionStorage?.removeItem("token");
+        }
+        navigate('/login');
+      }
+    })
     } catch (error) {
       setLoad(false);
       console.error("Error adding course:", error);
@@ -110,6 +130,7 @@ export const AddCourse = () => {
                 margin="normal"
                 render={({ field }) => (
                   <TextField
+                  key={key}
                     {...field}
                     fullWidth
                     label="Course Title"
@@ -544,9 +565,12 @@ export const AddCourse = () => {
                     type="file"
                     hidden
                     accept="image/*"
-                    onChange={(e) => setValue("image", e.target.files)}
+                    onChange={(e) => {setValue("image", e.target.files)
+                      setName(e.target.files[0].name)
+                    }}
                   />
                 </Button>
+                {name!=='' && <span style={{fontWeight:100,fontSize:"0.9rem",marginTop:"5px",marginLeft:'10px'}}>File name:- {name}</span>}
                 <FormHelperText>{errors.image?.message}</FormHelperText>
               </FormControl>
             </Grid>

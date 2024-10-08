@@ -52,6 +52,14 @@ export const MyCourse = () => {
         setResult(res.data);
       }).catch((error)=>{
         console.log(error);
+        if(error?.response?.data?.message==='login first or token expired')
+          {
+            if(sessionStorage?.getItem("token"))
+            {
+              sessionStorage?.removeItem("token");
+            }
+            navigate('/login');
+          }
       });
   }, []);
 

@@ -176,9 +176,10 @@ export const DashboardHome = () => {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
+                     
                     }}
                   >
-                    <Typography variant="h6">{data?.title}</Typography>
+                    <Typography variant="h6" sx={{ marginBottom:"10px"}}>{data?.title}</Typography>
                     <Typography variant="body2" color="textSecondary">
                       {data?.card_description}
                     </Typography>
@@ -197,7 +198,7 @@ export const DashboardHome = () => {
                 sx={{
                   backgroundColor: "#0d47a1",
                   color: "#fff",
-                  width: "60%",
+                  width: {lg:"20%",xs:"60%",sm:"60%",md:"20%"},
                   padding: "10px 24px",
                   fontSize: "1rem",
                   textTransform: "none",
@@ -209,7 +210,7 @@ export const DashboardHome = () => {
                 }}
                 onClick={loadMoreCourses}
               >
-                Load More Courses
+                Load More
               </Button>
             </Box>
           )}
@@ -259,9 +260,11 @@ export const DashboardHome = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <Typography variant="h6">{data?.category_name}</Typography>
+                    <Typography variant="h6" sx={{ marginBottom:"10px"}}>{data?.category_name}</Typography>
                     <Typography variant="body2" color="textSecondary">
-                      {data?.description}
+                    {data?.description.length > 150
+                        ? `${data?.description.slice(0, 150)}...`
+                        : data?.description}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -368,7 +371,7 @@ export const DashboardHome = () => {
                 justifyContent: "center",
               }}
             >
-              <Typography variant="h6">{data?.title}</Typography>
+              <Typography variant="h6" sx={{marginBottom:"10px"}}>{data?.title}</Typography>
               <Typography variant="body2" color="textSecondary">
                 {data?.description}
               </Typography>

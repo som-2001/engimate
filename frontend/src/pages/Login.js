@@ -163,6 +163,7 @@ export const Login = () => {
                       <TextField
                         {...field}
                         type="text"
+                        disabled={hide}
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
