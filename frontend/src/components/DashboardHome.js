@@ -21,6 +21,7 @@ import { BaseUrl } from "./BaseUrl";
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 export const DashboardHome = () => {
   const [courses, setCourses] = useState([]);
@@ -39,6 +40,7 @@ export const DashboardHome = () => {
   const handleVideoPlay = (index) => {
     setActiveVideo(index); // Set the clicked video index as active
   };
+  const navigate=useNavigate();
   // Fetch categories and courses data
   useEffect(() => {
     try {
@@ -48,6 +50,15 @@ export const DashboardHome = () => {
       });
     } catch (error) {
       console.error("Error fetching courses", error);
+      toast.error(error?.response?.data?.message, { autoClose: 3000 });
+      if(error?.response?.data?.message==='login first or token expired')
+      {
+        if(sessionStorage?.getItem("token"))
+        {
+          sessionStorage?.removeItem("token");
+        }
+        navigate('/login');
+      }
     }
 
     try {
@@ -57,8 +68,17 @@ export const DashboardHome = () => {
       });
     } catch (error) {
       console.error("Error fetching categories", error);
+      toast.error(error?.response?.data?.message, { autoClose: 3000 });
+      if(error?.response?.data?.message==='login first or token expired')
+      {
+        if(sessionStorage?.getItem("token"))
+        {
+          sessionStorage?.removeItem("token");
+        }
+        navigate('/login');
+      }
     }
-  }, []);
+  }, [navigate]);
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
@@ -106,6 +126,15 @@ export const DashboardHome = () => {
       })
       .catch((error) => {
         console.error("Error fetching categories", error);
+        toast.error(error?.response?.data?.message, { autoClose: 3000 });
+        if(error?.response?.data?.message==='login first or token expired')
+        {
+          if(sessionStorage?.getItem("token"))
+          {
+            sessionStorage?.removeItem("token");
+          }
+          navigate('/login');
+        }
       });
   };
 
@@ -129,7 +158,15 @@ export const DashboardHome = () => {
         setOpenDialog(false); // Close dialog after deletion
       }).catch(error => {
         console.error("Error deleting lecture", error);
-        toast.success(error.res.data.message, { autoClose: 3000 });
+        toast.error(error?.response?.data?.message, { autoClose: 3000 });
+        if(error?.response?.data?.message==='login first or token expired')
+        {
+          if(sessionStorage?.getItem("token"))
+          {
+            sessionStorage?.removeItem("token");
+          }
+          navigate('/login');
+        }
       });
     }
   };
@@ -375,7 +412,9 @@ export const DashboardHome = () => {
             >
               <Typography variant="h6" sx={{marginBottom:"10px"}}>{data?.title}</Typography>
               <Typography variant="body2" color="textSecondary">
-                {data?.description}
+              {data.description.length > 150
+                        ? `${data.description.slice(0, 150)}...`
+                        : data.description}
               </Typography>
             </CardContent>
             

@@ -74,6 +74,7 @@ export const PaymentSuccess = () => {
             marginTop: "40px",
             marginBottom: "20px",
           }}
+          onClick={(e)=>window.location.href='/my-course'}
         >
           Go to Dashboard
         </Button>

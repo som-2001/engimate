@@ -92,7 +92,7 @@ export const Lectures = () => {
             navigate('/login');
         }
       });
-  }, [id]);
+  }, [navigate,id]);
 
   return (
     <Box

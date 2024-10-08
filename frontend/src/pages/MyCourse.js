@@ -61,7 +61,7 @@ export const MyCourse = () => {
             navigate('/login');
           }
       });
-  }, []);
+  }, [navigate]);
 
   if (load) {
     return (

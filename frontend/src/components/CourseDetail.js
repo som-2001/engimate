@@ -24,7 +24,9 @@ const CourseDetail = () => {
   const [load, setLoad] = useState(true);
 
   const [paymentLoad, setPaymentLoad] = useState(false);
-  const [profile,setProfile]=useState([]);
+  const [profile, setProfile] = useState([]);
+  const [result, setResult] = useState([]);
+  const [status, setStatus] = useState("Buy Now");
   const id = window.location.href.split("/course-detail/")[1];
   const navigate = useNavigate();
 
@@ -72,6 +74,30 @@ const CourseDetail = () => {
       });
   }, [id]);
 
+  useEffect(() => {
+    axios
+      .get(`${BaseUrl}/mycourses`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const courseIds = res.data.map((data) => data._id);
+        setResult(courseIds);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error?.response?.data?.message === "login first or token expired") {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
+        }
+      });
+  }, [navigate]);
+
+  console.log(result);
+
   const parseStringToArray = (str) => {
     return str?.split("\n");
   };
@@ -79,7 +105,7 @@ const CourseDetail = () => {
   if (load) {
     return (
       <center>
-         {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
+        {sessionStorage.getItem("token") ? <UserNavbar /> : <Navbar />}
         <Box
           sx={{
             marginTop: { xs: "55%", sm: "45%", md: "25%", lg: "20%" },
@@ -146,13 +172,26 @@ const CourseDetail = () => {
               )
               .then((res) => {
                 // Log the response from the server
-                navigate(`/paymentSuccess/${res.data.message}`);
-                // if(res.data.message==='course purchased successfully')
+                if (res.data.message === "Course purchased successfully")
+                  navigate(`/paymentSuccess/${res.data.message}`);
+
                 console.log(res.data);
               })
               .catch((error) => {
                 // Handle any errors during the Axios request
                 console.error("Payment verification error:", error);
+                toast.error(error?.response?.data?.message, {
+                  autoClose: 3000,
+                });
+                if (
+                  error?.response?.data?.message ===
+                  "login first or token expired"
+                ) {
+                  if (sessionStorage?.getItem("token")) {
+                    sessionStorage?.removeItem("token");
+                  }
+                  navigate("/login");
+                }
               });
           },
           prefill: {
@@ -169,6 +208,7 @@ const CourseDetail = () => {
         };
 
         setPaymentLoad(false);
+        setStatus("Continue");
         var rzp1 = new window.Razorpay(options);
         document.getElementById("rzp-button1").onclick = function (e) {
           rzp1.open();
@@ -178,14 +218,19 @@ const CourseDetail = () => {
         setPaymentLoad(false);
         console.log(error);
 
-        if (error?.response?.data?.message)
-          toast.error(error?.response?.data?.message, { autoClose: 3000 });
+        toast.error(error?.response?.data?.message, { autoClose: 3000 });
+        if (error?.response?.data?.message === "login first or token expired") {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
+        }
       });
   };
 
   return (
     <Box sx={{ overflowX: "hidden" }}>
-       {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
+      {sessionStorage.getItem("token") ? <UserNavbar /> : <Navbar />}
       {/* Hero Section */}
       <ToastContainer />
       <Box
@@ -329,11 +374,11 @@ const CourseDetail = () => {
                 <Button
                   variant="contained"
                   color="secondary"
-                  disabled={paymentLoad}
+                  disabled={paymentLoad || result?.includes(course?._id)}
                   sx={{
                     backgroundColor: "#0d47a1", // Matching button color with main heading
                     color: "#fff",
-                    width:"95%",
+                    width: "95%",
                     padding: "10px 24px",
                     fontSize: "1rem",
                     textTransform: "none",
@@ -341,12 +386,12 @@ const CourseDetail = () => {
                     "&:hover": {
                       backgroundColor: "#08306b", // Darker shade on hover
                     },
-                    marginBottom:"5px"
+                    marginBottom: "5px",
                   }}
                   onClick={(e) => MakePayment(course?._id)}
                   id="rzp-button1"
                 >
-                  {paymentLoad ? <CircularProgress size={30} /> : "Buy Now"}
+                  {paymentLoad ? <CircularProgress size={30} /> : status}
                 </Button>
               </Box>
             </Box>

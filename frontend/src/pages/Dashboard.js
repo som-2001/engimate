@@ -24,6 +24,9 @@ import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import { Addpdf } from '../components/Addpdf';
 import { AddDpp } from '../components/AddDpp';
 import { AddExam } from '../components/AddExam';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import { Stats } from '../components/Stats';
+
 const drawerWidth = 280;
 
 const NAV_ITEMS = [
@@ -33,7 +36,8 @@ const NAV_ITEMS = [
   { text: 'Add Course', icon: <BarChartIcon />, content: <AddCourse />, heading: "Add Course" },
   { text: 'Upload Pdfs', icon: <PictureAsPdfIcon />, content: <Addpdf />, heading: "Upload Pdfs" },
   { text: 'Upload Dpps', icon: <BookIcon />, content: <AddDpp />, heading: "Upload Dpps" },
-  { text: 'Upload Exam Form', icon: <QuizIcon />, content: <AddExam />, heading: "Upload Exam Form" }
+  { text: 'Upload Exam Form', icon: <QuizIcon />, content: <AddExam />, heading: "Upload Exam Form" },
+  { text: 'Statictics', icon: <AnalyticsIcon />, content: <Stats />, heading: "Statictics Overview" }
 ];
 
 function Dashboard() {
@@ -134,16 +138,16 @@ function Dashboard() {
         <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1 ,backgroundColor:"white"}} >
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <IconButton
-              color="inherit"
+            
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
+              sx={{ mr: 2, display: { sm: 'none' },color:darkMode?"black":"" }}
             >
               <MenuIcon />
             </IconButton>
             <img src='./images/logo.png' alt='' style={{ width: "150px",cursor:"pointer" }} onClick={(e)=>window.location.href="/"}/>
-            <IconButton color="inherit" onClick={toggleDarkMode}>
+            <IconButton sx={{color:darkMode?"black":""}} onClick={toggleDarkMode}>
               <WbSunnyRounded />
             </IconButton>
           </Toolbar>
@@ -184,14 +188,14 @@ function Dashboard() {
         {/* Right side content for large screens */}
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 5, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
         >
           <Toolbar />
-          <Typography variant="h5" gutterBottom textAlign="center" margin="normal">
+          <Typography variant="h5" gutterBottom textAlign="center" margin="normal"  sx={{ textAlign: "center", fontWeight: "bold", color: "#0d47a1",fontSize:{lg:'2rem',md:"2rem",xs:"1.5rem",sm:"1.5rem" }}}>
             {selectedHeader}
           </Typography>
           <center>
-            <Divider sx={{ marginBottom: "50px", width: { lg: "8%", xs: "30%", sm: "18%", md: "8%" }, backgroundColor: "blue" }} />
+            <Divider sx={{ marginBottom: "50px", width: { lg: "14%", xs: "30%", sm: "18%", md: "14%" }, backgroundColor: "blue" }} />
           </center>
           {selectedContent}
         </Box>
