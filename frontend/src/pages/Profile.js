@@ -39,6 +39,7 @@ export const Profile = () => {
       .then((res) => {
         console.log(res.data.user);
         setProfile(res.data.user);
+        sessionStorage.setItem("name",res.data.user.name);
       })
       .catch((error) => {
         console.log(error);
@@ -113,7 +114,7 @@ export const Profile = () => {
                 color: "white",
               }}
             >
-              Hello, {sessionStorage.getItem('name')}
+              Hello, {profile.name}
             </Typography>
             <Typography
               sx={{
@@ -154,7 +155,7 @@ export const Profile = () => {
             width: "100%",
             borderRadius: 2,
             textAlign: "center",
-             backgroundColor:"whitesmoke"
+             backgroundColor:{lg:"whitesmoke",md:"whitesmoke",xs:"transparent",sm:"whitesmoke"}
           }}
         >
           {/* Profile Avatar */}

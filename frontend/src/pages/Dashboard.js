@@ -38,6 +38,7 @@ const NAV_ITEMS = [
   { text: 'Upload Dpps', icon: <BookIcon />, content: <AddDpp />, heading: "Upload Dpps" },
   { text: 'Upload Exam Form', icon: <QuizIcon />, content: <AddExam />, heading: "Upload Exam Form" },
   { text: 'Statictics', icon: <AnalyticsIcon />, content: <Stats />, heading: "Statictics Overview" }
+  
 ];
 
 function Dashboard() {
@@ -146,11 +147,14 @@ function Dashboard() {
             >
               <MenuIcon />
             </IconButton>
-            <img src='./images/logo.png' alt='' style={{ width: "150px",cursor:"pointer" }} onClick={(e)=>window.location.href="/"}/>
+            <img src='./images/logo.png' alt='' style={{ width: "150px",cursor:"pointer" }} />
+            
             <IconButton sx={{color:darkMode?"black":""}} onClick={toggleDarkMode}>
               <WbSunnyRounded />
             </IconButton>
+            
           </Toolbar>
+          
         </AppBar>
 
         {/* Sidebar for larger screens */}

@@ -55,6 +55,7 @@ const ReferEarn = () => {
       })
       .then((res) => {
         setReferralLink(res.data.user.referral_code);
+        sessionStorage.setItem("name",res.data.user.name);
       }).catch((error)=>{
         console.log(error);
         if(error?.reponse?.data?.message==='login first or token expired')

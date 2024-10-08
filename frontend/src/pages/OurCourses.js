@@ -211,7 +211,7 @@ export const OurCourses = () => {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.4)", // Overlay with opacity
+            backgroundColor: "rgba(0, 0, 0, 0.6)", // Overlay with opacity
             zIndex: 1,
           },
         }}
@@ -311,8 +311,8 @@ export const OurCourses = () => {
         </Box>
 
         {/* Course Cards Section */}
-        <Grid container spacing={4}>
-          {categories.map((course, index) => (
+        <Grid container spacing={4} justifyContent="center">
+          {categories.length===0 ? <center><p style={{padding:"40px",marginTop:"10%",marginBottom:"10%",fontWeight:"600",fontSize:"1.5rem"}}>Domains will be added soon.</p></center>:categories.map((course, index) => (
             <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <Card
                 sx={{

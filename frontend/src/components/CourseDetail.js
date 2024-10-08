@@ -65,6 +65,7 @@ const CourseDetail = () => {
       .then((res) => {
         console.log(res.data.user);
         setProfile(res.data.user);
+        sessionStorage.setItem("name",res.data.user.name);
       })
       .catch((error) => {
         console.log(error);
@@ -335,6 +336,17 @@ const CourseDetail = () => {
                   marginTop: "20px",
                 }}
               >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    textDecoration: "line-through",
+                    color: "grey",
+                    marginRight: "8px",
+                    marginTop:"2px"
+                  }}
+                >
+                  ₹{Math.floor(2.2*course?.price)}
+                </Typography>
                 <Typography
                   variant="body1"
                   sx={{ color: "black", fontSize: "1.2rem" }}

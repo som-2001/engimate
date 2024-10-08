@@ -7,6 +7,9 @@ import WhyUs from "../components/WhyUs";
 import { OurExpertise } from "../components/OurExpertise";
 import PopularCard from "../components/PopularCard";
 import UserNavbar from "../components/userNavbar";
+import { useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 export const Home = () => {
   const item = [
     {
@@ -278,7 +281,17 @@ export const Home = () => {
     },
   ];
 
- 
+  const navigate=useNavigate();
+ useEffect(()=>{
+
+  if(sessionStorage?.getItem('token'))
+  {
+    if(jwtDecode(sessionStorage?.getItem('token'))?.role==='admin' || jwtDecode(sessionStorage?.getItem('token'))?.role==='instructor')
+    {
+      navigate('/dashboard');
+    }
+  }
+ },[]);
 
 
   return (

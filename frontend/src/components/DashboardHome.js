@@ -179,7 +179,13 @@ export const DashboardHome = () => {
           <Typography variant="h5" style={{ marginBottom: "30px" }}>
             Courses
           </Typography>
+          {courses.length === 0 ? (
+              <center style={{padding:"40px"}}>
+                <p>No courses are added yet.</p>
+              </center>
+            ) : null}
           <Grid container spacing={2}>
+         
             {courses.slice(0, visibleCourses)?.map((data, index) => (
               <Grid item xs={12} sm={12} md={6} lg={4} key={index}>
                 <Card
@@ -261,12 +267,13 @@ export const DashboardHome = () => {
           >
             Categories
           </Typography>
-          <Grid container spacing={2}>
-            {categories.length === 0 ? (
-              <center>
-                <p>No Categories Added yet.</p>
+          {categories.length === 0 ? (
+              <center style={{padding:"40px"}}>
+                <p>No categories are added yet.</p>
               </center>
             ) : null}
+          <Grid container spacing={2}>
+            
             {categories.slice(0, visibleCategories)?.map((data, index) => (
               <Grid item xs={12} sm={12} md={6} lg={4} key={index}>
                 <Card
@@ -339,12 +346,19 @@ export const DashboardHome = () => {
         </Box>
       ) : (
         <Box>
-          <Typography variant="h5" style={{ marginBottom: "30px" }}>
+          <Typography variant="h5" style={{ marginBottom: "30px",fontSize:"1.7rem" }}>
             Lectures
           </Typography>
+          {lectures.length === 0 ? (
+              <center style={{padding:"40px"}}>
+                <p>No lectures are added yet.</p>
+              </center>
+            ) : null}
           <Grid container spacing={2}>
+          
           {lectures?.map((data, index) => (
         <Grid item xs={12} sm={12} md={4} key={index}>
+
           <Card
             sx={{
               boxShadow: 5,
