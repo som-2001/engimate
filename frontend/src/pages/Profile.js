@@ -142,6 +142,7 @@ export const Profile = () => {
           alignItems: "center",
           p: 4,
           minHeight: "80vh",
+         
         }}
       >
         <Box
@@ -153,6 +154,7 @@ export const Profile = () => {
             width: "100%",
             borderRadius: 2,
             textAlign: "center",
+             backgroundColor:"whitesmoke"
           }}
         >
           {/* Profile Avatar */}
