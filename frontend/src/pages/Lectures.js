@@ -17,9 +17,28 @@ import Footer from "../components/Footer";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { useNavigate, useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 export const Lectures = () => {
   const { id } = useParams();
+  const [value, setValue] = React.useState(0);
+  const [heading,setHeading]=useState("Lectures");
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    if(newValue===0)
+    {
+      setHeading("Lectures");
+    }else if(newValue===1)
+    {
+      setHeading("Pdfs")
+    }else if(newValue===2)
+    {
+      setHeading("Dpps")
+    }else{
+      setHeading("Exam");
+    }
+  };
   const [lectures, setLectures] = useState([]);
   const [loadLecture, setLoadLecture] = useState(true);
   const navigate = useNavigate();
@@ -241,7 +260,7 @@ export const Lectures = () => {
                 color: "white",
               }}
             >
-              Lectures
+              {heading}
             </Typography>
             <Typography
               sx={{
@@ -267,29 +286,61 @@ export const Lectures = () => {
       </Box>
 
       <Container maxWidth="lg" sx={{ paddingY: "3rem" }}>
-        <Typography
-          variant="h4"
-          align="center"
+       
+
+        <Box
           sx={{
-            fontWeight: "bold",
-            marginBottom: "2rem",
-            color: "#333",
-            fontSize: { xs: "1.8rem", md: "2.5rem" },
+            width: "100%",
+            bgcolor: "background.paper",
+            marginBottom: "40px",
+            borderRadius:"30px"
           }}
         >
-          Lectures
-        </Typography>
-        <center>
-          <Divider
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            centered
             sx={{
-              backgroundColor: "blue",
-              width: { lg: "10vw", xs: "30vw", md: "15vw", sm: "20vw" },
-              fontWeight: "700",
-              marginTop: "10px",
-              marginBottom: "40px",
+              minHeight: "auto", // to reduce the default height of tabs
+               
             }}
-          />
-        </center>
+          >
+            <Tab
+              label="Lectures"
+              sx={{
+                fontSize: { xs: "0.6rem", sm: "0.7rem" }, // responsive font size
+                minWidth: { xs: 60, sm: 80 }, // adjust width for smaller screens
+                padding: { xs: "6px 12px", sm: "10px 20px" }, // responsive padding
+               
+              }}
+            />
+            <Tab
+              label="Pdfs"
+              sx={{
+                fontSize: { xs: "0.6rem", sm: "0.7rem" },
+                minWidth: { xs: 60, sm: 80 },
+                padding: { xs: "6px 12px", sm: "10px 20px" },
+              }}
+            />
+            <Tab
+              label="Dpps"
+              sx={{
+                fontSize: { xs: "0.6rem", sm: "0.7rem" },
+                minWidth: { xs: 60, sm: 80 },
+                padding: { xs: "6px 12px", sm: "10px 20px" },
+              }}
+            />
+            <Tab
+              label="Exam"
+              sx={{
+                fontSize: { xs: "0.6rem", sm: "0.7rem" },
+                minWidth: { xs: 60, sm: 80 },
+                padding: { xs: "6px 12px", sm: "10px 20px" },
+              }}
+            />
+          </Tabs>
+        </Box>
+
         <Box>
           <Grid container spacing={2} justifyContent="center">
             {lectures?.length === 0 ? (
@@ -350,7 +401,7 @@ export const Lectures = () => {
                           }}
                           onClick={() => handleVideoPlay(index)} // Play video on click
                         >
-                          <PlayCircleOutlineIcon fontSize="large" />
+                          <PlayCircleOutlineIcon fontSize="2.3rem" />
                         </IconButton>
                       </>
                     )}
@@ -358,13 +409,15 @@ export const Lectures = () => {
                     <CardContent
                       sx={{
                         backgroundColor: "#f5f5f5",
-                        height: "170px",
+                        height: "110px",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "center",
                       }}
                     >
-                      <Typography variant="h6">{data?.title}</Typography>
+                      <Typography variant="h6" marginBottom="20px">
+                        {data?.title}
+                      </Typography>
                       <Typography variant="body2" color="textSecondary">
                         {data?.description}
                       </Typography>

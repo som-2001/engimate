@@ -40,7 +40,7 @@ const FAQReferEarn = () => {
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>{faq.question}</Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{backgroundColor:"#ffffff"}}>
             <Typography>{faq.answer}</Typography>
           </AccordionDetails>
         </Accordion>
