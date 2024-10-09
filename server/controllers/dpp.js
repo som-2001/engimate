@@ -17,9 +17,13 @@ export const getSingleDpp = Trycatch(async (req, res) => {
 
 export const getDppByTitleAndId = Trycatch(async (req, res) => {
   const { title, dpp_id } = req.query;
-
+  if (!title || !dpp_id) {
+    return res.status(400).json({
+      message: "title and dpp_id are required",
+    });
+  }
   const dpp = await Dpp.find({ title: title, _id: dpp_id });
-  if (!dpp) {
+  if (!dpp || dpp.length === 0) {
     return res.status(404).json({
       message: "material not found",
     });
