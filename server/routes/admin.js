@@ -6,8 +6,10 @@ import {
   addMaterials,
   createCourse,
   deleteCourse,
-  deleteLecture,
+  deleteLecture, deleteUser,
   getAllStats,
+  getAllUsers,
+  getSingleUser,
 } from "../controllers/admin.js";
 import { uploadFiles, uploadMany } from "../middlewares/multer.js";
 
@@ -38,4 +40,8 @@ router.post(
   uploadMany,
   addMaterials,
 );
+//usermangement
+router.get("/users/all", isAuth, isAdminOrInstructor, getAllUsers);
+router.get("/users/:id", isAuth, isAdminOrInstructor, getSingleUser);
+router.delete("/users/:id",isAuth,isAdminOrInstructor,deleteUser)
 export default router;

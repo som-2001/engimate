@@ -149,7 +149,7 @@ export const addDpp = Trycatch(async (req, res) => {
 });
 
 export const addMaterials = Trycatch(async (req, res) => {
-  const { course } = req.body;
+  const { title, course } = req.body;
   const pdfs = req.files;
   if (!pdfs || pdfs.length === 0) {
     return res
@@ -161,6 +161,7 @@ export const addMaterials = Trycatch(async (req, res) => {
   });
 
   const material = await Material.create({
+    title,
     course,
     fileData: base64Pdfs,
     createdBy: req.user._id,
@@ -168,5 +169,35 @@ export const addMaterials = Trycatch(async (req, res) => {
   res.status(201).json({
     message: "materials added successfully",
     material,
+  });
+});
+
+export const getAllUsers = Trycatch(async (req, res) => {
+  const users = await User.find();
+  return res.status(200).json({
+    message: "users fetch successful",
+    users,
+  });
+});
+
+export const getSingleUser = Trycatch(async (req, res) => {
+  const users = await User.findById(req.params.id);
+  return res.status(200).json({
+    message: "user data fetch successful",
+    users,
+  });
+});
+
+export const deleteUser = Trycatch(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return res.status(404).json({
+      message: "user Not found",
+    });
+  }
+  await User.deleteOne({ _id: req.params.id });
+  return res.status(200).json({
+    message: "user deleted successfully",
   });
 });
