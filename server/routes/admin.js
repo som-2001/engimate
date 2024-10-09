@@ -6,10 +6,13 @@ import {
   addMaterials,
   createCourse,
   deleteCourse,
-  deleteLecture, deleteUser,
+  deleteLecture,
+  deleteUser,
   getAllStats,
   getAllUsers,
   getSingleUser,
+  updateCourse,
+  updateLecture,
 } from "../controllers/admin.js";
 import { uploadFiles, uploadMany } from "../middlewares/multer.js";
 
@@ -23,7 +26,9 @@ router.post(
   createCourse,
 );
 router.post("/course/:id", isAuth, isAdminOrInstructor, addLectures);
+router.put("/course/:id", isAuth, isAdminOrInstructor, updateCourse);
 router.delete("/lecture/:id", isAuth, isAdminOrInstructor, deleteLecture);
+router.put("/lecture/:id", isAuth, isAdminOrInstructor, updateLecture);
 router.delete("/course/:id", isAuth, isAdminOrInstructor, deleteCourse);
 router.get("/stats/", isAuth, isAdminOrInstructor, getAllStats);
 router.post(
@@ -40,8 +45,8 @@ router.post(
   uploadMany,
   addMaterials,
 );
-//usermangement
+//user-mangement
 router.get("/users/all", isAuth, isAdminOrInstructor, getAllUsers);
 router.get("/users/:id", isAuth, isAdminOrInstructor, getSingleUser);
-router.delete("/users/:id",isAuth,isAdminOrInstructor,deleteUser)
+router.delete("/users/:id", isAuth, isAdminOrInstructor, deleteUser);
 export default router;
