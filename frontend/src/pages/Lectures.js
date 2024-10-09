@@ -52,7 +52,21 @@ export const Lectures = () => {
   };
 
   const extractVideoId = (url) => {
-    const videoId = url?.split("v=")[1];
+    let videoId = null;
+
+    if (url?.includes("v=")) {
+      // If 'v=' is present, extract the video ID before any other query parameters
+      videoId = url.split("v=")[1]?.split("&")[0];
+    } else if (url?.includes("youtube.com/shorts/")) {
+      // Handle YouTube Shorts
+      videoId = url.split("youtube.com/shorts/")[1]?.split("?")[0];
+    } else if (url?.includes("youtu.be/")) {
+      // Handle shortened YouTube URLs
+      videoId = url.split("youtu.be/")[1]?.split("?")[0];
+    } else {
+      console.error("Unsupported YouTube URL format");
+    }
+  
     return videoId;
   };
 

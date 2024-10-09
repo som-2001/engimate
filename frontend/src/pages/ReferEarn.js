@@ -81,7 +81,7 @@ const ReferEarn = () => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          paddingTop: "2vw",
+          paddingTop: "4vh",
           paddingBottom: "15vw",
           position: "relative",
           "&::before": {

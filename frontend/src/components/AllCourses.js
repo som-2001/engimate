@@ -292,8 +292,8 @@ export const AllCourses = () => {
         </Box>
 
         {/* Course Cards Section */}
-        <Grid container spacing={4}>
-          {categories.map((course, index) => (
+        <Grid container spacing={4} justifyContent="center">
+          {categories.length===0 ? <center><p style={{padding:"40px",marginTop:"10%",marginBottom:"10%",fontWeight:"600",fontSize:"1.5rem"}}>Domains will be added soon.</p></center>:categories.map((course, index) => (
             <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <Card
                 sx={{

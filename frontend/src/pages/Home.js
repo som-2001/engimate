@@ -73,7 +73,7 @@ export const Home = () => {
         },
       ],
     },
-  
+
     {
       title: "PLC",
       price: 5000,
@@ -140,7 +140,7 @@ export const Home = () => {
         },
       ],
     },
-  
+
     {
       title: "NX CAD",
       image: "nxcad.jpg",
@@ -200,7 +200,7 @@ export const Home = () => {
         },
       ],
     },
-  
+
     {
       title: "NX CAM",
       image: "nxcam.jpg",
@@ -281,23 +281,22 @@ export const Home = () => {
     },
   ];
 
-  const navigate=useNavigate();
- useEffect(()=>{
-
-  if(sessionStorage?.getItem('token'))
-  {
-    if(jwtDecode(sessionStorage?.getItem('token'))?.role==='admin' || jwtDecode(sessionStorage?.getItem('token'))?.role==='instructor')
-    {
-      navigate('/dashboard');
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (sessionStorage?.getItem("token")) {
+      if (
+        jwtDecode(sessionStorage?.getItem("token"))?.role === "admin" ||
+        jwtDecode(sessionStorage?.getItem("token"))?.role === "instructor"
+      ) {
+        navigate("/dashboard");
+      }
     }
-  }
- },[]);
-
+  }, []);
 
   return (
-    <Box sx={{overflowX:"hidden"}}>
-      {sessionStorage.getItem('token')?(<UserNavbar />):<Navbar/>}
-      <Box style={{ width: "100vw", }}>
+    <Box sx={{ overflowX: "hidden" }}>
+      {sessionStorage.getItem("token") ? <UserNavbar /> : <Navbar />}
+      <Box style={{ width: "100vw" }}>
         <Grid2
           container
           justifyContent="center"
@@ -313,7 +312,7 @@ export const Home = () => {
                 lineHeight: "110%",
                 overflow: "hidden",
                 marginTop: "30px",
-                color: "#1976D2"
+                color: "#1976D2",
               }}
             >
               Welcome to YANTRAVED!
@@ -353,7 +352,12 @@ export const Home = () => {
       </Box>
       <Box style={{ width: "100vw", marginTop: "50px" }}>
         <h1
-          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px",color: "#1976D2" }}
+          style={{
+            textAlign: "center",
+            fontSize: "2.5rem",
+            marginTop: "20px",
+            color: "#1976D2",
+          }}
         >
           Our Popular courses
         </h1>
@@ -365,8 +369,8 @@ export const Home = () => {
             fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.7rem" },
           }}
         >
-          Our job-oriented IT & Industrial Automation courses are designed for developing an excellent
-          path for the students.
+          Our job-oriented IT & Industrial Automation courses are designed for
+          developing an excellent path for the students.
           <br /> YANTRAVED offers Complete Placement Assistance on these popular
           courses. Check it out!
         </Typography>
@@ -382,7 +386,6 @@ export const Home = () => {
                 image={data.image}
                 title={data.title}
                 text={data.card_description}
-                
               />
             </Grid2>
           ))}
@@ -390,7 +393,12 @@ export const Home = () => {
       </Box>
       <Box sx={{ width: "100vw", marginTop: "50px" }}>
         <h1
-          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px",color: "#1976D2" }}
+          style={{
+            textAlign: "center",
+            fontSize: "2.5rem",
+            marginTop: "20px",
+            color: "#1976D2",
+          }}
         >
           Our Featured Training
         </h1>
@@ -428,7 +436,12 @@ export const Home = () => {
 
       <Box sx={{ width: "100vw", marginTop: "50px" }}>
         <h1
-          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px",color: "#1976D2" }}
+          style={{
+            textAlign: "center",
+            fontSize: "2.5rem",
+            marginTop: "20px",
+            color: "#1976D2",
+          }}
         >
           Our Expertise
         </h1>
@@ -438,17 +451,26 @@ export const Home = () => {
             textAlign: "center",
             padding: "10px",
             fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.7rem" },
-            marginBottom:"40px"
+            marginBottom: "40px",
           }}
         >
-          we pride ourselves on offering cutting-edge courses across a diverse range of industries to meet the evolving demands of today’s job market.<br/> Our expertise spans several critical fields, providing you with the knowledge and skills needed to excel in your chosen career path.
+          we pride ourselves on offering cutting-edge courses across a diverse
+          range of industries to meet the evolving demands of today’s job
+          market.
+          <br /> Our expertise spans several critical fields, providing you with
+          the knowledge and skills needed to excel in your chosen career path.
         </Typography>
         <OurExpertise />
       </Box>
 
       <Box sx={{ width: "100vw", marginTop: "50px" }}>
         <h1
-          style={{ textAlign: "center", fontSize: "2.5rem", marginTop: "20px",color: "#1976D2" }}
+          style={{
+            textAlign: "center",
+            fontSize: "2.5rem",
+            marginTop: "20px",
+            color: "#1976D2",
+          }}
         >
           Why Choose us
         </h1>
@@ -464,7 +486,8 @@ export const Home = () => {
           If you dream of having a great career with a good salary, then
           YANTRAVED,
           <br /> the best software training institute is your stop. Enrol on our
-          professional IT & Industrial Automation courses and get trained by the industry experts.
+          professional IT & Industrial Automation courses and get trained by the
+          industry experts.
         </Typography>
         <WhyUs />
       </Box>

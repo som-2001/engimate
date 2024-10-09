@@ -97,8 +97,6 @@ const CourseDetail = () => {
       });
   }, [navigate]);
 
-  console.log(result);
-
   const parseStringToArray = (str) => {
     return str?.split("\n");
   };
