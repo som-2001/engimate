@@ -11,6 +11,7 @@ import {
   DialogTitle,
   Grid,
   IconButton,
+  Skeleton,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -31,59 +32,68 @@ export const Lectures = () => {
   const [lectures, setLectures] = useState([]);
   const [loadLecture, setLoadLecture] = useState(true);
   const [loadDpp, setLoadDpp] = useState(true);
-  const [loadPdf,setLoadPdf]=useState(true);
+  const [loadPdf, setLoadPdf] = useState(true);
   const [dpp, setDpp] = useState([]);
   const [openDialog, setOpenDialog] = useState(false); // To handle dialog open/close
   const [selectedDpp, setSelectedDpp] = useState(null);
-  const [dppDownload,setDppDownload]=useState('');
+  const [dppDownload, setDppDownload] = useState("");
   //for pdfs
   const [pdf, setPdf] = useState([]);
   const [openpdfDialog, setOpenpdfDialog] = useState(false); // To handle dialog open/close
   const [selectedPdf, setSelectedPdf] = useState(null);
-  const [pdfDownload,setpdfDownload]=useState('');
+  const [pdfDownload, setpdfDownload] = useState("");
 
   // Function to open the dialog and set the selected Dpp data
   const handleCardClick = (data) => {
     setSelectedDpp(data);
 
-    axios.get(`${BaseUrl}/dpp/search?title=${data.title}&dpp_id=${data._id}`,{
-      headers:{
-        "Authorization":`Bearer ${sessionStorage.getItem('token')}`
-      }
-    }).then(res=>{
-      setDppDownload(res.data.dpp);
-    }).catch((error) => {
-      console.error("Error fetching categories", error);
-      if (error?.response?.data?.message === "login first or token expired") {
-        if (sessionStorage?.getItem("token")) {
-          sessionStorage?.removeItem("token");
+    axios
+      .get(`${BaseUrl}/dpp/search?title=${data.title}&dpp_id=${data._id}`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setDppDownload(res.data.dpp);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories", error);
+        if (error?.response?.data?.message === "login first or token expired") {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
         }
-        navigate("/login");
-      }
-    });
+      });
     setOpenDialog(true);
   };
 
-  const handleCardClick1=(data)=>{
+  const handleCardClick1 = (data) => {
     setSelectedPdf(data);
 
-    axios.get(`${BaseUrl}/materials/search?title=${data.title}&materials_id=${data._id}`,{
-      headers:{
-        "Authorization":`Bearer ${sessionStorage.getItem('token')}`
-      }
-    }).then(res=>{
-      setpdfDownload(res.data.materials);
-    }).catch((error) => {
-      console.error("Error fetching categories", error);
-      if (error?.response?.data?.message === "login first or token expired") {
-        if (sessionStorage?.getItem("token")) {
-          sessionStorage?.removeItem("token");
+    axios
+      .get(
+        `${BaseUrl}/materials/search?title=${data.title}&materials_id=${data._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
         }
-        navigate("/login");
-      }
-    });
+      )
+      .then((res) => {
+        setpdfDownload(res.data.materials);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories", error);
+        if (error?.response?.data?.message === "login first or token expired") {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
+        }
+      });
     setOpenpdfDialog(true);
-  }
+  };
 
   const handleCloseDialog1 = () => {
     setOpenpdfDialog(false);
@@ -103,51 +113,55 @@ export const Lectures = () => {
     switch (newValue) {
       case 0:
         setHeading("Lectures");
-        
+
         break;
       case 1:
         setHeading("Pdfs");
         axios
-        .get(`${BaseUrl}/materials/all`, {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        })
-        .then((res) => {
-          setLoadPdf(false);
-          setDpp(res.data.materials);
-        })
-        .catch((error) => {
-          console.error("Error fetching categories", error);
-          if (error?.response?.data?.message === "login first or token expired") {
-            if (sessionStorage?.getItem("token")) {
-              sessionStorage?.removeItem("token");
+          .get(`${BaseUrl}/materials/all`, {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            },
+          })
+          .then((res) => {
+            setLoadPdf(false);
+            setDpp(res.data.materials);
+          })
+          .catch((error) => {
+            console.error("Error fetching categories", error);
+            if (
+              error?.response?.data?.message === "login first or token expired"
+            ) {
+              if (sessionStorage?.getItem("token")) {
+                sessionStorage?.removeItem("token");
+              }
+              navigate("/login");
             }
-            navigate("/login");
-          }
-        });
+          });
         break;
       case 2:
         setHeading("Dpps");
         axios
-        .get(`${BaseUrl}/dpp/all`, {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        })
-        .then((res) => {
-          setLoadDpp(false);
-          setDpp(res.data.dpp);
-        })
-        .catch((error) => {
-          console.error("Error fetching categories", error);
-          if (error?.response?.data?.message === "login first or token expired") {
-            if (sessionStorage?.getItem("token")) {
-              sessionStorage?.removeItem("token");
+          .get(`${BaseUrl}/dpp/all`, {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            },
+          })
+          .then((res) => {
+            setLoadDpp(false);
+            setDpp(res.data.dpp);
+          })
+          .catch((error) => {
+            console.error("Error fetching categories", error);
+            if (
+              error?.response?.data?.message === "login first or token expired"
+            ) {
+              if (sessionStorage?.getItem("token")) {
+                sessionStorage?.removeItem("token");
+              }
+              navigate("/login");
             }
-            navigate("/login");
-          }
-        });
+          });
         break;
       default:
         setHeading("Exam");
@@ -193,25 +207,24 @@ export const Lectures = () => {
 
   useEffect(() => {
     axios
-    .get(`${BaseUrl}/lectures/${id}`, {
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      },
-    })
-    .then((res) => {
-      setLoadLecture(false);
-      setLectures(res.data.lectures);
-    })
-    .catch((error) => {
-      console.error("Error fetching categories", error);
-      if (error?.response?.data?.message === "login first or token expired") {
-        if (sessionStorage?.getItem("token")) {
-          sessionStorage?.removeItem("token");
+      .get(`${BaseUrl}/lectures/${id}`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setLoadLecture(false);
+        setLectures(res.data.lectures);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories", error);
+        if (error?.response?.data?.message === "login first or token expired") {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
         }
-        navigate("/login");
-      }
-    });  
-
+      });
   }, [navigate, id]);
 
   return (
@@ -350,8 +363,33 @@ export const Lectures = () => {
         <Box>
           {value === 0 &&
             (loadLecture ? (
-              <Box sx={{ textAlign: "center", marginTop: "20vh" }}>
-                <CircularProgress size={40} />
+              <Box sx={{ textAlign: "center", marginTop: "8vh" }}>
+                <Grid container spacing={4} justifyContent="center">
+                  {[...Array(3)].map(
+                    (
+                      _,
+                      index // Show 3 skeletons as placeholders
+                    ) => (
+                      <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Card>
+                          <CardContent>
+                            <Skeleton variant="text" width="80%" />
+                            <Skeleton variant="text" width="60%" />
+                            <Skeleton variant="text" width="60%" />
+                            <Skeleton variant="text" width="80%" />
+                            <Skeleton variant="text" width="40%" />
+                            <Skeleton variant="text" width="60%" />
+                            <Skeleton
+                              variant="rectangular"
+                              height={48}
+                              sx={{ marginTop: 2 }}
+                            />
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    )
+                  )}
+                </Grid>
               </Box>
             ) : (
               <Grid container spacing={2} justifyContent="center">
@@ -435,98 +473,147 @@ export const Lectures = () => {
                 )}
               </Grid>
             ))}
-          {value === 1 && (
-           (loadPdf ? (
-            <Box sx={{ textAlign: "center", marginTop: "20vh" }}>
-              <CircularProgress size={40} />
-            </Box>
-          ) : (
-            <Grid container spacing={2} justifyContent="center">
-              {pdf?.length === 0 ? (
-                <Typography variant="body1" marginTop="10%" marginBottom="5%">
-                  Dpp will be displayed here.
-                </Typography>
-              ) : (
-                pdf?.map((data, index) => (
-                  <Grid item xs={12} sm={6} md={4} key={index}>
-                    <Card
-                      sx={{
-                        boxShadow: 5,
-                        borderRadius: "16px",
-                        overflow: "hidden",
-                        height: "80px",
-                        position: "relative",
-                        transition: "transform 0.3s, box-shadow 0.3s",
-                        "&:hover": {
-                          transform: "scale(1.05)",
-                          boxShadow: "10px 10px 30px rgba(0,0,0,0.3)",
-                        },
-                      }}
-                      onClick={() => handleCardClick1(data)} // Trigger dialog on card click
-                    >
-                      <CardContent sx={{ padding: "16px", height: "80px" }}>
-                        <Typography
-                          variant="h6"
-                          sx={{ fontWeight: "bold", marginBottom: "12px" }}
-                        >
-                          {data.title}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                ))
-              )}
-            </Grid>
-          )))}
+          {value === 1 &&
+            (loadPdf ? (
+              <Box sx={{ textAlign: "center", marginTop: "7vh" }}>
+                <Grid container spacing={4} justifyContent="center">
+                  {[...Array(3)].map(
+                    (
+                      _,
+                      index // Show 3 skeletons as placeholders
+                    ) => (
+                      <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Card>
+                          <CardContent>
+                            <Skeleton variant="text" width="80%" />
+                            <Skeleton variant="text" width="60%" />
+                            <Skeleton variant="text" width="60%" />
+                            <Skeleton variant="text" width="80%" />
+                            <Skeleton variant="text" width="40%" />
+                            <Skeleton variant="text" width="60%" />
+                            <Skeleton
+                              variant="rectangular"
+                              height={48}
+                              sx={{ marginTop: 2 }}
+                            />
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    )
+                  )}
+                </Grid>
+              </Box>
+            ) : (
+              <Grid container spacing={2} justifyContent="center">
+                {pdf?.length === 0 ? (
+                  <Typography variant="body1" marginTop="10%" marginBottom="5%">
+                    pdf materials will be displayed here.
+                  </Typography>
+                ) : (
+                  pdf?.map((data, index) => (
+                    <Grid item xs={12} sm={6} md={4} key={index}>
+                      <Card
+                        sx={{
+                          boxShadow: 5,
+                          borderRadius: "16px",
+                          overflow: "hidden",
+                          height: "80px",
+                          position: "relative",
+                          transition: "transform 0.3s, box-shadow 0.3s",
+                          "&:hover": {
+                            transform: "scale(1.05)",
+                            boxShadow: "10px 10px 30px rgba(0,0,0,0.3)",
+                          },
+                        }}
+                        onClick={() => handleCardClick1(data)} // Trigger dialog on card click
+                      >
+                        <CardContent sx={{ padding: "16px", height: "80px" }}>
+                          <Typography
+                            variant="h6"
+                            sx={{ fontWeight: "bold", marginBottom: "12px" }}
+                          >
+                            {data.title}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  ))
+                )}
+              </Grid>
+            ))}
 
-        {/* Dialog to display the PDF */}
-        <Dialog
-          open={openpdfDialog}
-          onClose={handleCloseDialog1}
-          maxWidth="md"
-          fullWidth
-        >
-          <DialogTitle>
-            {selectedPdf?.title} {/* Display title */}
-          </DialogTitle>
-          <DialogContent dividers>
-            {/* Display PDF in an iframe */}
-            <iframe
-              src={dppDownload}
-              title={selectedPdf?.title}
-              width="100%"
-              height="500px"
-              style={{ border: "none" }}
-            />
-          </DialogContent>
-          <DialogActions>
-            {/* Download Button */}
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                backgroundColor: "#25D366", // WhatsApp-like color for download button
-                textTransform: "none",
-                "&:hover": {
-                  backgroundColor: "#1DA354", // Darker shade on hover
-                },
-              }}
-              href={dppDownload} // Download URL
-              download={selectedPdf?.title} // Name of the file to be downloaded
-            >
-              Download PDF
-            </Button>
-            <Button onClick={handleCloseDialog1} color="secondary">
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
-
+          {/* Dialog to display the PDF */}
+          <Dialog
+            open={openpdfDialog}
+            onClose={handleCloseDialog1}
+            maxWidth="md"
+            fullWidth
+          >
+            <DialogTitle>
+              {selectedPdf?.title} {/* Display title */}
+            </DialogTitle>
+            <DialogContent dividers>
+              {/* Display PDF in an iframe */}
+              <iframe
+                src={dppDownload}
+                title={selectedPdf?.title}
+                width="100%"
+                height="500px"
+                style={{ border: "none" }}
+              />
+            </DialogContent>
+            <DialogActions>
+              {/* Download Button */}
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  backgroundColor: "#25D366", // WhatsApp-like color for download button
+                  textTransform: "none",
+                  "&:hover": {
+                    backgroundColor: "#1DA354", // Darker shade on hover
+                  },
+                }}
+                href={dppDownload} // Download URL
+                download={selectedPdf?.title} // Name of the file to be downloaded
+              >
+                Download PDF
+              </Button>
+              <Button onClick={handleCloseDialog1} color="secondary">
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           {value === 2 &&
             (loadDpp ? (
-              <Box sx={{ textAlign: "center", marginTop: "20vh" }}>
-                <CircularProgress size={40} />
+              <Box sx={{ textAlign: "center", marginTop: "8vh" }}>
+                <Grid container spacing={4} justifyContent="center">
+                  {[...Array(3)].map(
+                    (
+                      _,
+                      index // Show 3 skeletons as placeholders
+                    ) => (
+                      <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Card>
+                          <CardContent>
+                            <Skeleton variant="text" width="80%" />
+                            <Skeleton variant="text" width="60%" />
+                            <Skeleton variant="text" width="60%" />
+                            <Skeleton variant="text" width="80%" />
+                            <Skeleton variant="text" width="40%" />
+                            <Skeleton variant="text" width="60%" />
+                            <Skeleton
+                              variant="rectangular"
+                              height={48}
+                              sx={{ marginTop: 2 }}
+                            />
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    )
+                  )}
+                </Grid>
               </Box>
             ) : (
               <Grid container spacing={2} justifyContent="center">
@@ -542,20 +629,34 @@ export const Lectures = () => {
                           boxShadow: 5,
                           borderRadius: "16px",
                           overflow: "hidden",
-                          height: "80px",
+                          height: "auto",
                           position: "relative",
-                          transition: "transform 0.3s, box-shadow 0.3s",
+                          
+                          padding: "16px",
+                          transition:
+                            "transform 0.3s ease, box-shadow 0.3s ease",
                           "&:hover": {
-                            transform: "scale(1.05)",
-                            boxShadow: "10px 10px 30px rgba(0,0,0,0.3)",
+                            transform: "scale(1.07)",
+                            boxShadow: "15px 15px 40px rgba(0, 0, 0, 0.4)", // Stronger shadow on hover
                           },
                         }}
                         onClick={() => handleCardClick(data)} // Trigger dialog on card click
                       >
-                        <CardContent sx={{ padding: "16px", height: "80px" }}>
+                        <CardContent
+                          sx={{
+                            padding: "12px",
+                            height: "auto",
+                            textAlign: "center",
+                          }}
+                        >
                           <Typography
-                            variant="h6"
-                            sx={{ fontWeight: "bold", marginBottom: "12px" }}
+                            variant="h6" // Bold and larger title
+                            sx={{
+                              fontWeight: "600", // Bold font
+                              marginBottom: "8px",
+                            
+                              letterSpacing: "0.5px", // Better letter spacing
+                            }}
                           >
                             {data.title}
                           </Typography>
