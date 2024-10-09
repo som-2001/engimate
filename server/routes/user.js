@@ -15,5 +15,5 @@ router.post("/user/verify", verifyUser);
 router.post("/user/request-login-otp", requestLoginOtp);
 router.post("/user/login/", verifyLoginOtp);
 router.get("/user/profile/", isAuth, myProfile);
-router.post("/contact/us", isAuth, sendQuery);
+router.post("/contact/us", sendQuery);
 export default router;

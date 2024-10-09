@@ -155,8 +155,8 @@ export const sendContactUsMail = async (contactdata) => {
 
   const emailSubject = `Contact Us Inquiry from ${name} -- ${subject}`;
   const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
+    <html lang="en">
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -169,18 +169,21 @@ export const sendContactUsMail = async (contactdata) => {
         }
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto; /* Added margin for spacing */
             background-color: #ffffff;
             padding: 30px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
+            border: 1px solid #e0e0e0; /* Subtle border for definition */
         }
         .header {
-            background-color: #007bff;
+            background-color: #007bff; /* Primary brand color */
             color: white;
             text-align: center;
             padding: 20px;
+            border-top-left-radius: 10px; /* Rounded corners */
+            border-top-right-radius: 10px; /* Rounded corners */
         }
         .header h1 {
             font-size: 28px;
@@ -207,9 +210,25 @@ export const sendContactUsMail = async (contactdata) => {
         .footer a {
             color: #007bff;
             text-decoration: none;
+            font-weight: bold; /* Bold links for emphasis */
         }
         .footer p {
             margin: 0;
+        }
+        /* Additional styles */
+        strong {
+            color: #333; /* Strong text color */
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px; /* Reduced padding on smaller screens */
+            }
+            .header h1 {
+                font-size: 24px; /* Smaller header font size */
+            }
+            p {
+                font-size: 14px; /* Smaller paragraph font size */
+            }
         }
     </style>
 </head>
@@ -238,6 +257,7 @@ export const sendContactUsMail = async (contactdata) => {
     </div>
 </body>
 </html>
+
 `;
   await transport.sendMail({
     from: process.env.SMTP_MAIL,
