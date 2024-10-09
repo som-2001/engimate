@@ -9,6 +9,7 @@ import {
   Grid,
   IconButton,
   Tooltip,
+  Skeleton,
 } from "@mui/material";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import UserNavbar from "../components/userNavbar";
@@ -28,8 +29,6 @@ const ReferEarn = () => {
     const token = sessionStorage?.getItem("token");
 
     if (token) {
-
-
       const decodedToken = jwtDecode(token);
 
       // Check if token is expired
@@ -55,14 +54,14 @@ const ReferEarn = () => {
       })
       .then((res) => {
         setReferralLink(res.data.user.referral_code);
-        sessionStorage.setItem("name",res.data.user.name);
-      }).catch((error)=>{
-        console.log(error);
-        if(error?.reponse?.data?.message==='login first or token expired')
-        {
-          window.location.href='/login';
-        }
+        sessionStorage.setItem("name", res.data.user.name);
       })
+      .catch((error) => {
+        console.log(error);
+        if (error?.reponse?.data?.message === "login first or token expired") {
+          window.location.href = "/login";
+        }
+      });
   }, []);
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink);
@@ -146,27 +145,29 @@ const ReferEarn = () => {
       <Box
         sx={{ maxWidth: "600px", margin: "auto", mt: 5, textAlign: "center" }}
       >
-      
-        <Typography variant="body1" gutterBottom sx={{padding:2,fontWeight:'600'}}>
+        <Typography
+          variant="body1"
+          gutterBottom
+          sx={{ padding: 2, fontWeight: "600" }}
+        >
           Refer your friends and earn rewards when they sign up and make a
           purchase.
         </Typography>
 
-        <Card  sx={{ p: 2, mt: 4,backgroundColor:"#fdfafa",borderRadius:"15px" }}>
+        <Card
+          sx={{ p: 2, mt: 4, backgroundColor: "#fdfafa", borderRadius: "15px" }}
+        >
           <CardContent>
-            <Typography variant="h6" gutterBottom marginBottom="20px">
-              Your Referral Code
-            </Typography>
+           
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={9}>
-                <TextField
-                  value={referralLink}
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
+                {referralLink === "" ? (
+                  <Skeleton animation="wave" height={56} />
+                ) : (
+                  <center><p style={{fontSize:"1.3rem"}}>
+                   Your Referral Code<br/> <b>{referralLink}</b>
+                  </p></center>
+                )}
               </Grid>
               <Grid item xs={3}>
                 <Tooltip title={copied ? "Copied!" : "Copy Link"}>
@@ -183,8 +184,8 @@ const ReferEarn = () => {
               sx={{
                 backgroundColor: "#0d47a1",
                 color: "#fff",
-                width: { lg: "60%", md: "60%", sm: "60%", xs: "80%" },
-                padding: "10px 24px",
+                width: { lg: "40%", md: "40%", sm: "40%", xs: "80%" },
+                padding: "5px 24px",
                 fontSize: "1rem",
                 textTransform: "none",
                 borderRadius: "50px",
@@ -210,8 +211,6 @@ const ReferEarn = () => {
             Rewards Earned: <strong>$50</strong>
           </Typography>
         </Box> */}
-
-       
       </Box>
       <FAQReferEarn />
       <Footer />

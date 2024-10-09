@@ -71,7 +71,7 @@ export const UserManagement = () => {
   };
 
   return (
-    <Box p={4}>
+    <Box p={2}>
      {loading ? (
         <Grid container spacing={4} justifyContent="center">
           {[...Array(3)].map((_, index) => ( // Show 3 skeletons as placeholders
@@ -92,7 +92,7 @@ export const UserManagement = () => {
         </Grid>
       ) : (
         <Grid container spacing={4} justifyContent="center">
-          {users.length===0 ? <center><p style={{padding:"40px",marginTop:"10%",marginBottom:"10%",fontWeight:"600",fontSize:"1.5rem"}}>No users currently Available.</p></center>:users.map((user) => (
+          {users.length===0 ? <center><p style={{marginTop:"25%",marginBottom:"10%",fontWeight:"500",fontSize:"1.5rem"}}>No users currently Available.</p></center>:users.map((user) => (
             <Grid item xs={12} sm={6} md={4} key={user._id}>
               <Card>
                 <CardContent>
