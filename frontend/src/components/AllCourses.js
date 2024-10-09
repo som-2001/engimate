@@ -348,7 +348,7 @@ export const AllCourses = () => {
                       backgroundColor: "#0d47a1",
                       color: "#fff",
                       width: "95%",
-                      padding: "10px 24px",
+                      padding: "5px 24px",
                       fontSize: "1rem",
                       textTransform: "none",
                       borderRadius: "50px",

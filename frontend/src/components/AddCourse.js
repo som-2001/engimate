@@ -14,6 +14,7 @@ import {
   Select,
   FormHelperText,
   CircularProgress,
+  Typography,
 } from "@mui/material";
 import { BaseUrl } from "./BaseUrl";
 import { toast, ToastContainer } from "react-toastify";
@@ -49,10 +50,10 @@ export const AddCourse = () => {
   });
 
   const [load, setLoad] = useState(false);
-  const [key,setKey]=useState(false);
-  const [name,setName]=useState('');
+  const [key, setKey] = useState(false);
+  const [name, setName] = useState("");
   const [result, setResult] = useState([]);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`${BaseUrl}/categories/all`).then((res) => {
@@ -76,34 +77,36 @@ export const AddCourse = () => {
 
     try {
       setLoad(true);
-      axios.post(`${BaseUrl}/courses/add`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-        },
-      }).then(response=>{
+      axios
+        .post(`${BaseUrl}/courses/add`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        })
+        .then((response) => {
+          setName("");
+          setKey(true);
+          console.log("Course added successfully:", response.data);
+          toast.success(response.data.message, { autoClose: 3000 });
 
-      setName('');
-      setKey(true);
-      console.log("Course added successfully:", response.data);
-      toast.success(response.data.message, { autoClose: 3000 });
-
-      if (response) {
-        setLoad(false);
-      }
-      reset(); // Reset form fields on success
-    }).catch (error=>{
-      setLoad(false);
-      toast.error(error?.response?.data?.message, { autoClose: 3000 });
-      if(error?.response?.data?.message==='login first or token expired')
-      {
-        if(sessionStorage?.getItem("token"))
-        {
-          sessionStorage?.removeItem("token");
-        }
-        navigate('/login');
-      }
-    })
+          if (response) {
+            setLoad(false);
+          }
+          reset(); // Reset form fields on success
+        })
+        .catch((error) => {
+          setLoad(false);
+          toast.error(error?.response?.data?.message, { autoClose: 3000 });
+          if (
+            error?.response?.data?.message === "login first or token expired"
+          ) {
+            if (sessionStorage?.getItem("token")) {
+              sessionStorage?.removeItem("token");
+            }
+            navigate("/login");
+          }
+        });
     } catch (error) {
       setLoad(false);
       console.error("Error adding course:", error);
@@ -121,6 +124,15 @@ export const AddCourse = () => {
     >
       <ToastContainer />
       <Box sx={{ width: "100%", maxWidth: 700 }}>
+        <Typography
+          variant="body2"
+          textAlign="center"
+          marginBottom="20px"
+          color="red"
+        >
+          * To get a new line/point in student course section frontend you have
+          to start the line from new line using cntl+shift.
+        </Typography>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -130,7 +142,7 @@ export const AddCourse = () => {
                 margin="normal"
                 render={({ field }) => (
                   <TextField
-                  key={key}
+                    key={key}
                     {...field}
                     fullWidth
                     label="Course Title"
@@ -138,22 +150,21 @@ export const AddCourse = () => {
                     InputProps={{
                       sx: {
                         borderRadius: "22px", // Customize border radius
-                       
-                        '&:hover': {
+
+                        "&:hover": {
                           backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                         },
                       },
                     }}
                     sx={{
                       borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                       
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
                         },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
                         },
                       },
                     }}
@@ -177,22 +188,21 @@ export const AddCourse = () => {
                     variant="outlined"
                     InputProps={{
                       sx: {
-                        borderRadius: "22px", 
-                        '&:hover': {
+                        borderRadius: "22px",
+                        "&:hover": {
                           backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                         },
                       },
                     }}
                     sx={{
                       borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                       
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
                         },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
                         },
                       },
                     }}
@@ -219,22 +229,21 @@ export const AddCourse = () => {
                     InputProps={{
                       sx: {
                         borderRadius: "22px", // Customize border radius
-                       
-                        '&:hover': {
+
+                        "&:hover": {
                           backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                         },
                       },
                     }}
                     sx={{
                       borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                       
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
                         },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
                         },
                       },
                     }}
@@ -261,22 +270,21 @@ export const AddCourse = () => {
                     InputProps={{
                       sx: {
                         borderRadius: "22px", // Customize border radius
-                       
-                        '&:hover': {
+
+                        "&:hover": {
                           backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                         },
                       },
                     }}
                     sx={{
                       borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                       
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
                         },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
                         },
                       },
                     }}
@@ -303,22 +311,21 @@ export const AddCourse = () => {
                     InputProps={{
                       sx: {
                         borderRadius: "22px", // Customize border radius
-                     
-                        '&:hover': {
+
+                        "&:hover": {
                           backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                         },
                       },
                     }}
                     sx={{
                       borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                        
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
                         },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
                         },
                       },
                     }}
@@ -345,22 +352,21 @@ export const AddCourse = () => {
                     InputProps={{
                       sx: {
                         borderRadius: "22px", // Customize border radius
-                       
-                        '&:hover': {
+
+                        "&:hover": {
                           backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                         },
                       },
                     }}
                     sx={{
                       borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                       
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
                         },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
                         },
                       },
                     }}
@@ -387,22 +393,21 @@ export const AddCourse = () => {
                     InputProps={{
                       sx: {
                         borderRadius: "22px", // Customize border radius
-                        
-                        '&:hover': {
+
+                        "&:hover": {
                           backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                         },
                       },
                     }}
                     sx={{
                       borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                       
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
                         },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
                         },
                       },
                     }}
@@ -429,22 +434,21 @@ export const AddCourse = () => {
                     InputProps={{
                       sx: {
                         borderRadius: "22px", // Customize border radius
-                        
-                        '&:hover': {
+
+                        "&:hover": {
                           backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                         },
                       },
                     }}
                     sx={{
                       borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                       
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
                         },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
                         },
                       },
                     }}
@@ -456,45 +460,44 @@ export const AddCourse = () => {
             </Grid>
 
             <Grid item xs={12}>
-  <Controller
-    name="price"
-    control={control}
-    defaultValue=""
-    render={({ field }) => (
-      <TextField
-        {...field}
-        fullWidth
-        label="Price"
-        variant="outlined"
-        type="number"
-        error={!!errors.price}
-        helperText={errors.price?.message}
-        InputProps={{
-          sx: {
-            borderRadius: "22px", // Customize border radius
-            
-            '&:hover': {
-              backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
-            },
-          },
-        }}
-        sx={{
-          borderRadius: "22px", // Outer border radius
-          
-          '& .MuiOutlinedInput-root': {
-            
-            '&:hover fieldset': {
-              borderColor: 'rgb(89, 139, 139)', // Border color on hover
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: 'rgb(107, 169, 169)', // Border color when focused
-            },
-          },
-        }}
-      />
-    )}
-  />
-</Grid>
+              <Controller
+                name="price"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    fullWidth
+                    label="Price"
+                    variant="outlined"
+                    type="number"
+                    error={!!errors.price}
+                    helperText={errors.price?.message}
+                    InputProps={{
+                      sx: {
+                        borderRadius: "22px", // Customize border radius
+
+                        "&:hover": {
+                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                        },
+                      },
+                    }}
+                    sx={{
+                      borderRadius: "22px", // Outer border radius
+
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
+                        },
+                      },
+                    }}
+                  />
+                )}
+              />
+            </Grid>
 
             <Grid item xs={12}>
               <FormControl fullWidth error={!!errors.category}>
@@ -503,38 +506,40 @@ export const AddCourse = () => {
                   name="category"
                   control={control}
                   defaultValue=""
-                  
                   render={({ field }) => (
-                    <Select {...field} fullWidth InputProps={{
-                      sx: {
-                        borderRadius: "22px", // Customize border radius
-                         // Custom background color
-                        '&:hover': {
-                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                    <Select
+                      {...field}
+                      fullWidth
+                      InputProps={{
+                        sx: {
+                          borderRadius: "22px", // Customize border radius
+                          // Custom background color
+                          "&:hover": {
+                            backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                          },
                         },
-                      },
-                    }}
-                    sx={{
-                      borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Custom border color
+                      }}
+                      sx={{
+                        borderRadius: "22px", // Outer border radius
+
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": {
+                            borderColor: "rgb(107, 169, 169)", // Custom border color
+                          },
+                          "&:hover fieldset": {
+                            borderColor: "rgb(89, 139, 139)", // Border color on hover
+                          },
+                          "&.Mui-focused fieldset": {
+                            borderColor: "rgb(107, 169, 169)", // Border color when focused
+                          },
                         },
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
-                        },
-                      },
-                    }}>
+                      }}
+                    >
                       {result.map((category) => (
                         <MenuItem key={category._id} value={category._id}>
                           {category.category_name}
                         </MenuItem>
                       ))}
-                      
                     </Select>
                   )}
                 />
@@ -551,7 +556,7 @@ export const AddCourse = () => {
                     backgroundColor: "#0d47a1",
                     color: "#fff",
 
-                    padding: "10px 24px",
+                    padding: "5px 24px",
                     fontSize: "1rem",
                     textTransform: "none",
                     borderRadius: "50px",
@@ -565,12 +570,24 @@ export const AddCourse = () => {
                     type="file"
                     hidden
                     accept="image/*"
-                    onChange={(e) => {setValue("image", e.target.files)
-                      setName(e.target.files[0].name)
+                    onChange={(e) => {
+                      setValue("image", e.target.files);
+                      setName(e.target.files[0].name);
                     }}
                   />
                 </Button>
-                {name!=='' && <span style={{fontWeight:100,fontSize:"0.9rem",marginTop:"5px",marginLeft:'10px'}}>File name:- {name}</span>}
+                {name !== "" && (
+                  <span
+                    style={{
+                      fontWeight: 100,
+                      fontSize: "0.9rem",
+                      marginTop: "5px",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    File name:- {name}
+                  </span>
+                )}
                 <FormHelperText>{errors.image?.message}</FormHelperText>
               </FormControl>
             </Grid>
@@ -586,7 +603,7 @@ export const AddCourse = () => {
                     backgroundColor: "#0d47a1",
                     color: "#fff",
                     width: "60%",
-                    padding: "10px 24px",
+                    padding: "5px 24px",
                     fontSize: "1rem",
                     textTransform: "none",
                     borderRadius: "50px",

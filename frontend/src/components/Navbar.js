@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Home", "About", "Our Course"];
+const pages = ["Home", "About", "Our Courses"];
 const settings = ["Placed Students", "Gallery", "Contact Us","Login"];
 
 function ResponsiveAppBar() {

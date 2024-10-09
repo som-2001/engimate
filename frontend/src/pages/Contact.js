@@ -25,23 +25,7 @@ import UserNavbar from "../components/userNavbar";
   
   export const Contact = () => {
    
-   const navigate=useNavigate();
-
-    React.useEffect(() => {
-      const token = sessionStorage?.getItem("token");
   
-      if (token) {
-        const decodedToken = jwtDecode(token);
-  
-        // Check if token is expired
-        if (decodedToken.exp < Math.floor(Date.now() / 1000)) {
-          sessionStorage.removeItem("token"); // Clear expired token
-          navigate("/login");
-        }
-      } else {
-        navigate("/login");
-      }
-    }, [navigate]);
   
     return (
       <Box

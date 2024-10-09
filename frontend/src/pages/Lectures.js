@@ -25,6 +25,8 @@ export const Lectures = () => {
   const [heading, setHeading] = useState("Lectures");
   const [lectures, setLectures] = useState([]);
   const [loadLecture, setLoadLecture] = useState(true);
+  const [loadDpp,setLoadDpp]=useState(true);
+  const [dpp,setDpp]=useState([]);
   const navigate = useNavigate();
   
   const [activeVideo, setActiveVideo] = useState(null); // Track which video is being played
@@ -106,6 +108,30 @@ export const Lectures = () => {
             navigate('/login');
         }
       });
+
+      axios
+      .get(`${BaseUrl}/dpp/all`,{
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        
+        setLoadDpp(false);
+        setDpp(res.data.dpp);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories", error);
+        if(error?.response?.data?.message==='login first or token expired')
+          {
+            if(sessionStorage?.getItem("token"))
+            {
+              sessionStorage?.removeItem("token");
+            }
+            navigate('/login');
+        }
+      });
+  
   }, [navigate,id]);
 
   return (
@@ -338,13 +364,49 @@ export const Lectures = () => {
           )}
 
           {value === 2 && (
-            <Typography
-              variant="h6"
-              sx={{ textAlign: "center", marginTop: "2rem" }}
-            >
-              Dpp content will be displayed here.
-            </Typography>
-          )}
+            (loadDpp ? (
+              <Box sx={{ textAlign: "center", marginTop: "20vh" }}>
+                <CircularProgress size={40} />
+              </Box>
+            ) : (
+              <Grid container spacing={2} justifyContent="center">
+                {dpp?.length === 0 ? (
+                  <Typography variant="body1" marginTop="10%" marginBottom="5%">
+                    Dpp will be displayed here.
+                  </Typography>
+                ) : (
+                  dpp?.map((data, index) => (
+                    <Grid item xs={12} sm={6} md={4} key={index}>
+                      <Card
+                        sx={{
+                          boxShadow: 5,
+                          borderRadius: "16px",
+                          overflow: "hidden",
+                          height: "auto",
+                          position: "relative",
+                          transition: "transform 0.3s, box-shadow 0.3s",
+                          "&:hover": {
+                            transform: "scale(1.05)",
+                            boxShadow: "10px 10px 30px rgba(0,0,0,0.3)",
+                          },
+                        }}
+                      >
+                        
+                        <CardContent sx={{ padding: "16px",height:"80px" }}>
+                          <Typography
+                            variant="h6"
+                            sx={{ fontWeight: "bold", marginBottom: "12px" }}
+                          >
+                            {data.title}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  ))
+                )}
+              </Grid>
+            )))}
+          
 
           {value === 3 && (
             <Typography

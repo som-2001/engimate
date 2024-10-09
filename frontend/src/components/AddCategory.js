@@ -179,7 +179,7 @@ export const AddCategory = () => {
                  sx={{
                   backgroundColor: "#0d47a1",
                   color: "#fff",
-                  padding: "10px 24px",
+                  padding: "5px 24px",
                   fontSize: "1rem",
                   textTransform: "none",
                   borderRadius: "50px",
@@ -215,7 +215,7 @@ export const AddCategory = () => {
                   backgroundColor: "#0d47a1",
                   color: "#fff",
                   width: "60%",
-                  padding: "10px 24px",
+                  padding: "5px 24px",
                   fontSize: "1rem",
                   textTransform: "none",
                   borderRadius: "50px",

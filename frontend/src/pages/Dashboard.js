@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {
   AppBar, Toolbar, Typography, IconButton, Box, Drawer, List, ListItem,
-  ListItemIcon, ListItemText, CssBaseline, Divider
+  ListItemIcon, ListItemText, CssBaseline, Divider,
+  Grid
 } from '@mui/material';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import {
@@ -26,6 +27,8 @@ import { AddDpp } from '../components/AddDpp';
 import { AddExam } from '../components/AddExam';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import { Stats } from '../components/Stats';
+import { UserManagement } from '../components/UserManagment';
+import { FaUser } from 'react-icons/fa';
 
 const drawerWidth = 280;
 
@@ -37,7 +40,8 @@ const NAV_ITEMS = [
   { text: 'Upload Pdfs', icon: <PictureAsPdfIcon />, content: <Addpdf />, heading: "Upload Pdfs" },
   { text: 'Upload Dpps', icon: <BookIcon />, content: <AddDpp />, heading: "Upload Dpps" },
   { text: 'Upload Exam Form', icon: <QuizIcon />, content: <AddExam />, heading: "Upload Exam Form" },
-  { text: 'Statictics', icon: <AnalyticsIcon />, content: <Stats />, heading: "Statictics Overview" }
+  { text: 'Statictics', icon: <AnalyticsIcon />, content: <Stats />, heading: "Statictics Overview" },
+  {text:"User Management",icon:<FaUser/>, content:<UserManagement/>,heading:"User management"}
   
 ];
 
@@ -195,6 +199,7 @@ function Dashboard() {
           sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
         >
           <Toolbar />
+
           <Typography variant="h5" gutterBottom textAlign="center" margin="normal"  sx={{ textAlign: "center", fontWeight: "bold", color: "#0d47a1",fontSize:{lg:'2rem',md:"2rem",xs:"1.5rem",sm:"1.5rem" }}}>
             {selectedHeader}
           </Typography>
