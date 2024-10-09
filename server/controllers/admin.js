@@ -51,6 +51,49 @@ export const createCourse = Trycatch(async (req, res) => {
   });
 });
 
+export const updateCourse = Trycatch(async (req, res) => {
+  const { id } = req.params;
+  const {
+    title,
+    course_description,
+    course_objective,
+    roles_in_industry,
+    course_highlights,
+    learn,
+    caption,
+    card_description,
+    price,
+    display_video_url,
+    category,
+  } = req.body;
+  const course = await Course.findById(id);
+  if (!course) {
+    return res.status(404).json({ message: "Course not found." });
+  }
+  const image = req.file;
+  let base64Image = course.image;
+  if (image) {
+    base64Image = `data:${image.mimetype};base64,${image.buffer.toString("base64")}`;
+  }
+  course.title = title || course.title;
+  course.course_description = course_description || course.course_description;
+  course.course_objective = course_objective || course.course_objective;
+  course.roles_in_industry = roles_in_industry || course.roles_in_industry;
+  course.course_highlights = course_highlights || course.course_highlights;
+  course.learn = learn || course.learn;
+  course.caption = caption || course.caption;
+  course.card_description = card_description || course.card_description;
+  course.price = price || course.price;
+  course.display_video_url = display_video_url || course.display_video_url;
+  course.category = category || course.category;
+  course.image = base64Image;
+  await course.save();
+
+  res.status(200).json({
+    message: "Course updated successfully",
+    course,
+  });
+});
 export const addLectures = Trycatch(async (req, res) => {
   const course = await Course.findById(req.params.id);
 
@@ -69,6 +112,22 @@ export const addLectures = Trycatch(async (req, res) => {
   res.status(201).json({ message: "Lecture added succesfully", lecture });
 });
 
+export const updateLecture = Trycatch(async (req, res) => {
+  const { id } = req.params;
+  const { title, description, video_url } = req.body;
+  const lecture = await Lecture.findById(id);
+  if (!lecture) {
+    return res.status(404).json({ message: "Lecture not found." });
+  }
+  lecture.title = title || lecture.title;
+  lecture.description = description || lecture.description;
+  lecture.video_url = video_url || lecture.video_url;
+  await lecture.save();
+  res.status(200).json({
+    message: "Lecture updated successfully",
+    lecture,
+  });
+});
 export const deleteLecture = Trycatch(async (req, res) => {
   const lecture = await Lecture.findById(req.params.id);
   if (!lecture) {

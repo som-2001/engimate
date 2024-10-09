@@ -1,7 +1,7 @@
 import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import sendmail from "../middlewares/sendmail.js";
+import { sendContactUsMail, sendMail } from "../middlewares/sendmail.js";
 import TryCatch from "../middlewares/trycatch.js";
 
 export const registerUser = TryCatch(async (req, res) => {
@@ -55,7 +55,7 @@ export const registerUser = TryCatch(async (req, res) => {
     username: name,
     otp: otp,
   };
-  sendmail(email, "your Verfication OTP for YANTRAVED", data);
+  sendMail(email, "your Verfication OTP for YANTRAVED", data);
 
   res.status(200).json({
     message: "OTP send to you mail",
@@ -100,7 +100,7 @@ export const requestLoginOtp = TryCatch(async (req, res) => {
   const data = { username: user.name, otp: otp };
 
   try {
-    await sendmail(user.email, "Your Login OTP for YANTRAVED", data);
+    await sendMail(user.email, "Your Login OTP for YANTRAVED", data);
   } catch (error) {
     return res
       .status(500)
@@ -150,3 +150,19 @@ export const myProfile = TryCatch(async (req, res) => {
   });
 });
 
+export const sendQuery = TryCatch(async (req, res) => {
+  const { name, email, phone_number, subject, message } = req.body;
+  if (!name || !email || !message) {
+    return res.status(400).json({ message: "All fields are required." });
+  }
+  try {
+    await sendContactUsMail({ name, email, message, subject, phone_number });
+    return res
+      .status(200)
+      .json({ message: "Your Query has been sent successfully!" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Failed to send email", error: error.message });
+  }
+});
