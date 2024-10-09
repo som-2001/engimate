@@ -146,10 +146,8 @@ const ReferEarn = () => {
       <Box
         sx={{ maxWidth: "600px", margin: "auto", mt: 5, textAlign: "center" }}
       >
-        <Typography variant="h4" gutterBottom>
-          Refer & Earn
-        </Typography>
-        <Typography variant="body1" gutterBottom sx={{padding:2}}>
+      
+        <Typography variant="body1" gutterBottom sx={{padding:2,fontWeight:'600'}}>
           Refer your friends and earn rewards when they sign up and make a
           purchase.
         </Typography>
@@ -213,8 +211,9 @@ const ReferEarn = () => {
           </Typography>
         </Box> */}
 
-        <FAQReferEarn />
+       
       </Box>
+      <FAQReferEarn />
       <Footer />
     </Box>
   );

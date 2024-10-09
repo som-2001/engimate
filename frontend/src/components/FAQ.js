@@ -37,7 +37,7 @@ const FAQReferEarn = () => {
   ];
 
   return (
-    <Container sx={{ marginTop: 4, backgroundColor: "#f9f9f9", p: {lg:4,md:4,sm:4,xs:2}, borderRadius: "20px",  }}>
+    <Container sx={{ marginTop: 4, backgroundColor: "#f9f9f9", p: {lg:4,md:4,sm:4,xs:2}, borderRadius: "20px", }}>
       <Typography variant="h6" sx={{ fontWeight: 700, marginBottom: 2, color: "#333",textAlign:"center",fontSize:{lg:"1.6rem",md:"1.6rem",sm:"1.6rem",xs:"1.2rem" }}}>
         FAQs for Refer & Earn
       </Typography>
