@@ -17,9 +17,7 @@ import {
     MdSubject,
   } from "react-icons/md";
  import "../App.css";
-import { useNavigate } from "react-router-dom";
 import React from "react";
-import { jwtDecode } from "jwt-decode";
 import UserNavbar from "../components/userNavbar";
 
   

@@ -11,7 +11,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  CircularProgress,
   Skeleton,
 } from "@mui/material";
 import axios from "axios";
@@ -39,7 +38,7 @@ export const UserManagement = () => {
         console.error(err);
         setLoading(false);
       });
-  }, [BaseUrl]);
+  }, []);
 
   const handleDeleteUser = (userId) => {
     setOpenDialog(true);

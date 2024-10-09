@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardContent,
-  CircularProgress,
   Container,
   Dialog,
   DialogActions,
@@ -125,7 +124,7 @@ export const Lectures = () => {
           })
           .then((res) => {
             setLoadPdf(false);
-            setDpp(res.data.materials);
+            setPdf(res.data.materials);
           })
           .catch((error) => {
             console.error("Error fetching categories", error);
@@ -555,7 +554,7 @@ export const Lectures = () => {
             <DialogContent dividers>
               {/* Display PDF in an iframe */}
               <iframe
-                src={dppDownload}
+                src={pdfDownload}
                 title={selectedPdf?.title}
                 width="100%"
                 height="500px"
