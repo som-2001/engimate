@@ -126,7 +126,7 @@ export const verifyLoginOtp = TryCatch(async (req, res) => {
     { email: user.email, _id: user.id, role: user.role },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1h",
+      expiresIn: "2h",
     },
   );
   user.otp = null;
