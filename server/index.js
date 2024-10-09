@@ -31,12 +31,14 @@ import userRoutes from "./routes/user.js";
 import coursesRoutes from "./routes/courses.js";
 import adminRoutes from "./routes/admin.js";
 import categoryRoutes from "./routes/categories.js";
+import DppRoutes from "./routes/dpp.js";
 
 // using routes
 app.use("/api", userRoutes);
 app.use("/api", coursesRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", DppRoutes);
 const startserver = async () => {
   try {
     await connectDb();

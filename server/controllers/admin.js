@@ -6,6 +6,8 @@ import { promise } from "bcrypt/promises.js";
 import { promisify } from "util";
 import fs, { rm } from "fs";
 import { User } from "../models/user.js";
+import { Dpp } from "../models/Dpp.js";
+import { Material } from "../models/material.js";
 
 export const createCourse = Trycatch(async (req, res) => {
   const {
@@ -18,6 +20,7 @@ export const createCourse = Trycatch(async (req, res) => {
     caption,
     card_description,
     price,
+    display_video_url,
     category,
   } = req.body;
   const createdBy = req.user._id;
@@ -37,6 +40,7 @@ export const createCourse = Trycatch(async (req, res) => {
     caption,
     card_description,
     price,
+    display_video_url,
     category,
     createdBy,
     image: base64Image,
@@ -117,5 +121,52 @@ export const getAllStats = Trycatch(async (req, res) => {
   res.status(200).json({
     message: "Statistics retrieved successfully",
     stats,
+  });
+});
+
+export const addDpp = Trycatch(async (req, res) => {
+  const { title, course } = req.body;
+  const pdfs = req.files;
+  if (!pdfs || pdfs.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "At least one PDF file is required." });
+  }
+  const base64Pdfs = pdfs.map((pdf) => {
+    return `data:${pdf.mimetype};base64,${pdf.buffer.toString("base64")}`;
+  });
+
+  const dpp = await Dpp.create({
+    title,
+    course,
+    fileData: base64Pdfs,
+    createdBy: req.user._id,
+  });
+  res.status(201).json({
+    message: "DPP created successfully",
+    dpp,
+  });
+});
+
+export const addMaterials = Trycatch(async (req, res) => {
+  const { course } = req.body;
+  const pdfs = req.files;
+  if (!pdfs || pdfs.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "At least one PDF file is required." });
+  }
+  const base64Pdfs = pdfs.map((pdf) => {
+    return `data:${pdf.mimetype};base64,${pdf.buffer.toString("base64")}`;
+  });
+
+  const material = await Material.create({
+    course,
+    fileData: base64Pdfs,
+    createdBy: req.user._id,
+  });
+  res.status(201).json({
+    message: "materials added successfully",
+    material,
   });
 });
