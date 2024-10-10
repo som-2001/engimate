@@ -22,20 +22,20 @@ export const getSingleCourse = Trycatch(async (req, res) => {
 });
 
 export const fetchLectures = Trycatch(async (req, res) => {
-  const lectures = await Lecture.find({ course: req.params.id }).exec(); // Resolves the query
-  const reversedLectures = lectures.reverse(); // Reverse the array
+  const reversedLectures = await Lecture.find({ course: req.params.id }).exec(); // Resolves the query
+  const lectures = reversedLectures.reverse(); // Reverse the array
 
   const user = await User.findById(req.user._id);
 
   if (user.role === "admin" || user.role === "instructor") {
-    return res.json({ reversedLectures });
+    return res.json({ lectures });
   }
   if (!user.subscription.includes(req.params.id)) {
     return res.json({
       message: "you are not subscribed to this course",
     });
   }
-  res.json({ reversedLectures });
+  res.json({ lectures });
 });
 
 export const fetchLecture = Trycatch(async (req, res) => {
