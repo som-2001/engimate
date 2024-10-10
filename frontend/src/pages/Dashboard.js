@@ -40,7 +40,9 @@ const NAV_ITEMS = [
   { text: 'Upload Dpps', icon: <BookIcon />, content: <AddDpp />, heading: "Upload Dpps" },
   { text: 'Upload Exam Form', icon: <QuizIcon />, content: <AddExam />, heading: "Upload Exam Form" },
   { text: 'Statictics', icon: <AnalyticsIcon />, content: <Stats />, heading: "Statictics Overview" },
-  {text:"User Management",icon:<FaUser/>, content:<UserManagement/>,heading:"User management"}
+  {text:"User Management",icon:<FaUser/>, content:<UserManagement/>,heading:"User management"},
+  {text:"Delete Materials",icon:<FaUser/>, content:<DeleteMaterials/>,heading:"Delete Materials"}
+
   
 ];
 

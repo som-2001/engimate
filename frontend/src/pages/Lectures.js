@@ -53,8 +53,25 @@ export const Lectures = () => {
         },
       })
       .then((res) => {
-        setDppDownload(res?.data?.dpp?.fileData?.[0]);
-        console.log(res?.data?.dpp?.fileData?.[0])
+        
+        const base64Pdf = res?.data?.dpp?.fileData?.[0].split(",")[1]; // Extract base64 part
+        const binaryPdf = atob(base64Pdf); // Convert base64 to binary data
+  
+        // Create an array buffer for the binary data
+        const len = binaryPdf.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binaryPdf.charCodeAt(i);
+        }
+  
+        // Create a Blob with the PDF binary data
+        const blob = new Blob([bytes], { type: "application/pdf" });
+  
+        // Create an object URL for the Blob
+        const url = URL.createObjectURL(blob);
+        console.log("URL:",url);
+        setDppDownload(url);
+        // console.log(res?.data?.dpp?.fileData?.[0])
       })
       .catch((error) => {
         console.error("Error fetching categories", error);
@@ -81,7 +98,26 @@ export const Lectures = () => {
         }
       )
       .then((res) => {
-        setpdfDownload(res?.data?.materials?.fileData?.[0]);
+       
+        console.log(res.data.material?.[0]);
+        const base64Pdf = res?.data?.material?.[0]?.fileData?.[0].split(",")[1]; // Extract base64 part
+        const binaryPdf = atob(base64Pdf); // Convert base64 to binary data
+  
+        // Create an array buffer for the binary data
+        const len = binaryPdf.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binaryPdf.charCodeAt(i);
+        }
+  
+        // Create a Blob with the PDF binary data
+        const blob = new Blob([bytes], { type: "application/pdf" });
+  
+        // Create an object URL for the Blob
+        const url = URL.createObjectURL(blob);
+        console.log("URL:",url);
+        setpdfDownload(url);
+        // console.log(res?.data?.dpp?.fileData?.[0])
       })
       .catch((error) => {
         console.error("Error fetching categories", error);
@@ -589,6 +625,7 @@ export const Lectures = () => {
             </DialogTitle>
             <DialogContent dividers>
               {/* Display PDF in an iframe */}
+              {pdfDownload.length===0?(<p style={{fontWeight:"600",fontSize:"1.5rem",marginTop:"40px",marginBottom:"40px"}}>Wait a moment,your pdf is loading...</p>):(
               <iframe
                 src={pdfDownload}
                 title={selectedPdf?.title}
@@ -596,6 +633,7 @@ export const Lectures = () => {
                 height="500px"
                 style={{ border: "none" }}
               />
+            )}
             </DialogContent>
             <DialogActions>
               {/* Download Button */}
@@ -736,13 +774,15 @@ export const Lectures = () => {
             </DialogTitle>
             <DialogContent dividers>
               {/* Display PDF in an iframe */}
+              {dppDownload.length===0?(<p style={{fontWeight:"600",fontSize:"1.5rem",marginTop:"40px",marginBottom:"40px"}}>Wait a moment,your pdf is loading...</p>):(
               <iframe
-                src={`data:application/pdf;base64,${dppDownload.split(";base64,")[1]}`}
+                src={dppDownload}
                 title={selectedDpp?.title}
                 width="100%"
                 height="500px"
                 style={{ border: "none" }}
               />
+            )}
             </DialogContent>
             <DialogActions>
               {/* Download Button */}
