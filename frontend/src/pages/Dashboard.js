@@ -28,6 +28,7 @@ import AnalyticsIcon from '@mui/icons-material/Analytics';
 import { Stats } from '../components/Stats';
 import { UserManagement } from '../components/UserManagment';
 import { FaUser } from 'react-icons/fa';
+import { DeleteMaterials } from '../components/DeleteMaterials';
 
 const drawerWidth = 280;
 
