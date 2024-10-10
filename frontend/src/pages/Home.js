@@ -485,7 +485,7 @@ export const Home = () => {
         >
           If you dream of having a great career with a good salary, then
           YANTRAVED,
-          <br /> the best software training institute is your stop. Enrol on our
+          <br /> the best software training institute is your stop. Enroll on our
           professional IT & Industrial Automation courses and get trained by the
           industry experts.
         </Typography>

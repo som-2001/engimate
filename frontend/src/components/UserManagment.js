@@ -15,12 +15,14 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { BaseUrl } from "./BaseUrl";
+import { useNavigate } from "react-router-dom";
 
 export const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const navigate=useNavigate();
 
   useEffect(() => {
     // Fetch users from the API
@@ -34,8 +36,17 @@ export const UserManagement = () => {
         setUsers(res.data.users);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        console.error(error);
+        console.error("Error fetching categories", error);
+            if (
+              error?.response?.data?.message === "login first or token expired"
+            ) {
+              if (sessionStorage?.getItem("token")) {
+                sessionStorage?.removeItem("token");
+              }
+              navigate("/login");
+            }
         setLoading(false);
       });
   }, []);
@@ -58,9 +69,18 @@ export const UserManagement = () => {
         setOpenDialog(false);
         setSelectedUserId(null);
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        console.error(error);
         setOpenDialog(false);
+        console.error("Error fetching categories", error);
+        if (
+          error?.response?.data?.message === "login first or token expired"
+        ) {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
+        }
       });
   };
 
