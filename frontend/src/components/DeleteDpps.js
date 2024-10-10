@@ -18,7 +18,7 @@ import { toast,ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 
-export const DeleteMaterials = () => {
+export const DeleteDpps = () => {
   const [materials, setMaterials] = useState([]);
   const [filteredMaterials, setFilteredMaterials] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,17 +26,16 @@ export const DeleteMaterials = () => {
   const [selectedMaterialId, setSelectedMaterialId] = useState(null);
   const navigate=useNavigate();
 
-
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get(`${BaseUrl}/materials/all`, {
+        const response = await axios.get(`${BaseUrl}/dpp/all`, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
         });
-        setMaterials(response.data.materials); // Adjust this based on your actual response structure
-        setFilteredMaterials(response.data.materials); // Initialize filtered materials
+        setMaterials(response.data.dpp); // Adjust this based on your actual response structure
+        setFilteredMaterials(response.data.dpp); // Initialize filtered materials
       } catch (error) {
         console.error('Error fetching materials:', error);
       }
@@ -62,12 +61,11 @@ export const DeleteMaterials = () => {
 
   const handleConfirmDelete = async () => {
     try {
-      axios.delete(`${BaseUrl}/material/${selectedMaterialId}`, {
+      axios.delete(`${BaseUrl}/dpp/${selectedMaterialId}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
       }).then(res=>{
-
         toast.success(res.data.message,{autoClose:3000});
         setMaterials((prevMaterials) =>
             prevMaterials.filter((material) => material._id !== selectedMaterialId)
@@ -77,20 +75,20 @@ export const DeleteMaterials = () => {
           );
           setOpenDialog(false);
       }).catch(error=>{
+
+        toast.error(error?.response?.data?.message,{autoClose:3000});
         console.error("Error fetching categories", error);
-            if (
-              error?.response?.data?.message === "login first or token expired"
-            ) {
-              if (sessionStorage?.getItem("token")) {
-                sessionStorage?.removeItem("token");
-              }
-              navigate("/login");
-            }
+        if (
+          error?.response?.data?.message === "login first or token expired"
+        ) {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
+        }
       })
-     
-     
     } catch (error) {
-      console.error('Error deleting material:', error);
+      console.error('Error deleting dpp:', error);
     }
   };
 
@@ -105,7 +103,7 @@ export const DeleteMaterials = () => {
 
       <ToastContainer/>
       <TextField
-        label="Search Materials"
+        label="Search Dpps"
         variant="outlined"
         value={searchTerm}
         onChange={handleSearch}
@@ -129,7 +127,7 @@ export const DeleteMaterials = () => {
           ))
         ) : (
           <Typography variant="body1" color="textSecondary" marginTop="10%" textAlign="center">
-            No materials found with this name.
+            No Dpps found with this name.
           </Typography>
         )}
       </List>
@@ -139,7 +137,7 @@ export const DeleteMaterials = () => {
         <DialogTitle>Confirm Deletion</DialogTitle>
         <DialogContent>
           <Typography>
-            Are you sure you want to delete this material?
+            Are you sure you want to delete this Dpp?
           </Typography>
         </DialogContent>
         <DialogActions>

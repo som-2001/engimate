@@ -29,6 +29,8 @@ import { Stats } from '../components/Stats';
 import { UserManagement } from '../components/UserManagment';
 import { FaUser } from 'react-icons/fa';
 import { DeleteMaterials } from '../components/DeleteMaterials';
+import { DeleteDpps } from '../components/DeleteDpps';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const drawerWidth = 280;
 
@@ -42,7 +44,8 @@ const NAV_ITEMS = [
   { text: 'Upload Exam Form', icon: <QuizIcon />, content: <AddExam />, heading: "Upload Exam Form" },
   { text: 'Statictics', icon: <AnalyticsIcon />, content: <Stats />, heading: "Statictics Overview" },
   {text:"User Management",icon:<FaUser/>, content:<UserManagement/>,heading:"User management"},
-  {text:"Delete Materials",icon:<FaUser/>, content:<DeleteMaterials/>,heading:"Delete Materials"}
+  {text:"Delete Materials",icon:<ClearIcon/>, content:<DeleteMaterials/>,heading:"Delete Materials"},
+  {text:"Delete Dpps",icon:<ClearIcon/>, content:<DeleteDpps/>,heading:"Delete Dpps"}
 
   
 ];
