@@ -35,6 +35,9 @@ const validationSchema = Yup.object().shape({
     .required("Price is required")
     .min(1, "Price must be greater than 0"),
   category: Yup.string().required("Category is required"),
+  display_video_url: Yup.string()
+    .url("Enter a valid URL")
+    .required("Video URL is required"),
   image: Yup.mixed().required("Image is required"),
 });
 
@@ -74,6 +77,7 @@ export const AddCourse = () => {
     formData.append("price", data.price);
     formData.append("category", data.category);
     formData.append("file", data.image[0]);
+    formData.append("display_video_url",data.display_video_url);
 
     try {
       setLoad(true);
@@ -500,6 +504,46 @@ export const AddCourse = () => {
             </Grid>
 
             <Grid item xs={12}>
+              <Controller
+                name="display_video_url"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    fullWidth
+                    label="Video URL"
+                    variant="outlined"
+                    InputProps={{
+                      sx: {
+                        borderRadius: "22px", // Customize border radius
+                       
+                        '&:hover': {
+                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                        },
+                      },
+                    }}
+                    sx={{
+                      borderRadius: "22px", // Outer border radius
+                      
+                      '& .MuiOutlinedInput-root': {
+                        
+                        '&:hover fieldset': {
+                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        },
+                      },
+                    }}
+                    error={!!errors.display_video_url}
+                    helperText={errors.display_video_url?.message}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
               <FormControl fullWidth error={!!errors.category}>
                 <InputLabel>Category</InputLabel>
                 <Controller
@@ -510,6 +554,7 @@ export const AddCourse = () => {
                     <Select
                       {...field}
                       fullWidth
+                      key={key}
                       InputProps={{
                         sx: {
                           borderRadius: "22px", // Customize border radius

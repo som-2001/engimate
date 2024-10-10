@@ -6,6 +6,7 @@ import {
   Divider,
   Button,
   CircularProgress,
+  IconButton,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
@@ -18,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import UserNavbar from "./userNavbar";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 const CourseDetail = () => {
   const [course, setCourse] = useState(null);
@@ -45,6 +47,10 @@ const CourseDetail = () => {
       navigate("/login");
     }
   }, [navigate]);
+
+  const handleVideoPlay = (index) => {
+    setActiveVideo(index);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -101,6 +107,8 @@ const CourseDetail = () => {
     return str?.split("\n");
   };
 
+  const [activeVideo, setActiveVideo] = useState(0); 
+
   if (load) {
     return (
       <center>
@@ -117,6 +125,26 @@ const CourseDetail = () => {
       </center>
     );
   }
+
+  const extractVideoId = (url) => {
+    let videoId = null;
+
+    if (url?.includes("v=")) {
+      // If 'v=' is present, extract the video ID before any other query parameters
+      videoId = url.split("v=")[1]?.split("&")[0];
+    } else if (url?.includes("youtube.com/shorts/")) {
+      // Handle YouTube Shorts
+      videoId = url.split("youtube.com/shorts/")[1]?.split("?")[0];
+    } else if (url?.includes("youtu.be/")) {
+      // Handle shortened YouTube URLs
+      videoId = url.split("youtu.be/")[1]?.split("?")[0];
+    } else {
+      console.error("Unsupported YouTube URL format");
+    }
+
+    return videoId;
+  };
+  
 
   const MakePayment = (id) => {
     setPaymentLoad(true);
@@ -321,11 +349,46 @@ const CourseDetail = () => {
                 padding: "20px",
               }}
             >
-              <img
-                src={course?.image}
-                alt={course?.title}
-                style={{ width: "100%", height: "auto", borderRadius: "15px" }}
-              />
+              {activeVideo === 0 ? (
+                          // YouTube Video Embed without autoplay
+                          <iframe
+                            width="100%"
+                            height="250"
+                            src={`https://www.youtube.com/embed/${extractVideoId(course?.display_video_url)}`}
+                            title={course?._id}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        ) : (
+                          // YouTube Thumbnail with Play Button
+                          <>
+                            <img
+                              src={`https://img.youtube.com/vi/${extractVideoId(course?.display_video_url)}/hqdefault.jpg`}
+                              alt="Video thumbnail"
+                              width="100%"
+                              height="250"
+                              style={{ objectFit: "cover" }}
+                            />
+
+                            {/* Play Button Overlay */}
+                            <IconButton
+                              sx={{
+                                position: "absolute",
+                                top: "40%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                                color: "red",
+                              }}
+                              onClick={() => handleVideoPlay(0)} // Play video on click
+                            >
+                              <PlayCircleOutlineIcon
+                                sx={{ fontSize: "2.5rem" }}
+                              />
+                            </IconButton>
+                          </>
+                        )}
               <Box
                 sx={{
                   display: "flex",

@@ -15,16 +15,37 @@ export const getSingleMaterial = Trycatch(async (req, res) => {
 });
 
 export const getMaterialByTitleAndId = Trycatch(async (req, res) => {
-  const { title, material_id } = req.query;
+  const { title, dpp_id } = req.query;
 
-  const material = await Material.find({ title: title, _id: material_id });
-  if (!material) {
+// Check if both title and dpp_id are provided
+if (!title || !dpp_id) {
+  return res.status(400).json({
+    message: "title and dpp_id are required",
+  });
+}
+
+try {
+  // Use findOne instead of find, and pass the conditions correctly
+  const dpp = await Dpp.findOne({ title: title, _id: dpp_id });
+
+  // Check if the document is not found
+  if (!dpp) {
     return res.status(404).json({
       message: "material not found",
     });
   }
+
+  // Successful response
   return res.status(200).json({
     message: "material fetch successful",
-    material,
+    dpp,
   });
+
+} catch (error) {
+  // Handle any server errors
+  return res.status(500).json({
+    message: "Server error occurred",
+    error: error.message, // Include the error message for debugging
+  });
+}
 });
