@@ -150,22 +150,11 @@ export const deleteCourse = Trycatch(async (req, res) => {
     });
   }
   await Lecture.deleteMany({ course: req.params.id });
-  if (course.image) {
-    rm(course.image, (err) => {
-      if (err) {
-        console.error("Error deleting image:", err);
-        return res.status(500).json({
-          message: "Error deleting course image",
-        });
-      }
-      console.log("course Image deleted");
-    });
-    await Course.deleteOne({ _id: req.params.id });
-    await User.updateMany({}, { $pull: { subscription: req.params.id } });
-    res.json({
-      message: "Course Deleted successfully",
-    });
-  }
+  await Course.deleteOne({ _id: req.params.id });
+  await User.updateMany({}, { $pull: { subscription: req.params.id } });
+  res.json({
+    message: "Course Deleted successfully",
+  });
 });
 
 export const getAllStats = Trycatch(async (req, res) => {
@@ -258,5 +247,31 @@ export const deleteUser = Trycatch(async (req, res) => {
   await User.deleteOne({ _id: req.params.id });
   return res.status(200).json({
     message: "user deleted successfully",
+  });
+});
+
+export const deleteDpp = Trycatch(async (req, res) => {
+  const dpp = await Dpp.findById(req.params.id);
+  if (!dpp) {
+    return res.status(404).json({
+      message: "Dpp not found",
+    });
+  }
+  await Dpp.deleteOne({ _id: req.params.id });
+  return res.status(200).json({
+    message: "Dpp deleted successfully",
+  });
+});
+
+export const deleteMaterial = Trycatch(async (req, res) => {
+  const material = await Material.findById(req.params.id);
+  if (!material) {
+    return res.status(404).json({
+      message: "material not found",
+    });
+  }
+  await Material.deleteOne({ _id: req.params.id });
+  return res.status(200).json({
+    message: "Material deleted successfully",
   });
 });

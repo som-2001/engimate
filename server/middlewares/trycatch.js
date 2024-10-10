@@ -3,8 +3,10 @@ const TryCatch = (handler) => {
     try {
       await handler(req, res, next);
     } catch (error) {
-      res.status(500).json({
-        message: error.message,
+      console.error("Error caught in TryCatch middleware:", error);
+      const statusCode = error.status || 500;
+      res.status(statusCode).json({
+        message: error.message || "Internal Server Error",
       });
     }
   };

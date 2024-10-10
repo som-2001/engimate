@@ -7,7 +7,7 @@ const Schema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
@@ -33,4 +33,5 @@ const Schema = new mongoose.Schema({
     required: true,
   },
 });
+Schema.set("timestamps", true);
 export const Dpp = mongoose.model("Daily-Practice-Problems", Schema);

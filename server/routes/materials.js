@@ -14,5 +14,5 @@ router.get(
   isSubscriber("material"),
   getSingleMaterial,
 );
-router.get("materials/search", isAuth, getMaterialByTitleAndId);
+router.get("/materials-search/", isAuth, getMaterialByTitleAndId);
 export default router;

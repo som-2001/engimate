@@ -40,6 +40,7 @@ app.use("/api", coursesRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", dppRoutes);
+app.use("/api", materialRoutes);
 const startserver = async () => {
   try {
     await connectDb();
