@@ -11,13 +11,19 @@ import {
   
   FormHelperText,
   FormControl,
+  CircularProgress,
 } from "@mui/material";
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BaseUrl } from "./BaseUrl";
+import { useNavigate } from "react-router-dom";
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
   category_name: Yup.string().required("Category name is required"),
   description: Yup.string().required("Description is required"),
   file: Yup.mixed().required("File is required"),
+ 
 });
 
 export const AddCategory = () => {
@@ -31,19 +37,41 @@ export const AddCategory = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  const [load,setLoad]=React.useState(false);
+  const navigate=useNavigate();
+  const [name,setName]=React.useState('');
+  
+
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("category_name", data.category_name);
     formData.append("description", data.description);
     formData.append("file", data.file[0]);
-
+    
     try {
-      const response = await axios.post(`/api/category/add/`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      console.log("Category added successfully:", response.data);
-      reset(); // Reset form fields on success
+      setLoad(true);
+      axios.post(`${BaseUrl}/categories/add/`, formData, {
+        headers: { "Content-Type": "multipart/form-data",
+          "Authorization":`Bearer ${sessionStorage.getItem("token")}`
+         },
+      }).then(res=>{
+        setLoad(false);
+        setName('');
+        console.log("Category added successfully:", res.data);
+        toast.success(res.data.message, { autoClose: 3000 });
+        reset(); // Reset form fields on success
+      }).catch(error=>{
+        if(error?.response?.data?.message==='login first or token expired')
+          {
+            if(sessionStorage?.getItem("token"))
+            {
+              sessionStorage?.removeItem("token");
+            }
+            navigate('/login');
+          }
+      })
     } catch (error) {
+      setLoad(false);
       console.error("Error adding category:", error);
     }
   };
@@ -57,6 +85,8 @@ export const AddCategory = () => {
         minHeight: "70vh",
       }}
     >
+       <ToastContainer />
+
       <Box sx={{ padding: 0, width: "100%", maxWidth: 600 }}>
        
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -72,6 +102,28 @@ export const AddCategory = () => {
                     fullWidth
                     label="Category Name"
                     variant="outlined"
+                    InputProps={{
+                      sx: {
+                        borderRadius: "22px", // Customize border radius
+                        
+                        '&:hover': {
+                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                        },
+                      },
+                    }}
+                    sx={{
+                      borderRadius: "22px", // Outer border radius
+                      
+                      '& .MuiOutlinedInput-root': {
+                        
+                        '&:hover fieldset': {
+                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        },
+                      },
+                    }}
                     error={!!errors.category_name}
                     helperText={errors.category_name?.message}
                   />
@@ -92,6 +144,28 @@ export const AddCategory = () => {
                     variant="outlined"
                     multiline
                     rows={4}
+                    InputProps={{
+                      sx: {
+                        borderRadius: "22px", // Customize border radius
+                  
+                        '&:hover': {
+                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                        },
+                      },
+                    }}
+                    sx={{
+                      borderRadius: "22px", // Outer border radius
+                      
+                      '& .MuiOutlinedInput-root': {
+                       
+                        '&:hover fieldset': {
+                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
+                        },
+                      },
+                    }}
                     error={!!errors.description}
                     helperText={errors.description?.message}
                   />
@@ -101,28 +175,58 @@ export const AddCategory = () => {
 
             <Grid item xs={12}>
               <FormControl fullWidth error={!!errors.file}>
-                <Button component="label" variant="contained" color="primary">
+                <Button component="label" variant="contained" color="primary"
+                 sx={{
+                  backgroundColor: "#0d47a1",
+                  color: "#fff",
+                  padding: "5px 24px",
+                  fontSize: "1rem",
+                  textTransform: "none",
+                  borderRadius: "50px",
+                  "&:hover": {
+                    backgroundColor: "#08306b",
+                  },
+                  
+                }}>
                   Upload File
                   <input
                     type="file"
                     accept="image/*"
                     hidden
-                    onChange={(e) => setValue("file", e.target.files)}
+                    onChange={(e) => {setValue("file", e.target.files)
+                     
+                      setName(e.target.files[0].name)
+                    }}
                   />
                 </Button>
+                {name!=='' && <span style={{fontWeight:100,fontSize:"0.9rem",marginTop:"5px",marginLeft:'10px'}}>File name:- {name}</span>}
                 <FormHelperText>{errors.file?.message}</FormHelperText>
               </FormControl>
             </Grid>
 
             <Grid item xs={12}>
-              <Button
+            <center><Button
                 type="submit"
+                disabled={load}
                 variant="contained"
                 color="primary"
                 fullWidth
+                sx={{
+                  backgroundColor: "#0d47a1",
+                  color: "#fff",
+                  width: "60%",
+                  padding: "5px 24px",
+                  fontSize: "1rem",
+                  textTransform: "none",
+                  borderRadius: "50px",
+                  "&:hover": {
+                    backgroundColor: "#08306b",
+                  },
+                  marginTop: "30px",
+                }}
               >
-                Submit
-              </Button>
+                {load ? <CircularProgress size={30}/> :<span>Submit</span>}
+              </Button></center>
             </Grid>
           </Grid>
         </form>

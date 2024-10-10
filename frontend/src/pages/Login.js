@@ -71,9 +71,9 @@ export const Login = () => {
         // You can handle successful login here (e.g., navigate to dashboard)
         setInterval(()=>{
           if(jwtDecode(response.data.token).role==='admin' || jwtDecode(response.data.token).role==='instructor')
-            navigate('/dashboard');
+            window.location.href='/dashboard';
           else{
-            navigate('/user-dashboard');
+            window.location.href='/user-dashboard';
           }
         },2000);  
       }
@@ -130,6 +130,7 @@ export const Login = () => {
                   height: "auto",
                   marginBottom: "20px",
                   mt: { xs: "5%", md: "0%" },
+                  cursor:"pointer"
                 }}
               />
               <Typography
@@ -162,6 +163,7 @@ export const Login = () => {
                       <TextField
                         {...field}
                         type="text"
+                        disabled={hide}
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">

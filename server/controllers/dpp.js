@@ -18,7 +18,6 @@ export const getSingleDpp = Trycatch(async (req, res) => {
 
 export const getDppByTitleAndId = Trycatch(async (req, res) => {
   const { title, dpp_id } = req.query;
-
   // Validate presence of parameters
   if (!title || !dpp_id) {
     return res.status(400).json({
@@ -27,7 +26,6 @@ export const getDppByTitleAndId = Trycatch(async (req, res) => {
   }
 
   // Validate ObjectId format
-
   //console.log(`Fetching DPP with title: ${title} and ID: ${dpp_id}`);
   if (!mongoose.Types.ObjectId.isValid(dpp_id)) {
     return res.status(400).json({ message: "Invalid ID format." });
@@ -46,4 +44,4 @@ export const getDppByTitleAndId = Trycatch(async (req, res) => {
     message: "Dpp fetch successful",
     dpp,
   });
-});
+ 

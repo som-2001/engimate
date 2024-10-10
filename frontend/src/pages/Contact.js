@@ -17,10 +17,13 @@ import {
     MdSubject,
   } from "react-icons/md";
  import "../App.css";
+import React from "react";
+import UserNavbar from "../components/userNavbar";
 
   
   export const Contact = () => {
    
+  
   
     return (
       <Box
@@ -32,7 +35,7 @@ import {
         }}
       >
        
-        <Navbar />
+       {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
         <Box
         sx={{
           width: "100vw",
@@ -192,9 +195,16 @@ import {
                 <Button
                   variant="contained"
                   sx={{
-                    width: { lg: "30%", md: "40%", xs: "50%", sm: "40%" },
-                    borderRadius: "25px",
-                    marginBottom:"20px"
+                    backgroundColor: "#0d47a1",
+                    color: "#fff",
+
+                    padding: "10px 24px",
+                    fontSize: "1rem",
+                    textTransform: "none",
+                    borderRadius: "50px",
+                    "&:hover": {
+                      backgroundColor: "#08306b",
+                    },
                   }}
                 >
                   Send Message

@@ -1,48 +1,41 @@
-import React from "react";
-import { Grid, Card, CardMedia, CardContent, Typography, Container, Box } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Grid, Card, CardMedia, CardContent, Typography, Container, Box, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-const expertise = [
-  {
-    image: "industrial_automation.png",
-    title: "Industrial Automation",
-    abbreviation: "IA",
-    description: "Master the latest in automation technologies with courses that cover PLC, SCADA, DCS, HMI, and more.",
-    link:"/courses/EE"
-  },
-  {
-    image: "Electrical & Electronics.jpg",
-    title: "Electrical & Electronics Engineering",
-    abbreviation: "EEE",
-    description: "Gain hands-on experience in electrical systems, circuit design, microcontroller, embedded system, power distribution, and safety protocols.",
-    link:"/courses/EE"
-  },
-  {
-    image: "mechanical.jpg",
-    title: "Mechanical Engineering",
-    abbreviation: "ME",
-    description: "Explore the fundamentals of mechanical design, CAD/CAM software, thermodynamics, and advanced manufacturing processes.",
-    link:"/courses/Mechanical"
-  },
-  {
-    image: "civil.jpg",
-    title: "Civil Engineering",
-    abbreviation: "CE",
-    description: "Learn the essentials of structural analysis, construction management, and sustainable building practices.",
-    link:"/courses/Civil"
-  },
-  {
-    image: "cse.jpg",
-    title: "IT and Software Development",
-    abbreviation: "ITSD",
-    description: "Equip yourself with the skills needed in today’s tech-driven world, including programming languages, software development, and IT infrastructure management.",
-    link:"/courses/CSE"
-  },
-];
+import axios from "axios";
+import { BaseUrl } from "./BaseUrl";
 
 export const OurExpertise = () => {
  
+  const handleViewCourses = (id) => {
+    window.location.href=`/courses/${id}`;
+  };
+
   const navigate=useNavigate();
+  const [categories,setCategories]=useState([]);
+  const [loadCategory,setLoadCategory]=useState(true);
+
+  useEffect(()=>{
+    try {
+      axios.get(`${BaseUrl}/categories/all`).then((res) => {
+        setLoadCategory(false);
+        setCategories(res.data.categories);
+      });
+    } catch (error) {
+      console.error("Error fetching categories", error);
+    }
+  },[navigate]);
+
+  if (loadCategory) {
+    return (
+      <center>
+        <Box sx={{ marginTop: { xs: "55%", sm: "45%", md: "25%", lg: "20%" },marginBottom:"20%" }}>
+          <CircularProgress size={30} />
+        </Box>
+       
+      </center>
+    );
+  }
+
 
   return (
     <Box>
@@ -50,11 +43,11 @@ export const OurExpertise = () => {
       <Container sx={{ padding: "9px" }}>
         
         {/* Expertise Cards Section */}
-        <Grid container spacing={4}>
-          {expertise.map((course, index) => (
+        <Grid container spacing={4} justifyContent="center">
+          {categories.length===0 ? <center><p style={{padding:"40px",marginTop:"10%",marginBottom:"10%",fontWeight:"600",fontSize:"1.5rem"}}>Expertise will be added soon.</p></center>:categories.map((course, index) => (
             <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <Card
-              onClick={(e)=>navigate(course.link)}
+              onClick={(e)=>handleViewCourses(course?._id)}
                 sx={{
                   boxShadow: 5,
                   borderRadius: "16px",
@@ -71,7 +64,7 @@ export const OurExpertise = () => {
                 <CardMedia
                   component="img"
                   height="280"
-                  image={`../images/${course.image}`}
+                  image={`${course.image}`}
                   alt={course.title}
                   sx={{ objectFit: "cover" }}
                 />
@@ -84,11 +77,13 @@ export const OurExpertise = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h5" component="div" sx={{ fontWeight: "bold", color: "#333" }}>
-                    {course.title}
+                  <Typography variant="h6" component="div" sx={{ fontWeight: "bold", color: "#333" }}>
+                    {course.category_name}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {course.description}
+                  <Typography variant="body2" color="text.secondary" marginTop="10px">
+                  {course.description.length > 150
+                        ? `${course.description.slice(0, 150)}...`
+                        : course.description}
                   </Typography>
                  
                 </CardContent>

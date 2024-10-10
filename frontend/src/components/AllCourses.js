@@ -11,39 +11,19 @@ import {
   CardActions,
   CircularProgress,
 } from "@mui/material";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ArrowRightAlt } from "@mui/icons-material";
 import axios from "axios";
 import { BaseUrl } from "../components/BaseUrl";
-import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
-import UserNavbar from "../components/userNavbar";
+import UserNavbar from "./userNavbar";
 
-export const OurCourses = () => {
+export const AllCourses = () => {
   const handleViewCourses = (id) => {
     window.location.href = `/courses/${id}`;
   };
 
   const [categories, setCategories] = useState([]);
   const [loadCategory, setLoadCategory] = useState(true);
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    const token = sessionStorage?.getItem("token");
-
-    if (token) {
-      const decodedToken = jwtDecode(token);
-
-      // Check if token is expired
-      if (decodedToken.exp < Math.floor(Date.now() / 1000)) {
-        sessionStorage.removeItem("token"); // Clear expired token
-        navigate("/login");
-      }
-    } else {
-      navigate("/login");
-    }
-  }, [navigate]);
 
   useEffect(() => {
     try {
@@ -59,9 +39,10 @@ export const OurCourses = () => {
   if (loadCategory) {
     return (
       <center style={{ overflowX: "hidden" }}>
-        {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
+        <UserNavbar />
         <Box
           sx={{
+           
             marginBottom: "20%",
           }}
         >
@@ -184,7 +165,7 @@ export const OurCourses = () => {
               </Typography>
             </Box>
           </Container>
-          <CircularProgress size={30} sx={{marginTop:"10%",marginBottom:"10%"}}/>
+          <CircularProgress size={30} sx={{marginTop:"10%"}}/>
         </Box>
         <Footer />
       </center>
@@ -192,7 +173,7 @@ export const OurCourses = () => {
   }
   return (
     <Box sx={{ overflowX: "hidden" }}>
-      {sessionStorage.getItem("token")?<UserNavbar/>:<Navbar />}
+      <UserNavbar />
       <Box
         sx={{
           width: "100vw",
@@ -211,7 +192,7 @@ export const OurCourses = () => {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.6)", // Overlay with opacity
+            backgroundColor: "rgba(0, 0, 0, 0.4)", // Overlay with opacity
             zIndex: 1,
           },
         }}
@@ -312,7 +293,7 @@ export const OurCourses = () => {
 
         {/* Course Cards Section */}
         <Grid container spacing={4} justifyContent="center">
-          {categories.length===0 ? <center><p style={{padding:"40px",marginTop:"10%",marginBottom:"10%",fontWeight:"600",fontSize:"1.5rem"}}>Domains will be added soon.</p></center>:categories.map((course, index) => (
+          {categories.length===0 ? <center><p style={{padding:"20px",marginTop:"10%",marginBottom:"10%",fontWeight:"600",fontSize:"1.5rem",textAlign:"center"}}>Domains will be added soon.</p></center>:categories.map((course, index) => (
             <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <Card
                 sx={{
@@ -363,7 +344,19 @@ export const OurCourses = () => {
                 <CardActions>
                   <Button
                     variant="standard"
-                    color="primary"
+                    sx={{
+                      backgroundColor: "#0d47a1",
+                      color: "#fff",
+                      width: "95%",
+                      padding: "5px 24px",
+                      fontSize: "1rem",
+                      textTransform: "none",
+                      borderRadius: "50px",
+                      "&:hover": {
+                        backgroundColor: "#08306b",
+                      },
+                      marginBottom: "5px",
+                    }}
                     onClick={() => handleViewCourses(course?._id)}
                   >
                     View Courses <ArrowRightAlt />
