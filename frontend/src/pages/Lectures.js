@@ -23,6 +23,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
+
+dayjs.extend(advancedFormat);
 
 export const Lectures = () => {
   const { id } = useParams();
@@ -495,12 +499,16 @@ export const Lectures = () => {
                             variant="h6"
                             sx={{ fontWeight: "bold", marginBottom: "12px" }}
                           >
-                            {data.title}
+                            <span style={{fontSize:"1.3rem",color:"blueviolet"}}>#{index+1}</span> {data.title}
                           </Typography>
                           <Typography variant="body2" color="textSecondary">
-                            {data?.description.length > 80
-                              ? `${data?.description.slice(0, 80)}...`
+                            {data?.description.length > 150
+                              ? `${data?.description.slice(0, 150)}...`
                               : data?.description}
+                          </Typography>
+                          <Typography variant="body2" color="textSecondary">
+                          Posted At:{" "}
+                          {dayjs(data?.createdAt).format("Do MMM YYYY")}
                           </Typography>
                         </CardContent>
                       </Card>
@@ -568,6 +576,7 @@ export const Lectures = () => {
                         onClick={() => handleCardClick1(data)} // Trigger dialog on card click
                       >
                         {/* PDF Icon */}
+                        <span style={{fontSize:"1.5rem",fontWeight:"700",marginRight:"5px",color:"blueviolet"}}>#{index+1}</span>
                         <Box
                           sx={{
                             minWidth: "40px",
@@ -593,6 +602,7 @@ export const Lectures = () => {
                         </Box>
 
                         {/* Title */}
+                        <Box sx={{display:"flex",flexDirection:"column"}}>
                         <Typography
                           variant="h6"
                           sx={{
@@ -606,6 +616,11 @@ export const Lectures = () => {
                         >
                           {data.title}
                         </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Posted At:{" "}
+                          {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                          </Typography>
+                          </Box>
                       </Card>
                     </Grid>
                   ))
@@ -716,6 +731,7 @@ export const Lectures = () => {
                         }}
                         onClick={() => handleCardClick(data)} // Trigger dialog on card click
                       >
+                        <span style={{fontSize:"1.5rem",fontWeight:"700",marginRight:"5px",color:"blueviolet"}}>#{index+1}</span>
                         {/* PDF Icon */}
                         <Box
                           sx={{
@@ -724,11 +740,13 @@ export const Lectures = () => {
                             backgroundColor: "#d32f2f", // Red background to resemble PDF
                             borderRadius: "8px",
                             display: "flex",
+                            flexDirection:"column",
                             justifyContent: "center",
                             alignItems: "center",
                             marginRight: "12px", // Space between icon and title
                           }}
                         >
+                          
                           <Typography
                             variant="body2"
                             sx={{
@@ -742,6 +760,7 @@ export const Lectures = () => {
                         </Box>
 
                         {/* Title */}
+                       <Box sx={{display:"flex",flexDirection:"column"}}>
                         <Typography
                           variant="h6"
                           sx={{
@@ -755,6 +774,12 @@ export const Lectures = () => {
                         >
                           {data.title}
                         </Typography>
+                       
+                        <Typography variant="body2" color="textSecondary">
+                          Posted At:{" "}
+                          {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                          </Typography>
+                          </Box>
                       </Card>
                     </Grid>
                   ))

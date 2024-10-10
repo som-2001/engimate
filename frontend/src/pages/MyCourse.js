@@ -18,6 +18,10 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import FAQPurchasedCourses from "../components/FAQPurchasedCourses";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
+
+dayjs.extend(advancedFormat);
 
 export const MyCourse = () => {
   const [result, setResult] = useState([]);
@@ -175,7 +179,7 @@ export const MyCourse = () => {
           <Box sx={{ textAlign: "center" }}>
             <Grid container spacing={4} justifyContent="center">
               {[...Array(3)].map((_, index) => (
-                <Grid item xs={12} sm={6} md={4} key={index}>
+                <Grid item xs={12} sm={12} md={12} key={index}>
                   <Card>
                     <CardContent>
                       <Skeleton variant="text" width="80%" />
@@ -208,8 +212,8 @@ export const MyCourse = () => {
         ) : (
           <Grid container spacing={4} justifyContent="center">
             {result.map((course, index) => (
-              <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
-                <Card
+              <Grid item xs={12} sm={12} md={12} lg={12} key={index}>
+                {/* <Card
                   onClick={() => handleViewCourses(course?._id)}
                   sx={{
                     borderRadius: "12px",
@@ -228,7 +232,7 @@ export const MyCourse = () => {
                     backgroundColor: "#f9f9f9", // Light background for modern feel
                   }}
                 >
-                  {/* Image Section */}
+                  
                   <CardMedia
                     component="img"
                     height="200"
@@ -243,7 +247,7 @@ export const MyCourse = () => {
                     }}
                   />
 
-                  {/* Content Section */}
+                  
                   <CardContent
                     sx={{
                       padding: "1.5rem",
@@ -251,7 +255,7 @@ export const MyCourse = () => {
                       backgroundColor: "#fff", // Clean white background for content
                     }}
                   >
-                    {/* Course Title */}
+                   
                     <Typography
                       variant="h5"
                       sx={{
@@ -264,7 +268,7 @@ export const MyCourse = () => {
                       {course.title}
                     </Typography>
 
-                    {/* Description */}
+                    
                     <Typography
                       variant="body2"
                       color="text.secondary"
@@ -285,7 +289,7 @@ export const MyCourse = () => {
                         : course.card_description}
                     </Typography>
 
-                    {/* Call to Action Button */}
+                   
                     <Button
                       variant="contained"
                       sx={{
@@ -306,7 +310,6 @@ export const MyCourse = () => {
                     </Button>
                   </CardContent>
 
-                  {/* Pricing/Enrolled Section */}
                   <Box
                     sx={{
                       padding: "1rem",
@@ -323,6 +326,86 @@ export const MyCourse = () => {
                     >
                       ENROLLED
                     </Typography>
+                  </Box>
+                </Card> */}
+
+                <Card
+                  sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", sm: "column", md: "row" }, // Stack vertically on small screens
+                    alignItems: "center", // Center content on small screens
+                    p: 2, // Add padding for better spacing
+                    gap: 2, // Add gap between media and content
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    sx={{
+                      width: { xs: "100%", sm: 300 }, // Full width on small screens, 300px on larger screens
+                      height: { xs: 200, sm: "auto" }, // Set fixed height on small screens
+                      objectFit: "cover", // Make sure image covers the container
+                    }}
+                    image={course.image}
+                    alt=""
+                    onClick={() => handleViewCourses(course?._id)}
+                  />
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      // flex: "1 0 auto",
+                    }}
+                  >
+                    <CardContent cc>
+                      <Typography component="div" variant="h5">
+                        {course?.title}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ color: "text.secondary", wordWrap: "break-word" }}
+                      >
+                        {course.card_description.length > 200
+                          ? `${course.card_description.slice(0, 200)}...`
+                          : course.card_description}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        component="div"
+                        sx={{ color: "text.secondary" }}
+                      >
+                        Created At:{" "}
+                        {dayjs(course?.createdAt).format("Do MMM YYYY")}
+                      </Typography>
+                      <span
+                        
+                        style={{ fontSize: "1.0rem", color: "red",textDecoration:"line-through" }}
+                      >
+                        Rs: {course.price} 
+                      </span>
+                      <span style={{color:"green",textDecoration:"none",fontSize:"1.2rem"}}> 
+                     {" "}Enrolled</span>
+                     
+                    </CardContent>
+                    <Button
+                     
+                     sx={{
+                       backgroundColor: "#0d47a1", // Blue color for Edit
+                       color: "#fff",
+                       width: {xs:"80%",md:"40%",sm:"40%",lg:"30%"},
+                       padding: "5px 16px", // Adjust padding
+                       fontSize: "1rem",
+                       textTransform: "none",
+                       borderRadius: "50px",
+                       "&:hover": {
+                         backgroundColor: "#08306b", // Darker shade on hover
+                       },
+                       marginBottom: "5px",
+                     }}
+                     onClick={() => handleViewCourses(course?._id)}
+                   >
+                     View
+                   </Button>
                   </Box>
                 </Card>
               </Grid>

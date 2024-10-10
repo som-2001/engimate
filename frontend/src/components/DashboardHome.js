@@ -29,7 +29,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
 
+dayjs.extend(advancedFormat); // Extend dayjs with the plugi
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   description: Yup.string().required("Description is required"),
@@ -484,8 +487,8 @@ export const DashboardHome = () => {
           ) : null}
           <Grid container spacing={2}>
             {courses.slice(0, visibleCourses)?.map((data, index) => (
-              <Grid item xs={12} sm={12} md={6} lg={4} key={index}>
-                <Card
+              <Grid item xs={12} sm={12} md={12} lg={12} key={index}>
+                {/* <Card
                   sx={{
                     boxShadow: 5,
                     borderRadius: "16px",
@@ -526,6 +529,9 @@ export const DashboardHome = () => {
                         ? `${data.card_description.slice(0, 70)}...`
                         : data.card_description}
                     </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                    </Typography>
                   </CardContent>
                   <Box
                     sx={{
@@ -534,7 +540,7 @@ export const DashboardHome = () => {
                       alignItems: "center",
                     }}
                   >
-                    {/* Delete Button */}
+
                     <Button
                       startIcon={<DeleteIcon />} // Add Delete Icon
                       sx={{
@@ -555,7 +561,6 @@ export const DashboardHome = () => {
                       Delete
                     </Button>
 
-                    {/* Edit Button */}
                     <Button
                       startIcon={<EditIcon />} // Add Edit Icon
                       sx={{
@@ -575,6 +580,116 @@ export const DashboardHome = () => {
                     >
                       Edit
                     </Button>
+                  </Box>
+                </Card> */}
+
+                <Card
+                  sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", sm: "column",md:"row" }, // Stack vertically on small screens
+                    alignItems: "center", // Center content on small screens
+                    p: 2, // Add padding for better spacing
+                    gap: 2, // Add gap between media and content
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    sx={{
+                      width: { xs: "100%", sm: 300 }, // Full width on small screens, 300px on larger screens
+                      height: { xs: 200, sm: "auto" }, // Set fixed height on small screens
+                      objectFit: "cover", // Make sure image covers the container
+                      cursor:"pointer"
+                    }}
+                    image={data.image}
+                    alt=""
+                    onClick={() => lectureShow(data?._id)}
+                  />
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      // flex: "1 0 auto",
+                    }}
+                  >
+                    <CardContent sx={{cursor:"pointer"}} onClick={() => lectureShow(data?._id)}>
+                      <Typography component="div" variant="h5">
+                        {data?.title}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        
+                        sx={{ color: "text.secondary",wordWrap:"break-word" }}
+                      >
+                        {data.card_description.length > 200
+                          ? `${data.card_description.slice(0, 200)}...`
+                          : data.card_description}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        component="div"
+                        sx={{ color: "text.secondary" }}
+                      >
+                        Created At:{" "}
+                        {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        component="div"
+                        sx={{ fontSize: "1.2rem", color: "green" }}
+                      >
+                        Rs: {data.price}
+                      </Typography>
+                    </CardContent>
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: { xs: "column", sm: "row" }, // Stack buttons vertically on small screens, row on larger screens
+                        alignItems: "center",
+                        gap: "10px",
+                        
+                      }}
+                    >
+                      <Button
+                        startIcon={<DeleteIcon />}
+                        sx={{
+                          backgroundColor: "#e53935",
+                          color: "#fff",
+                          width: { xs: "100%", sm: "100%",md:"40%",lg:"30%" }, // Full width button on small screens
+                          padding: "8px 16px",
+                          fontSize: "1rem",
+                          textTransform: "none",
+                          borderRadius: "10px",
+                          "&:hover": {
+                            backgroundColor: "#c62828",
+                          },
+                          mb: { xs: "10px", sm: 0 }, // Adjust bottom margin for small screens
+                        }}
+                        onClick={() => handleDeleteClick(data?._id)}
+                      >
+                        Delete
+                      </Button>
+
+                      <Button
+                        startIcon={<EditIcon />}
+                        sx={{
+                          backgroundColor: "#0d47a1",
+                          color: "#fff",
+                          width: { xs: "100%", sm: "100%",md:"40%",lg:"30%" }, // Full width button on small screens
+                          padding: "8px 16px",
+                          fontSize: "1rem",
+                          textTransform: "none",
+                          borderRadius: "10px",
+                          "&:hover": {
+                            backgroundColor: "#08306b",
+                          },
+                        }}
+                        onClick={() => handleEditCourse(data?._id)}
+                      >
+                        Edit
+                      </Button>
+                    </Box>
                   </Box>
                 </Card>
 
@@ -747,12 +862,11 @@ export const DashboardHome = () => {
                 <form onSubmit={handleSubmit(onSubmit1)} noValidate>
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
-                      
                       <TextField
                         {...register("title")}
                         fullWidth
                         focused
-                        label='Title'
+                        label="Title"
                         variant="outlined"
                         InputProps={{
                           sx: {
@@ -852,7 +966,7 @@ export const DashboardHome = () => {
                         {...register("course_description")}
                         fullWidth
                         focused
-                        label='Course Description'
+                        label="Course Description"
                         variant="outlined"
                         multiline
                         rows={4}
@@ -992,7 +1106,7 @@ export const DashboardHome = () => {
                         {...register("course_highlights")}
                         fullWidth
                         focused
-                        label='Course Highlights'
+                        label="Course Highlights"
                         variant="outlined"
                         multiline
                         rows={3}
