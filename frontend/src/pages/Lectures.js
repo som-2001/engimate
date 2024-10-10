@@ -47,13 +47,14 @@ export const Lectures = () => {
     setSelectedDpp(data);
 
     axios
-      .get(`${BaseUrl}/dpp/search?title=${data.title}&dpp_id=${data._id}`, {
+      .get(`${BaseUrl}/dpp-search/?title=${data.title}&dpp_id=${data._id}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
       })
       .then((res) => {
-        setDppDownload(res.data.dpp);
+        setDppDownload(res?.data?.dpp?.fileData?.[0]);
+        console.log(res?.data?.dpp?.fileData?.[0])
       })
       .catch((error) => {
         console.error("Error fetching categories", error);
@@ -72,7 +73,7 @@ export const Lectures = () => {
 
     axios
       .get(
-        `${BaseUrl}/materials/search?title=${data.title}&materials_id=${data._id}`,
+        `${BaseUrl}/materials-search/?title=${data.title}&material_id=${data._id}`,
         {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -80,7 +81,7 @@ export const Lectures = () => {
         }
       )
       .then((res) => {
-        setpdfDownload(res.data.materials);
+        setpdfDownload(res?.data?.materials?.fileData?.[0]);
       })
       .catch((error) => {
         console.error("Error fetching categories", error);
@@ -513,27 +514,62 @@ export const Lectures = () => {
                     <Grid item xs={12} sm={6} md={4} key={index}>
                       <Card
                         sx={{
-                          boxShadow: 5,
+                          boxShadow: 2,
                           borderRadius: "16px",
                           overflow: "hidden",
                           height: "80px",
                           position: "relative",
+                          display: "flex", // Align content horizontally
+                          alignItems: "center", // Center vertically
+                          padding: "8px",
+                          backgroundColor: "#f0f0f0", // Light background
                           transition: "transform 0.3s, box-shadow 0.3s",
                           "&:hover": {
                             transform: "scale(1.05)",
-                            boxShadow: "10px 10px 30px rgba(0,0,0,0.3)",
+                            boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
                           },
                         }}
                         onClick={() => handleCardClick1(data)} // Trigger dialog on card click
                       >
-                        <CardContent sx={{ padding: "16px", height: "80px" }}>
+                        {/* PDF Icon */}
+                        <Box
+                          sx={{
+                            minWidth: "40px",
+                            minHeight: "40px",
+                            backgroundColor: "#d32f2f", // Red background to resemble PDF
+                            borderRadius: "8px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginRight: "12px", // Space between icon and title
+                          }}
+                        >
                           <Typography
-                            variant="h6"
-                            sx={{ fontWeight: "bold", marginBottom: "12px" }}
+                            variant="body2"
+                            sx={{
+                              color: "white",
+                              fontWeight: "bold",
+                              fontSize: "12px",
+                            }}
                           >
-                            {data.title}
+                            PDF
                           </Typography>
-                        </CardContent>
+                        </Box>
+
+                        {/* Title */}
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: "bold",
+                            fontSize: "1rem",
+                            color: "#333", // Dark text color
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis", // Handle long titles
+                          }}
+                        >
+                          {data.title}
+                        </Typography>
                       </Card>
                     </Grid>
                   ))
@@ -625,41 +661,62 @@ export const Lectures = () => {
                     <Grid item xs={12} sm={6} md={4} key={index}>
                       <Card
                         sx={{
-                          boxShadow: 5,
+                          boxShadow: 2,
                           borderRadius: "16px",
                           overflow: "hidden",
-                          height: "auto",
+                          height: "80px",
                           position: "relative",
-                          
-                          padding: "16px",
-                          transition:
-                            "transform 0.3s ease, box-shadow 0.3s ease",
+                          display: "flex", // Align content horizontally
+                          alignItems: "center", // Center vertically
+                          padding: "8px",
+                          backgroundColor: "#f0f0f0", // Light background
+                          transition: "transform 0.3s, box-shadow 0.3s",
                           "&:hover": {
-                            transform: "scale(1.07)",
-                            boxShadow: "15px 15px 40px rgba(0, 0, 0, 0.4)", // Stronger shadow on hover
+                            transform: "scale(1.05)",
+                            boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
                           },
                         }}
                         onClick={() => handleCardClick(data)} // Trigger dialog on card click
                       >
-                        <CardContent
+                        {/* PDF Icon */}
+                        <Box
                           sx={{
-                            padding: "12px",
-                            height: "auto",
-                            textAlign: "center",
+                            minWidth: "40px",
+                            minHeight: "40px",
+                            backgroundColor: "#d32f2f", // Red background to resemble PDF
+                            borderRadius: "8px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginRight: "12px", // Space between icon and title
                           }}
                         >
                           <Typography
-                            variant="h6" // Bold and larger title
+                            variant="body2"
                             sx={{
-                              fontWeight: "600", // Bold font
-                              marginBottom: "8px",
-                            
-                              letterSpacing: "0.5px", // Better letter spacing
+                              color: "white",
+                              fontWeight: "bold",
+                              fontSize: "12px",
                             }}
                           >
-                            {data.title}
+                            PDF
                           </Typography>
-                        </CardContent>
+                        </Box>
+
+                        {/* Title */}
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: "bold",
+                            fontSize: "1rem",
+                            color: "#333", // Dark text color
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis", // Handle long titles
+                          }}
+                        >
+                          {data.title}
+                        </Typography>
                       </Card>
                     </Grid>
                   ))
@@ -680,7 +737,7 @@ export const Lectures = () => {
             <DialogContent dividers>
               {/* Display PDF in an iframe */}
               <iframe
-                src={dppDownload}
+                src={`data:application/pdf;base64,${dppDownload.split(";base64,")[1]}`}
                 title={selectedDpp?.title}
                 width="100%"
                 height="500px"

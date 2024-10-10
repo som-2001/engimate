@@ -1,5 +1,6 @@
 import Trycatch from "../middlewares/trycatch.js";
 import { Material } from "../models/material.js";
+import mongoose from "mongoose";
 
 export const getAllMaterials = Trycatch(async (req, res) => {
   const materials = await Material.find().select("_id title");
