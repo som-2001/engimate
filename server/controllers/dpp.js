@@ -27,7 +27,7 @@ if (!title || !dpp_id) {
 
 try {
   // Use findOne instead of find, and pass the conditions correctly
-  const dpp = await Dpp.findOne({ title: title, _id: dpp_id });
+  const dpp = await Dpp.findOne({_id: dpp_id });
 
   // Check if the document is not found
   if (!dpp) {
