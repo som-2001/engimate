@@ -44,4 +44,4 @@ export const getDppByTitleAndId = Trycatch(async (req, res) => {
     message: "Dpp fetch successful",
     dpp,
   });
- 
+})
