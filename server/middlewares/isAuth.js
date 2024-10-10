@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.js";
 import { Dpp } from "../models/Dpp.js";
-import {Material} from "../models/material.js";
+import { Material } from "../models/material.js";
+import mongoose from "mongoose";
 
 export const isAuth = async (req, res, next) => {
   try {
@@ -24,6 +25,7 @@ export const isAuth = async (req, res, next) => {
       return res.status(404).json({ message: "User not found" });
     }
     //console.log("Decoded Data: ", decodedData);
+    //console.log("Request Query:", req.query);
     next();
   } catch (error) {
     res.status(401).json({
@@ -46,7 +48,6 @@ export const isAdminOrInstructor = (req, res, next) => {
     });
   }
 };
-
 export const isSubscriber = (itemType) => {
   return async (req, res, next) => {
     try {
@@ -55,8 +56,8 @@ export const isSubscriber = (itemType) => {
       let itemDoc;
       let courseId;
       if (itemType === "dpp") {
-        itemDoc = await Dpp.findById(dpp_id);
-        if (!dpp_doc) {
+        itemDoc = await Dpp.findById(itemId);
+        if (!itemDoc) {
           return res.status(404).json({ message: "DPP not found." });
         }
         courseId = itemDoc.course._id;

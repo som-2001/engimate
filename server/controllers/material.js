@@ -16,7 +16,14 @@ export const getSingleMaterial = Trycatch(async (req, res) => {
 
 export const getMaterialByTitleAndId = Trycatch(async (req, res) => {
   const { title, material_id } = req.query;
-
+  if (!title || !material_id) {
+    return res.status(400).json({
+      message: "Title and material_id are required",
+    });
+  }
+  if (!mongoose.Types.ObjectId.isValid(material_id)) {
+    return res.status(400).json({ message: "Invalid ID format." });
+  }
   const material = await Material.find({ title: title, _id: material_id });
   if (!material) {
     return res.status(404).json({
