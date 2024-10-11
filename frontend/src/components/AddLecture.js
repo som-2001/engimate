@@ -97,209 +97,230 @@ export const AddLecture = () => {
     >
       <ToastContainer/>
 
-      <Box sx={{width: "100%", maxWidth: 600,boxShadow:{xs:0,sm:2},padding:{sm:5},backgroundColor:{sm:"whitesmoke"} }}>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Controller
-                name="title"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    label="Title"
-                    variant="outlined"
-                    InputProps={{
-                      sx: {
-                        borderRadius: "22px", // Customize border radius
-                       
-                        '&:hover': {
-                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
-                        },
-                      },
-                    }}
-                    sx={{
-                      borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                       
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
-                        },
-                      },
-                    }}
-                    error={!!errors.title}
-                    helperText={errors.title?.message}
-                  />
-                )}
-              />
-            </Grid>
+      <Box sx={{width: "100%", maxWidth: 800,boxShadow:{xs:0,sm:2},padding:{sm:2},backgroundColor:{sm:"transparent"},borderRadius:'10px' }}>
+       
+        <Grid container spacing={2}>
+  {/* Left Side - Image */}
+  <Grid item xs={12} sm={12} md={5}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+      }}
+    >
+      <img
+        src="../images/elearning.png" // Add your image URL here
+        alt="Form Side "
+        style={{
+          width: "100%",
+          maxWidth: "500px",
+          borderRadius: "15px",
+          objectFit: "cover",
+          height:"100%"
+        }}
+      />
+    </Box>
+  </Grid>
 
-            <Grid item xs={12}>
-              <Controller
-                name="description"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    label="Description"
-                    variant="outlined"
-                    multiline
-                    rows={4}
-                    InputProps={{
-                      sx: {
-                        borderRadius: "22px", // Customize border radius
-                      
-                        '&:hover': {
-                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
-                        },
-                      },
-                    }}
-                    sx={{
-                      borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                        
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
-                        },
-                      },
-                    }}
-                    error={!!errors.description}
-                    helperText={errors.description?.message}
-                  />
-                )}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Controller
-                name="video_url"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    label="Video URL"
-                    variant="outlined"
-                    InputProps={{
-                      sx: {
-                        borderRadius: "22px", // Customize border radius
-                       
-                        '&:hover': {
-                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
-                        },
-                      },
-                    }}
-                    sx={{
-                      borderRadius: "22px", // Outer border radius
-                      
-                      '& .MuiOutlinedInput-root': {
-                        
-                        '&:hover fieldset': {
-                          borderColor: 'rgb(89, 139, 139)', // Border color on hover
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'rgb(107, 169, 169)', // Border color when focused
-                        },
-                      },
-                    }}
-                    error={!!errors.video_url}
-                    helperText={errors.video_url?.message}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Box sx={{ mb: 2 }}>
-                <FormControl
-                  fullWidth
-                  variant="outlined"
-                  error={!!errors.course}
-                >
-                  <InputLabel id="course-label">Course</InputLabel>
-                  <Controller
-                    name="course"
-                    control={control}
-                    render={({ field }) => (
-                      <Select {...field} fullWidth key={key}
-                      InputProps={{
-                        sx: {
-                          borderRadius: "22px", // Customize border radius
-                         
-                          '&:hover': {
-                            backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
-                          },
-                        },
-                      }}
-                      sx={{
-                        borderRadius: "22px", // Outer border radius
-                        
-                        '& .MuiOutlinedInput-root': {
-                          
-                          '&:hover fieldset': {
-                            borderColor: 'rgb(89, 139, 139)', // Border color on hover
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: 'rgb(107, 169, 169)', // Border color when focused
-                          },
-                        },
-                      }}
-                      >
-                      {result.map((course) => (
-                        <MenuItem
-                          key={course._id}
-                          value={course._id}
-                        >
-                          {course.title}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    )}
-                  />
-                  {errors.course && (
-                    <FormHelperText>{errors.course.message}</FormHelperText>
-                  )}
-                </FormControl>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <center><Button
-                type="submit"
-                variant="contained"
-                disabled={load}
-                color="primary"
+  {/* Right Side - Form */}
+  <Grid item xs={12} sm={12} md={7}>
+    <form onSubmit={handleSubmit(onSubmit)} >
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Controller
+            name="title"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField
+                {...field}
                 fullWidth
-                sx={{
-                  backgroundColor: "#0d47a1",
-                  color: "#fff",
-                  width: "60%",
-                  padding: "10px 24px",
-                  fontSize: "1rem",
-                  textTransform: "none",
-                  borderRadius: "50px",
-                  "&:hover": {
-                    backgroundColor: "#08306b",
+                label="Title"
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    borderRadius: "22px",
+                    '&:hover': {
+                      backgroundColor: "rgba(107, 169, 169, 0.1)",
+                    },
                   },
-                  marginBottom: "20px",
                 }}
-              >
-                {load ? <CircularProgress size={30}/> :<span>Submit</span>}
-              </Button></center>
-            </Grid>
-          </Grid>
-        </form>
+                sx={{
+                  borderRadius: "22px",
+                  '& .MuiOutlinedInput-root': {
+                    '&:hover fieldset': {
+                      borderColor: 'rgb(89, 139, 139)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'rgb(107, 169, 169)',
+                    },
+                  },
+                }}
+                error={!!errors.title}
+                helperText={errors.title?.message}
+              />
+            )}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Controller
+            name="description"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                label="Description"
+                variant="outlined"
+                multiline
+                rows={4}
+                InputProps={{
+                  sx: {
+                    borderRadius: "22px",
+                    '&:hover': {
+                      backgroundColor: "rgba(107, 169, 169, 0.1)",
+                    },
+                  },
+                }}
+                sx={{
+                  borderRadius: "22px",
+                  '& .MuiOutlinedInput-root': {
+                    '&:hover fieldset': {
+                      borderColor: 'rgb(89, 139, 139)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'rgb(107, 169, 169)',
+                    },
+                  },
+                }}
+                error={!!errors.description}
+                helperText={errors.description?.message}
+              />
+            )}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Controller
+            name="video_url"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+                label="Video URL"
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    borderRadius: "22px",
+                    '&:hover': {
+                      backgroundColor: "rgba(107, 169, 169, 0.1)",
+                    },
+                  },
+                }}
+                sx={{
+                  borderRadius: "22px",
+                  '& .MuiOutlinedInput-root': {
+                    '&:hover fieldset': {
+                      borderColor: 'rgb(89, 139, 139)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'rgb(107, 169, 169)',
+                    },
+                  },
+                }}
+                error={!!errors.video_url}
+                helperText={errors.video_url?.message}
+              />
+            )}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Box sx={{ mb: 2 }}>
+            <FormControl
+              fullWidth
+              variant="outlined"
+              error={!!errors.course}
+            >
+              <InputLabel id="course-label">Course</InputLabel>
+              <Controller
+                name="course"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    fullWidth
+                    sx={{
+                      borderRadius: "22px",
+                      '&:hover': {
+                        backgroundColor: "rgba(107, 169, 169, 0.1)",
+                      },
+                      '& .MuiOutlinedInput-root': {
+                        '&:hover fieldset': {
+                          borderColor: 'rgb(89, 139, 139)',
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: 'rgb(107, 169, 169)',
+                        },
+                      },
+                    }}
+                  >
+                    {result.map((course) => (
+                      <MenuItem
+                        key={course._id}
+                        value={course._id}
+                      >
+                        {course.title}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+              {errors.course && (
+                <FormHelperText>{errors.course.message}</FormHelperText>
+              )}
+            </FormControl>
+          </Box>
+        </Grid>
+
+        <Grid item xs={12}>
+          <center>
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={load}
+              color="primary"
+              fullWidth
+              sx={{
+                backgroundColor: "#0d47a1",
+                color: "#fff",
+                width: "60%",
+                padding: "5px 24px",
+                fontSize: "1rem",
+                textTransform: "none",
+                borderRadius: "50px",
+                "&:hover": {
+                  backgroundColor: "#08306b",
+                },
+                marginBottom: "10px",
+              }}
+            >
+              {load ? <CircularProgress size={30} /> : <span>Submit</span>}
+            </Button>
+          </center>
+        </Grid>
+      </Grid>
+    </form>
+  </Grid>
+</Grid>
+
+      
       </Box>
     </Box>
   );
