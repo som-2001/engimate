@@ -51,6 +51,6 @@ router.post(
 router.get("/users/all", isAuth, isAdminOrInstructor, getAllUsers);
 router.get("/users/:id", isAuth, isAdminOrInstructor, getSingleUser);
 router.delete("/users/:id", isAuth, isAdminOrInstructor, deleteUser);
-router.delete("/material/:id", isAuth, isAdminOrInstructor, deleteMaterial);
+router.delete("/materials/:id", isAuth, isAdminOrInstructor, deleteMaterial);
 router.delete("/dpp/:id", isAuth, isAdminOrInstructor, deleteDpp);
 export default router;
