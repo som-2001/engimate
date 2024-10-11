@@ -10,7 +10,7 @@ export const getAllDpp = Trycatch(async (req, res) => {
   });
 });
 export const getSingleDpp = Trycatch(async (req, res) => {
-  const dpp = await Dpp.find({course:req.params.id});
+  const dpp = await Dpp.find({course:mongoose.Types.ObjectId(req.params.id)});
   res.json({
     dpp,
   });

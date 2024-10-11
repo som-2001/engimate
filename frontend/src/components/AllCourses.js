@@ -17,6 +17,10 @@ import axios from "axios";
 import { BaseUrl } from "../components/BaseUrl";
 import UserNavbar from "./userNavbar";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
+dayjs.extend(advancedFormat);
+
 
 export const AllCourses = () => {
   const handleViewCourses = (id) => {
@@ -344,9 +348,12 @@ export const AllCourses = () => {
                     color="text.secondary"
                     marginTop="20px"
                   >
-                    {course.description.length > 150
-                        ? `${course.description.slice(0, 150)}...`
+                    {course.description.length > 100
+                        ? `${course.description.slice(0, 100)}...`
                         : course.description}
+                  </Typography>
+                  <Typography variant="body2" color="primary">
+                    Posted At: {dayjs(course.createdAt).format('Do MMM YYYY')}
                   </Typography>
                 </CardContent>
                 <CardActions>

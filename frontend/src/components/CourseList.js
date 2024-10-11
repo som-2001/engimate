@@ -16,6 +16,9 @@ import axios from "axios";
 import { BaseUrl } from "./BaseUrl";
 import UserNavbar from "./userNavbar";
 import { jwtDecode } from "jwt-decode";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
+dayjs.extend(advancedFormat);
 
 
 const CourseList = () => {
@@ -248,7 +251,7 @@ const CourseList = () => {
           <Typography
             variant="body1"
             sx={{
-              maxWidth: "800px",
+              // maxWidth: "800px",
               margin: "auto",
               fontSize: { lg: "1.1rem", xs: "0.9rem", md: "0.7rem" },
             }}
@@ -300,13 +303,13 @@ const CourseList = () => {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
-                    textAlign: "center",
+                    
                   }}
                 >
                   <Typography
                     variant="h6"
                     component="div"
-                    sx={{ fontWeight: "bold", color: "#333" }}
+                    sx={{ fontWeight: "bold", color: "#333",textAlign:"center" }}
                   >
                     {course?.title}
                   </Typography>
@@ -315,10 +318,17 @@ const CourseList = () => {
                     color="text.secondary"
                     sx={{ marginTop: "10px", color: "#666" }}
                   >
-                    {course.card_description.length > 150
-                        ? `${course.card_description.slice(0, 150)}...`
+                    {course.card_description.length > 100
+                        ? `${course.card_description.slice(0, 100)}...`
                         : course.card_description}
                   </Typography>
+                  <Typography variant="body2">
+                    Price: {course.price}
+                  </Typography>
+                  <Typography variant="body2" color="primary">
+                    Posted At: {dayjs(course.createdAt).format('Do MMM YYYY')}
+                  </Typography>
+                  
                 </CardContent>
               </Card>
             </Grid>

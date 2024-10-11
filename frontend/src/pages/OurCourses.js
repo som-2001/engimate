@@ -19,6 +19,9 @@ import { BaseUrl } from "../components/BaseUrl";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import UserNavbar from "../components/userNavbar";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
+dayjs.extend(advancedFormat);
 
 export const OurCourses = () => {
   const handleViewCourses = (id) => {
@@ -355,9 +358,12 @@ export const OurCourses = () => {
                     color="text.secondary"
                     marginTop="20px"
                   >
-                    {course.description.length > 150
-                        ? `${course.description.slice(0, 150)}...`
+                    {course.description.length > 100
+                        ? `${course.description.slice(0, 100)}...`
                         : course.description}
+                  </Typography>
+                  <Typography variant="body2" color="primary">
+                    Posted At: {dayjs(course.createdAt).format('Do MMM YYYY')}
                   </Typography>
                 </CardContent>
                 <CardActions>
