@@ -16,12 +16,14 @@ import { ArrowRightAlt } from "@mui/icons-material";
 import axios from "axios";
 import { BaseUrl } from "../components/BaseUrl";
 import UserNavbar from "./userNavbar";
+import { useNavigate } from "react-router-dom";
 
 export const AllCourses = () => {
   const handleViewCourses = (id) => {
     window.location.href = `/courses/${id}`;
   };
 
+  const navigate=useNavigate();
   const [categories, setCategories] = useState([]);
   const [loadCategory, setLoadCategory] = useState(true);
 
@@ -33,6 +35,12 @@ export const AllCourses = () => {
       });
     } catch (error) {
       console.error("Error fetching categories", error);
+      if (error?.response?.data?.message === "login first or token expired") {
+        if (sessionStorage?.getItem("token")) {
+          sessionStorage?.removeItem("token");
+        }
+        navigate("/login");
+      }
     }
   }, []);
 
