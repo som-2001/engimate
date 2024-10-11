@@ -22,7 +22,7 @@ export const UserManagement = () => {
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch users from the API
@@ -39,14 +39,12 @@ export const UserManagement = () => {
       .catch((error) => {
         console.error(error);
         console.error("Error fetching categories", error);
-            if (
-              error?.response?.data?.message === "login first or token expired"
-            ) {
-              if (sessionStorage?.getItem("token")) {
-                sessionStorage?.removeItem("token");
-              }
-              navigate("/login");
-            }
+        if (error?.response?.data?.message === "login first or token expired") {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
+        }
         setLoading(false);
       });
   }, []);
@@ -73,9 +71,7 @@ export const UserManagement = () => {
         console.error(error);
         setOpenDialog(false);
         console.error("Error fetching categories", error);
-        if (
-          error?.response?.data?.message === "login first or token expired"
-        ) {
+        if (error?.response?.data?.message === "login first or token expired") {
           if (sessionStorage?.getItem("token")) {
             sessionStorage?.removeItem("token");
           }
@@ -91,72 +87,121 @@ export const UserManagement = () => {
 
   return (
     <Box p={2}>
-     {loading ? (
+      {loading ? (
         <Grid container spacing={4} justifyContent="center">
-          {[...Array(3)].map((_, index) => ( // Show 3 skeletons as placeholders
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card>
-                <CardContent>
-                  <Skeleton variant="text" width="80%" />
-                  <Skeleton variant="text" width="60%" />
-                  <Skeleton variant="text" width="60%" />
-                  <Skeleton variant="text" width="80%" />
-                  <Skeleton variant="text" width="40%" />
-                  <Skeleton variant="text" width="60%" />
-                  <Skeleton variant="rectangular" height={48} sx={{ marginTop: 2 }} />
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+          {[...Array(3)].map(
+            (
+              _,
+              index // Show 3 skeletons as placeholders
+            ) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card>
+                  <CardContent>
+                    <Skeleton variant="text" width="80%" />
+                    <Skeleton variant="text" width="60%" />
+                    <Skeleton variant="text" width="60%" />
+                    <Skeleton variant="text" width="80%" />
+                    <Skeleton variant="text" width="40%" />
+                    <Skeleton variant="text" width="60%" />
+                    <Skeleton
+                      variant="rectangular"
+                      height={48}
+                      sx={{ marginTop: 2 }}
+                    />
+                  </CardContent>
+                </Card>
+              </Grid>
+            )
+          )}
         </Grid>
       ) : (
         <Grid container spacing={4} justifyContent="center">
-          {users.length===0 ? <center><p style={{marginTop:"25%",marginBottom:"10%",fontWeight:"500",fontSize:"1.5rem"}}>No users currently Available.</p></center>:users.map((user) => (
-            <Grid item xs={12} sm={6} md={4} key={user._id}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6">{user.name}</Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    <b>Email:</b> {user.email}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    <b>Phone:</b> {user.phone_number}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    <b>Course Enrolled:</b> {user.course_enrolled}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    <b>Specialization:</b> {user.specialization || "N/A"}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    <b>Role:</b> {user.role}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    <b>Referral Code:</b> {user.referral_code}
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => handleDeleteUser(user._id)}
-                    sx={{
-                      backgroundColor: "#e53935",
-                      color: "#fff",
-                      padding: "5px 24px",
-                      fontSize: "1rem",
-                      textTransform: "none",
-                      borderRadius: "50px",
-                      "&:hover": {
+          {users.length === 0 ? (
+            <center>
+              <p
+                style={{
+                  marginTop: "25%",
+                  marginBottom: "10%",
+                  fontWeight: "500",
+                  fontSize: "1.5rem",
+                }}
+              >
+                No users currently Available.
+              </p>
+            </center>
+          ) : (
+            users.map((user) => (
+              <Grid item xs={12} sm={6} md={4} key={user._id}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h6">{user.name}</Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      <b>Email:</b> <a href={`mailto:${user.email}`}>
+                        {user.email}
+                      </a>
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" sx={{cursor:"pointer"}}>
+                      <b>Phone:</b>{" "}
+                      <a href={`tel:${user.phone_number}`}>
+                        {user.phone_number}
+                      </a>
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      <b>Course Enrolled:</b> {user.course_enrolled}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      <b>Specialization:</b> {user.specialization || "N/A"}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      <b>Role:</b> {user.role}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      <b>Referral Code:</b> {user.referral_code}
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleDeleteUser(user._id)}
+                      sx={{
                         backgroundColor: "#e53935",
-                      },
-                      marginTop: "20px",
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+                        color: "#fff",
+                        padding: "5px 24px",
+                        fontSize: "1rem",
+                        textTransform: "none",
+                        borderRadius: "50px",
+                        "&:hover": {
+                          backgroundColor: "#e53935",
+                        },
+                        marginTop: "20px",
+                        marginRight: "10px",
+                      }}
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleDeleteUser(user._id)}
+                      sx={{
+                        backgroundColor: "#0d47a1",
+                        color: "#fff",
+                        padding: "5px 24px",
+                        fontSize: "1rem",
+                        textTransform: "none",
+                        borderRadius: "50px",
+                        "&:hover": {
+                          backgroundColor: "#0d47a1",
+                        },
+                        marginTop: "20px",
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))
+          )}
         </Grid>
       )}
 
@@ -180,11 +225,7 @@ export const UserManagement = () => {
           <Button onClick={handleCloseDialog} color="primary">
             No
           </Button>
-          <Button
-            onClick={confirmDeleteUser}
-            color="secondary"
-            autoFocus
-          >
+          <Button onClick={confirmDeleteUser} color="secondary" autoFocus>
             Yes, Delete
           </Button>
         </DialogActions>
@@ -192,4 +233,3 @@ export const UserManagement = () => {
     </Box>
   );
 };
-
