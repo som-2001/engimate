@@ -117,41 +117,41 @@ export const UserManagement = () => {
                 <CardContent>
                   <Typography variant="h6">{user.name}</Typography>
                   <Typography variant="body2" color="textSecondary">
-                    Email: {user.email}
+                    <b>Email:</b> {user.email}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    Phone: {user.phone_number}
+                    <b>Phone:</b> {user.phone_number}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    Course Enrolled: {user.course_enrolled}
+                    <b>Course Enrolled:</b> {user.course_enrolled}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    Specialization: {user.specialization || "N/A"}
+                    <b>Specialization:</b> {user.specialization || "N/A"}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    Role: {user.role}
+                    <b>Role:</b> {user.role}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    Referral Code: {user.referral_code}
+                    <b>Referral Code:</b> {user.referral_code}
                   </Typography>
                   <Button
                     variant="contained"
                     color="secondary"
                     onClick={() => handleDeleteUser(user._id)}
                     sx={{
-                      backgroundColor: "#0d47a1",
+                      backgroundColor: "#e53935",
                       color: "#fff",
                       padding: "5px 24px",
                       fontSize: "1rem",
                       textTransform: "none",
                       borderRadius: "50px",
                       "&:hover": {
-                        backgroundColor: "#08306b",
+                        backgroundColor: "#e53935",
                       },
                       marginTop: "20px",
                     }}
                   >
-                    Delete User
+                    Delete
                   </Button>
                 </CardContent>
               </Card>

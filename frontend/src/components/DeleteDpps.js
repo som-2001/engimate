@@ -11,12 +11,14 @@ import {
   ListItem,
   ListItemText,
   TextField,
+  Divider,
+  InputAdornment,
 } from '@mui/material';
 import axios from 'axios';
 import { BaseUrl } from './BaseUrl';
 import { toast,ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
+import SearchIcon from '@mui/icons-material/Search';
 
 export const DeleteDpps = () => {
   const [materials, setMaterials] = useState([]);
@@ -103,9 +105,16 @@ export const DeleteDpps = () => {
 
       <ToastContainer/>
       <TextField
-        label="Search Dpps"
+        placeholder="Search Dpps"
         variant="outlined"
         value={searchTerm}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
         onChange={handleSearch}
         sx={{width:{lg:"50%",md:"50%",sm:"80%",xs:"100%"}}}
         margin="normal"
@@ -114,6 +123,7 @@ export const DeleteDpps = () => {
       <List>
         {filteredMaterials.length > 0 ? (
           filteredMaterials.map((material) => (
+            <>
             <ListItem key={material._id} secondaryAction={
               <Button
                 color="error"
@@ -123,7 +133,11 @@ export const DeleteDpps = () => {
               </Button>
             }>
               <ListItemText primary={material.title} /> {/* Adjust based on your data structure */}
+             
             </ListItem>
+            <Divider/>
+            </>
+         
           ))
         ) : (
           <Typography variant="body1" color="textSecondary" marginTop="10%" textAlign="center">

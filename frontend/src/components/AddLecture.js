@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
-  description: Yup.string().required("Description is required"),
+  description: Yup.string().required("Description is required").max(100,"maximum 100 characters can be added."),
   video_url: Yup.string()
     .url("Enter a valid URL")
     .required("Video URL is required"),

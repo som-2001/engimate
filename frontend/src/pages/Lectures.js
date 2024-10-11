@@ -446,12 +446,14 @@ export const Lectures = () => {
                           borderRadius: "16px",
                           overflow: "hidden",
                           height: "auto",
-                          position: "relative",
+                          position: "relative", // Needed for overlay positioning
                           transition: "transform 0.3s, box-shadow 0.3s",
                           "&:hover": {
-                            transform: "scale(1.05)",
-                            boxShadow: "10px 10px 30px rgba(0,0,0,0.3)",
+                            transform: "translateY(-5px)",
+                            boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
                           },
+                          marginBottom: "10px",
+                          cursor: "pointer",
                         }}
                       >
                         {activeVideo === index ? (
@@ -494,7 +496,12 @@ export const Lectures = () => {
                             </IconButton>
                           </>
                         )}
-                        <CardContent sx={{ padding: "16px", height: "80px" }}>
+                        <CardContent sx={{
+                      height: "130px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}>
                           <Typography
                             variant="h6"
                             sx={{ fontWeight: "bold", marginBottom: "12px" }}

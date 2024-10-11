@@ -205,11 +205,11 @@ function Dashboard() {
         >
           <Toolbar />
 
-          <Typography variant="h5" gutterBottom textAlign="center" margin="normal"  sx={{ textAlign: "center", fontWeight: "bold", color: "#0d47a1",fontSize:{lg:'2rem',md:"2rem",xs:"1.5rem",sm:"1.5rem" }}}>
+          <Typography variant="body1" gutterBottom textAlign="center" sx={{ textAlign: "center", fontWeight: "bold", color: "blueviolet",fontSize:{lg:'2rem',md:"2rem",xs:"1.5rem",sm:"1.5rem" },fontFamily:"mono-space"}}>
             {selectedHeader}
           </Typography>
-          <center>
-            <Divider sx={{ marginBottom: "50px", width: { lg: "14%", xs: "30%", sm: "18%", md: "14%" }, backgroundColor: "blue" }} />
+          <center style={{marginTop:'1px'}}>
+            <Divider sx={{ marginBottom: "50px", width: { lg: "14%", xs: "30%", sm: "18%", md: "14%" }, backgroundColor: "blue", }} />
           </center>
           {selectedContent}
         </Box>

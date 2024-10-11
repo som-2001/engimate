@@ -11,12 +11,13 @@ import {
   ListItem,
   ListItemText,
   TextField,
+  InputAdornment,
 } from '@mui/material';
 import axios from 'axios';
 import { BaseUrl } from './BaseUrl';
 import { toast,ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
+import SearchIcon from '@mui/icons-material/Search';
 
 export const DeleteMaterials = () => {
   const [materials, setMaterials] = useState([]);
@@ -105,9 +106,16 @@ export const DeleteMaterials = () => {
 
       <ToastContainer/>
       <TextField
-        label="Search Materials"
+        placeholder="Search Materials"
         variant="outlined"
         value={searchTerm}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
         onChange={handleSearch}
         sx={{width:{lg:"50%",md:"50%",sm:"80%",xs:"100%"}}}
         margin="normal"
