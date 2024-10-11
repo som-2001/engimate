@@ -111,12 +111,12 @@ export const AddDpp = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "70vh",
+        minHeight: "60vh",
       }}
     >
       <ToastContainer />
 
-      <Box sx={{ width: "100%", maxWidth: 600 }}>
+      <Box sx={{ width: "100%", maxWidth: 600,boxShadow:{xs:0,sm:2},padding:{sm:5},backgroundColor:{sm:"whitesmoke"}}}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -216,18 +216,18 @@ export const AddDpp = () => {
                   component="label"
                   variant="outlined"
                   sx={{
-                    backgroundColor: "#0d47a1",
+                    backgroundColor: "blueviolet",
                     color: "#fff",
                     padding: "5px 24px",
                     fontSize: "1rem",
                     textTransform: "none",
-                    borderRadius: "50px",
+                    borderRadius: "10px",
                     "&:hover": {
                       backgroundColor: "#08306b",
                     },
                   }}
                 >
-                  Upload Dpp
+                  CHOOSE A FILE
                   <input
                     type="file"
                     hidden

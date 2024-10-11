@@ -127,7 +127,7 @@ export const AddCourse = () => {
       }}
     >
       <ToastContainer />
-      <Box sx={{ width: "100%", maxWidth: 700 }}>
+      <Box sx={{ width: "100%", maxWidth: 700,boxShadow:{xs:0,sm:2},padding:{sm:5},backgroundColor:{sm:"whitesmoke"} }}>
         <Typography
           variant="body2"
           textAlign="center"
@@ -598,19 +598,19 @@ export const AddCourse = () => {
                   component="label"
                   variant="outlined"
                   sx={{
-                    backgroundColor: "#0d47a1",
+                    backgroundColor: "blueviolet",
                     color: "#fff",
 
                     padding: "5px 24px",
                     fontSize: "1rem",
                     textTransform: "none",
-                    borderRadius: "50px",
+                    borderRadius: "10px",
                     "&:hover": {
                       backgroundColor: "#08306b",
                     },
                   }}
                 >
-                  Upload Image
+                  SELECT A FILE
                   <input
                     type="file"
                     hidden

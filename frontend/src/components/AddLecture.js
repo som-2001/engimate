@@ -92,12 +92,12 @@ export const AddLecture = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "70vh",
+        minHeight: "60vh",
       }}
     >
       <ToastContainer/>
 
-      <Box sx={{width: "100%", maxWidth: 600 }}>
+      <Box sx={{width: "100%", maxWidth: 600,boxShadow:{xs:0,sm:2},padding:{sm:5},backgroundColor:{sm:"whitesmoke"} }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>

@@ -87,7 +87,7 @@ export const AddCategory = () => {
     >
        <ToastContainer />
 
-      <Box sx={{ padding: 0, width: "100%", maxWidth: 600 }}>
+      <Box sx={{width: "100%", maxWidth: 600,boxShadow:{xs:0,sm:2},padding:{sm:5},backgroundColor:{sm:"whitesmoke"} }}>
        
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
@@ -177,18 +177,18 @@ export const AddCategory = () => {
               <FormControl fullWidth error={!!errors.file}>
                 <Button component="label" variant="contained" color="primary"
                  sx={{
-                  backgroundColor: "#0d47a1",
+                  backgroundColor: "blueviolet",
                   color: "#fff",
                   padding: "5px 24px",
                   fontSize: "1rem",
                   textTransform: "none",
-                  borderRadius: "50px",
+                  borderRadius: "10px",
                   "&:hover": {
                     backgroundColor: "#08306b",
                   },
                   
                 }}>
-                  Upload File
+                  CHOOSE A FILE
                   <input
                     type="file"
                     accept="image/*"
