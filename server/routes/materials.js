@@ -9,10 +9,17 @@ import {
 const router = express.Router();
 router.get("/materials/all", isAuth, getAllMaterials);
 router.get(
-  "/materials/:id",
+  "/materials/single/:id",
   isAuth,
   isSubscriber("material"),
   getSingleMaterial,
 );
+router.get(
+  "/materials/category/:id",
+  isAuth,
+  isSubscriber("material"),
+  getallMaterialsByCategory,
+);
+
 router.get("/materials-search/", isAuth, getMaterialByTitleAndId);
 export default router;

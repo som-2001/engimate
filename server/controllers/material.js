@@ -9,7 +9,17 @@ export const getAllMaterials = Trycatch(async (req, res) => {
   });
 });
 export const getSingleMaterial = Trycatch(async (req, res) => {
-  const material = await Material.find({course:mongoose.Types.ObjectId(req.params.id)});
+  const material = await Material.find({
+    course: mongoose.Types.ObjectId(req.params.id),
+  });
+  res.json({
+    material,
+  });
+});
+export const getallMaterialsByCategory = Trycatch(async (req, res) => {
+  const material = await Material.find({
+    course: mongoose.Types.ObjectId(req.params.id).select("_id title"),
+  });
   res.json({
     material,
   });
