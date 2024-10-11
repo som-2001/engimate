@@ -4,7 +4,7 @@ const Schema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    
+    unique: true,
   },
   createdAt: {
     type: Date,

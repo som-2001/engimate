@@ -11,16 +11,29 @@ export const getAllDpp = Trycatch(async (req, res) => {
 });
 export const getSingleDpp = Trycatch(async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    return res.status(400).json({ message: 'Invalid course ID' });
+    return res.status(400).json({ message: "Invalid course ID" });
   }
-  const dpp = await Dpp.find({ course: mongoose.Types.ObjectId(req.params.id) });
+  const dpp = await Dpp.findOne({
+    course: mongoose.Types.ObjectId(req.params.id),
+  });
   if (!dpp.length) {
-    return res.status(404).json({ message: 'No DPP found for this course' });
+    return res.status(404).json({ message: "No DPP found for this course" });
   }
   res.json({ dpp });
 });
 
-
+export const getAllDppByCategory = Trycatch(async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ message: "Invalid course ID" });
+  }
+  const dpp = await Dpp.find({
+    course: mongoose.Types.ObjectId(req.params.id).select("_id title"),
+  });
+  if (!dpp.length) {
+    return res.status(404).json({ message: "No DPP found for this course" });
+  }
+  res.json({ dpp });
+});
 
 export const getDppByTitleAndId = Trycatch(async (req, res) => {
   const { title, dpp_id } = req.query;
@@ -50,4 +63,4 @@ export const getDppByTitleAndId = Trycatch(async (req, res) => {
     message: "Dpp fetch successful",
     dpp,
   });
-})
+});
