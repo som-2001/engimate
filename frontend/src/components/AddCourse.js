@@ -168,7 +168,7 @@ export const AddCourse = () => {
             />
           </Box>
         </Grid>
-        <Grid item xs={12} sm={12} md={7} sx={{height:"60vh",overflowY:"scroll"}}>
+        <Grid item xs={12} sm={12} md={7} sx={{height:{xs:"fit-content",sm:"fit-content",md:"68vh"},overflowY:{xs:"hidden",sm:"hidden",md:"scroll"}}}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate style={{paddingRight:"25px"}}>
             <Grid container spacing={2}>
               <Grid item xs={12}>

@@ -25,7 +25,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
-
 dayjs.extend(advancedFormat);
 
 export const Lectures = () => {

@@ -19,6 +19,10 @@ import { BaseUrl } from './BaseUrl';
 import { toast,ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
+
+dayjs.extend(advancedFormat);
 
 export const DeleteDpps = () => {
   const [materials, setMaterials] = useState([]);
@@ -40,6 +44,14 @@ export const DeleteDpps = () => {
         setFilteredMaterials(response.data.dpp); // Initialize filtered materials
       } catch (error) {
         console.error('Error fetching materials:', error);
+        if (
+          error?.response?.data?.message === "login first or token expired"
+        ) {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
+        }
       }
     };
 
@@ -135,6 +147,7 @@ export const DeleteDpps = () => {
               <ListItemText primary={material.title} /> {/* Adjust based on your data structure */}
              
             </ListItem>
+            <Typography variant='body2' sx={{marginLeft:"15px",marginTop:"-10px",marginBottom:"10px"}}>Created At: {dayjs(material.createdAt).format('Do MMM YYYY')}</Typography>
             <Divider/>
             </>
          
