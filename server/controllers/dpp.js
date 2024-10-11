@@ -10,11 +10,12 @@ export const getAllDpp = Trycatch(async (req, res) => {
   });
 });
 export const getSingleDpp = Trycatch(async (req, res) => {
-  const dpp = await Dpp.findById(req.params.id);
+  const dpp = await Dpp.find({course:req.params.id});
   res.json({
     dpp,
   });
 });
+
 
 export const getDppByTitleAndId = Trycatch(async (req, res) => {
   const { title, dpp_id } = req.query;

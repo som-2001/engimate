@@ -9,7 +9,7 @@ export const getAllMaterials = Trycatch(async (req, res) => {
   });
 });
 export const getSingleMaterial = Trycatch(async (req, res) => {
-  const material = await Material.findById(req.params.id);
+  const material = await Material.find({course:req.params.id});
   res.json({
     material,
   });
