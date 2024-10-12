@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/dpp/all", isAuth, getAllDpp);
 router.get("/dpp/single/:id", isAuth, isSubscriber("dpp"), getSingleDpp);
 router.get(
-  "/dpp/category/:category_id/:id",
+  "/dpp/category/:id",
   isAuth,
   isSubscriber("dpp"),
   getAllDppByCategory,
