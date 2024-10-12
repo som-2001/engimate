@@ -157,7 +157,7 @@ export const Lectures = () => {
       case 1:
         setHeading("Pdfs");
         axios
-          .get(`${BaseUrl}/materials/all`, {
+          .get(`${BaseUrl}/materials/category/${id}`, {
             headers: {
               Authorization: `Bearer ${sessionStorage.getItem("token")}`,
             },
@@ -181,7 +181,7 @@ export const Lectures = () => {
       case 2:
         setHeading("Dpps");
         axios
-          .get(`${BaseUrl}/dpp/all`, {
+          .get(`${BaseUrl}/dpp/category/${id}`, {
             headers: {
               Authorization: `Bearer ${sessionStorage.getItem("token")}`,
             },
