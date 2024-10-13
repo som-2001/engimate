@@ -8,6 +8,7 @@ import fs, { rm } from "fs";
 import { User } from "../models/user.js";
 import { Dpp } from "../models/Dpp.js";
 import { Material } from "../models/material.js";
+import { Category_Course } from "../models/category_course.js";
 
 export const createCourse = Trycatch(async (req, res) => {
   const {
@@ -45,6 +46,10 @@ export const createCourse = Trycatch(async (req, res) => {
     createdBy,
     image: base64Image,
   });
+  await Category_Course.create({
+    course: course._id,
+    category: category,
+  });
   res.status(201).json({
     message: "course created successfully",
     course,
@@ -66,6 +71,7 @@ export const updateCourse = Trycatch(async (req, res) => {
     display_video_url,
     category,
   } = req.body;
+  console.log("Request body:", req.body);
   const course = await Course.findById(id);
   if (!course) {
     return res.status(404).json({ message: "Course not found." });
@@ -273,5 +279,33 @@ export const deleteMaterial = Trycatch(async (req, res) => {
   await Material.deleteOne({ _id: req.params.id });
   return res.status(200).json({
     message: "Material deleted successfully",
+  });
+});
+
+export const updateUserRole = Trycatch(async (req, res) => {
+  const user = await User.findById(req.params.id).select("_id name email role");
+  const { role } = req.body;
+  if (!user) {
+    return res.status(404).json({
+      message: "User not found",
+    });
+  }
+  if (!["user", "admin", "instructor"].includes(role)) {
+    return res.status(400).json({
+      message: "Invalid role",
+    });
+  }
+  user.role = role;
+
+  await user.save();
+
+  res.status(200).json({
+    message: "User role updated Successfully",
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
   });
 });

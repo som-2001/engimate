@@ -13,7 +13,6 @@ router.get("/dpp/single/:id", isAuth, isSubscriber("dpp"), getSingleDpp);
 router.get(
   "/dpp/category/:id",
   isAuth,
-  isSubscriber("dpp"),
   getAllDppByCategory,
 );
 router.get("/dpp-search/", isAuth, getDppByTitleAndId);

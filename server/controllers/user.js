@@ -75,7 +75,7 @@ export const verifyUser = TryCatch(async (req, res) => {
       message: "Wrong OTP",
     });
 
-  await User.create({
+  const user = await User.create({
     name: verify.name,
     email: verify.email,
     phone_number: verify.phone_number,
@@ -83,6 +83,12 @@ export const verifyUser = TryCatch(async (req, res) => {
     specialization: verify.specialization,
     referred_by: verify.referred_by,
   });
+  //add refereal
+  if (verify.referred_by) {
+    await User.findByIdAndUpdate(verify.referred_by, {
+      $push: { referred_users: user._id },
+    });
+  }
   res.status(201).json({ message: "User registered successfully." });
 });
 
