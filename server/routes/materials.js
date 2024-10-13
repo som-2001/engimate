@@ -1,7 +1,7 @@
 import express from "express";
 import { isAuth, isSubscriber } from "../middlewares/isAuth.js";
 import {
-  getAllMaterials,
+  getAllMaterials, getallMaterialsByCategory,
   getMaterialByTitleAndId,
   getSingleMaterial,
 } from "../controllers/material.js";
@@ -17,7 +17,6 @@ router.get(
 router.get(
   "/materials/category/:id",
   isAuth,
-  isSubscriber("material"),
   getallMaterialsByCategory,
 );
 

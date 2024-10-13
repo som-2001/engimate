@@ -18,8 +18,8 @@ export const getSingleMaterial = Trycatch(async (req, res) => {
 });
 export const getallMaterialsByCategory = Trycatch(async (req, res) => {
   const material = await Material.find({
-    course: mongoose.Types.ObjectId(req.params.id).select("_id title"),
-  });
+    course: new mongoose.Types.ObjectId(req.params.id),
+  }).select("_id title");
   res.json({
     material,
   });

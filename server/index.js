@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDb } from "./database/db.js";
 import cors from "cors";
 import Razorpay from "razorpay";
+import twilio from "twilio";
 
 dotenv.config();
 export const instance = new Razorpay({
@@ -12,6 +13,11 @@ export const instance = new Razorpay({
 const app = express();
 const port = process.env.PORT || 8000;
 
+export const client = twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN,
+);
+export const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER;
 app.use(
   cors({
     origin: "*", // Allows all origins
@@ -40,7 +46,7 @@ app.use("/api", coursesRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", dppRoutes);
-app.use("/api",materialRoutes);
+app.use("/api", materialRoutes);
 
 const startserver = async () => {
   try {

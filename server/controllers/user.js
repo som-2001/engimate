@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { sendContactUsMail, sendMail } from "../middlewares/sendmail.js";
 import TryCatch from "../middlewares/trycatch.js";
+import { client, TWILIO_PHONE_NUMBER } from "../index.js";
 
 export const registerUser = TryCatch(async (req, res) => {
   const {
@@ -75,7 +76,7 @@ export const verifyUser = TryCatch(async (req, res) => {
       message: "Wrong OTP",
     });
 
-  await User.create({
+  const user = await User.create({
     name: verify.name,
     email: verify.email,
     phone_number: verify.phone_number,
@@ -83,6 +84,12 @@ export const verifyUser = TryCatch(async (req, res) => {
     specialization: verify.specialization,
     referred_by: verify.referred_by,
   });
+  //add refereal
+  if (verify.referred_by) {
+    await User.findByIdAndUpdate(verify.referred_by, {
+      $push: { referred_users: user._id },
+    });
+  }
   res.status(201).json({ message: "User registered successfully." });
 });
 
@@ -165,4 +172,35 @@ export const sendQuery = TryCatch(async (req, res) => {
       .status(500)
       .json({ message: "Failed to send email", error: error.message });
   }
+});
+
+export const requestLogin = TryCatch(async (req, res) => {
+  const { phone_number } = req.body;
+
+  const user = await User.findOne({ phone_number });
+  if (!user) {
+    return res.status(400).json({
+      message: "user not found",
+    });
+  }
+  const otp = Math.floor(Math.random() * 900000).toString();
+  user.otpExpiration = Date.now() + 5 * 60 * 1000;
+  user.otp = otp;
+  user.otp = otp;
+
+  const message = `Your Login OTP for YANTRAVED is ${otp}`;
+
+  try {
+    await client.messages.create({
+      body: message,
+      from: TWILIO_PHONE_NUMBER,
+      to: phone_number,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to send OTP SMS",
+      error: error.message,
+    });
+  }
+  res.status(200).json({ message: "OTP sent to your phone number." });
 });

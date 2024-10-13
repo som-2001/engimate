@@ -27,8 +27,8 @@ export const getAllDppByCategory = Trycatch(async (req, res) => {
     return res.status(400).json({ message: "Invalid course ID" });
   }
   const dpp = await Dpp.find({
-    course: mongoose.Types.ObjectId(req.params.id).select("_id title"),
-  });
+    course: new mongoose.Types.ObjectId(req.params.id),
+  }).select("_id title");
   if (!dpp.length) {
     return res.status(404).json({ message: "No DPP found for this course" });
   }
