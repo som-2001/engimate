@@ -32,13 +32,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import { KeyboardBackspace } from "@mui/icons-material";
 
 dayjs.extend(advancedFormat); // Extend dayjs with the plugi
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
-  description: Yup.string().required("Description is required").max(100,"maximum 100 characters can be added."),
+  description: Yup.string()
+    .required("Description is required")
+    .max(100, "maximum 100 characters can be added."),
   video_url: Yup.string()
     .url("Enter a valid URL")
     .required("Video URL is required"),
@@ -47,7 +49,9 @@ const validationSchema = Yup.object().shape({
 const validationSchema1 = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   learn: Yup.string().required("Learn is required"),
-  card_description: Yup.string().required("Card description is required"),
+  card_description: Yup.string()
+    .required("Card description is required")
+    .min(100, "minimum 100 character required"),
   course_description: Yup.string().required("Course description is required"),
   course_objective: Yup.string().required("Course objective is required"),
   roles_in_industry: Yup.string().required("Roles in industry are required"),
@@ -59,7 +63,7 @@ const validationSchema1 = Yup.object().shape({
   display_video_url: Yup.string()
     .url("Enter a valid URL")
     .required("Video URL is required"),
-  image: Yup.mixed().required("Image is required"),
+  file: Yup.mixed().required("Image is required"),
 });
 
 export const DashboardHome = () => {
@@ -79,7 +83,7 @@ export const DashboardHome = () => {
   const [openDialog1, setOpenDialog1] = useState(false);
   const [load, setLoad] = useState(false);
   const [name, setName] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState('');
   const [filteredCourse, setFilteredCourse] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -158,6 +162,7 @@ export const DashboardHome = () => {
 
   const handleCloseDialog1 = () => {
     setOpenDialog1(false);
+    setName('');
     reset();
   };
   // Function to handle loading more items
@@ -258,7 +263,7 @@ export const DashboardHome = () => {
         setValue("roles_in_industry", res.data.course.roles_in_industry);
         setValue("course_highlights", res.data.course.course_highlights);
         setValue("price", res.data.course.price);
-        setValue("file", res.data.course.image[0]);
+        setValue("file", res.data.course.image);
         setValue("display_video_url", res.data.course.display_video_url);
       })
       .catch((error) => {
@@ -303,6 +308,7 @@ export const DashboardHome = () => {
   };
   const confirmDelete = () => {
     if (selectedLecture) {
+      setLoad(true);
       axios
         .delete(`${BaseUrl}/lecture/${selectedLecture}`, {
           headers: {
@@ -310,6 +316,7 @@ export const DashboardHome = () => {
           },
         })
         .then((res) => {
+          setLoad(false);
           toast.success(res.data.message, { autoClose: 3000 });
           setLectures((prevLectures) =>
             prevLectures.filter((item) => item._id !== selectedLecture)
@@ -318,6 +325,7 @@ export const DashboardHome = () => {
         })
         .catch((error) => {
           console.error("Error deleting lecture", error);
+          setLoad(false);
           toast.error(error?.response?.data?.message, { autoClose: 3000 });
           if (
             error?.response?.data?.message === "login first or token expired"
@@ -333,6 +341,8 @@ export const DashboardHome = () => {
 
   const confirmCourseDelete = () => {
     if (selectedLecture) {
+
+      setLoad(true);
       axios
         .delete(`${BaseUrl}/course/${selectedLecture}`, {
           headers: {
@@ -344,10 +354,15 @@ export const DashboardHome = () => {
           setCourses((prevLectures) =>
             prevLectures.filter((item) => item._id !== selectedLecture)
           );
+          setFilteredCourse((prevLectures) =>
+            prevLectures.filter((item) => item._id !== selectedLecture)
+          );
+          setLoad(false);
           setOpenDialog(false); // Close dialog after deletion
         })
         .catch((error) => {
           console.error("Error deleting Course", error);
+          setLoad(false);
           toast.error(error?.response?.data?.message, { autoClose: 3000 });
           if (
             error?.response?.data?.message === "login first or token expired"
@@ -410,7 +425,7 @@ export const DashboardHome = () => {
 
   const onSubmit1 = async (data) => {
     if (!selectedCourse) return; // Early exit if no lecture is selected
-    console.log("podpod");
+    console.log(data.file);
     setLoad(true);
     const formData = new FormData();
 
@@ -423,59 +438,87 @@ export const DashboardHome = () => {
     formData.append("roles_in_industry", data.roles_in_industry);
     formData.append("course_highlights", data.course_highlights);
     formData.append("price", data.price);
-    formData.append("file", data.image[0]);
+    formData.append("file", data.file);
     formData.append("display_video_url", data.display_video_url);
 
+  
     try {
-      const res = await axios.put(
-        `${BaseUrl}/course/${selectedCourse}`,
-        formData,
-        {
+      axios
+        .put(`${BaseUrl}/course/${selectedCourse}`, formData, {
           headers: {
-            "Content-Type": "application/json",
+           
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
-        }
-      );
+        })
+        .then((res) => {
+          setLoad(false);
+          console.log("Course updated successfully:", selectedCourse);
+          console.log(filteredCourse);
+          toast.success(res.data.message, { autoClose: 3000 });
+          reset(); // Reset form fields on success
+          handleCloseDialog1(); // Close the dialog after submission
+          setName('');
+          setFilteredCourse((prev) =>
+        
+            prev.map((item) =>(
+              
+              String(item._id) === String(selectedCourse)
+                ? {
+                    ...item,
+                    title: data.title,
+                    caption: data.caption,
+                    card_description: data.card_description,
+                    course_description: data.course_description,
+                    course_objective: data.course_objective,
+                    learn: data.learn,
+                    roles_in_industry: data.roles_in_industry,
+                    course_highlights: data.course_highlights,
+                    price: data.price,
+                    category: data.category,
+                    file: res.data.course.image,
+                    display_video_url: data.display_video_url,
+                  }
+                : item
+            )
+          ));
 
-      setLoad(false);
-      console.log("Course updated successfully:", res?.data?.message);
-      setCourses((prev) =>
-        prev.map((item) =>
-          item._id === selectedCourse
-            ? {
-                ...item,
-                title: data.title,
-                caption: data.caption,
-                card_description: data.card_description,
-                course_description: data.course_description,
-                course_objective: data.course_objective,
-                learn: data.learn,
-                roles_in_industry: data.roles_in_industry,
-                course_highlights: data.course_highlights,
-                price: data.price,
-                category: data.category,
-                file: data.image[0],
-                display_video_url: data.display_video_url,
-              }
-            : item
-        )
-      );
-      toast.success(res.data.message, { autoClose: 3000 });
-      reset(); // Reset form fields on success
-      handleCloseDialog1(); // Close the dialog after submission
-      setLectures((prev) =>
-        prev.map((item) =>
-          item._id === selectedCourse
-            ? {
-                ...item,
-                title: data.title,
-                description: data.description,
-                video_url: data.video_url,
-              }
-            : item
-        )
-      );
+          setCourses((prev) =>
+        
+            prev.map((item) =>(
+              
+              String(item._id) === String(selectedCourse)
+                ? {
+                    ...item,
+                    title: data.title,
+                    caption: data.caption,
+                    card_description: data.card_description,
+                    course_description: data.course_description,
+                    course_objective: data.course_objective,
+                    learn: data.learn,
+                    roles_in_industry: data.roles_in_industry,
+                    course_highlights: data.course_highlights,
+                    price: data.price,
+                    category: data.category,
+                    file: res.data.course.image,
+                    display_video_url: data.display_video_url,
+                  }
+                : item
+            )
+          ));
+          
+        })
+        .catch((error) => {
+          setLoad(false);
+          setName('');
+          handleCloseDialog1();
+          toast.error(error?.response?.data?.message, { autoClose: 3000 });
+          if (
+            error?.response?.data?.message === "login first or token expired"
+          ) {
+            sessionStorage.removeItem("token");
+            navigate("/login");
+          }
+        });
     } catch (error) {
       setLoad(false);
       toast.error(error?.response?.data?.message, { autoClose: 3000 });
@@ -495,7 +538,7 @@ export const DashboardHome = () => {
           <Typography variant="h5" style={{ marginBottom: "30px" }}>
             Courses ({courses.length} items)
           </Typography>
-          
+
           <Grid container spacing={2} justifyContent="flex-end">
             <TextField
               placeholder="Search Course"
@@ -510,166 +553,174 @@ export const DashboardHome = () => {
                 ),
               }}
               sx={{ width: { lg: "50%", md: "50%", sm: "80%", xs: "100%" } }}
-              
             />
             {filteredCourse.length > 0 ? (
-          filteredCourse.map((data,index) => (
-              <Grid item xs={12} sm={12} md={12} lg={12} key={index}>
-                <Card
-                  sx={{
-                    display: "flex",
-                    flexDirection: { xs: "column", sm: "column", md: "row" }, // Stack vertically on small screens
-                    alignItems: "center", // Center content on small screens
-                    p: 2, // Add padding for better spacing
-                    gap: 2, // Add gap between media and content
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    sx={{
-                      width: { xs: "100%", sm: 300 }, // Full width on small screens, 300px on larger screens
-                      height: { xs: 200, sm: "auto" }, // Set fixed height on small screens
-                      objectFit: "cover", // Make sure image covers the container
-                      cursor: "pointer",
-                    }}
-                    image={data.image}
-                    alt=""
-                    onClick={() => lectureShow(data?._id)}
-                  />
-
-                  <Box
+              filteredCourse.slice(0, visibleCourses).map((data, index) => (
+                <Grid item xs={12} sm={12} md={12} lg={12} key={index}>
+                  <Card
                     sx={{
                       display: "flex",
-                      flexDirection: "column",
-                      // flex: "1 0 auto",
+                      flexDirection: { xs: "column", sm: "column", md: "row" }, // Stack vertically on small screens
+                      alignItems: "center", // Center content on small screens
+                      p: 2, // Add padding for better spacing
+                      gap: 2, // Add gap between media and content
                     }}
                   >
-                    <CardContent
-                      sx={{ cursor: "pointer" }}
+                    <CardMedia
+                      component="img"
+                      sx={{
+                        width: { xs: "100%", sm: 250 }, // Full width on small screens, 300px on larger screens
+                        height: { xs: 200, sm: 240 }, // Set fixed height on small screens
+                        objectFit: "cover", // Make sure image covers the container
+                        cursor: "pointer",
+                        borderRadius:"10px"
+                      }}
+                      image={data.image}
+                      alt=""
                       onClick={() => lectureShow(data?._id)}
-                    >
-                      <Typography component="div" variant="h5">
-                        {data?.title}
-                      </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        sx={{ color: "text.secondary", wordWrap: "break-word" }}
-                      >
-                        {data.card_description.length > 200
-                          ? `${data.card_description.slice(0, 200)}...`
-                          : data.card_description}
-                      </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        component="div"
-                        sx={{ color: "text.secondary" }}
-                      >
-                        Created At:{" "}
-                        {dayjs(data?.createdAt).format("Do MMM YYYY")}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        component="div"
-                        sx={{ fontSize: "1.2rem", color: "green" }}
-                      >
-                        Rs: {data.price}
-                      </Typography>
-                    </CardContent>
+                    />
 
                     <Box
                       sx={{
                         display: "flex",
-                        flexDirection: { xs: "column", sm: "row" }, // Stack buttons vertically on small screens, row on larger screens
-                        alignItems: "center",
-                        gap: "10px",
+                        flexDirection: "column",
                       }}
                     >
-                      <Button
-                        startIcon={<DeleteIcon />}
-                        sx={{
-                          backgroundColor: "#e53935",
-                          color: "#fff",
-                          width: {
-                            xs: "100%",
-                            sm: "100%",
-                            md: "40%",
-                            lg: "30%",
-                          }, // Full width button on small screens
-                          padding: "8px 16px",
-                          fontSize: "1rem",
-                          textTransform: "none",
-                          borderRadius: "10px",
-                          "&:hover": {
-                            backgroundColor: "#c62828",
-                          },
-                          mb: { xs: "10px", sm: 0 }, // Adjust bottom margin for small screens
-                        }}
-                        onClick={() => handleDeleteClick(data?._id)}
+                      <CardContent
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => lectureShow(data?._id)}
                       >
-                        Delete
-                      </Button>
+                        <Typography component="div" variant="h5">
+                          {data?.title}
+                        </Typography>
+                        <Typography
+                          variant="subtitle1"
+                          sx={{
+                            color: "text.secondary",
+                            wordWrap: "break-word",
+                          }}
+                        >
+                          {data.card_description.length > 200
+                            ? `${data.card_description.slice(0, 200)}...`
+                            : data.card_description}
+                        </Typography>
+                        <Typography
+                          variant="subtitle1"
+                          component="div"
+                          sx={{ color: "text.secondary" }}
+                        >
+                          Created At:{" "}
+                          {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          component="div"
+                          sx={{ fontSize: "1.2rem", color: "green" }}
+                        >
+                          Rs: {data.price}
+                        </Typography>
+                      </CardContent>
 
-                      <Button
-                        startIcon={<EditIcon />}
+                      <Box
                         sx={{
-                          backgroundColor: "#0d47a1",
-                          color: "#fff",
-                          width: {
-                            xs: "100%",
-                            sm: "100%",
-                            md: "40%",
-                            lg: "30%",
-                          }, // Full width button on small screens
-                          padding: "8px 16px",
-                          fontSize: "1rem",
-                          textTransform: "none",
-                          borderRadius: "10px",
-                          "&:hover": {
-                            backgroundColor: "#08306b",
-                          },
+                          display: "flex",
+                          flexDirection: { xs: "column", sm: "row" }, // Stack buttons vertically on small screens, row on larger screens
+                          alignItems: "center",
+                          gap: "10px",
                         }}
-                        onClick={() => handleEditCourse(data?._id)}
                       >
-                        Edit
-                      </Button>
+                        <Button
+                          startIcon={<DeleteIcon />}
+                          sx={{
+                            backgroundColor: "#e53935",
+                            color: "#fff",
+                            width: {
+                              xs: "100%",
+                              sm: "100%",
+                              md: "40%",
+                              lg: "30%",
+                            }, // Full width button on small screens
+                            padding: "8px 16px",
+                            fontSize: "1rem",
+                            textTransform: "none",
+                            borderRadius: "10px",
+                            "&:hover": {
+                              backgroundColor: "#c62828",
+                            },
+                            mb: { xs: "10px", sm: 0 }, // Adjust bottom margin for small screens
+                          }}
+                          onClick={() => handleDeleteClick(data?._id)}
+                        >
+                          Delete
+                        </Button>
+
+                        <Button
+                          startIcon={<EditIcon />}
+                          sx={{
+                            backgroundColor: "#0d47a1",
+                            color: "#fff",
+                            width: {
+                              xs: "100%",
+                              sm: "100%",
+                              md: "40%",
+                              lg: "30%",
+                            }, // Full width button on small screens
+                            padding: "8px 16px",
+                            fontSize: "1rem",
+                            textTransform: "none",
+                            borderRadius: "10px",
+                            "&:hover": {
+                              backgroundColor: "#08306b",
+                            },
+                          }}
+                          onClick={() => handleEditCourse(data?._id)}
+                        >
+                          Edit
+                        </Button>
+                      </Box>
                     </Box>
-                  </Box>
-                </Card>
+                  </Card>
 
-                <Dialog
-                  open={openDialog}
-                  onClose={handleCloseDialog}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
-                >
-                  <DialogTitle id="alert-dialog-title">
-                    {"Confirm Deletion"}
-                  </DialogTitle>
-                  <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                      Are you sure you want to delete this Course? This action
-                      cannot be undone.
-                    </DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleCloseDialog} color="primary">
-                      No
-                    </Button>
-                    <Button
-                      onClick={confirmCourseDelete}
-                      color="secondary"
-                      autoFocus
-                    >
-                      Yes, Delete
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+                  <Dialog
+                    open={openDialog}
+                    onClose={handleCloseDialog}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">
+                      {"Confirm Deletion"}
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        Are you sure you want to delete this Course? This action
+                        cannot be undone.
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleCloseDialog} color="primary">
+                        No
+                      </Button>
+                      <Button
+                       disabled={load}
+                        onClick={confirmCourseDelete}
+                        color="secondary"
+                        autoFocus
+                      >
+                        Yes, Delete
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </Grid>
+              ))
+            ) : (
+              <Grid container spacing={2} textAlign="center">
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <p style={{ fontSize: "1.2rem", marginTop: "50px" }}>
+                    No courses found.
+                  </p>
+                </Grid>
               </Grid>
-            ))):( <Grid container spacing={2} textAlign="center">
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-              <p style={{fontSize:"1.2rem",marginTop:"50px"}}>No courses found.</p>
-              </Grid>
-            </Grid>)}
+            )}
           </Grid>
 
           {/* Load More Courses Button */}
@@ -1172,12 +1223,15 @@ export const DashboardHome = () => {
                             type="file"
                             hidden
                             accept="image/*"
-                            {...register("image")} // Registering the input
-                            onChange={(e) => {
-                              const files = e.target.files;
-                              setValue("image", files); // Set the file value
-                              setName(files[0]?.name || ""); // Set file name
-                            }}
+                            {...register("file", {
+                              onChange: (e) => {
+                                // Handle the file change here
+                                const selectedFile = e.target.files[0];
+                                console.log(selectedFile); // Logs the selected file
+                                setName(selectedFile?.name); // Set file name for display
+                                setValue("file", selectedFile); // Properly set the file value in the form data
+                              },
+                            })}
                           />
                         </Button>
                         {name && (
@@ -1204,6 +1258,7 @@ export const DashboardHome = () => {
                 No
               </Button>
               <Button
+              disabled={load}
                 onClick={handleSubmit(onSubmit1)}
                 color="primary"
                 autoFocus
@@ -1215,27 +1270,31 @@ export const DashboardHome = () => {
         </Box>
       ) : (
         <Box>
-          <Button onClick={(e)=>setHide(true)} startIcon={<KeyboardBackspace/>} // Add Delete Icon
-                      sx={{
-                        backgroundColor: "blueviolet", // Red color for Delete
-                        color: "#fff",
-                        width: {
-                          xs: "40%",
-                          sm: "40%",
-                          md: "10%",
-                          lg: "10%",
-                        },
-                        padding: "5px 10px", // Adjust padding
-                        fontSize: "1rem",
-                        textTransform: "none",
-                        borderRadius: "50px",
-                        "&:hover": {
-                          backgroundColor: "blueviolet", // Darker shade on hover
-                          
-                        },
-                        marginBottom: "20px",
-                        marginLeft:"0px"
-                      }} >Back</Button>
+          <Button
+            onClick={(e) => setHide(true)}
+            startIcon={<KeyboardBackspace />} // Add Delete Icon
+            sx={{
+              backgroundColor: "blueviolet", // Red color for Delete
+              color: "#fff",
+              width: {
+                xs: "40%",
+                sm: "40%",
+                md: "10%",
+                lg: "10%",
+              },
+              padding: "5px 10px", // Adjust padding
+              fontSize: "1rem",
+              textTransform: "none",
+              borderRadius: "50px",
+              "&:hover": {
+                backgroundColor: "blueviolet", // Darker shade on hover
+              },
+              marginBottom: "20px",
+              marginLeft: "0px",
+            }}
+          >
+            Back
+          </Button>
           <Typography
             variant="h5"
             style={{ marginBottom: "30px", fontSize: "1.7rem" }}
@@ -1266,7 +1325,6 @@ export const DashboardHome = () => {
                     cursor: "pointer",
                   }}
                 >
-               
                   {activeVideo === index ? (
                     // YouTube Video Embed without autoplay
                     <iframe
@@ -1306,7 +1364,6 @@ export const DashboardHome = () => {
                     </>
                   )}
 
-
                   <CardContent
                     sx={{
                       height: "130px",
@@ -1315,22 +1372,28 @@ export const DashboardHome = () => {
                       justifyContent: "center",
                     }}
                   >
-                     
                     <Typography variant="h6" sx={{ marginBottom: "10px" }}>
-                    <span style={{fontSize:"1.3rem",color:"blueviolet",fontWeight:"600"}}>#{index+1}</span> {data.title}
+                      <span
+                        style={{
+                          fontSize: "1.3rem",
+                          color: "blueviolet",
+                          fontWeight: "600",
+                        }}
+                      >
+                        #{index + 1}
+                      </span>{" "}
+                      {data.title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
-                     
-                        {data.description}
+                      {data.description}
                     </Typography>
                     <Typography
-                        variant="subtitle1"
-                        component="div"
-                        sx={{ color: "text.secondary" }}
-                      >
-                        Created At:{" "}
-                        {dayjs(data?.createdAt).format("Do MMM YYYY")}
-                      </Typography>
+                      variant="subtitle1"
+                      component="div"
+                      sx={{ color: "text.secondary" }}
+                    >
+                      Created At: {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                    </Typography>
                   </CardContent>
 
                   <Box
@@ -1338,10 +1401,9 @@ export const DashboardHome = () => {
                       display: "flex",
                       flexDirection: "row",
                       alignItems: "center",
-                      gap:"5px"
+                      gap: "5px",
                     }}
                   >
-                   
                     <Button
                       startIcon={<DeleteIcon />} // Add Delete Icon
                       sx={{
@@ -1361,16 +1423,16 @@ export const DashboardHome = () => {
                           backgroundColor: "#c62828", // Darker shade on hover
                         },
                         marginBottom: "10px",
-                        marginLeft:"10px"
+                        marginLeft: "10px",
                       }}
                       onClick={(e) => handleDeleteClick(data?._id)}
                     >
                       Delete
                     </Button>
 
-                   
                     <Button
                       startIcon={<EditIcon />} // Add Edit Icon
+                     
                       sx={{
                         backgroundColor: "#0d47a1", // Blue color for Edit
                         color: "#fff",
@@ -1418,7 +1480,7 @@ export const DashboardHome = () => {
               <Button onClick={handleCloseDialog} color="primary">
                 No
               </Button>
-              <Button onClick={confirmDelete} color="secondary" autoFocus>
+              <Button disabled={load} onClick={confirmDelete} color="secondary" autoFocus>
                 Yes, Delete
               </Button>
             </DialogActions>
@@ -1542,6 +1604,7 @@ export const DashboardHome = () => {
                 No
               </Button>
               <Button
+              disabled={load}
                 onClick={firstSchemaHandleSubmit(onSubmit)}
                 color="primary"
                 autoFocus

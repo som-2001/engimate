@@ -25,7 +25,7 @@ import { useNavigate } from "react-router-dom";
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   learn: Yup.string().required("Learn is required"),
-  card_description: Yup.string().required("Card description is required"),
+  card_description: Yup.string().required("Card description is required").min(100,"minimum 100 character required"),
   course_description: Yup.string().required("Course description is required"),
   course_objective: Yup.string().required("Course objective is required"),
   roles_in_industry: Yup.string().required("Roles in industry are required"),
@@ -98,6 +98,8 @@ export const AddCourse = () => {
             setLoad(false);
           }
           reset(); // Reset form fields on success
+          setValue("title","");
+          setValue("course","");
         })
         .catch((error) => {
           setLoad(false);
@@ -123,7 +125,7 @@ export const AddCourse = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "60vh",
+        height: "67%",
       }}
     >
       <ToastContainer />
@@ -169,7 +171,7 @@ export const AddCourse = () => {
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={7} sx={{height:{xs:"fit-content",sm:"fit-content",md:"68vh"},overflowY:{xs:"hidden",sm:"hidden",md:"scroll"}}}>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate style={{paddingRight:"25px"}}>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate style={{paddingRight:"25px"}}  key={key}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Controller

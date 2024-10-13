@@ -30,6 +30,7 @@ export const DeleteDpps = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedMaterialId, setSelectedMaterialId] = useState(null);
+  const [load,setLoad]=useState(false);
   const navigate=useNavigate();
 
   useEffect(() => {
@@ -75,11 +76,13 @@ export const DeleteDpps = () => {
 
   const handleConfirmDelete = async () => {
     try {
+      setLoad(true);
       axios.delete(`${BaseUrl}/dpp/${selectedMaterialId}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
       }).then(res=>{
+        setLoad(false);
         toast.success(res.data.message,{autoClose:3000});
         setMaterials((prevMaterials) =>
             prevMaterials.filter((material) => material._id !== selectedMaterialId)
@@ -89,7 +92,7 @@ export const DeleteDpps = () => {
           );
           setOpenDialog(false);
       }).catch(error=>{
-
+        setLoad(false);
         toast.error(error?.response?.data?.message,{autoClose:3000});
         console.error("Error fetching categories", error);
         if (
@@ -171,7 +174,7 @@ export const DeleteDpps = () => {
           <Button onClick={handleCloseDialog} color="primary">
             No
           </Button>
-          <Button onClick={handleConfirmDelete} color="secondary">
+          <Button  disabled={load} onClick={handleConfirmDelete} color="secondary">
             Yes
           </Button>
         </DialogActions>

@@ -83,7 +83,7 @@ export const AddCategory = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "70vh",
+        minHeight: "68vh",
       }}
     >
       <ToastContainer />

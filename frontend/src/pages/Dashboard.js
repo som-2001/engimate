@@ -43,8 +43,8 @@ const NAV_ITEMS = [
   { text: 'Upload Dpps', icon: <BookIcon />, content: <AddDpp />, heading: "Upload Dpps" },
   { text: 'Upload Exam Form', icon: <QuizIcon />, content: <AddExam />, heading: "Upload Exam Form" },
   { text: 'Statictics', icon: <AnalyticsIcon />, content: <Stats />, heading: "Statictics Overview" },
-  {text:"User Management",icon:<FaUser/>, content:<UserManagement/>,heading:"User management"},
-  {text:"Delete Materials",icon:<ClearIcon/>, content:<DeleteMaterials/>,heading:"Delete Materials"},
+  {text:"User Management",icon:<FaUser/>, content:<UserManagement/>,heading:"User Management"},
+  {text:"Delete Pdfs",icon:<ClearIcon/>, content:<DeleteMaterials/>,heading:"Delete Pdfs"},
   {text:"Delete Dpps",icon:<ClearIcon/>, content:<DeleteDpps/>,heading:"Delete Dpps"}
 
   

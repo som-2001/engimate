@@ -84,6 +84,8 @@ export const Addpdf = () => {
           toast.success(res.data.message, { autoClose: 3000 });
           setName("");
           reset(); // Reset form fields on success
+          setValue("course","");
+          setValue("pdf","");
         })
         .catch((error) => {
           if (
@@ -107,7 +109,7 @@ export const Addpdf = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "70vh",
+        minHeight: "68vh",
       }}
     >
       <ToastContainer />

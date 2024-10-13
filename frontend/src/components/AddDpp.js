@@ -84,6 +84,7 @@ export const AddDpp = () => {
           toast.success(res.data.message, { autoClose: 3000 });
           setName("");
           reset();
+          setValue("course","");
         })
         .catch((error) => {
           setLoad(false);
@@ -109,7 +110,7 @@ export const AddDpp = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "60vh",
+        minHeight: "58vh",
       }}
     >
       <ToastContainer />
@@ -147,7 +148,7 @@ export const AddDpp = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={7}>
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate key={key}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Controller

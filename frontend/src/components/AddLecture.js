@@ -38,6 +38,7 @@ export const AddLecture = () => {
     control,
     formState: { errors },
     reset,
+    setValue
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
@@ -71,6 +72,7 @@ export const AddLecture = () => {
         console.log("Lecture added successfully:", res?.data?.message);
         toast.success(res.data.message, { autoClose: 3000 });
         reset(); // Reset form fields on success
+        setValue("course","");
       }).catch (error=>{
         setLoad(false);
         toast.error(error?.response?.data?.message, { autoClose: 3000 });
@@ -126,7 +128,7 @@ export const AddLecture = () => {
 
   {/* Right Side - Form */}
   <Grid item xs={12} sm={12} md={7}>
-    <form onSubmit={handleSubmit(onSubmit)} >
+    <form onSubmit={handleSubmit(onSubmit)} key={key} >
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Controller
