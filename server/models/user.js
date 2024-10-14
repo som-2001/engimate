@@ -23,9 +23,11 @@ const schema = new mongoose.Schema(
     phone_number: {
       type: String,
       unique: true,
+      required: true, // If you want to make this field mandatory
       validate: {
         validator: function (v) {
-          return /^\d{10}$/.test(v);
+          // E.164 format regex: allows +, country code, and digits
+          return /^\+?[1-9]\d{1,14}$/.test(v);
         },
         message: (props) => `${props.value} is not a valid phone number!`,
       },
