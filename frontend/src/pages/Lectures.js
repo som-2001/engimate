@@ -817,7 +817,7 @@ export const Lectures = () => {
             </DialogTitle>
             <DialogContent dividers>
               {/* Display PDF in an iframe */}
-              {dppDownload.length===0?(<p style={{fontWeight:"600",fontSize:"1.5rem",marginTop:"40px",marginBottom:"40px"}}>Wait a moment,your pdf is loading...</p>):(
+              {dppDownload.length===0?(<p style={{fontWeight:"500",fontSize:"1.5rem",marginTop:"40px",marginBottom:"40px"}}>Wait a moment,your pdf is loading...</p>):(
               <iframe
                 src={dppDownload}
                 title={selectedDpp?.title}

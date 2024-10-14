@@ -183,7 +183,7 @@ export const Login = () => {
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ fontWeight: "600" }}
+                sx={{ fontWeight: "400" }}
                 align="center"
               >
                 Crack Jobs with YANTRAVED
@@ -197,12 +197,12 @@ export const Login = () => {
                 centered
                 sx={{ mt: 3, minHeight: "auto", }}
               >
-                <Tab label="Verify with Email" sx={{
+                <Tab label="Login with Email" sx={{
                 fontSize: { xs: "0.6rem", sm: "0.7rem" }, // responsive font size
                 minWidth: { xs: 60, sm: 80 }, // adjust width for smaller screens
                 padding: { xs: "6px 12px", sm: "10px 20px" }, // responsive padding
               }} />
-                <Tab label="Verify with Phone" sx={{
+                <Tab label="Login with Phone" sx={{
                 fontSize: { xs: "0.6rem", sm: "0.7rem" }, // responsive font size
                 minWidth: { xs: 60, sm: 80 }, // adjust width for smaller screens
                 padding: { xs: "6px 12px", sm: "10px 20px" }, // responsive padding
