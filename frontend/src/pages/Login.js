@@ -5,6 +5,8 @@ import {
   CircularProgress,
   Grid,
   InputAdornment,
+  Tab,
+  Tabs,
   TextField,
   Typography,
 } from "@mui/material";
@@ -22,14 +24,21 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {jwtDecode} from 'jwt-decode';
 
-// Define your Yup validation schema
+// Define Yup validation schema
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email")
-    .required("Email is required"),
+  email: Yup.string().email("Invalid email").when("hide", {
+    is: true,
+    then: Yup.string().required("Email is required"),
+  }),
   otp: Yup.string().when("hide", {
     is: true,
     then: Yup.string().required("OTP is required"),
+  }),
+  phone_number: Yup.string().when("hide", {
+    is: true,
+    then: Yup.string()
+      .matches(/^\+[1-9]\d{1,14}$/, "Invalid phone number with country code")
+      .required("Phone number is required"),
   }),
 });
 
@@ -37,6 +46,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const [hide, setHide] = useState(false);
   const [load, setLoad] = useState(false);
+  const [tab, setTab] = useState(0); // Track which tab is active
 
   // Initialize react-hook-form
   const {
@@ -47,38 +57,69 @@ export const Login = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  const handleTabChange = (event, newValue) => {
+    setTab(newValue);
+    setHide(false); // Reset hide when switching tabs
+  };
+
   const onSubmit = async (data) => {
     setLoad(true);
-
     try {
       if (!hide) {
-        // Request OTP
-        const response = await axios.post(`${URL}/request-login-otp/`, {
-          email: data.email,
-        });
-        toast.success("OTP has been sent to your email", { autoClose: 3000 });
-        if (response?.data?.message === "OTP sent to your email.") {
-          setHide(true);
+        // Request OTP (Email or Phone based on the tab)
+        if (tab === 0) {
+          // Email OTP
+          const response = await axios.post(`${URL}/request-login-otp/`, {
+            email: data.email,
+          });
+          toast.success("OTP has been sent to your email", { autoClose: 3000 });
+          if (response?.data?.message === "OTP sent to your email.") {
+            setHide(true);
+          }
+        } else {
+          // Phone OTP
+          const response = await axios.post(`${URL}/request-mobile-otp`, {
+            phone_number: data.phone_number,
+          });
+          toast.success("OTP has been sent to your phone", { autoClose: 3000 });
+          if (response?.data?.message === "OTP sent to your phone.") {
+            setHide(true);
+          }
         }
       } else {
-        // Verify OTP
-        const response = await axios.post(`${URL}/login/`, {
-          email: data.email,
-          otp: data.otp,
-        });
-        toast.success(response.data.message, { autoClose: 3000 });
-        sessionStorage.setItem("token",response.data.token);
-        // You can handle successful login here (e.g., navigate to dashboard)
-        setInterval(()=>{
-          if(jwtDecode(response.data.token).role==='admin' || jwtDecode(response.data.token).role==='instructor')
-            window.location.href='/dashboard';
-          else{
-            window.location.href='/user-dashboard';
+        // Verify OTP (Email or Phone based on the tab)
+        if (tab === 0) {
+          // Verify Email OTP
+          const response = await axios.post(`${URL}/login/`, {
+            email: data.email,
+            otp: data.otp,
+          });
+          toast.success(response.data.message, { autoClose: 3000 });
+          sessionStorage.setItem("token", response.data.token);
+        } else {
+          // Verify Phone OTP
+          const response = await axios.post(`${URL}/login/`, {
+            phone_number: data.phone_number,
+            otp: data.otp,
+          });
+          toast.success(response.data.message, { autoClose: 3000 });
+          sessionStorage.setItem("token", response.data.token);
+        }
+
+        // Redirect to dashboard based on role
+        setInterval(() => {
+          const decodedToken = jwtDecode(sessionStorage.getItem("token"));
+          if (decodedToken.role === "admin" || decodedToken.role === "instructor") {
+            window.location.href = "/dashboard";
+          } else {
+            window.location.href = "/user-dashboard";
           }
-        },2000);  
+        }, 2000);
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || "An error occurred", { autoClose: 3000 });
+      toast.error(error?.response?.data?.message || "An error occurred", {
+        autoClose: 3000,
+      });
     } finally {
       setLoad(false);
     }
@@ -106,7 +147,7 @@ export const Login = () => {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                marginTop: "10%",
+                marginTop: "5%",
               }}
             />
           </Grid>
@@ -128,9 +169,9 @@ export const Login = () => {
                 sx={{
                   width: { xs: "60%", sm: "50%", md: "45%", lg: "45%" },
                   height: "auto",
-                  marginBottom: "20px",
+                  marginBottom: "10px",
                   mt: { xs: "5%", md: "0%" },
-                  cursor:"pointer"
+                  cursor: "pointer",
                 }}
               />
               <Typography
@@ -145,8 +186,29 @@ export const Login = () => {
                 sx={{ fontWeight: "600" }}
                 align="center"
               >
-                An Online Learning Platform
+                Crack Jobs with YANTRAVED
               </Typography>
+
+              {/* Tabs for Email/Phone Verification */}
+              <Tabs
+                value={tab}
+                onChange={handleTabChange}
+                aria-label="login tabs"
+                centered
+                sx={{ mt: 3, minHeight: "auto", }}
+              >
+                <Tab label="Verify with Email" sx={{
+                fontSize: { xs: "0.6rem", sm: "0.7rem" }, // responsive font size
+                minWidth: { xs: 60, sm: 80 }, // adjust width for smaller screens
+                padding: { xs: "6px 12px", sm: "10px 20px" }, // responsive padding
+              }} />
+                <Tab label="Verify with Phone" sx={{
+                fontSize: { xs: "0.6rem", sm: "0.7rem" }, // responsive font size
+                minWidth: { xs: 60, sm: 80 }, // adjust width for smaller screens
+                padding: { xs: "6px 12px", sm: "10px 20px" }, // responsive padding
+              }} />
+              </Tabs>
+
               <Box
                 component="form"
                 onSubmit={handleSubmit(onSubmit)}
@@ -155,31 +217,69 @@ export const Login = () => {
                   mt: 4,
                 }}
               >
-                <Box sx={{ mb: 2 }}>
-                  <Controller
-                    name="email"
-                    control={control}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        type="text"
-                        disabled={hide}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <CgProfile />
-                            </InputAdornment>
-                          ),
-                        }}
-                        placeholder="Email..."
-                        fullWidth
-                        variant="outlined"
-                        error={!!errors.email}
-                        helperText={errors.email?.message}
-                      />
-                    )}
-                  />
-                </Box>
+                {tab === 0 && (
+                  <Box sx={{ mb: 2 }}>
+                    <Controller
+                      name="email"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          type="email"
+                          required
+                          disabled={hide}
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <CgProfile />
+                              </InputAdornment>
+                            ),
+                          }}
+                          placeholder="Email..."
+                          fullWidth
+                          variant="outlined"
+                          error={!!errors.email}
+                          helperText={errors.email?.message}
+                        />
+                      )}
+                    />
+                  </Box>
+                )}
+
+                {tab === 1 && (
+                  <Box sx={{ mb: 2 }}>
+                    <Controller
+                      name="phone_number"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          type="text"
+                          required
+                          disabled={hide}
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <CgProfile />
+                              </InputAdornment>
+                            ),
+                          }}
+                          inputProps={{
+                            maxLength: 12, // Limit to 12 digits
+                            minLength:12,
+                            inputMode: 'numeric',  // Show numeric keyboard on mobile
+                            pattern: '[0-9]*',  // Ensure only digits are entered
+                          }}
+                          placeholder="Phone number with country code..."
+                          fullWidth
+                          variant="outlined"
+                          error={!!errors.phone_number}
+                          helperText={errors.phone_number?.message}
+                        />
+                      )}
+                    />
+                  </Box>
+                )}
 
                 {hide && (
                   <Box sx={{ mb: 2 }}>
@@ -189,7 +289,8 @@ export const Login = () => {
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          type="text"
+                          type="number"
+                          required
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -207,43 +308,28 @@ export const Login = () => {
                     />
                   </Box>
                 )}
-
-                <Box sx={{ mb: 2 }}>
-                  <Typography
-                    variant="body1"
-                    textAlign="center"
-                    fontSize="0.9rem"
-                  >
-                    New to YANTRAVED?{" "}
-                    <span
-                      onClick={() => navigate("/register")}
-                      style={{ cursor: "pointer", textDecoration: "underline" }}
-                    >
-                      Register now.
-                    </span>
-                  </Typography>
-                </Box>
                 <center>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#0d47a1",
-                      color: "#fff",
-                      width: "60%",
-                      padding: "10px 24px",
-                      fontSize: "1rem",
-                      textTransform: "none",
-                      borderRadius: "50px",
-                      "&:hover": {
-                        backgroundColor: "#08306b",
-                      },
-                      marginBottom: "30px",
-                    }}
-                    disabled={load} // Disable button when loading
-                  >
-                    {load ? <CircularProgress size={30}/> : (hide ? "Verify OTP" : "Send OTP")}
-                  </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={load}
+                  fullWidth
+                  sx={{
+                    backgroundColor: "#0d47a1",
+                    color: "#fff",
+                    width: "60%",
+                    padding: "10px 24px",
+                    fontSize: "1rem",
+                    textTransform: "none",
+                    borderRadius: "50px",
+                    "&:hover": {
+                      backgroundColor: "#08306b",
+                    },
+                    marginBottom: "20px",
+                  }}
+                >
+                  {load ? <CircularProgress size={24} /> : hide ? "Verify OTP" : "Send OTP"}
+                </Button>
                 </center>
               </Box>
             </Box>

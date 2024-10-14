@@ -87,11 +87,14 @@ const Footer = () => {
             </Typography>
             <Box display="flex" alignItems="center" mb={1}>
               <MdEmail style={{ marginRight: "8px" }} />
-              <FooterLink
-                href="mailto:lyssstartup24@gmail.com"
-                color="textSecondary"
-              >
-                lyssstartup24@gmail.com
+              <FooterLink href="mailto:support@lyss.in" color="textSecondary">
+                support@lyss.in (For general/purchase related enquiries)
+              </FooterLink>
+            </Box>
+            <Box display="flex" alignItems="center" mb={1}>
+              <MdEmail style={{ marginRight: "8px" }} />
+              <FooterLink href="mailto:careers@lyss.in" color="textSecondary">
+                careers@lyss.in(For career related enquiries)
               </FooterLink>
             </Box>
             <Box display="flex" alignItems="center" mb={1}>
@@ -102,7 +105,10 @@ const Footer = () => {
             </Box>
             <Box display="flex" alignItems="center" mb={1}>
               <FaGithub style={{ marginRight: "8px" }} />
-              <FooterLink href="https://github.com/lyss-technology" color="textSecondary">
+              <FooterLink
+                href="https://github.com/lyss-technology"
+                color="textSecondary"
+              >
                 GitHub
               </FooterLink>
             </Box>
@@ -136,41 +142,54 @@ const Footer = () => {
           </Grid>
         </FooterGrid>
         <Typography
-        variant="body1"
-        align="center"
-        color="text.secondary"
-        mt={2}
-        sx={{ color: "white", fontSize: "1.0rem" }}
-      >
-        © Copyright {new Date().getFullYear()}. All Rights Reserved.
-      </Typography>
-
-      <Typography
-        variant="body1"
-        textAlign="center"
-        sx={{ marginTop: "20px",display:{md:"none",sm:"block",xs:"block",lg:"block"}}}
-      >
-        NH-83, Boond Vihar Colony, Street no.- 02, Near Jehanabad Court Halt,<br/> Jehanabad, Bihar, India - 804417
-      </Typography>
-
-      <Box style={{ marginTop: "10px", display: "flex", gap: "5px",justifyContent:"center" }}>
-        <span
-          onClick={(e)=>window.location.href="/refund-policy"}
-          color="textSecondary"
-          textAlign="center"
-          style={{cursor:"pointer"}}
-          
+          variant="body1"
+          align="center"
+          color="text.secondary"
+          mt={2}
+          sx={{ color: "white", fontSize: "1.0rem" }}
         >
-          Refund Policy 
-        </span>
-        <span>|</span>
-        <span href="#" color="textSecondary" textAlign="center"    style={{cursor:"pointer"}}>
-           Terms & Condition
-        </span>
-      </Box>
+          © Copyright {new Date().getFullYear()}. All Rights Reserved.
+        </Typography>
 
+        <Typography
+          variant="body1"
+          textAlign="center"
+          sx={{
+            marginTop: "20px",
+            display: { md: "none", sm: "block", xs: "block", lg: "block" },
+          }}
+        >
+          NH-83, Boond Vihar Colony, Street no.- 02, Near Jehanabad Court Halt,
+          <br /> Jehanabad, Bihar, India - 804417
+        </Typography>
+
+        <Box
+          style={{
+            marginTop: "10px",
+            display: "flex",
+            gap: "5px",
+            justifyContent: "center",
+          }}
+        >
+          <span
+            onClick={(e) => (window.location.href = "/refund-policy")}
+            color="textSecondary"
+            textAlign="center"
+            style={{ cursor: "pointer" }}
+          >
+            Refund Policy
+          </span>
+          <span>|</span>
+          <span
+            href="#"
+            color="textSecondary"
+            textAlign="center"
+            style={{ cursor: "pointer" }}
+          >
+            Terms & Condition
+          </span>
+        </Box>
       </Container>
-     
     </FooterContainer>
   );
 };
