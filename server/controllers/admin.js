@@ -188,7 +188,12 @@ export const addDpp = Trycatch(async (req, res) => {
   const base64Pdfs = pdfs.map((pdf) => {
     return `data:${pdf.mimetype};base64,${pdf.buffer.toString("base64")}`;
   });
-
+  const existingDpp = await Dpp.findOne({ title: title });
+  if (existingDpp) {
+    return res.status(400).json({
+      message: "title is Invalid, should be unique",
+    });
+  }
   const dpp = await Dpp.create({
     title,
     course,

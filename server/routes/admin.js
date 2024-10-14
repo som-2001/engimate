@@ -14,7 +14,8 @@ import {
   getAllUsers,
   getSingleUser,
   updateCourse,
-  updateLecture, updateUserRole,
+  updateLecture,
+  updateUserRole,
 } from "../controllers/admin.js";
 import { uploadFiles, uploadMany } from "../middlewares/multer.js";
 
@@ -28,7 +29,13 @@ router.post(
   createCourse,
 );
 router.post("/course/:id", isAuth, isAdminOrInstructor, addLectures);
-router.put("/course/:id", isAuth, isAdminOrInstructor,uploadFiles, updateCourse);
+router.put(
+  "/course/:id",
+  isAuth,
+  isAdminOrInstructor,
+  uploadFiles,
+  updateCourse,
+);
 router.delete("/lecture/:id", isAuth, isAdminOrInstructor, deleteLecture);
 router.put("/lecture/:id", isAuth, isAdminOrInstructor, updateLecture);
 router.delete("/course/:id", isAuth, isAdminOrInstructor, deleteCourse);
@@ -50,7 +57,7 @@ router.post(
 //user-mangement
 router.get("/users/all", isAuth, isAdminOrInstructor, getAllUsers);
 router.get("/users/:id", isAuth, isAdminOrInstructor, getSingleUser);
-router.put("/users/:id",isAuth,isAdminOrInstructor,updateUserRole)
+router.put("/users/:id", isAuth, isAdminOrInstructor, updateUserRole);
 router.delete("/users/:id", isAuth, isAdminOrInstructor, deleteUser);
 router.delete("/materials/:id", isAuth, isAdminOrInstructor, deleteMaterial);
 router.delete("/dpp/:id", isAuth, isAdminOrInstructor, deleteDpp);
