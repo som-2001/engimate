@@ -1,5 +1,4 @@
 import { User } from "../models/user.js";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { sendContactUsMail, sendMail } from "../middlewares/sendmail.js";
 import TryCatch from "../middlewares/trycatch.js";

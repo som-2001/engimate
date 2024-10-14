@@ -2,7 +2,6 @@ import Trycatch from "../middlewares/trycatch.js";
 
 import { Lecture } from "../models/lecture.js";
 import { Course } from "../models/course.js";
-import { promise } from "bcrypt/promises.js";
 import { promisify } from "util";
 import fs, { rm } from "fs";
 import { User } from "../models/user.js";
