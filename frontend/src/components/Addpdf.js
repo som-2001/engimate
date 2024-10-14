@@ -14,6 +14,7 @@ import {
   InputLabel,
   FormControl,
   CircularProgress,
+  ListSubheader,
 } from "@mui/material";
 import { BaseUrl } from "./BaseUrl";
 import { toast, ToastContainer } from "react-toastify";
@@ -47,17 +48,49 @@ export const Addpdf = () => {
     resolver: yupResolver(validationSchema),
   });
 
+
   const [result, setResult] = React.useState([]);
   const [load, setLoad] = React.useState(false);
   const [name, setName] = React.useState("");
   const navigate = useNavigate();
   const [key, setKey] = React.useState(false);
+  const [search, setSearch] = React.useState("")
+  const [filteredResult, setFilteredResult] = React.useState([]);
 
   React.useEffect(() => {
-    axios.get(`${BaseUrl}/course/all`).then((res) => {
-      setResult(res?.data?.courses);
-    });
+    axios
+      .get(`${BaseUrl}/category-course/detail/all`)
+      .then((res) => {
+        setResult(res?.data?.categoryCourse); // Assuming the API returns categories with their respective courses
+        setFilteredResult(res?.data?.categoryCourse);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearch(value);
+
+    if (value === "") {
+      setFilteredResult(result);
+    } else {
+      const filtered = result
+        .map((category) => {
+          const filteredCourses = category.courses.filter((course) =>
+            course.title.toLowerCase().includes(value)
+          );
+          return {
+            ...category,
+            courses: filteredCourses,
+          };
+        })
+        .filter((category) => category.courses.length > 0); // Filter out categories with no matching courses
+
+      setFilteredResult(filtered);
+    }
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -86,6 +119,7 @@ export const Addpdf = () => {
           reset(); // Reset form fields on success
           setValue("course","");
           setValue("pdf","");
+          setSearch('');
         })
         .catch((error) => {
           if (
@@ -158,6 +192,7 @@ export const Addpdf = () => {
                       <TextField
                         {...field}
                         fullWidth
+                        placeholder="Prefered way:- Coursename-Pdfname-serialno."
                         label="Title"
                         variant="outlined"
                         InputProps={{
@@ -187,54 +222,105 @@ export const Addpdf = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <Box sx={{ mb: 0 }}>
-                    <FormControl
-                      fullWidth
-                      variant="outlined"
-                      error={!!errors.course}
-                    >
-                      <InputLabel id="course-label">Course</InputLabel>
-                      <Controller
-                        name="course"
-                        control={control}
-                        render={({ field }) => (
-                          <Select
-                            {...field}
-                            key={key}
-                            fullWidth
-                            InputProps={{
-                              sx: {
-                                borderRadius: "22px", // Customize border radius
-                                "&:hover": {
-                                  backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
-                                },
+                  <TextField
+                    label="Search Course"
+                    value={search}
+                    onChange={handleSearch}
+                    fullWidth
+                    variant="outlined"
+                    placeholder="Search by course name"
+                    InputProps={{
+                      sx: {
+                        borderRadius: "22px", // Customize border radius
+                        "&:hover": {
+                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                        },
+                      },
+                    }}
+                    sx={{
+                      borderRadius: "22px", // Outer border radius
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
+                        },
+                      },
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth
+                    variant="outlined"
+                    error={!!errors.course}
+                  >
+                    <InputLabel id="course-label">Course</InputLabel>
+
+                    {/* Use Controller from react-hook-form */}
+                    <Controller
+                      name="course"
+                      control={control}
+                      defaultValue=""
+                      render={({ field }) => (
+                        <Select
+                          {...field} // Spread the field props
+                          label="Course"
+                          fullWidth
+                          onChange={(e) => {
+                            field.onChange(e.target.value); // Update the form state
+                            console.log(e.target.value);
+                          }}
+                          onClose={field.onBlur} // Ensure the dropdown closes after selection
+                          InputProps={{
+                            sx: {
+                              borderRadius: "22px", // Customize border radius
+                              "&:hover": {
+                                backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                               },
-                            }}
-                            sx={{
-                              borderRadius: "22px", // Outer border radius
-                              "& .MuiOutlinedInput-root": {
-                                "&:hover fieldset": {
-                                  borderColor: "rgb(89, 139, 139)", // Border color on hover
-                                },
-                                "&.Mui-focused fieldset": {
-                                  borderColor: "rgb(107, 169, 169)", // Border color when focused
-                                },
+                            },
+                          }}
+                          sx={{
+                            borderRadius: "22px", // Outer border radius
+                            "& .MuiOutlinedInput-root": {
+                              "&:hover fieldset": {
+                                borderColor: "rgb(89, 139, 139)", // Border color on hover
                               },
-                            }}
-                          >
-                            {result.map((course) => (
+                              "&.Mui-focused fieldset": {
+                                borderColor: "rgb(107, 169, 169)", // Border color when focused
+                              },
+                            },
+                          }}
+                        >
+                          {filteredResult?.flatMap((category_item) => [
+                            <ListSubheader
+                              key={`header-${category_item.category._id}`}
+                              disabled
+                              sx={{
+                                pointerEvents: "none",
+                                fontWeight: "bold",
+                                fontSize: "1.2rem",
+                              }}
+                            >
+                              {category_item.category.category_name}
+                            </ListSubheader>,
+                            ...category_item.courses.map((course) => (
                               <MenuItem key={course._id} value={course._id}>
                                 {course.title}
                               </MenuItem>
-                            ))}
-                          </Select>
-                        )}
-                      />
-                      {errors.course && (
-                        <FormHelperText>{errors.course.message}</FormHelperText>
+                            )),
+                          ])}
+                        </Select>
                       )}
-                    </FormControl>
-                  </Box>
+                    />
+
+                    {/* Display error if course is not selected */}
+                    {errors.course && (
+                      <FormHelperText>{errors.course.message}</FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
 
                 <Grid item xs={12}>

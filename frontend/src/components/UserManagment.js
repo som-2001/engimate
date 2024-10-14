@@ -104,9 +104,10 @@ export const UserManagement = () => {
   const confirmEditUser = (data) => {
     setLoad(true);
     axios
-      .put(`${BaseUrl}/users/${selectedUserId1}`, {
+      .put(`${BaseUrl}/users/${selectedUserId1}`,{role:data.role}, {
         headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
         },
       })
       .then((res) => {

@@ -159,6 +159,7 @@ export const AddExam = () => {
                         fullWidth
                         label="Title"
                         variant="outlined"
+                        placeholder="Prefered way:-Coursename-ExamForm-serialno."
                         InputProps={{
                           sx: {
                             borderRadius: "22px", // Customize border radius

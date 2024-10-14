@@ -715,7 +715,7 @@ export const DashboardHome = () => {
             ) : (
               <Grid container spacing={2} textAlign="center">
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <p style={{ fontSize: "1.2rem", marginTop: "50px" }}>
+                  <p style={{ marginTop: "50px" }}>
                     No courses found.
                   </p>
                 </Grid>

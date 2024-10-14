@@ -39,6 +39,7 @@ export const Lectures = () => {
   const [openDialog, setOpenDialog] = useState(false); // To handle dialog open/close
   const [selectedDpp, setSelectedDpp] = useState(null);
   const [dppDownload, setDppDownload] = useState("");
+  const [message,setMessage]=useState('');
   //for pdfs
   const [pdf, setPdf] = useState([]);
   const [openpdfDialog, setOpenpdfDialog] = useState(false); // To handle dialog open/close
@@ -164,7 +165,7 @@ export const Lectures = () => {
           })
           .then((res) => {
             setLoadPdf(false);
-            setPdf(res.data.materials);
+            setPdf(res.data.material);
           })
           .catch((error) => {
             console.error("Error fetching categories", error);
@@ -192,6 +193,11 @@ export const Lectures = () => {
           })
           .catch((error) => {
             console.error("Error fetching categories", error);
+            if(error?.response?.data?.message==='No DPP found for this course')
+            {
+              setLoadDpp(false);
+              setDpp([]);
+            }
             if (
               error?.response?.data?.message === "login first or token expired"
             ) {
@@ -254,6 +260,7 @@ export const Lectures = () => {
       .then((res) => {
         setLoadLecture(false);
         setLectures(res.data.lectures);
+        setMessage(res.data.message);
       })
       .catch((error) => {
         console.error("Error fetching categories", error);
@@ -401,7 +408,9 @@ export const Lectures = () => {
 
         <Box>
           {value === 0 &&
+          
             (loadLecture ? (
+              
               <Box sx={{ textAlign: "center", marginTop: "8vh" }}>
                 <Grid container spacing={4} justifyContent="center">
                   {[...Array(3)].map(
@@ -431,6 +440,9 @@ export const Lectures = () => {
                 </Grid>
               </Box>
             ) : (
+              message ?( <Typography variant="body1" textAlign="center" marginTop="10%" marginBottom="5%">
+                {message}
+              </Typography>):
               <Grid container spacing={2} justifyContent="center">
                 {lectures?.length === 0 ? (
                   <Typography variant="body1" marginTop="10%" marginBottom="5%">

@@ -69,7 +69,7 @@ export const Login = () => {
         // Request OTP (Email or Phone based on the tab)
         if (tab === 0) {
           // Email OTP
-          const response = await axios.post(`${URL}/request-login-otp/`, {
+          const response = await axios.post(`${URL}/request-login-otp`, {
             email: data.email,
           });
           toast.success("OTP has been sent to your email", { autoClose: 3000 });
@@ -79,10 +79,10 @@ export const Login = () => {
         } else {
           // Phone OTP
           const response = await axios.post(`${URL}/request-mobile-otp`, {
-            phone_number: data.phone_number,
+            phone_number: `+91${data.phone_number}`,
           });
           toast.success("OTP has been sent to your phone", { autoClose: 3000 });
-          if (response?.data?.message === "OTP sent to your phone.") {
+          if (response?.data?.message === "OTP sent to your phone number.") {
             setHide(true);
           }
         }
@@ -98,8 +98,8 @@ export const Login = () => {
           sessionStorage.setItem("token", response.data.token);
         } else {
           // Verify Phone OTP
-          const response = await axios.post(`${URL}/login/`, {
-            phone_number: data.phone_number,
+          const response = await axios.post(`${URL}/mobile-login/`, {
+            phone_number: `+91${data.phone_number}`,
             otp: data.otp,
           });
           toast.success(response.data.message, { autoClose: 3000 });
@@ -265,8 +265,8 @@ export const Login = () => {
                             ),
                           }}
                           inputProps={{
-                            maxLength: 12, // Limit to 12 digits
-                            minLength:12,
+                            maxLength: 10, // Limit to 12 digits
+                            minLength:10,
                             inputMode: 'numeric',  // Show numeric keyboard on mobile
                             pattern: '[0-9]*',  // Ensure only digits are entered
                           }}
@@ -309,6 +309,7 @@ export const Login = () => {
                   </Box>
                 )}
                 <center>
+                
                 <Button
                   type="submit"
                   variant="contained"
@@ -331,7 +332,19 @@ export const Login = () => {
                   {load ? <CircularProgress size={24} /> : hide ? "Verify OTP" : "Send OTP"}
                 </Button>
                 </center>
+                
               </Box>
+              <Box sx={{ mb: 2 }}>
+                  <Typography variant="body1" textAlign="center" fontSize="0.9rem">
+                    new to YANTRAVED?{" "}
+                    <span
+                      onClick={() => window.location.href = "/register"}
+                      style={{ cursor: "pointer", textDecoration: "underline" }}
+                    >
+                      Register now.
+                    </span>
+                  </Typography>
+                </Box>
             </Box>
           </Grid>
         </Grid>
