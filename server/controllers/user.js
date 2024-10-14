@@ -116,34 +116,40 @@ export const requestLoginOtp = TryCatch(async (req, res) => {
   res.status(200).json({ message: "OTP sent to your email." });
 });
 
-export const verifyLoginOtp = TryCatch(async (req, res) => {
-  const { email, otp } = req.body;
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(400).json({ message: "User not found with this email" });
-  }
-  if (user.otp !== otp.toString()) {
-    return res.status(400).json({ message: "Invalid OTP" });
-  }
-  if (Date.now() > user.otpExpiration) {
-    return res.status(400).json({ message: "OTP has Expired" });
-  }
-  const token = jwt.sign(
-    { email: user.email, _id: user.id, role: user.role },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "2h",
-    },
-  );
-  user.otp = null;
-  user.otpExpiration = null;
-  await user.save();
+export const verifyLoginOtp = (item) => {
+  return TryCatch(async (req, res) => {
+    const otp  = req.body.otp;
+    const userIdentifier = req.body[item]
+    const user = await User.findOne({ [item]:userIdentifier });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: `User not found with this ${item}` });
+    }
+    //console.log(user)
+    if (user.otp !== otp.toString()) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+    if (Date.now() > user.otpExpiration) {
+      return res.status(400).json({ message: "OTP has Expired" });
+    }
+    const token = jwt.sign(
+      { email: user.email, _id: user.id, role: user.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "2h",
+      },
+    );
+    user.otp = null;
+    user.otpExpiration = null;
+    await user.save();
 
-  res.status(200).json({
-    message: "login successful",
-    token,
+    res.status(200).json({
+      message: "login successful",
+      token,
+    });
   });
-});
+};
 
 export const myProfile = TryCatch(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -185,8 +191,7 @@ export const requestLogin = TryCatch(async (req, res) => {
   const otp = Math.floor(Math.random() * 900000).toString();
   user.otpExpiration = Date.now() + 5 * 60 * 1000;
   user.otp = otp;
-  user.otp = otp;
-
+  await user.save();
   const message = `Your Login OTP for YANTRAVED is ${otp}`;
 
   try {
