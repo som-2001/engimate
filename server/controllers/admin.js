@@ -70,7 +70,7 @@ export const updateCourse = Trycatch(async (req, res) => {
     display_video_url,
     category,
   } = req.body;
-  console.log("Request body:", req.body);
+  //console.log("Request body:", req.body);
   const course = await Course.findById(id);
   if (!course) {
     return res.status(404).json({ message: "Course not found." });
