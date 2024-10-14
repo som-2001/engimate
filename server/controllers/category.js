@@ -58,17 +58,8 @@ export const getCourseByCategory = Trycatch(async (req, res) => {
 });
 
 export const getCategoryCourses = Trycatch(async (req, res) => {
-  const { category_id } = req.params;
 
-  if (!category_id) {
-    return res.status(400).json({ message: "Category ID is required" });
-  }
   const categoryCourse = await Category_Course.aggregate([
-    {
-      $match: {
-        category: mongoose.Types.ObjectId(categoryId), // Match the category by ID
-      },
-    },
     {
       $lookup: {
         from: "courses", // Name of the courses collection

@@ -23,5 +23,5 @@ router.delete("/category/:id", isAuth, isAdminOrInstructor, deleteCategory);
 router.get("/category/:id", getSingleCategory);
 router.get("/categories/all", getAllCategories);
 router.get("/course-category/:id", getCourseByCategory);
-router.get("/category-course/detail/:id", getCategoryCourses);
+router.get("/category-course/detail/all", getCategoryCourses);
 export default router;
