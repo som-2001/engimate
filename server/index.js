@@ -39,6 +39,7 @@ import adminRoutes from "./routes/admin.js";
 import categoryRoutes from "./routes/categories.js";
 import dppRoutes from "./routes/dpp.js";
 import materialRoutes from "./routes/materials.js";
+import examRoutes from "./routes/exam.js";
 
 // using routes
 app.use("/api", userRoutes);
@@ -47,6 +48,7 @@ app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", dppRoutes);
 app.use("/api", materialRoutes);
+app.use("/api", examRoutes);
 
 const startserver = async () => {
   try {

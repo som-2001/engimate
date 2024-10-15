@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 import { sendContactUsMail, sendMail } from "../middlewares/sendmail.js";
 import TryCatch from "../middlewares/trycatch.js";
 import { client, TWILIO_PHONE_NUMBER } from "../index.js";
+import { ExamApplication } from "../models/exam-applications.js";
+import { ExamSubmission } from "../models/exam-submissions.js";
 
 export const registerUser = TryCatch(async (req, res) => {
   const {
@@ -87,6 +89,7 @@ export const verifyUser = TryCatch(async (req, res) => {
   if (verify.referred_by) {
     await User.findByIdAndUpdate(verify.referred_by, {
       $push: { referred_users: user._id },
+      $inc: { points: 10 },
     });
   }
   res.status(201).json({ message: "User registered successfully." });
@@ -118,9 +121,9 @@ export const requestLoginOtp = TryCatch(async (req, res) => {
 
 export const verifyLoginOtp = (item) => {
   return TryCatch(async (req, res) => {
-    const otp  = req.body.otp;
-    const userIdentifier = req.body[item]
-    const user = await User.findOne({ [item]:userIdentifier });
+    const otp = req.body.otp;
+    const userIdentifier = req.body[item];
+    const user = await User.findOne({ [item]: userIdentifier });
     if (!user) {
       return res
         .status(400)
@@ -207,4 +210,104 @@ export const requestLogin = TryCatch(async (req, res) => {
     });
   }
   res.status(200).json({ message: "OTP sent to your phone number." });
+});
+
+export const applyExam = TryCatch(async (req, res) => {
+  const examId = req.body;
+  const applicantId = req.user._id;
+  const exam = await Exam.findById(examId).populate("course");
+  const user = await User.findById(applicantId).populate("subscription");
+
+  if (!exam || !user) {
+    return res.status(404).json({
+      message: "Exam or user not found.",
+    });
+  }
+  const isSubscribedToCourse = user.subscription.some((subscribedCourse) =>
+    subscribedCourse.equals(exam.course._id),
+  );
+  if (!isSubscribedToCourse) {
+    return res.status(403).json({
+      message:
+        "You are not subscribed to this course. Please subscribe to apply for this exam.",
+    });
+  }
+  let examApplication = await ExamApplication.findOne({
+    applicant: applicantId,
+    exam: examId,
+  });
+  if (examApplication) {
+    if (examApplication.status === "fail") {
+      examApplication.status = "applied";
+      examApplication.marks = 0;
+      await examApplication.save();
+
+      return res.status(200).json({
+        message: "Re-applied for the exam successfully.",
+        examApplication,
+      });
+    } else {
+      return res.status(400).json({
+        message:
+          "Cannot re-apply. You have either already passed or not applied for this exam yet.",
+      });
+    }
+  }
+  examApplication = await ExamApplication.create({
+    applicant: applicantId,
+    exam: examId,
+    status: "applied",
+  });
+  res.status(201).json({
+    message: "Applied for thr exam Successfully and submission initialized.",
+    examApplication,
+  });
+});
+
+export const knowExamstatus = TryCatch(async (req, res) => {
+  const examApplication = await ExamApplication.findOne({
+    applicant: req.user._id,
+  }).select("status");
+
+  if (!examApplication) {
+    return res.status(400).json({
+      message: "You have not applied to any Exam",
+    });
+  }
+});
+
+export const submitExam = TryCatch(async (req, res) => {
+  const pdf = req.file;
+  const userId = req.user_id;
+
+  const existingSubmission = await ExamSubmission.findOne({
+    applicant: userId,
+    status: "submitted",
+  });
+
+  if (existingSubmission) {
+    return res.status(400).json({
+      message: "You have already submitted this exam.",
+    });
+  }
+  const submission = await ExamSubmission.findOne({
+    applicant: userId,
+    status: "not-submitted",
+  });
+
+  if (!submission) {
+    return res.status(400).json({
+      message: "Invalid submission or the exam is already submitted.",
+    });
+  }
+  const fileBase64 = `data:${pdf.mimetype};base64,${pdf.buffer.toString("base64")}`;
+  submission.fileData = fileBase64;
+  submission.status = "submitted";
+  submission.updatedAt = Date.now();
+  await submission.save();
+
+  res.status(200).json({
+    message: "Exam submission was successfull.",
+    submission,
+  });
 });
