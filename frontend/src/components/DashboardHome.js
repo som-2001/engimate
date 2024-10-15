@@ -83,7 +83,7 @@ export const DashboardHome = () => {
   const [openDialog1, setOpenDialog1] = useState(false);
   const [load, setLoad] = useState(false);
   const [name, setName] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState('');
+  const [selectedCourse, setSelectedCourse] = useState("");
   const [filteredCourse, setFilteredCourse] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -162,7 +162,7 @@ export const DashboardHome = () => {
 
   const handleCloseDialog1 = () => {
     setOpenDialog1(false);
-    setName('');
+    setName("");
     reset();
   };
   // Function to handle loading more items
@@ -341,7 +341,6 @@ export const DashboardHome = () => {
 
   const confirmCourseDelete = () => {
     if (selectedLecture) {
-
       setLoad(true);
       axios
         .delete(`${BaseUrl}/course/${selectedLecture}`, {
@@ -441,12 +440,10 @@ export const DashboardHome = () => {
     formData.append("file", data.file);
     formData.append("display_video_url", data.display_video_url);
 
-  
     try {
       axios
         .put(`${BaseUrl}/course/${selectedCourse}`, formData, {
           headers: {
-           
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
         })
@@ -457,11 +454,9 @@ export const DashboardHome = () => {
           toast.success(res.data.message, { autoClose: 3000 });
           reset(); // Reset form fields on success
           handleCloseDialog1(); // Close the dialog after submission
-          setName('');
+          setName("");
           setFilteredCourse((prev) =>
-        
-            prev.map((item) =>(
-              
+            prev.map((item) =>
               String(item._id) === String(selectedCourse)
                 ? {
                     ...item,
@@ -480,12 +475,10 @@ export const DashboardHome = () => {
                   }
                 : item
             )
-          ));
+          );
 
           setCourses((prev) =>
-        
-            prev.map((item) =>(
-              
+            prev.map((item) =>
               String(item._id) === String(selectedCourse)
                 ? {
                     ...item,
@@ -504,12 +497,11 @@ export const DashboardHome = () => {
                   }
                 : item
             )
-          ));
-          
+          );
         })
         .catch((error) => {
           setLoad(false);
-          setName('');
+          setName("");
           handleCloseDialog1();
           toast.error(error?.response?.data?.message, { autoClose: 3000 });
           if (
@@ -534,7 +526,7 @@ export const DashboardHome = () => {
       {/* Courses Section */}
       <ToastContainer />
       {hide ? (
-        <Box>
+        <Box >
           <Typography variant="h5" style={{ marginBottom: "30px" }}>
             Courses ({courses.length} items)
           </Typography>
@@ -573,7 +565,7 @@ export const DashboardHome = () => {
                         height: { xs: 200, sm: 240 }, // Set fixed height on small screens
                         objectFit: "cover", // Make sure image covers the container
                         cursor: "pointer",
-                        borderRadius:"10px"
+                        borderRadius: "10px",
                       }}
                       image={data.image}
                       alt=""
@@ -701,7 +693,7 @@ export const DashboardHome = () => {
                         No
                       </Button>
                       <Button
-                       disabled={load}
+                        disabled={load}
                         onClick={confirmCourseDelete}
                         color="secondary"
                         autoFocus
@@ -715,9 +707,7 @@ export const DashboardHome = () => {
             ) : (
               <Grid container spacing={2} textAlign="center">
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <p style={{ marginTop: "50px" }}>
-                    No courses found.
-                  </p>
+                  <p style={{ marginTop: "50px" }}>No courses found.</p>
                 </Grid>
               </Grid>
             )}
@@ -838,8 +828,9 @@ export const DashboardHome = () => {
             onClose={handleCloseDialog1}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
+        
           >
-            <DialogContent>
+            <DialogContent >
               <DialogContentText
                 id="alert-dialog-description"
                 marginBottom="20px"
@@ -847,7 +838,7 @@ export const DashboardHome = () => {
                 Are you sure you want to Edit this course?
               </DialogContentText>
 
-              <Box sx={{ width: "100%", maxWidth: 700 }}>
+              <Box>
                 <Typography
                   variant="body2"
                   textAlign="center"
@@ -1258,7 +1249,7 @@ export const DashboardHome = () => {
                 No
               </Button>
               <Button
-              disabled={load}
+                disabled={load}
                 onClick={handleSubmit(onSubmit1)}
                 color="primary"
                 autoFocus
@@ -1432,7 +1423,6 @@ export const DashboardHome = () => {
 
                     <Button
                       startIcon={<EditIcon />} // Add Edit Icon
-                     
                       sx={{
                         backgroundColor: "#0d47a1", // Blue color for Edit
                         color: "#fff",
@@ -1480,7 +1470,12 @@ export const DashboardHome = () => {
               <Button onClick={handleCloseDialog} color="primary">
                 No
               </Button>
-              <Button disabled={load} onClick={confirmDelete} color="secondary" autoFocus>
+              <Button
+                disabled={load}
+                onClick={confirmDelete}
+                color="secondary"
+                autoFocus
+              >
                 Yes, Delete
               </Button>
             </DialogActions>
@@ -1604,7 +1599,7 @@ export const DashboardHome = () => {
                 No
               </Button>
               <Button
-              disabled={load}
+                disabled={load}
                 onClick={firstSchemaHandleSubmit(onSubmit)}
                 color="primary"
                 autoFocus
