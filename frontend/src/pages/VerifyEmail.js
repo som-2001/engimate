@@ -104,10 +104,10 @@ export const VerifyEmail = () => {
             >
               <CardMedia
                 component="img"
-                src="../images/logo.png"
+                src="../images/logo1.png"
                 alt="Logo"
                 sx={{
-                  width: { xs: "60%", sm: "50%", md: "45%" },
+                  width: { xs: "50%", sm: "25%", md: "45%", lg: "30%" },
                   height: "auto",
                   mt: { xs: "5%", md: "0%" },
                 }}
@@ -115,7 +115,7 @@ export const VerifyEmail = () => {
               <Typography
                 variant="body2"
                 align="center"
-                sx={{ mb: 1, fontSize: { xs: "1.2rem", md: "1.4rem" } }}
+                sx={{mt:4, fontSize: { xs: "1.2rem", md: "1.4rem" } }}
                 className="header"
               >
                 OTP Verification

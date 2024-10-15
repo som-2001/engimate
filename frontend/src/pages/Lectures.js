@@ -472,10 +472,10 @@ export const Lectures = () => {
                           <iframe
                             width="100%"
                             height="250"
-                            src={`https://www.youtube.com/embed/${extractVideoId(data?.video_url)}`}
+                            src={`https://www.youtube.com/embed/${extractVideoId(data?.video_url)}?modestbranding=1&rel=0&controls=1`}
                             title={data?._id}
                             frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
                           />
                         ) : (
@@ -493,7 +493,7 @@ export const Lectures = () => {
                             <IconButton
                               sx={{
                                 position: "absolute",
-                                top: "40%",
+                                top: "30%",
                                 left: "50%",
                                 transform: "translate(-50%, -50%)",
                                 backgroundColor: "rgba(0, 0, 0, 0.7)",

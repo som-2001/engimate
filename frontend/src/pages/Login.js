@@ -164,10 +164,10 @@ export const Login = () => {
             >
               <CardMedia
                 component="img"
-                src="../images/logo.png"
+                src="../images/logo1.png"
                 alt="Logo"
                 sx={{
-                  width: { xs: "60%", sm: "50%", md: "45%", lg: "45%" },
+                  width: { xs: "50%", sm: "25%", md: "45%", lg: "30%" },
                   height: "auto",
                   marginBottom: "10px",
                   mt: { xs: "5%", md: "0%" },

@@ -76,7 +76,7 @@ export const DeleteMaterials = () => {
     try {
       setLoad(true);
       axios
-        .delete(`${BaseUrl}/material/${selectedMaterialId}`, {
+        .delete(`${BaseUrl}/materials/${selectedMaterialId}`, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
