@@ -177,12 +177,15 @@ function Dashboard() {
           <ListItem
             button
             key={index}
-            style={{
+            sx={{
               cursor: "pointer",
               backgroundColor:
                 selectedIndex === index ? "#d6d6d6" : "transparent", // Conditionally apply background color
               color: selectedIndex === index ? "blueviolet" : "grey", // Change text color when selected
-              
+              '&:hover': {
+            backgroundColor: 'whitesmoke', // Apply whitesmoke background on hover
+            color: 'black', // Optional: change text color on hover if needed
+          },
             }}
             onClick={() =>
               handleNavigationClick(item.content, item.heading, index)
