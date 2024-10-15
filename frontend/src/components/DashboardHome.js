@@ -470,7 +470,7 @@ export const DashboardHome = () => {
                     course_highlights: data.course_highlights,
                     price: data.price,
                     category: data.category,
-                    file: res.data.course.image,
+                    image: URL.createObjectURL(data.file),
                     display_video_url: data.display_video_url,
                   }
                 : item
@@ -492,7 +492,7 @@ export const DashboardHome = () => {
                     course_highlights: data.course_highlights,
                     price: data.price,
                     category: data.category,
-                    file: res.data.course.image,
+                    image: URL.createObjectURL(data.file),
                     display_video_url: data.display_video_url,
                   }
                 : item
