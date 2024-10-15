@@ -15,7 +15,6 @@ import {
   InputAdornment,
 } from '@mui/material';
 import axios from 'axios';
-import { BaseUrl } from './BaseUrl';
 import { toast,ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
@@ -36,7 +35,7 @@ export const DeleteDpps = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get(`${BaseUrl}/dpp/all`, {
+        const response = await axios.get(`${process.env.REACT_APP_BASEURl}/dpp/all`, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
@@ -57,7 +56,7 @@ export const DeleteDpps = () => {
     };
 
     fetchMaterials();
-  }, []);
+  }, [navigate]);
 
   // Filter materials based on search term
   const handleSearch = (event) => {
@@ -77,7 +76,7 @@ export const DeleteDpps = () => {
   const handleConfirmDelete = async () => {
     try {
       setLoad(true);
-      axios.delete(`${BaseUrl}/dpp/${selectedMaterialId}`, {
+      axios.delete(`${process.env.REACT_APP_BASEURl}/dpp/${selectedMaterialId}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },

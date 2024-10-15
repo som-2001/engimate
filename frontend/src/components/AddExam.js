@@ -15,7 +15,6 @@ import {
   FormControl,
   CircularProgress,
 } from "@mui/material";
-import { BaseUrl } from "./BaseUrl";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +52,7 @@ export const AddExam = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    axios.get(`${BaseUrl}/course/all`).then((res) => {
+    axios.get(`${process.env.REACT_APP_BASEURl}/course/all`).then((res) => {
       setResult(res?.data?.courses);
     });
   }, []);
@@ -71,7 +70,7 @@ export const AddExam = () => {
 
       // Post the data to the server
       axios
-        .post(`${BaseUrl}/course/${data.course}`, formData, {
+        .post(`${process.env.REACT_APP_BASEURl}/course/${data.course}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,

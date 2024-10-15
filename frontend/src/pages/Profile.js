@@ -1,6 +1,5 @@
 import { Box, Typography, Avatar, Button, Grid, DialogActions, DialogContentText, DialogContent, DialogTitle, Dialog } from "@mui/material";
 import axios from "axios";
-import { BaseUrl } from "../components/BaseUrl";
 import { useEffect, useState } from "react";
 import UserNavbar from "../components/userNavbar";
 import Footer from "../components/Footer";
@@ -31,7 +30,7 @@ export const Profile = () => {
 
   useEffect(() => {
     axios
-      .get(`${BaseUrl}/user/profile`, {
+      .get(`${process.env.REACT_APP_BASEURl}/user/profile`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },

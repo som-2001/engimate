@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { BaseUrl } from "../components/BaseUrl";
 import axios from "axios";
 import UserNavbar from "../components/userNavbar";
 import Footer from "../components/Footer";
@@ -46,7 +45,7 @@ export const MyCourse = () => {
 
   useEffect(() => {
     axios
-      .get(`${BaseUrl}/mycourses`, {
+      .get(`${process.env.REACT_APP_BASEURl}/mycourses`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },

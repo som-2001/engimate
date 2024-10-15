@@ -13,7 +13,6 @@ import {
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import UserNavbar from "../components/userNavbar";
 import Footer from "../components/Footer";
-import { BaseUrl } from "../components/BaseUrl";
 import axios from "axios";
 import FAQReferEarn from "../components/FAQ";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +45,7 @@ const ReferEarn = () => {
   };
   useEffect(() => {
     axios
-      .get(`${BaseUrl}/user/profile`, {
+      .get(`${process.env.REACT_APP_BASEURl}/user/profile`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },

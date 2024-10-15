@@ -19,7 +19,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { BaseUrl } from "./BaseUrl";
+
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -53,7 +53,7 @@ export const AddLecture = () => {
   // Fetch categories and courses
   useEffect(() => {
     axios
-      .get(`${BaseUrl}/category-course/detail/all`)
+      .get(`${process.env.REACT_APP_BASEURl}/category-course/detail/all`)
       .then((res) => {
         setResult(res?.data?.categoryCourse); // Assuming the API returns categories with their respective courses
         setFilteredResult(res?.data?.categoryCourse);
@@ -92,7 +92,7 @@ export const AddLecture = () => {
     setLoad(true);
     axios
       .post(
-        `${BaseUrl}/course/${data.course}`,
+        `${process.env.REACT_APP_BASEURl}/course/${data.course}`,
         {
           title: data.title,
           description: data.description,

@@ -13,7 +13,6 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { IoIosCheckmark } from "react-icons/io";
 import axios from "axios";
-import { BaseUrl } from "./BaseUrl";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -57,13 +56,13 @@ const CourseDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/course/${id}`).then((res) => {
+    axios.get(`${process.env.REACT_APP_BASEURl}/course/${id}`).then((res) => {
       setCourse(res.data.course); // Assuming the API returns an array
       console.log(res.data.course);
       setLoad(false);
     });
     axios
-      .get(`${BaseUrl}/user/profile`, {
+      .get(`${process.env.REACT_APP_BASEURl}/user/profile`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
@@ -83,7 +82,7 @@ const CourseDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`${BaseUrl}/mycourses`, {
+      .get(`${process.env.REACT_APP_BASEURl}/mycourses`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
@@ -150,7 +149,7 @@ const CourseDetail = () => {
     setPaymentLoad(true);
     axios
       .post(
-        `${BaseUrl}/course/checkout/${id}`,
+        `${process.env.REACT_APP_BASEURl}/course/checkout/${id}`,
         {},
         {
           headers: {
@@ -185,7 +184,7 @@ const CourseDetail = () => {
             // Post to backend with verification data
             axios
               .post(
-                `${BaseUrl}/verifypayment/${id}`, // Sending order.id to verify with the backend
+                `${process.env.REACT_APP_BASEURl}/verifypayment/${id}`, // Sending order.id to verify with the backend
                 {
                   razorpay_payment_id,
                   razorpay_order_id,

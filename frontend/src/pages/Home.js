@@ -291,7 +291,7 @@ export const Home = () => {
         navigate("/dashboard");
       }
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <Box sx={{ overflowX: "hidden" }}>

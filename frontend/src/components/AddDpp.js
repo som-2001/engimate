@@ -16,7 +16,6 @@ import {
   CircularProgress,
   ListSubheader,
 } from "@mui/material";
-import { BaseUrl } from "./BaseUrl";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +58,7 @@ export const AddDpp = () => {
  
   React.useEffect(() => {
     axios
-      .get(`${BaseUrl}/category-course/detail/all`)
+      .get(`${process.env.REACT_APP_BASEURl}/category-course/detail/all`)
       .then((res) => {
         setResult(res?.data?.categoryCourse); // Assuming the API returns categories with their respective courses
         setFilteredResult(res?.data?.categoryCourse);
@@ -103,7 +102,7 @@ export const AddDpp = () => {
 
       // Post the data to the server
       axios
-        .post(`${BaseUrl}/daily-practice-problems/add/`, formData, {
+        .post(`${process.env.REACT_APP_BASEURl}/daily-practice-problems/add/`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,

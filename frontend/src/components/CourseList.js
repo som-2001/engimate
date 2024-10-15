@@ -13,7 +13,6 @@ import {
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import axios from "axios";
-import { BaseUrl } from "./BaseUrl";
 import UserNavbar from "./userNavbar";
 import { jwtDecode } from "jwt-decode";
 import dayjs from "dayjs";
@@ -48,7 +47,7 @@ const CourseList = () => {
   }, [navigate]);
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/course-category/${id}`).then((res) => {
+    axios.get(`${process.env.REACT_APP_BASEURl}/course-category/${id}`).then((res) => {
       setSelectedCourses(res.data.category);
       setLoad(false);
     });

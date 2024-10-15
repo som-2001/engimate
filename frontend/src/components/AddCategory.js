@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BaseUrl } from "./BaseUrl";
 import { useNavigate } from "react-router-dom";
 
 // Validation schema using Yup
@@ -48,7 +47,7 @@ export const AddCategory = () => {
     try {
       setLoad(true);
       axios
-        .post(`${BaseUrl}/categories/add/`, formData, {
+        .post(`${process.env.REACT_APP_BASEURl}/categories/add/`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,

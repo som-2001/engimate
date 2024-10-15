@@ -22,7 +22,6 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaCodeBranch } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { URL } from "../components/BaseUrl";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -66,7 +65,7 @@ export const RegisterPage = () => {
     };
 
     axios
-      .post(`${URL}/register`, postData, {
+      .post(`${process.env.REACT_APP_URl}/register`, postData, {
         headers: { 'Content-Type': 'application/json' },
       })
       .then((response) => {

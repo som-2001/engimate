@@ -13,13 +13,11 @@ import {
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { CgProfile } from "react-icons/cg";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import { URL } from "../components/BaseUrl";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {jwtDecode} from 'jwt-decode';
@@ -43,7 +41,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export const Login = () => {
-  const navigate = useNavigate();
+ 
   const [hide, setHide] = useState(false);
   const [load, setLoad] = useState(false);
   const [tab, setTab] = useState(0); // Track which tab is active
@@ -69,7 +67,7 @@ export const Login = () => {
         // Request OTP (Email or Phone based on the tab)
         if (tab === 0) {
           // Email OTP
-          const response = await axios.post(`${URL}/request-login-otp`, {
+          const response = await axios.post(`${process.env.REACT_APP_URl}/request-login-otp`, {
             email: data.email,
           });
           toast.success("OTP has been sent to your email", { autoClose: 3000 });
@@ -78,7 +76,7 @@ export const Login = () => {
           }
         } else {
           // Phone OTP
-          const response = await axios.post(`${URL}/request-mobile-otp`, {
+          const response = await axios.post(`${process.env.REACT_APP_URl}/request-mobile-otp`, {
             phone_number: `+91${data.phone_number}`,
           });
           toast.success("OTP has been sent to your phone", { autoClose: 3000 });
@@ -90,7 +88,7 @@ export const Login = () => {
         // Verify OTP (Email or Phone based on the tab)
         if (tab === 0) {
           // Verify Email OTP
-          const response = await axios.post(`${URL}/login/`, {
+          const response = await axios.post(`${process.env.REACT_APP_URl}/login/`, {
             email: data.email,
             otp: data.otp,
           });
@@ -98,7 +96,7 @@ export const Login = () => {
           sessionStorage.setItem("token", response.data.token);
         } else {
           // Verify Phone OTP
-          const response = await axios.post(`${URL}/mobile-login/`, {
+          const response = await axios.post(`${process.env.REACT_APP_URl}/mobile-login/`, {
             phone_number: `+91${data.phone_number}`,
             otp: data.otp,
           });

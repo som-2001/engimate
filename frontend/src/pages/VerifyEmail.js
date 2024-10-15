@@ -14,7 +14,6 @@ import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaCodeBranch } from "react-icons/fa";
-import { URL } from "../components/BaseUrl";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -48,7 +47,7 @@ export const VerifyEmail = () => {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${URL}/verify`,
+        url: `${process.env.REACT_APP_URl}/verify`,
         headers: { 
           'Content-Type': 'application/json'
         },

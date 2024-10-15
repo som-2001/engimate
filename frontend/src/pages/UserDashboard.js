@@ -3,13 +3,13 @@ import { Box } from "@mui/material"
 import { MyCourse } from "./MyCourse";
 import axios from "axios";
 import { useEffect } from "react";
-import { BaseUrl } from "../components/BaseUrl";
+
 
 export const UserDashboard=()=>{
    
-  useEffect(()=>{
+  useEffect(()=>{ 
     axios
-    .get(`${BaseUrl}/user/profile`, {
+    .get(`${process.env.REACT_APP_BASEURl}/user/profile`, {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },

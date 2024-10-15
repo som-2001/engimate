@@ -20,7 +20,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import axios from "axios";
-import { BaseUrl } from "./BaseUrl";
+
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -113,7 +113,7 @@ export const DashboardHome = () => {
   // Fetch categories and courses data
   useEffect(() => {
     try {
-      axios.get(`${BaseUrl}/course/all`).then((res) => {
+      axios.get(`${process.env.REACT_APP_BASEURl}/course/all`).then((res) => {
         setLoadCourse(false);
         setCourses(res.data.courses);
         setFilteredCourse(res.data.courses);
@@ -130,7 +130,7 @@ export const DashboardHome = () => {
     }
 
     try {
-      axios.get(`${BaseUrl}/categories/all`).then((res) => {
+      axios.get(`${process.env.REACT_APP_BASEURl}/categories/all`).then((res) => {
         setLoadCategory(false);
         setCategories(res.data.categories);
       });
@@ -197,7 +197,7 @@ export const DashboardHome = () => {
     setHide(false);
     setLoadLecture(true);
     axios
-      .get(`${BaseUrl}/lectures/${id}`, {
+      .get(`${process.env.REACT_APP_BASEURl}/lectures/${id}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
@@ -246,7 +246,7 @@ export const DashboardHome = () => {
     setOpenDialog1(true);
 
     axios
-      .get(`${BaseUrl}/course/${id}`, {
+      .get(`${process.env.REACT_APP_BASEURl}/course/${id}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
@@ -283,7 +283,7 @@ export const DashboardHome = () => {
     setOpenDialog1(true);
 
     axios
-      .get(`${BaseUrl}/lecture/${id}`, {
+      .get(`${process.env.REACT_APP_BASEURl}/lecture/${id}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
@@ -310,7 +310,7 @@ export const DashboardHome = () => {
     if (selectedLecture) {
       setLoad(true);
       axios
-        .delete(`${BaseUrl}/lecture/${selectedLecture}`, {
+        .delete(`${process.env.REACT_APP_BASEURl}/lecture/${selectedLecture}`, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
@@ -343,7 +343,7 @@ export const DashboardHome = () => {
     if (selectedLecture) {
       setLoad(true);
       axios
-        .delete(`${BaseUrl}/course/${selectedLecture}`, {
+        .delete(`${process.env.REACT_APP_BASEURl}/course/${selectedLecture}`, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
@@ -381,7 +381,7 @@ export const DashboardHome = () => {
 
     try {
       const res = await axios.put(
-        `${BaseUrl}/lecture/${selectedLecture1}`,
+        `${process.env.REACT_APP_BASEURl}/lecture/${selectedLecture1}`,
         {
           title: data.title,
           description: data.description,
@@ -442,7 +442,7 @@ export const DashboardHome = () => {
 
     try {
       axios
-        .put(`${BaseUrl}/course/${selectedCourse}`, formData, {
+        .put(`${process.env.REACT_APP_BASEURl}/course/${selectedCourse}`, formData, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },

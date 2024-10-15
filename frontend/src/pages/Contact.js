@@ -24,7 +24,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import axios from "axios";
-import { BaseUrl } from "../components/BaseUrl";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -52,7 +51,7 @@ export const Contact = () => {
   const onSubmit = (data) => {
     setLoad(true);
     axios
-      .post(`${BaseUrl}/contact/us`, data)
+      .post(`${process.env.REACT_APP_BASEURl}/contact/us`, data)
       .then((response) => {
         setLoad(false);
         toast.success(response.data.message, { autoClose: 3000 });

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Grid, Card, CardMedia, CardContent, Typography, Container, Box, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { BaseUrl } from "./BaseUrl";
 
 export const OurExpertise = () => {
  
@@ -16,7 +15,7 @@ export const OurExpertise = () => {
 
   useEffect(()=>{
     try {
-      axios.get(`${BaseUrl}/categories/all`).then((res) => {
+      axios.get(`${process.env.REACT_APP_BASEURl}/categories/all`).then((res) => {
         setLoadCategory(false);
         setCategories(res.data.categories);
       });

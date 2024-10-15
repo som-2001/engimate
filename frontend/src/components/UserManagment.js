@@ -19,7 +19,6 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
-import { BaseUrl } from "./BaseUrl";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -57,7 +56,7 @@ export const UserManagement = () => {
   useEffect(() => {
     // Fetch users from the API
     axios
-      .get(`${BaseUrl}/users/all`, {
+      .get(`${process.env.REACT_APP_BASEURl}/users/all`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
@@ -77,7 +76,7 @@ export const UserManagement = () => {
         }
         setLoading(false);
       });
-  }, []);
+  }, [navigate]);
 
   const handleDeleteUser = (userId) => {
     setOpenDialog(true);
@@ -104,7 +103,7 @@ export const UserManagement = () => {
   const confirmEditUser = (data) => {
     setLoad(true);
     axios
-      .put(`${BaseUrl}/users/${selectedUserId1}`,{role:data.role}, {
+      .put(`${process.env.REACT_APP_BASEURl}/users/${selectedUserId1}`,{role:data.role}, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
@@ -141,7 +140,7 @@ export const UserManagement = () => {
   const confirmDeleteUser = () => {
     setLoad(true);
     axios
-      .delete(`${BaseUrl}/users/${selectedUserId}`, {
+      .delete(`${process.env.REACT_APP_BASEURl}/users/${selectedUserId}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },

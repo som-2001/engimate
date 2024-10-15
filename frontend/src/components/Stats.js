@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Avatar, Box, Grid, Skeleton, Typography } from "@mui/material";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { BaseUrl } from "./BaseUrl";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +15,7 @@ export const Stats = () => {
 
   useEffect(() => {
     axios
-      .get(`${BaseUrl}/stats/`, {
+      .get(`${process.env.REACT_APP_BASEURl}/stats/`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },

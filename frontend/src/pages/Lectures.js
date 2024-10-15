@@ -14,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { BaseUrl } from "../components/BaseUrl";
 import axios from "axios";
 import UserNavbar from "../components/userNavbar";
 import Footer from "../components/Footer";
@@ -51,7 +50,7 @@ export const Lectures = () => {
     setSelectedDpp(data);
 
     axios
-      .get(`${BaseUrl}/dpp-search/?title=${data.title}&dpp_id=${data._id}`, {
+      .get(`${process.env.REACT_APP_BASEURl}/dpp-search/?title=${data.title}&dpp_id=${data._id}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
@@ -94,7 +93,7 @@ export const Lectures = () => {
 
     axios
       .get(
-        `${BaseUrl}/materials-search/?title=${data.title}&material_id=${data._id}`,
+        `${process.env.REACT_APP_BASEURl}/materials-search/?title=${data.title}&material_id=${data._id}`,
         {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -158,7 +157,7 @@ export const Lectures = () => {
       case 1:
         setHeading("Pdfs");
         axios
-          .get(`${BaseUrl}/materials/category/${id}`, {
+          .get(`${process.env.REACT_APP_BASEURl}/materials/category/${id}`, {
             headers: {
               Authorization: `Bearer ${sessionStorage.getItem("token")}`,
             },
@@ -182,7 +181,7 @@ export const Lectures = () => {
       case 2:
         setHeading("Dpps");
         axios
-          .get(`${BaseUrl}/dpp/category/${id}`, {
+          .get(`${process.env.REACT_APP_BASEURl}/dpp/category/${id}`, {
             headers: {
               Authorization: `Bearer ${sessionStorage.getItem("token")}`,
             },
@@ -252,7 +251,7 @@ export const Lectures = () => {
 
   useEffect(() => {
     axios
-      .get(`${BaseUrl}/lectures/${id}`, {
+      .get(`${process.env.REACT_APP_BASEURl}/lectures/${id}`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },

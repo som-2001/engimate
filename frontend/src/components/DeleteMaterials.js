@@ -15,7 +15,6 @@ import {
   Divider,
 } from "@mui/material";
 import axios from "axios";
-import { BaseUrl } from "./BaseUrl";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
@@ -36,7 +35,7 @@ export const DeleteMaterials = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get(`${BaseUrl}/materials/all`, {
+        const response = await axios.get(`${process.env.REACT_APP_BASEURl}/materials/all`, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
@@ -55,7 +54,7 @@ export const DeleteMaterials = () => {
     };
 
     fetchMaterials();
-  }, []);
+  }, [navigate]);
 
   // Filter materials based on search term
   const handleSearch = (event) => {
@@ -76,7 +75,7 @@ export const DeleteMaterials = () => {
     try {
       setLoad(true);
       axios
-        .delete(`${BaseUrl}/materials/${selectedMaterialId}`, {
+        .delete(`${process.env.REACT_APP_BASEURl}/materials/${selectedMaterialId}`, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },

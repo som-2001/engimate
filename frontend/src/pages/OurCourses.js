@@ -15,7 +15,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ArrowRightAlt } from "@mui/icons-material";
 import axios from "axios";
-import { BaseUrl } from "../components/BaseUrl";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import UserNavbar from "../components/userNavbar";
@@ -50,7 +49,7 @@ export const OurCourses = () => {
 
   useEffect(() => {
     try {
-      axios.get(`${BaseUrl}/categories/all`).then((res) => {
+      axios.get(`${process.env.REACT_APP_BASEURl}/categories/all`).then((res) => {
         setLoadCategory(false);
         setCategories(res.data.categories);
       });

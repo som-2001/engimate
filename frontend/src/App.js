@@ -20,7 +20,7 @@ import { AllCourses } from "./components/AllCourses";
 import { Lectures } from "./pages/Lectures";
 import ReferEarn from "./pages/ReferEarn";
 import { Profile } from "./pages/Profile";
-import { useEffect } from "react";
+
 // import { useEffect } from "react";
 
 function App() {
