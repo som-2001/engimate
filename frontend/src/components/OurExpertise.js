@@ -42,7 +42,7 @@ export const OurExpertise = () => {
       <Container sx={{ padding: "9px" }}>
         
         {/* Expertise Cards Section */}
-        <Grid container spacing={4} justifyContent="center">
+        <Grid container spacing={4} >
           {categories.length===0 ? <center><p style={{padding:"40px",marginTop:"10%",marginBottom:"10%",fontWeight:"600",fontSize:"1.5rem"}}>Expertise will be added soon.</p></center>:categories.map((course, index) => (
             <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <Card

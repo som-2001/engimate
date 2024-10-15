@@ -38,7 +38,7 @@ export const Lectures = () => {
   const [openDialog, setOpenDialog] = useState(false); // To handle dialog open/close
   const [selectedDpp, setSelectedDpp] = useState(null);
   const [dppDownload, setDppDownload] = useState("");
-  const [message,setMessage]=useState('');
+  const [message, setMessage] = useState("");
   //for pdfs
   const [pdf, setPdf] = useState([]);
   const [openpdfDialog, setOpenpdfDialog] = useState(false); // To handle dialog open/close
@@ -50,29 +50,31 @@ export const Lectures = () => {
     setSelectedDpp(data);
 
     axios
-      .get(`${process.env.REACT_APP_BASEURl}/dpp-search/?title=${data.title}&dpp_id=${data._id}`, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_BASEURl}/dpp-search/?title=${data.title}&dpp_id=${data._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      )
       .then((res) => {
-        
         const base64Pdf = res?.data?.dpp?.fileData?.[0].split(",")[1]; // Extract base64 part
         const binaryPdf = atob(base64Pdf); // Convert base64 to binary data
-  
+
         // Create an array buffer for the binary data
         const len = binaryPdf.length;
         const bytes = new Uint8Array(len);
         for (let i = 0; i < len; i++) {
           bytes[i] = binaryPdf.charCodeAt(i);
         }
-  
+
         // Create a Blob with the PDF binary data
         const blob = new Blob([bytes], { type: "application/pdf" });
-  
+
         // Create an object URL for the Blob
         const url = URL.createObjectURL(blob);
-        console.log("URL:",url);
+        console.log("URL:", url);
         setDppDownload(url);
         // console.log(res?.data?.dpp?.fileData?.[0])
       })
@@ -101,24 +103,23 @@ export const Lectures = () => {
         }
       )
       .then((res) => {
-       
         console.log(res.data.material?.[0]);
         const base64Pdf = res?.data?.material?.[0]?.fileData?.[0].split(",")[1]; // Extract base64 part
         const binaryPdf = atob(base64Pdf); // Convert base64 to binary data
-  
+
         // Create an array buffer for the binary data
         const len = binaryPdf.length;
         const bytes = new Uint8Array(len);
         for (let i = 0; i < len; i++) {
           bytes[i] = binaryPdf.charCodeAt(i);
         }
-  
+
         // Create a Blob with the PDF binary data
         const blob = new Blob([bytes], { type: "application/pdf" });
-  
+
         // Create an object URL for the Blob
         const url = URL.createObjectURL(blob);
-        console.log("URL:",url);
+        console.log("URL:", url);
         setpdfDownload(url);
         // console.log(res?.data?.dpp?.fileData?.[0])
       })
@@ -192,8 +193,9 @@ export const Lectures = () => {
           })
           .catch((error) => {
             console.error("Error fetching categories", error);
-            if(error?.response?.data?.message==='No DPP found for this course')
-            {
+            if (
+              error?.response?.data?.message === "No DPP found for this course"
+            ) {
               setLoadDpp(false);
               setDpp([]);
             }
@@ -407,9 +409,7 @@ export const Lectures = () => {
 
         <Box>
           {value === 0 &&
-          
             (loadLecture ? (
-              
               <Box sx={{ textAlign: "center", marginTop: "8vh" }}>
                 <Grid container spacing={4} justifyContent="center">
                   {[...Array(3)].map(
@@ -438,10 +438,16 @@ export const Lectures = () => {
                   )}
                 </Grid>
               </Box>
-            ) : (
-              message ?( <Typography variant="body1" textAlign="center" marginTop="10%" marginBottom="5%">
+            ) : message ? (
+              <Typography
+                variant="body1"
+                textAlign="center"
+                marginTop="10%"
+                marginBottom="5%"
+              >
                 {message}
-              </Typography>):
+              </Typography>
+            ) : (
               <Grid container spacing={2} justifyContent="center">
                 {lectures?.length === 0 ? (
                   <Typography variant="body1" marginTop="10%" marginBottom="5%">
@@ -506,17 +512,27 @@ export const Lectures = () => {
                             </IconButton>
                           </>
                         )}
-                        <CardContent sx={{
-                      height: "130px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                    }}>
+                        <CardContent
+                          sx={{
+                            height: "130px",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                          }}
+                        >
                           <Typography
                             variant="h6"
                             sx={{ fontWeight: "bold", marginBottom: "12px" }}
                           >
-                            <span style={{fontSize:"1.3rem",color:"blueviolet"}}>#{index+1}</span> {data.title}
+                            <span
+                              style={{
+                                fontSize: "1.3rem",
+                                color: "blueviolet",
+                              }}
+                            >
+                              #{index + 1}
+                            </span>{" "}
+                            {data.title}
                           </Typography>
                           <Typography variant="body2" color="textSecondary">
                             {data?.description.length > 150
@@ -524,8 +540,8 @@ export const Lectures = () => {
                               : data?.description}
                           </Typography>
                           <Typography variant="body2" color="textSecondary">
-                          Posted At:{" "}
-                          {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                            Posted At:{" "}
+                            {dayjs(data?.createdAt).format("Do MMM YYYY")}
                           </Typography>
                         </CardContent>
                       </Card>
@@ -593,7 +609,16 @@ export const Lectures = () => {
                         onClick={() => handleCardClick1(data)} // Trigger dialog on card click
                       >
                         {/* PDF Icon */}
-                        <span style={{fontSize:"1.5rem",fontWeight:"700",marginRight:"5px",color:"blueviolet"}}>#{index+1}</span>
+                        <span
+                          style={{
+                            fontSize: "1.5rem",
+                            fontWeight: "700",
+                            marginRight: "5px",
+                            color: "blueviolet",
+                          }}
+                        >
+                          #{index + 1}
+                        </span>
                         <Box
                           sx={{
                             minWidth: "40px",
@@ -619,25 +644,25 @@ export const Lectures = () => {
                         </Box>
 
                         {/* Title */}
-                        <Box sx={{display:"flex",flexDirection:"column"}}>
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            fontWeight: "bold",
-                            fontSize: "1rem",
-                            color: "#333", // Dark text color
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis", // Handle long titles
-                          }}
-                        >
-                          {data.title}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          Posted At:{" "}
-                          {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                              color: "#333", // Dark text color
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis", // Handle long titles
+                            }}
+                          >
+                            {data.title}
                           </Typography>
-                          </Box>
+                          <Typography variant="body2" color="textSecondary">
+                            Posted At:{" "}
+                            {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                          </Typography>
+                        </Box>
                       </Card>
                     </Grid>
                   ))
@@ -657,15 +682,26 @@ export const Lectures = () => {
             </DialogTitle>
             <DialogContent dividers>
               {/* Display PDF in an iframe */}
-              {pdfDownload.length===0?(<p style={{fontWeight:"600",fontSize:"1.5rem",marginTop:"40px",marginBottom:"40px"}}>Wait a moment,your pdf is loading...</p>):(
-              <iframe
-                src={pdfDownload}
-                title={selectedPdf?.title}
-                width="100%"
-                height="500px"
-                style={{ border: "none" }}
-              />
-            )}
+              {pdfDownload.length === 0 ? (
+                <p
+                  style={{
+                    fontWeight: "600",
+                    fontSize: "1.5rem",
+                    marginTop: "40px",
+                    marginBottom: "40px",
+                  }}
+                >
+                  Wait a moment,your pdf is loading...
+                </p>
+              ) : (
+                <iframe
+                  src={pdfDownload}
+                  title={selectedPdf?.title}
+                  width="100%"
+                  height="500px"
+                  style={{ border: "none" }}
+                />
+              )}
             </DialogContent>
             <DialogActions>
               {/* Download Button */}
@@ -748,7 +784,16 @@ export const Lectures = () => {
                         }}
                         onClick={() => handleCardClick(data)} // Trigger dialog on card click
                       >
-                        <span style={{fontSize:"1.5rem",fontWeight:"700",marginRight:"5px",color:"blueviolet"}}>#{index+1}</span>
+                        <span
+                          style={{
+                            fontSize: "1.5rem",
+                            fontWeight: "700",
+                            marginRight: "5px",
+                            color: "blueviolet",
+                          }}
+                        >
+                          #{index + 1}
+                        </span>
                         {/* PDF Icon */}
                         <Box
                           sx={{
@@ -757,13 +802,12 @@ export const Lectures = () => {
                             backgroundColor: "#d32f2f", // Red background to resemble PDF
                             borderRadius: "8px",
                             display: "flex",
-                            flexDirection:"column",
+                            flexDirection: "column",
                             justifyContent: "center",
                             alignItems: "center",
                             marginRight: "12px", // Space between icon and title
                           }}
                         >
-                          
                           <Typography
                             variant="body2"
                             sx={{
@@ -777,26 +821,26 @@ export const Lectures = () => {
                         </Box>
 
                         {/* Title */}
-                       <Box sx={{display:"flex",flexDirection:"column"}}>
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            fontWeight: "bold",
-                            fontSize: "1rem",
-                            color: "#333", // Dark text color
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis", // Handle long titles
-                          }}
-                        >
-                          {data.title}
-                        </Typography>
-                       
-                        <Typography variant="body2" color="textSecondary">
-                          Posted At:{" "}
-                          {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                              color: "#333", // Dark text color
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis", // Handle long titles
+                            }}
+                          >
+                            {data.title}
                           </Typography>
-                          </Box>
+
+                          <Typography variant="body2" color="textSecondary">
+                            Posted At:{" "}
+                            {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                          </Typography>
+                        </Box>
                       </Card>
                     </Grid>
                   ))
@@ -816,15 +860,26 @@ export const Lectures = () => {
             </DialogTitle>
             <DialogContent dividers>
               {/* Display PDF in an iframe */}
-              {dppDownload.length===0?(<p style={{fontWeight:"500",fontSize:"1.5rem",marginTop:"40px",marginBottom:"40px"}}>Wait a moment,your pdf is loading...</p>):(
-              <iframe
-                src={dppDownload}
-                title={selectedDpp?.title}
-                width="100%"
-                height="500px"
-                style={{ border: "none" }}
-              />
-            )}
+              {dppDownload.length === 0 ? (
+                <p
+                  style={{
+                    fontWeight: "500",
+                    fontSize: "1.5rem",
+                    marginTop: "40px",
+                    marginBottom: "40px",
+                  }}
+                >
+                  Wait a moment,your pdf is loading...
+                </p>
+              ) : (
+                <iframe
+                  src={dppDownload}
+                  title={selectedDpp?.title}
+                  width="100%"
+                  height="500px"
+                  style={{ border: "none" }}
+                />
+              )}
             </DialogContent>
             <DialogActions>
               {/* Download Button */}

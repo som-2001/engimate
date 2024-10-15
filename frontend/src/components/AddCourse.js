@@ -124,7 +124,7 @@ export const AddCourse = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "67%",
+        minHeight: "70vh",
       }}
     >
       <ToastContainer />
@@ -674,6 +674,7 @@ export const AddCourse = () => {
                   <Button
                     type="submit"
                     variant="contained"
+                    disabled={load}
                     color="primary"
                     fullWidth
                     sx={{

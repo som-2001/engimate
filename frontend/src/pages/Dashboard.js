@@ -1,64 +1,128 @@
-import * as React from 'react';
+import * as React from "react";
 import {
-  AppBar, Toolbar, Typography, IconButton, Box, Drawer, List, ListItem,
-  ListItemIcon, ListItemText, CssBaseline, Divider,
-} from '@mui/material';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+  AppBar,
+  Toolbar,
+  IconButton,
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  CssBaseline,
+} from "@mui/material";
+import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   Dashboard as DashboardIcon,
   BarChart as BarChartIcon,
   Menu as MenuIcon,
   Category as CategoryIcon,
-  WbSunnyRounded
-} from '@mui/icons-material';
-import { DashboardHome } from '../components/DashboardHome';
-import { AddLecture } from '../components/AddLecture';
-import { AddCategory } from '../components/AddCategory';
-import { AddCourse } from '../components/AddCourse';
-import {jwtDecode} from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import QuizIcon from '@mui/icons-material/Quiz';
-import BookIcon from '@mui/icons-material/Book';
-import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
-import { Addpdf } from '../components/Addpdf';
-import { AddDpp } from '../components/AddDpp';
-import { AddExam } from '../components/AddExam';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
-import { Stats } from '../components/Stats';
-import { UserManagement } from '../components/UserManagment';
-import { FaUser } from 'react-icons/fa';
-import { DeleteMaterials } from '../components/DeleteMaterials';
-import { DeleteDpps } from '../components/DeleteDpps';
-import ClearIcon from '@mui/icons-material/Clear';
+  WbSunnyRounded,
+} from "@mui/icons-material";
+import { DashboardHome } from "../components/DashboardHome";
+import { AddLecture } from "../components/AddLecture";
+import { AddCategory } from "../components/AddCategory";
+import { AddCourse } from "../components/AddCourse";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import QuizIcon from "@mui/icons-material/Quiz";
+import BookIcon from "@mui/icons-material/Book";
+import VideoCameraFrontIcon from "@mui/icons-material/VideoCameraFront";
+import { Addpdf } from "../components/Addpdf";
+import { AddDpp } from "../components/AddDpp";
+import { AddExam } from "../components/AddExam";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
+import { Stats } from "../components/Stats";
+import { UserManagement } from "../components/UserManagment";
+import { FaUser } from "react-icons/fa";
+import { DeleteMaterials } from "../components/DeleteMaterials";
+import { DeleteDpps } from "../components/DeleteDpps";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const drawerWidth = 280;
 
 const NAV_ITEMS = [
-  { text: 'Dashboard', icon: <DashboardIcon />, content: <DashboardHome />, heading: "Dashboard" },
-  { text: 'Add Lecture', icon: <VideoCameraFrontIcon />, content: <AddLecture />, heading: "Add Lecture" },
-  { text: 'Add Category', icon: <CategoryIcon />, content: <AddCategory />, heading: "Add Category" },
-  { text: 'Add Course', icon: <BarChartIcon />, content: <AddCourse />, heading: "Add Course" },
-  { text: 'Upload Pdfs', icon: <PictureAsPdfIcon />, content: <Addpdf />, heading: "Upload Pdfs" },
-  { text: 'Upload Dpps', icon: <BookIcon />, content: <AddDpp />, heading: "Upload Dpps" },
-  { text: 'Upload Exam Form', icon: <QuizIcon />, content: <AddExam />, heading: "Upload Exam Form" },
-  { text: 'Statictics', icon: <AnalyticsIcon />, content: <Stats />, heading: "Statictics Overview" },
-  {text:"User Management",icon:<FaUser/>, content:<UserManagement/>,heading:"User Management"},
-  {text:"Delete Pdfs",icon:<ClearIcon/>, content:<DeleteMaterials/>,heading:"Delete Pdfs"},
-  {text:"Delete Dpps",icon:<ClearIcon/>, content:<DeleteDpps/>,heading:"Delete Dpps"}
-
-  
+  {
+    text: "Dashboard",
+    icon: <DashboardIcon />,
+    content: <DashboardHome />,
+    heading: "Dashboard",
+  },
+  {
+    text: "Add Category",
+    icon: <CategoryIcon />,
+    content: <AddCategory />,
+    heading: "Add Category",
+  },
+  {
+    text: "Add Course",
+    icon: <BarChartIcon />,
+    content: <AddCourse />,
+    heading: "Add Course",
+  },
+  {
+    text: "Add Lecture",
+    icon: <VideoCameraFrontIcon />,
+    content: <AddLecture />,
+    heading: "Add Lecture",
+  },
+  {
+    text: "Upload Pdfs",
+    icon: <PictureAsPdfIcon />,
+    content: <Addpdf />,
+    heading: "Upload Pdfs",
+  },
+  {
+    text: "Upload Dpps",
+    icon: <BookIcon />,
+    content: <AddDpp />,
+    heading: "Upload Dpps",
+  },
+  {
+    text: "Upload Exam Form",
+    icon: <QuizIcon />,
+    content: <AddExam />,
+    heading: "Upload Exam Form",
+  },
+  {
+    text: "Statictics",
+    icon: <AnalyticsIcon />,
+    content: <Stats />,
+    heading: "Statictics Overview",
+  },
+  {
+    text: "User Management",
+    icon: <FaUser />,
+    content: <UserManagement />,
+    heading: "User Management",
+  },
+  {
+    text: "Delete Pdfs",
+    icon: <ClearIcon />,
+    content: <DeleteMaterials />,
+    heading: "Delete Pdfs",
+  },
+  {
+    text: "Delete Dpps",
+    icon: <ClearIcon />,
+    content: <DeleteDpps />,
+    heading: "Delete Dpps",
+  },
 ];
 
 function Dashboard() {
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [selectedContent, setSelectedContent] = React.useState(NAV_ITEMS[0].content); // Default to first item
-  const [selectedHeader, setSelectedHeader] = React.useState(NAV_ITEMS[0].heading); // Default to first item
+  const [selectedIndex, setSelectedIndex] = React.useState(0); // Default to the first item (Dashboard)
+  const [selectedContent, setSelectedContent] = React.useState(
+    NAV_ITEMS[0].content
+  ); // Default to first item
+
   const [darkMode, setDarkMode] = React.useState(false); // Manage dark mode state
 
   const theme = useTheme();
-  
+
   // Handle drawer toggle for mobile
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -81,7 +145,10 @@ function Dashboard() {
         navigate("/login");
       } else {
         // Check if the role is either "admin" or "instructor"
-        if (decodedToken.role === "admin" || decodedToken.role === "instructor") {
+        if (
+          decodedToken.role === "admin" ||
+          decodedToken.role === "instructor"
+        ) {
           navigate("/dashboard");
         } else {
           navigate("/user-dashboard");
@@ -92,10 +159,10 @@ function Dashboard() {
     }
   }, [navigate]);
 
-  const handleNavigationClick = (content, heading) => {
+  const handleNavigationClick = (content, heading, index) => {
     setSelectedContent(content); // Update content based on the selected item
-    setSelectedHeader(heading);
-    if(heading==='Dashboard'){
+    setSelectedIndex(index);
+    if (heading === "Dashboard") {
       window.location.reload();
     }
     if (mobileOpen) {
@@ -105,11 +172,31 @@ function Dashboard() {
 
   const drawer = (
     <div>
-      <List sx={{ marginTop: "50%" }}>
+      <List sx={{ marginTop: "40%" }}>
         {NAV_ITEMS.map((item, index) => (
-          <ListItem button key={index} style={{ cursor: "pointer" }} onClick={() => handleNavigationClick(item.content, item.heading)}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
+          <ListItem
+            button
+            key={index}
+            style={{
+              cursor: "pointer",
+              backgroundColor:
+                selectedIndex === index ? "#d6d6d6" : "transparent", // Conditionally apply background color
+              color: selectedIndex === index ? "blueviolet" : "grey", // Change text color when selected
+              
+            }}
+            onClick={() =>
+              handleNavigationClick(item.content, item.heading, index)
+            } // Set selected index
+          >
+            <ListItemIcon
+              style={{
+                color: selectedIndex === index ? "blueviolet" : "grey",
+                fontWeight: 600,
+              }}
+            >
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.text} sx={{ fontWeight: 600 }} />
           </ListItem>
         ))}
       </List>
@@ -119,57 +206,72 @@ function Dashboard() {
   // Define a light and dark theme using Material-UI's theming system
   const lightTheme = createTheme({
     palette: {
-      mode: 'light',
+      mode: "light",
       background: {
-        default: '#ffffff',
+        default: "#ffffff",
       },
       text: {
-        primary: '#000000',
+        primary: "#000000",
       },
     },
   });
 
   const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
+      mode: "dark",
       background: {
-        default: '#121212',
+        default: "#121212",
       },
       text: {
-        primary: '#ffffff',
+        primary: "#ffffff",
       },
     },
   });
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1 ,backgroundColor:"white"}} >
+        <AppBar
+          position="fixed"
+          sx={{ zIndex: theme.zIndex.drawer + 1, backgroundColor: "white" }}
+        >
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <IconButton
-            
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' },color:darkMode?"black":"" }}
+              sx={{
+                mr: 2,
+                display: { sm: "none" },
+                color: darkMode ? "black" : "",
+              }}
             >
               <MenuIcon />
             </IconButton>
-            <img src='./images/logo.png' alt='' style={{ width: "150px",cursor:"pointer" }} />
-            
-            <IconButton sx={{color:darkMode?"black":""}} onClick={toggleDarkMode}>
+            <img
+              src="./images/logo.png"
+              alt=""
+              style={{ width: "150px", cursor: "pointer" }}
+            />
+
+            <IconButton
+              sx={{ color: darkMode ? "black" : "" }}
+              onClick={toggleDarkMode}
+            >
               <WbSunnyRounded />
             </IconButton>
-            
           </Toolbar>
-          
         </AppBar>
 
         {/* Sidebar for larger screens */}
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, marginTop: "20%" }}
+          sx={{
+            width: { sm: drawerWidth },
+            flexShrink: { sm: 0 },
+            marginTop: "20%",
+          }}
           aria-label="mailbox folders"
         >
           <Drawer
@@ -180,8 +282,11 @@ function Dashboard() {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
             }}
           >
             {drawer}
@@ -189,8 +294,11 @@ function Dashboard() {
           <Drawer
             variant="permanent"
             sx={{
-              display: { xs: 'none', sm: 'block' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              display: { xs: "none", sm: "block" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
             }}
             open
           >
@@ -201,16 +309,14 @@ function Dashboard() {
         {/* Right side content for large screens */}
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+          }}
         >
           <Toolbar />
 
-          <Typography variant="body1" gutterBottom textAlign="center" sx={{ textAlign: "center", fontWeight: "bold", color: "blueviolet",fontSize:{lg:'2rem',md:"2rem",xs:"1.5rem",sm:"1.5rem" },fontFamily:"mono-space"}}>
-            {selectedHeader}
-          </Typography>
-          <center style={{marginTop:'1px'}}>
-            <Divider sx={{ marginBottom: "50px", width: { lg: "14%", xs: "30%", sm: "18%", md: "14%" }, backgroundColor: "blue", }} />
-          </center>
           {selectedContent}
         </Box>
       </Box>

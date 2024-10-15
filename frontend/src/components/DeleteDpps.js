@@ -31,6 +31,59 @@ export const DeleteDpps = () => {
   const [selectedMaterialId, setSelectedMaterialId] = useState(null);
   const [load,setLoad]=useState(false);
   const navigate=useNavigate();
+  const [selectedPdf, setSelectedPdf] = useState(null);
+  const [pdfDownload, setpdfDownload] = useState("");
+  const [openpdfDialog, setOpenpdfDialog] = useState(false); // To handle dialog open/close
+
+  const handleCardClick1 = (data) => {
+    setSelectedPdf(data);
+
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURl}/dpp-search/?title=${data.title}&dpp_id=${data._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data.dpp);
+        const base64Pdf = res?.data?.dpp?.fileData?.[0].split(",")[1]; // Extract base64 part
+        const binaryPdf = atob(base64Pdf); // Convert base64 to binary data
+
+        // Create an array buffer for the binary data
+        const len = binaryPdf.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binaryPdf.charCodeAt(i);
+        }
+
+        // Create a Blob with the PDF binary data
+        const blob = new Blob([bytes], { type: "application/pdf" });
+
+        // Create an object URL for the Blob
+        const url = URL.createObjectURL(blob);
+        console.log("URL:", url);
+        setpdfDownload(url);
+        // console.log(res?.data?.dpp?.fileData?.[0])
+      })
+      .catch((error) => {
+        console.error("Error fetching categories", error);
+        if (error?.response?.data?.message === "login first or token expired") {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
+        }
+      });
+    setOpenpdfDialog(true);
+  };
+
+  const handleCloseDialog1 = () => {
+    setOpenpdfDialog(false);
+    setSelectedPdf(null);
+  };
 
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -139,12 +192,20 @@ export const DeleteDpps = () => {
           filteredMaterials.map((material) => (
             <>
             <ListItem key={material._id} secondaryAction={
+              <>
               <Button
                 color="error"
                 onClick={() => handleDeleteClick(material._id)}
               >
                 Delete
               </Button>
+              <Button
+                color="primary"
+                onClick={() => handleCardClick1(material)}
+              >
+                View
+              </Button>
+              </>
             }>
               <ListItemText primary={material.title} /> {/* Adjust based on your data structure */}
              
@@ -156,7 +217,7 @@ export const DeleteDpps = () => {
           ))
         ) : (
           <Typography variant="body1" color="textSecondary" marginTop="10%" textAlign="center">
-            No Dpps found with this name.
+            No Dpps found.
           </Typography>
         )}
       </List>
@@ -178,6 +239,60 @@ export const DeleteDpps = () => {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Dialog
+            open={openpdfDialog}
+            onClose={handleCloseDialog1}
+            maxWidth="md"
+            fullWidth
+          >
+            <DialogTitle>
+              {selectedPdf?.title} {/* Display title */}
+            </DialogTitle>
+            <DialogContent dividers>
+              {/* Display PDF in an iframe */}
+              {pdfDownload.length === 0 ? (
+                <p
+                  style={{
+                    fontWeight: "500",
+                    fontSize: "1.5rem",
+                    marginTop: "40px",
+                    marginBottom: "40px",
+                  }}
+                >
+                  Wait a moment,your Dpp is loading...
+                </p>
+              ) : (
+                <iframe
+                  src={pdfDownload}
+                  title={selectedPdf?.title}
+                  width="100%"
+                  height="500px"
+                  style={{ border: "none" }}
+                />
+              )}
+            </DialogContent>
+            <DialogActions>
+              {/* Download Button */}
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  backgroundColor: "#25D366", // WhatsApp-like color for download button
+                  textTransform: "none",
+                  "&:hover": {
+                    backgroundColor: "#1DA354", // Darker shade on hover
+                  },
+                }}
+                
+              >
+                Download Dpp
+              </Button>
+              <Button onClick={handleCloseDialog1} color="secondary">
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
     </Box>
   );
 };

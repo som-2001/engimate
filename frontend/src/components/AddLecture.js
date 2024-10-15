@@ -128,7 +128,7 @@ export const AddLecture = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "60vh",
+        minHeight: "80vh",
       }}
     >
       <ToastContainer />

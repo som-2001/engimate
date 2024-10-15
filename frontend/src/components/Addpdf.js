@@ -142,7 +142,7 @@ export const Addpdf = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "68vh",
+        minHeight: "70vh",
       }}
     >
       <ToastContainer />
@@ -371,6 +371,7 @@ export const Addpdf = () => {
                   <center>
                     <Button
                       type="submit"
+                      disabled={load}
                       variant="contained"
                       color="primary"
                       fullWidth

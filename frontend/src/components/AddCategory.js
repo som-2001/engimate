@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
   category_name: Yup.string().required("Category name is required"),
-  description: Yup.string().required("Description is required"),
+  description: Yup.string().required("Description is required").min(100,"minimum 100 words have to write"),
   file: Yup.mixed().required("File is required"),
 });
 
@@ -82,7 +82,7 @@ export const AddCategory = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "68vh",
+        minHeight: "70vh",
       }}
     >
       <ToastContainer />

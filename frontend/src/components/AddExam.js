@@ -14,6 +14,7 @@ import {
   InputLabel,
   FormControl,
   CircularProgress,
+  ListSubheader,
 } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -49,13 +50,44 @@ export const AddExam = () => {
   const [result, setResult] = React.useState([]);
   const [load, setLoad] = React.useState(false);
   const [name, setName] = React.useState("");
+  const [search, setSearch] = React.useState("")
   const navigate = useNavigate();
+  const [filteredResult, setFilteredResult] = React.useState([]);
 
   React.useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BASEURl}/course/all`).then((res) => {
-      setResult(res?.data?.courses);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASEURl}/category-course/detail/all`)
+      .then((res) => {
+        setResult(res?.data?.categoryCourse); // Assuming the API returns categories with their respective courses
+        setFilteredResult(res?.data?.categoryCourse);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearch(value);
+
+    if (value === "") {
+      setFilteredResult(result);
+    } else {
+      const filtered = result
+        .map((category) => {
+          const filteredCourses = category.courses.filter((course) =>
+            course.title.toLowerCase().includes(value)
+          );
+          return {
+            ...category,
+            courses: filteredCourses,
+          };
+        })
+        .filter((category) => category.courses.length > 0); // Filter out categories with no matching courses
+
+      setFilteredResult(filtered);
+    }
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -64,13 +96,12 @@ export const AddExam = () => {
       // Prepare form data for submission
       const formData = new FormData();
       formData.append("title", data.title);
-      formData.append("description", data.description);
-      formData.append("pdf", data.pdf[0]); // Assuming the pdf is a file input
+      formData.append("file", data.pdf[0]); // Assuming the pdf is a file input
       formData.append("course", data.course);
 
       // Post the data to the server
       axios
-        .post(`${process.env.REACT_APP_BASEURl}/course/${data.course}`, formData, {
+        .post(`${process.env.REACT_APP_BASEURl}/add/exam/`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -78,7 +109,7 @@ export const AddExam = () => {
         })
         .then((res) => {
           setLoad(false);
-          console.log("Lecture added successfully:", res?.data?.message);
+          console.log("Exam Form added successfully:", res?.data?.message);
           toast.success(res.data.message, { autoClose: 3000 });
           setName("");
           reset(); // Reset form fields on success
@@ -107,7 +138,7 @@ export const AddExam = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "68vh",
+        minHeight: "70vh",
       }}
     >
       <ToastContainer />
@@ -156,7 +187,7 @@ export const AddExam = () => {
                       <TextField
                         {...field}
                         fullWidth
-                        label="Title"
+                        label="Module"
                         variant="outlined"
                         placeholder="Prefered way:-Coursename-ExamForm-serialno."
                         InputProps={{
@@ -186,53 +217,105 @@ export const AddExam = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <Box sx={{ mb: 0 }}>
-                    <FormControl
-                      fullWidth
-                      variant="outlined"
-                      error={!!errors.course}
-                    >
-                      <InputLabel id="course-label">Course</InputLabel>
-                      <Controller
-                        name="course"
-                        control={control}
-                        render={({ field }) => (
-                          <Select
-                            {...field}
-                            fullWidth
-                            InputProps={{
-                              sx: {
-                                borderRadius: "22px", // Customize border radius
-                                "&:hover": {
-                                  backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
-                                },
+                  <TextField
+                    label="Search Course"
+                    value={search}
+                    onChange={handleSearch}
+                    fullWidth
+                    variant="outlined"
+                    placeholder="Search by course name"
+                    InputProps={{
+                      sx: {
+                        borderRadius: "22px", // Customize border radius
+                        "&:hover": {
+                          backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
+                        },
+                      },
+                    }}
+                    sx={{
+                      borderRadius: "22px", // Outer border radius
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "rgb(89, 139, 139)", // Border color on hover
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "rgb(107, 169, 169)", // Border color when focused
+                        },
+                      },
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth
+                    variant="outlined"
+                    error={!!errors.course}
+                  >
+                    <InputLabel id="course-label">Course</InputLabel>
+
+                    {/* Use Controller from react-hook-form */}
+                    <Controller
+                      name="course"
+                      control={control}
+                      defaultValue=""
+                      render={({ field }) => (
+                        <Select
+                          {...field} // Spread the field props
+                          label="Course"
+                          fullWidth
+                          onChange={(e) => {
+                            field.onChange(e.target.value); // Update the form state
+                            console.log(e.target.value);
+                          }}
+                          onClose={field.onBlur} // Ensure the dropdown closes after selection
+                          InputProps={{
+                            sx: {
+                              borderRadius: "22px", // Customize border radius
+                              "&:hover": {
+                                backgroundColor: "rgba(107, 169, 169, 0.1)", // Background color on hover
                               },
-                            }}
-                            sx={{
-                              borderRadius: "22px", // Outer border radius
-                              "& .MuiOutlinedInput-root": {
-                                "&:hover fieldset": {
-                                  borderColor: "rgb(89, 139, 139)", // Border color on hover
-                                },
-                                "&.Mui-focused fieldset": {
-                                  borderColor: "rgb(107, 169, 169)", // Border color when focused
-                                },
+                            },
+                          }}
+                          sx={{
+                            borderRadius: "22px", // Outer border radius
+                            "& .MuiOutlinedInput-root": {
+                              "&:hover fieldset": {
+                                borderColor: "rgb(89, 139, 139)", // Border color on hover
                               },
-                            }}
-                          >
-                            {result.map((course) => (
+                              "&.Mui-focused fieldset": {
+                                borderColor: "rgb(107, 169, 169)", // Border color when focused
+                              },
+                            },
+                          }}
+                        >
+                          {filteredResult?.flatMap((category_item) => [
+                            <ListSubheader
+                              key={`header-${category_item.category._id}`}
+                              disabled
+                              sx={{
+                                pointerEvents: "none",
+                                fontWeight: "bold",
+                                fontSize: "1.2rem",
+                              }}
+                            >
+                              {category_item.category.category_name}
+                            </ListSubheader>,
+                            ...category_item.courses.map((course) => (
                               <MenuItem key={course._id} value={course._id}>
                                 {course.title}
                               </MenuItem>
-                            ))}
-                          </Select>
-                        )}
-                      />
-                      {errors.course && (
-                        <FormHelperText>{errors.course.message}</FormHelperText>
+                            )),
+                          ])}
+                        </Select>
                       )}
-                    </FormControl>
-                  </Box>
+                    />
+
+                    {/* Display error if course is not selected */}
+                    {errors.course && (
+                      <FormHelperText>{errors.course.message}</FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -286,6 +369,7 @@ export const AddExam = () => {
                     <Button
                       type="submit"
                       variant="contained"
+                      disabled={load}
                       color="primary"
                       fullWidth
                       sx={{

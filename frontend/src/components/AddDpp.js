@@ -142,7 +142,7 @@ export const AddDpp = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "58vh",
+        minHeight: "70vh",
       }}
     >
       <ToastContainer />
@@ -422,6 +422,7 @@ export const AddDpp = () => {
                   <center>
                     <Button
                       type="submit"
+                      disabled={load}
                       variant="contained"
                       color="primary"
                       fullWidth
