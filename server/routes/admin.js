@@ -2,6 +2,7 @@ import express from "express";
 import { isAdminOrInstructor, isAuth } from "../middlewares/isAuth.js";
 import {
   addDpp,
+  addExam,
   addLectures,
   addMaterials,
   createCourse,
@@ -61,4 +62,5 @@ router.put("/users/:id", isAuth, isAdminOrInstructor, updateUserRole);
 router.delete("/users/:id", isAuth, isAdminOrInstructor, deleteUser);
 router.delete("/materials/:id", isAuth, isAdminOrInstructor, deleteMaterial);
 router.delete("/dpp/:id", isAuth, isAdminOrInstructor, deleteDpp);
+router.post("/add/exam/", isAuth, isAdminOrInstructor, uploadFiles, addExam);
 export default router;

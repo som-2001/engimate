@@ -46,6 +46,10 @@ const schema = new mongoose.Schema(
       enum: ["user", "admin", "instructor"],
       default: "user",
     },
+    points: {
+      type: Number,
+      default: 0,
+    },
     subscription: [
       {
         type: mongoose.Schema.Types.ObjectId,

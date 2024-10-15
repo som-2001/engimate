@@ -8,6 +8,7 @@ import { User } from "../models/user.js";
 import { Dpp } from "../models/Dpp.js";
 import { Material } from "../models/material.js";
 import { Category_Course } from "../models/category_course.js";
+import { Exam } from "../models/exam.js";
 
 export const createCourse = Trycatch(async (req, res) => {
   const {
@@ -311,5 +312,29 @@ export const updateUserRole = Trycatch(async (req, res) => {
       email: user.email,
       role: user.role,
     },
+  });
+});
+
+export const addExam = Trycatch(async (req, res) => {
+  const { title, course } = req.body;
+  const pdf = req.file;
+  if (!pdf || pdf.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "At least one PDF file is required." });
+  }
+  if (pdf.mimetype !== "application/pdf") {
+    return res.status(400).json({ message: "Only PDF files are allowed." });
+  }
+  const base64Pdf = `data:${pdf.mimetype};base64,${pdf.buffer.toString("base64")}`;
+  const exam = await Exam.create({
+    title,
+    course,
+    fileData: base64Pdf,
+    createdBy: req.user._id,
+  });
+  res.status(201).json({
+    message: "exam added successfully",
+    exam,
   });
 });
