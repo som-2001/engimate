@@ -269,20 +269,28 @@ export const applyExam = TryCatch(async (req, res) => {
 export const knowExamstatus = TryCatch(async (req, res) => {
   const examApplication = await ExamApplication.findOne({
     applicant: req.user._id,
-  }).select("status");
+    exam: req.params.id,
+  }).select("status _id");
 
   if (!examApplication) {
     return res.status(400).json({
       message: "You have not applied to any Exam",
     });
   }
+  res.status(200).json({
+    message: `your exam status is ${examApplication.status}`,
+  });
 });
 
 export const submitExam = TryCatch(async (req, res) => {
   const examApplicationId = req.params.id;
   const pdf = req.file;
-  const userId = req.user_id;
-
+  const userId = req.user._id;
+  if (!pdf) {
+    return res.status(400).json({
+      message: "No file uploaded. Please upload a PDF file to submit.",
+    });
+  }
   const existingSubmission = await ExamSubmission.findOne({
     applicant: userId,
     examApplication: examApplicationId,

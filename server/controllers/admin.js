@@ -371,9 +371,9 @@ export const getDetailSubmission = Trycatch(async (req, res) => {
 
 export const addMarksToSubmission = Trycatch(async (req, res) => {
   const marks = req.body.marks;
-  const submission = await ExamSubmission.findById(req.params.id).select(
-    "_id applicant exam status marks",
-  );
+  const submission = await ExamSubmission.findById(req.params.id)
+    .populate("examApplication")
+    .select("_id applicant exam status marks examApplication");
 
   if (!submission) {
     return res.status(404).json({
@@ -382,9 +382,8 @@ export const addMarksToSubmission = Trycatch(async (req, res) => {
   }
   submission.marks = marks;
   await submission.save();
-
   const examApplication = await ExamApplication.findById(
-    submission.examApplication,
+    submission.examApplication._id,
   ).select("_id marks applicant examApplication status");
   if (!examApplication) {
     return res.status(404).json({
@@ -392,11 +391,7 @@ export const addMarksToSubmission = Trycatch(async (req, res) => {
     });
   }
   examApplication.marks = marks;
-  if (marks >= 75) {
-    examApplication.status = "passed";
-  } else {
-    examApplication.status = "failed";
-  }
+  examApplication.status = marks >= 75 ? "passed" : "failed";
   await examApplication.save();
   res.status(200).json({
     message: "Marks updated successfully.",

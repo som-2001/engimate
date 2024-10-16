@@ -20,7 +20,7 @@ const Schema = new mongoose.Schema({
   },
   fileData: {
     type: String,
-    required: true,
+    required: false,
     validate: {
       validator: function (value) {
         const sizeInBytes = Buffer.from(value, "base64").length;
