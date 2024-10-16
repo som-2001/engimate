@@ -80,7 +80,7 @@ export const Gallary = () => {
                 color:"white"
               }}
             >
-              Gallery
+              Gallary
             </Typography>
             <Typography
               sx={{

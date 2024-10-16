@@ -13,7 +13,7 @@ import { CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const pages = ["Home", "About", "Our Courses"];
-const settings = ["Placed Students", "Gallery", "Contact Us","Login"];
+const settings = [ "Gallary", "Contact Us","Login"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

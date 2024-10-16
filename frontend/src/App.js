@@ -20,6 +20,8 @@ import { AllCourses } from "./components/AllCourses";
 import { Lectures } from "./pages/Lectures";
 import ReferEarn from "./pages/ReferEarn";
 import { Profile } from "./pages/Profile";
+import NotFoundPage from "./pages/NotFoundPage";
+import PlacedStudentsPage from "./pages/PlacedStudentsPage";
 
 // import { useEffect } from "react";
 
@@ -62,7 +64,7 @@ function App() {
         <Route path="/my-course" element={<MyCourse/>}/>
         <Route path="/our-courses" element={<OurCourses />} />
         <Route path="/all-courses" element={<AllCourses />} />
-        <Route path="/gallery" element={<Gallary />} />
+        <Route path="/gallary" element={<Gallary />} />
         <Route path="/lectures/:id" element={<Lectures/>}/>
         <Route path="/refer-earn" element={<ReferEarn/>}/>
         <Route path="/paymentSuccess/:id" element={<PaymentSuccess/>}/>
@@ -75,6 +77,8 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
+        <Route path="/placed-students" element={<PlacedStudentsPage/>}/>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   

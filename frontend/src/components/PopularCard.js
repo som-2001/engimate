@@ -42,9 +42,9 @@ const StyledCardContent = styled(CardContent)(({ theme }) => ({
 
   
 export default function PopularCard({ image, text, title }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleCardClick = (title) => {
-    navigate(`/course/${title}`);
+    // navigate(`/course/${title}`);
   };
   return (
     <StyledCard
@@ -68,7 +68,7 @@ export default function PopularCard({ image, text, title }) {
           >
             {title}
           </Typography>
-          <Typography variant="body2" sx={{ color: "#555" }}>
+          <Typography variant="body2" sx={{ color: "#555",marginTop:"20px" }}>
             {text}
           </Typography>
         </StyledCardContent>

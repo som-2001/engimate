@@ -51,7 +51,7 @@ export default function CourseCard({ image, text, title }) {
           <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 'bold', color: '#333' }}>
             {title}
           </Typography>
-          <Typography variant="body2" sx={{ color: '#555' }}>
+          <Typography variant="body2" sx={{ color: '#555',marginTop:"15px" }}>
             {text}
           </Typography>
         </StyledCardContent>

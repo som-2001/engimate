@@ -12,7 +12,7 @@ const whatWeOffer=[
   {
     image:"project.jpg",
     title:"Comprehensive Course",
-    text:"Our curriculum spans across critical industries, offering specialized courses in Industrial Automation, Electrical, Mechanical, and Civil Engineering, as well as IT and Software Development. Whether you're interested in mastering the intricacies of automation systems, developing cutting-edge software, we have a course tailored for you."
+    text:"Our curriculum spans across critical industries, offering specialized courses in Industrial Automation, Electrical, Mechanical, and Civil Engineering, as well as IT and Software Development."
   },
   {
     image:"experts.jpg",
@@ -52,7 +52,7 @@ const About = () => {
   const navigate = useNavigate();
 
   return (
-    <Box>
+    <Box sx={{overflowX:"hidden"}}>
       <Navbar />
       <Box
         sx={{
