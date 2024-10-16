@@ -5,6 +5,9 @@ import TryCatch from "../middlewares/trycatch.js";
 import { client, TWILIO_PHONE_NUMBER } from "../index.js";
 import { ExamApplication } from "../models/exam-applications.js";
 import { ExamSubmission } from "../models/exam-submissions.js";
+import trycatch from "../middlewares/trycatch.js";
+import exam from "../routes/exam.js";
+import { Exam } from "../models/exam.js";
 
 export const registerUser = TryCatch(async (req, res) => {
   const {
@@ -277,11 +280,13 @@ export const knowExamstatus = TryCatch(async (req, res) => {
 });
 
 export const submitExam = TryCatch(async (req, res) => {
+  const examApplicationId = req.params.id;
   const pdf = req.file;
   const userId = req.user_id;
 
   const existingSubmission = await ExamSubmission.findOne({
     applicant: userId,
+    examApplication: examApplicationId,
     status: "submitted",
   });
 
@@ -291,6 +296,7 @@ export const submitExam = TryCatch(async (req, res) => {
     });
   }
   const submission = await ExamSubmission.findOne({
+    examApplication: examApplicationId,
     applicant: userId,
     status: "not-submitted",
   });
@@ -309,5 +315,66 @@ export const submitExam = TryCatch(async (req, res) => {
   res.status(200).json({
     message: "Exam submission was successfull.",
     submission,
+  });
+});
+
+export const getExamPdf = trycatch(async (req, res) => {
+  const examId = req.params.id;
+  const applicantId = req.user._id;
+  const exam = await Exam.findById(examId).populate("course");
+  const user = await User.findById(applicantId).populate("subscription");
+  if (!exam || !user) {
+    return res.status(404).json({
+      message: "Exam or user not found.",
+    });
+  }
+  const isSubscribedToCourse = user.subscription.some((subscribedCourse) =>
+    subscribedCourse.equals(exam.course._id),
+  );
+  if (!isSubscribedToCourse) {
+    return res.status(403).json({
+      message:
+        "You are not subscribed to this course. Please subscribe to access the exam file.",
+    });
+  }
+  const examApplication = await ExamApplication.findOne({
+    applicant: applicantId,
+    exam: examId,
+  });
+  if (!examApplication) {
+    return res.status(404).json({
+      message: "You have not applied for this exam.",
+    });
+  }
+  res.status(200).json({
+    message: "Exam file retrieved successfully.",
+    fileData: exam.fileData,
+  });
+});
+export const listAllExams = trycatch(async (req, res) => {
+  const exams = await Exam.find().select("title course _id");
+
+  if (!exams || exams.length === 0) {
+    return res.status(404).json({
+      message: "No Exams found",
+    });
+  }
+  res.status(200).json({
+    message: "All Exams retrieved successfully",
+    exams,
+  });
+});
+
+export const listExamsByCourse = trycatch(async (req, res) => {
+  const exams = await Exam.find({ course: req.params.id }).select("title _id");
+
+  if (!exams || exams.length === 0) {
+    return res.status(404).json({
+      message: "No Exams found",
+    });
+  }
+  res.status(200).json({
+    message: "All Exams retrieved successfully",
+    exams,
   });
 });

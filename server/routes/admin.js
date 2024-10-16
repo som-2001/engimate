@@ -4,6 +4,7 @@ import {
   addDpp,
   addExam,
   addLectures,
+  addMarksToSubmission,
   addMaterials,
   createCourse,
   deleteCourse,
@@ -12,7 +13,9 @@ import {
   deleteMaterial,
   deleteUser,
   getAllStats,
+  getAllSubmissions,
   getAllUsers,
+  getDetailSubmission,
   getSingleUser,
   updateCourse,
   updateLecture,
@@ -63,4 +66,22 @@ router.delete("/users/:id", isAuth, isAdminOrInstructor, deleteUser);
 router.delete("/materials/:id", isAuth, isAdminOrInstructor, deleteMaterial);
 router.delete("/dpp/:id", isAuth, isAdminOrInstructor, deleteDpp);
 router.post("/add/exam/", isAuth, isAdminOrInstructor, uploadFiles, addExam);
+router.get(
+  "/exam/getsubmissions/all/",
+  isAuth,
+  isAdminOrInstructor,
+  getAllSubmissions,
+);
+router.get(
+  "/exam/submission/:id",
+  isAuth,
+  isAdminOrInstructor,
+  getDetailSubmission,
+);
+router.post(
+  "/exam/update-marks/:id",
+  isAuth,
+  isAdminOrInstructor,
+  addMarksToSubmission,
+);
 export default router;
