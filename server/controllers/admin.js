@@ -345,7 +345,7 @@ export const getAllSubmissions = Trycatch(async (req, res) => {
   const submissions = await ExamSubmission.find().select(
     "_id applicant examApplication status",
   );
-  if (!submission || submission.length === 0) {
+  if (!submissions || submissions.length === 0) {
     return res.status(404).json({
       message: "No submissions Found.",
     });
