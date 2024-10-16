@@ -2,9 +2,11 @@ import express from "express";
 import { isAuth } from "../middlewares/isAuth.js";
 import {
   applyExam,
+  getExamApplicationId,
   getExamPdf,
   knowExamstatus,
   listAllExams,
+  listExamApplications,
   listExamsByCourse,
   submitExam,
 } from "../controllers/user.js";
@@ -17,4 +19,6 @@ router.post("/submitExam/:id", isAuth, uploadFiles, submitExam);
 router.get("/exam/download/:id", isAuth, getExamPdf);
 router.get("/exam/ongoing/all", isAuth, listAllExams);
 router.get("/exam/list-by-course/:id", isAuth, listExamsByCourse);
+router.get("/exam/applications/", isAuth, listExamApplications);
+router.get("/exam/applicationId/:id", isAuth, getExamApplicationId);
 export default router;

@@ -7,6 +7,8 @@ import { ExamApplication } from "../models/exam-applications.js";
 import { ExamSubmission } from "../models/exam-submissions.js";
 import trycatch from "../middlewares/trycatch.js";
 import { Exam } from "../models/exam.js";
+import user from "../routes/user.js";
+import { Exam_Application_ref } from "../models/exam-applications-ref.js";
 
 export const registerUser = TryCatch(async (req, res) => {
   const {
@@ -260,8 +262,14 @@ export const applyExam = TryCatch(async (req, res) => {
     exam: examId,
     status: "applied",
   });
+  await Exam_Application_ref.create({
+    user: applicantId,
+    exam: examId,
+    exam_application: examApplication._id,
+    status: "applied",
+  });
   res.status(201).json({
-    message: "Applied for thr exam Successfully and submission initialized.",
+    message: "Applied for the exam Successfully and submission initialized.",
     examApplication,
   });
 });
@@ -278,7 +286,8 @@ export const knowExamstatus = TryCatch(async (req, res) => {
     });
   }
   res.status(200).json({
-    message: `your exam status is ${examApplication.status}`,
+    message: "your exam status is retrieved successfully",
+    exam_status: examApplication.status,
   });
 });
 
@@ -310,7 +319,7 @@ export const submitExam = TryCatch(async (req, res) => {
 
   if (!submission) {
     return res.status(400).json({
-      message: "Invalid submission or the exam is already submitted.",
+      message: "Invalid submission.",
     });
   }
   const fileBase64 = `data:${pdf.mimetype};base64,${pdf.buffer.toString("base64")}`;
@@ -383,5 +392,39 @@ export const listExamsByCourse = trycatch(async (req, res) => {
   res.status(200).json({
     message: "All Exams retrieved successfully",
     exams,
+  });
+});
+
+export const listExamApplications = trycatch(async (req, res) => {
+  const applications = await ExamApplication.find({
+    applicant: req.user._id,
+  })
+    .select("_id applicant exam status")
+    .populate("exam", "title");
+  if (!applications || applications.length === 0) {
+    return res.status(404).json({
+      message: "Applications not found.",
+    });
+  }
+  res.status(200).json({
+    message: "applications retrieved successfully",
+    applications,
+  });
+});
+
+export const getExamApplicationId = trycatch(async (req, res) => {
+  const examId = req.params.id;
+  const applicationRef = await Exam_Application_ref.findOne({
+    user: req.user._id,
+    exam: examId,
+  }).select("exam_application");
+  if (!applicationRef) {
+    return res.status(404).json({
+      message: "Application Reference not found.",
+    });
+  }
+  res.status(200).json({
+    message: "Application ID retrieved successfully",
+    applicationId: applicationRef.exam_application,
   });
 });

@@ -11,6 +11,7 @@ import { Category_Course } from "../models/category_course.js";
 import { Exam } from "../models/exam.js";
 import { ExamSubmission } from "../models/exam-submissions.js";
 import { ExamApplication } from "../models/exam-applications.js";
+import { Exam_Application_ref } from "../models/exam-applications-ref.js";
 
 export const createCourse = Trycatch(async (req, res) => {
   const {
@@ -390,9 +391,19 @@ export const addMarksToSubmission = Trycatch(async (req, res) => {
       message: "Exam application not found for this submission.",
     });
   }
+  const refApplication = await Exam_Application_ref.findById(
+    submission.examApplication._id,
+  );
+  if (!refApplication) {
+    return res.status(404).json({
+      message: "Exam Ref application not found for this submission.",
+    });
+  }
   examApplication.marks = marks;
   examApplication.status = marks >= 75 ? "passed" : "failed";
+  refApplication.status = marks >= 75 ? "passed" : "failed";
   await examApplication.save();
+  await refApplication.save();
   res.status(200).json({
     message: "Marks updated successfully.",
     submission,
