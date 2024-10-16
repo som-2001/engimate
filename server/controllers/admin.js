@@ -9,6 +9,8 @@ import { Dpp } from "../models/Dpp.js";
 import { Material } from "../models/material.js";
 import { Category_Course } from "../models/category_course.js";
 import { Exam } from "../models/exam.js";
+import { ExamSubmission } from "../models/exam-submissions.js";
+import { ExamApplication } from "../models/exam-applications.js";
 
 export const createCourse = Trycatch(async (req, res) => {
   const {
@@ -336,5 +338,69 @@ export const addExam = Trycatch(async (req, res) => {
   res.status(201).json({
     message: "exam added successfully",
     exam,
+  });
+});
+
+export const getAllSubmissions = Trycatch(async (req, res) => {
+  const submissions = await ExamSubmission.find().select(
+    "_id applicant examApplication status",
+  );
+  if (!submission || submission.length === 0) {
+    return res.status(404).json({
+      message: "No submissions Found.",
+    });
+  }
+  res.status(200).json({
+    message: "submissions retrieved successfully",
+    submissions,
+  });
+});
+
+export const getDetailSubmission = Trycatch(async (req, res) => {
+  const submission = await ExamSubmission.findById(req.params.id);
+  if (!submission || submission.status !== "submitted") {
+    return res.status(404).json({
+      message: "Applicant did not yet submitted or submission not found.",
+    });
+  }
+  res.status(200).json({
+    message: "Submission details retrieved successfully.",
+    submission,
+  });
+});
+
+export const addMarksToSubmission = Trycatch(async (req, res) => {
+  const marks = req.body.marks;
+  const submission = await ExamSubmission.findById(req.params.id).select(
+    "_id applicant exam status marks",
+  );
+
+  if (!submission) {
+    return res.status(404).json({
+      message: "submission Not found",
+    });
+  }
+  submission.marks = marks;
+  await submission.save();
+
+  const examApplication = await ExamApplication.findById(
+    submission.examApplication,
+  ).select("_id marks applicant examApplication status");
+  if (!examApplication) {
+    return res.status(404).json({
+      message: "Exam application not found for this submission.",
+    });
+  }
+  examApplication.marks = marks;
+  if (marks >= 75) {
+    examApplication.status = "passed";
+  } else {
+    examApplication.status = "failed";
+  }
+  await examApplication.save();
+  res.status(200).json({
+    message: "Marks updated successfully.",
+    submission,
+    examApplication,
   });
 });
