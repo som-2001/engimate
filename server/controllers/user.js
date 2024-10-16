@@ -215,7 +215,7 @@ export const requestLogin = TryCatch(async (req, res) => {
 });
 
 export const applyExam = TryCatch(async (req, res) => {
-  const examId = req.body;
+  const { examId } = req.body;
   const applicantId = req.user._id;
   const exam = await Exam.findById(examId).populate("course");
   const user = await User.findById(applicantId).populate("subscription");
