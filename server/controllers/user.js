@@ -6,7 +6,6 @@ import { client, TWILIO_PHONE_NUMBER } from "../index.js";
 import { ExamApplication } from "../models/exam-applications.js";
 import { ExamSubmission } from "../models/exam-submissions.js";
 import trycatch from "../middlewares/trycatch.js";
-import exam from "../routes/exam.js";
 import { Exam } from "../models/exam.js";
 
 export const registerUser = TryCatch(async (req, res) => {
