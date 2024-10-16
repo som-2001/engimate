@@ -10,6 +10,8 @@ import UserNavbar from "../components/userNavbar";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet';
+
 export const Home = () => {
   const item = [
     {
@@ -296,6 +298,9 @@ export const Home = () => {
   return (
     <Box sx={{ overflowX: "hidden" }}>
       {sessionStorage.getItem("token") ? <UserNavbar /> : <Navbar />}
+      <Helmet>
+        <title>Yantraved || INNOVATE TRANSFORM ELEVATE </title>
+      </Helmet>
       <Box style={{ width: "100vw" }}>
         <Grid2
           container

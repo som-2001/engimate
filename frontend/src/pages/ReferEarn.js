@@ -133,7 +133,7 @@ const ReferEarn = () => {
                 color: "white",
               }}
             >
-              Earn cash upto ₹1000 in your bank account for <b>Every Friend</b>{" "}
+              Earn virtual coins for <b>Every Friend</b>{" "}
               you refer.
             </Typography>
           </Grid>

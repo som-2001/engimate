@@ -32,7 +32,7 @@ const FAQReferEarn = () => {
     },
     {
       question: 'Can I track my referral progress?',
-      answer: 'Yes, you can easily track your referral progress and see how many friends have signed up and the rewards you’ve earned in the Refer and Earn dashboard.'
+      answer: 'Yes, you can easily track your referral progress and see how many virtual coins you have gathered in profile section.'
     }
   ];
 
