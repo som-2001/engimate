@@ -3,7 +3,7 @@ import { isAuth } from "../middlewares/isAuth.js";
 import {
   applyExam,
   getExamPdf,
-  knowExamstatus,
+  knowExamstatus, listAllExams,
   listExamsByCourse,
   submitExam,
 } from "../controllers/user.js";
