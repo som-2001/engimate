@@ -324,7 +324,7 @@ export const Login = () => {
                     "&:hover": {
                       backgroundColor: "#08306b",
                     },
-                    marginBottom: "20px",
+                    marginBottom: "3px"
                   }}
                 >
                   {load ? <CircularProgress size={24} /> : hide ? "Verify OTP" : "Send OTP"}
@@ -332,7 +332,7 @@ export const Login = () => {
                 </center>
                 
               </Box>
-              <Box sx={{ mb: 2 }}>
+              <Box sx={{ mb: 5 }}>
                   <Typography variant="body1" textAlign="center" fontSize="0.9rem">
                     new to YANTRAVED?{" "}
                     <span

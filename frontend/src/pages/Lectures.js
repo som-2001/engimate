@@ -23,7 +23,8 @@ import { jwtDecode } from "jwt-decode";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import dayjs from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat"; // Import advancedFormat for ordinal dates
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import { ExamComponent } from "../components/ExamComponent";
 dayjs.extend(advancedFormat);
 
 export const Lectures = () => {
@@ -44,6 +45,8 @@ export const Lectures = () => {
   const [openpdfDialog, setOpenpdfDialog] = useState(false); // To handle dialog open/close
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [pdfDownload, setpdfDownload] = useState("");
+  const [exam,setExam]=useState([]);
+  const [loadExam,setLoadExam]=useState(true);
 
   // Function to open the dialog and set the selected Dpp data
   const handleCardClick = (data) => {
@@ -211,6 +214,33 @@ export const Lectures = () => {
         break;
       default:
         setHeading("Exam");
+        axios
+        .get(`${process.env.REACT_APP_BASEURl}/exam/list-by-course/${id}`, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          setLoadExam(false);
+          setExam(res.data.exams);
+        })
+        .catch((error) => {
+          console.error("Error fetching categories", error);
+          if (
+            error?.response?.data?.message === "No exams found"
+          ) {
+            setLoadExam(false);
+            setExam([]);
+          }
+          if (
+            error?.response?.data?.message === "login first or token expired"
+          ) {
+            if (sessionStorage?.getItem("token")) {
+              sessionStorage?.removeItem("token");
+            }
+            navigate("/login");
+          }
+        });
         break;
     }
   };
@@ -715,7 +745,7 @@ export const Lectures = () => {
                     backgroundColor: "#1DA354", // Darker shade on hover
                   },
                 }}
-                href={dppDownload} // Download URL
+                href={pdfDownload} // Download URL
                 download={selectedPdf?.title} // Name of the file to be downloaded
               >
                 Download PDF
@@ -905,12 +935,7 @@ export const Lectures = () => {
           </Dialog>
 
           {value === 3 && (
-            <Typography
-              variant="h6"
-              sx={{ textAlign: "center", marginTop: "2rem" }}
-            >
-              Exam content will be displayed here.
-            </Typography>
+            <ExamComponent exam={exam} setExam={setExam} loadExam={loadExam} setLoadExam={setLoadExam}/>
           )}
         </Box>
       </Container>

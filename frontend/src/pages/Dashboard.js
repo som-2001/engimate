@@ -39,6 +39,7 @@ import { FaUser } from "react-icons/fa";
 import { DeleteMaterials } from "../components/DeleteMaterials";
 import { DeleteDpps } from "../components/DeleteDpps";
 import ClearIcon from "@mui/icons-material/Clear";
+import { ExamForms } from "../components/ExamForms";
 
 const drawerWidth = 280;
 
@@ -107,6 +108,12 @@ const NAV_ITEMS = [
     text: "Delete Dpps",
     icon: <ClearIcon />,
     content: <DeleteDpps />,
+    heading: "Delete Dpps",
+  },
+  {
+    text: "Exam Forms",
+    icon: <ClearIcon />,
+    content: <ExamForms />,
     heading: "Delete Dpps",
   },
 ];
