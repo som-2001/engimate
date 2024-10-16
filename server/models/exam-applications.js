@@ -26,13 +26,19 @@ const Schema = new mongoose.Schema({
 
 Schema.post("save", async function (doc, next) {
   try {
-    await mongoose.model("Exam-Submissions").create({
+    //console.log("Saved ExamApplication _id:", doc._id);
+    const examSubmission = await mongoose.model("Exam-Submissions").create({
       applicant: doc.applicant,
       examApplication: doc._id,
       status: "not-submitted",
       marks: 0,
       fileData: "",
     });
+    /*console.log(
+              "Created ExamSubmission with examApplication _id:",
+              examSubmission.examApplication,
+            );     
+        */
     next();
   } catch (error) {
     next(error);
