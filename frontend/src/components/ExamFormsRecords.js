@@ -12,6 +12,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Skeleton,
 } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 
@@ -20,6 +21,7 @@ export const ExamFormsRecords = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
   const [marks, setMarks] = useState(0);
+  const [load,setLoad]=useState(true);
 
   // Fetch all submissions
   useEffect(() => {
@@ -35,9 +37,11 @@ export const ExamFormsRecords = () => {
     axios
       .request(config)
       .then((response) => {
+        setLoad(false);
         setSubmissions(response.data.submissions);
       })
       .catch((error) => {
+        setLoad(false);
         console.error(error);
       });
   }, []);
@@ -92,24 +96,52 @@ export const ExamFormsRecords = () => {
   return (
     <Box sx={{ padding: "20px" }}>
       <Grid container spacing={4}>
-        {submissions.map((submission) => (
-          <Grid item xs={12} sm={6} md={4} key={submission._id}>
-            <Card
-              sx={{ cursor: "pointer", boxShadow: 3 }}
-              onClick={() => handleCardClick(submission._id)}
-            >
-              <CardContent>
-                <Typography variant="h6">
-                  Applicant ID: {submission.applicant}
-                </Typography>
-                <Typography variant="body2">
-                  Exam Application: {submission.examApplication}
-                </Typography>
-                <Typography variant="body2">Status: {submission.status}</Typography>
-              </CardContent>
-            </Card>
+        {load ? (
+          // Display skeletons when loading
+          <Grid container spacing={4} justifyContent="center">
+            {[...Array(3)].map((_, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card>
+                  <CardContent>
+                    <Skeleton variant="text" width="80%" />
+                    <Skeleton variant="text" width="60%" />
+                    <Skeleton variant="text" width="60%" />
+                    <Skeleton variant="text" width="80%" />
+                    <Skeleton variant="text" width="40%" />
+                    <Skeleton variant="text" width="60%" />
+                    <Skeleton
+                      variant="rectangular"
+                      height={48}
+                      sx={{ marginTop: 2 }}
+                    />
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
-        ))}
+        ) : (
+          // Display submissions when data is loaded
+          submissions.map((submission) => (
+            <Grid item xs={12} sm={6} md={4} key={submission._id}>
+              <Card
+                sx={{ cursor: "pointer", boxShadow: 3 }}
+                onClick={() => handleCardClick(submission._id)}
+              >
+                <CardContent>
+                  <Typography variant="h6">
+                    Applicant ID: {submission.applicant}
+                  </Typography>
+                  <Typography variant="body2">
+                    Exam Application: {submission.examApplication}
+                  </Typography>
+                  <Typography variant="body2">
+                    Status: {submission.status}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))
+        )}
       </Grid>
 
       {/* Dialog to show submission details */}
