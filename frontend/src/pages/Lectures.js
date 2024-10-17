@@ -227,7 +227,7 @@ export const Lectures = () => {
         .catch((error) => {
           console.error("Error fetching categories", error);
           if (
-            error?.response?.data?.message === "No exams found"
+            error?.response?.data?.message === "No Exams found"
           ) {
             setLoadExam(false);
             setExam([]);

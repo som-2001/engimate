@@ -40,6 +40,7 @@ import { DeleteMaterials } from "../components/DeleteMaterials";
 import { DeleteDpps } from "../components/DeleteDpps";
 import ClearIcon from "@mui/icons-material/Clear";
 import { ExamForms } from "../components/ExamForms";
+import { ExamFormsRecords } from "../components/ExamFormsRecords";
 
 const drawerWidth = 280;
 
@@ -111,10 +112,16 @@ const NAV_ITEMS = [
     heading: "Delete Dpps",
   },
   {
-    text: "Exam Forms",
+    text: "Delete Exam Forms",
     icon: <ClearIcon />,
     content: <ExamForms />,
-    heading: "Delete Dpps",
+    heading: "Delete Exam forms",
+  },
+  {
+    text: "Exam Forms Records",
+    icon: <ClearIcon />,
+    content: <ExamFormsRecords />,
+    heading: "Records of Exam forms",
   },
 ];
 

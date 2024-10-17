@@ -126,6 +126,7 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
       )
       .then((res) => {
         console.log(res.data);
+        toast.success(res?.data?.message, { autoClose: 3000 });
       })
       .catch((error) => {
         console.error("Error fetching courses", error);
@@ -140,29 +141,53 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
   };
 
   const onSubmit1 = (data) => {
-    const formData = new FormData();
-    formData.append("file", data.file?.[0]);
+
     axios
-      .post(
-        `${process.env.REACT_APP_BASEURl}/submitExam/${id}`,
-        {
-          formData,
-        },
-        {
+      .get(
+        `${process.env.REACT_APP_BASEURl}/exam/applicationId/${id}`,{
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
         }
-      )
-      .then((res) => {
-        console.log(res.data);
-        toast.success(res.data.message, { autoClose: 3000 });
-        reset();
-        setValue("file", "");
+      ).then(res=>{
+        const formData = new FormData();
+        console.log(data.file);
+        formData.append("file", data.file[0]);
+        axios
+          .post(
+            `${process.env.REACT_APP_BASEURl}/submitExam/${res.data.applicationId}`,formData,{
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res.data);
+            toast.success(res.data.message, { autoClose: 3000 });
+            reset();
+            setValue("file", "");
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error(error?.response?.data?.message,{autoClose:3000});
+            if (error?.response?.data?.message === "login first or token expired") {
+              if (sessionStorage?.getItem("token")) {
+                sessionStorage?.removeItem("token");
+              }
+              navigate("/login");
+            }
+          });
+      }).catch(error=>{
+        if (error?.response?.data?.message === "login first or token expired") {
+          if (sessionStorage?.getItem("token")) {
+            sessionStorage?.removeItem("token");
+          }
+          navigate("/login");
+        }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+
+   
   };
   return (
     <Box>
@@ -202,6 +227,11 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
               Exams will be displayed here.
             </Typography>
           ) : (
+            exam?.length === 0 ? (
+              <Typography variant="body1" marginTop="10%" marginBottom="5%">
+                Dpp will be displayed here.
+              </Typography>
+            ):( 
             exam?.map((data, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card
@@ -293,7 +323,7 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
                   </Box>
                 </Card>
               </Grid>
-            ))
+            )))
           )}
         </Grid>
       )}

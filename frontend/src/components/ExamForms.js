@@ -1,108 +1,137 @@
 import { KeyboardBackspace } from "@mui/icons-material";
-import { Box, Button, Card, CardContent, CardMedia, Grid, InputAdornment, TextField, Typography } from "@mui/material"
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
 
-export const ExamForms=()=>{
+export const ExamForms = () => {
+  const [hide, setHide] = useState(true);
+  const [courses, setCourses] = useState([]);
+  const [loadCourse, setLoadCourse] = useState(true);
+  const [filteredCourse, setFilteredCourse] = useState([]);
+  const [filteredExams, setFilteredExams] = useState([]);
+  const [visibleCourses, setVisibleCourses] = useState(3);
+  const [exams, setExams] = useState([]);
+  const [loadExam, setLoadExam] = useState(true);
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm1, setSearchTerm1] = useState("");
 
-    const [hide,setHide]=useState(true);
-    const [courses,setCourses]=useState([]);
-    const [loadCourse,setLoadCourse]=useState(true);
-    const [filteredCourse,setFilteredCourse]=useState([]);
-    const [visibleCourses, setVisibleCourses] = useState(3);
-    const [exams,setExams]=useState([]);
-    const [loadExam,setLoadExam]=useState(true);
-    const navigate=useNavigate();
-    const [searchTerm, setSearchTerm] = useState("");
+  const loadMoreCourses = () => {
+    setVisibleCourses((prevVisible) => prevVisible + 4); // Load 4 more courses
+  };
 
-
-    const loadMoreCourses = () => {
-        setVisibleCourses((prevVisible) => prevVisible + 4); // Load 4 more courses
-      };
-
-    useEffect(() => {
-        try {
-          axios.get(`${process.env.REACT_APP_BASEURl}/course/all`).then((res) => {
-            setLoadCourse(false);
-            setCourses(res.data.courses);
-            setFilteredCourse(res.data.courses);
-          }).catch(error=>{
-            console.error("Error fetching courses", error);
-          toast.error(error?.response?.data?.message, { autoClose: 3000 });
-          if (error?.response?.data?.message === "login first or token expired") {
-            if (sessionStorage?.getItem("token")) {
-              sessionStorage?.removeItem("token");
-            }
-            navigate("/login");
-          }
-          });
-        } catch (error) {
+  useEffect(() => {
+    try {
+      axios
+        .get(`${process.env.REACT_APP_BASEURl}/course/all`)
+        .then((res) => {
+          setLoadCourse(false);
+          setCourses(res.data.courses);
+          setFilteredCourse(res.data.courses);
+        })
+        .catch((error) => {
           console.error("Error fetching courses", error);
           toast.error(error?.response?.data?.message, { autoClose: 3000 });
-          if (error?.response?.data?.message === "login first or token expired") {
+          if (
+            error?.response?.data?.message === "login first or token expired"
+          ) {
             if (sessionStorage?.getItem("token")) {
               sessionStorage?.removeItem("token");
             }
             navigate("/login");
           }
+        });
+    } catch (error) {
+      console.error("Error fetching courses", error);
+      toast.error(error?.response?.data?.message, { autoClose: 3000 });
+      if (error?.response?.data?.message === "login first or token expired") {
+        if (sessionStorage?.getItem("token")) {
+          sessionStorage?.removeItem("token");
         }
-    
-      }, [navigate]);
-
-      const handleSearch = (event) => {
-        const term = event.target.value;
-        setSearchTerm(term);
-        console.log(term);
-        const filtered = courses.filter(
-          (course) => course.title.toLowerCase().includes(term.toLowerCase()) // Adjust based on your data structure
-        );
-        setFilteredCourse(filtered);
-      };
-
-
-    const ExamShow=(id)=>{
-        setHide(false);
-        setLoadExam(true);
-        try {
-            axios.get(`${process.env.REACT_APP_BASEURl}/exam/list-by-course/${id}`,{
-                headers:{
-                    "Authorization":`Bearer ${sessionStorage.getItem('token')}`
-                }
-            }).then((res) => {
-              setLoadExam(false);
-              setExams(res.data.exams);
-            }).catch(error=>{
-              console.error("Error fetching courses", error);
-            toast.error(error?.response?.data?.message, { autoClose: 3000 });
-            if (error?.response?.data?.message === "login first or token expired") {
-              if (sessionStorage?.getItem("token")) {
-                sessionStorage?.removeItem("token");
-              }
-              navigate("/login");
-            }
-            });
-          } catch (error) {
-            console.error("Error fetching categories", error);
-            toast.error(error?.response?.data?.message, { autoClose: 3000 });
-            if (error?.response?.data?.message === "login first or token expired") {
-              if (sessionStorage?.getItem("token")) {
-                sessionStorage?.removeItem("token");
-              }
-              navigate("/login");
-            }
-          }
+        navigate("/login");
+      }
     }
-    return(
+  }, [navigate]);
+
+  const handleSearch = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    console.log(term);
+    const filtered = courses.filter(
+      (course) => course.title.toLowerCase().includes(term.toLowerCase()) // Adjust based on your data structure
+    );
+    setFilteredCourse(filtered);
+  };
+
+  const handleSearch1 = (event) => {
+    const term = event.target.value;
+    setSearchTerm1(term);
+    console.log(term);
+    const filtered = exams.filter(
+      (course) => course.title.toLowerCase().includes(term.toLowerCase()) // Adjust based on your data structure
+    );
+    setFilteredExams(filtered);
+  };
+
+  const ExamShow = (id) => {
+    setHide(false);
+    setLoadExam(true);
+    try {
+      axios
+        .get(`${process.env.REACT_APP_BASEURl}/exam/list-by-course/${id}`, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          setLoadExam(false);
+          setExams(res.data.exams);
+          setFilteredExams(res.data.exams);
+        })
+        .catch((error) => {
+          console.error("Error fetching courses", error);
+          toast.error(error?.response?.data?.message, { autoClose: 3000 });
+          if (
+            error?.response?.data?.message === "login first or token expired"
+          ) {
+            if (sessionStorage?.getItem("token")) {
+              sessionStorage?.removeItem("token");
+            }
+            navigate("/login");
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching categories", error);
+      toast.error(error?.response?.data?.message, { autoClose: 3000 });
+      if (error?.response?.data?.message === "login first or token expired") {
+        if (sessionStorage?.getItem("token")) {
+          sessionStorage?.removeItem("token");
+        }
+        navigate("/login");
+      }
+    }
+  };
+  return (
+    <Box>
+      {hide ? (
         <Box>
-        {hide ? (
-        <Box >
           <Typography variant="h5" style={{ marginBottom: "30px" }}>
             Courses ({courses.length} items)
           </Typography>
@@ -188,7 +217,6 @@ export const ExamForms=()=>{
                           Rs: {data.price}
                         </Typography>
                       </CardContent>
-
                     </Box>
                   </Card>
                 </Grid>
@@ -228,7 +256,8 @@ export const ExamForms=()=>{
             </Box>
           )}
         </Box>
-    ):(  <Box>
+      ) : (
+        <Box>
           <Button
             onClick={(e) => setHide(true)}
             startIcon={<KeyboardBackspace />} // Add Delete Icon
@@ -258,107 +287,127 @@ export const ExamForms=()=>{
             variant="h5"
             style={{ marginBottom: "30px", fontSize: "1.7rem" }}
           >
-            Exam From ({exams.length} items)
+            Exam Form ({exams.length} items)
           </Typography>
-          {exams.length === 0 ? (
-            <center style={{ padding: "40px" }}>
-              <p>No Exam forms are added yet.</p>
-            </center>
-          ) : null}
-          <Grid container spacing={2}>
-            {exams?.map((data, index) => (
-              <Grid item xs={12} sm={12} md={4} key={index}>
-                <Card
-                  sx={{
-                    boxShadow: 5,
-                    borderRadius: "16px",
-                    overflow: "hidden",
-                    height: "auto",
-                    position: "relative", // Needed for overlay positioning
-                    transition: "transform 0.3s, box-shadow 0.3s",
-                    "&:hover": {
-                      transform: "translateY(-5px)",
-                      boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-                    },
-                    marginBottom: "10px",
-                    cursor: "pointer",
-                  }}
-                >
-                  
-                  <CardContent
-                    sx={{
-                      height: "130px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6" sx={{ marginBottom: "10px" }}>
-                      <span
-                        style={{
-                          fontSize: "1.3rem",
-                          color: "blueviolet",
-                          fontWeight: "600",
-                        }}
-                      >
-                        #{index + 1}
-                      </span>{" "}
-                      {data.title}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      {data.description}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      component="div"
-                      sx={{ color: "text.secondary" }}
-                    >
-                      Created At: {dayjs(data?.createdAt).format("Do MMM YYYY")}
-                    </Typography>
-                  </CardContent>
 
-                  <Box
+          <TextField
+              placeholder="Search Course"
+              variant="outlined"
+              value={searchTerm1}
+              onChange={handleSearch1}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{ width: { lg: "50%", md: "50%", sm: "80%", xs: "100%" },
+              marginBottom:"50px"
+            }}
+            />
+            
+          <Grid container spacing={2} >
+            
+            {filteredExams.length > 0 ? (
+              filteredExams?.map((data, index) => (
+                <Grid item xs={12} sm={12} md={4} key={index}>
+                  <Card
                     sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: "5px",
+                      boxShadow: 5,
+                      borderRadius: "16px",
+                      overflow: "hidden",
+                      height: "auto",
+                      position: "relative", // Needed for overlay positioning
+                      transition: "transform 0.3s, box-shadow 0.3s",
+                      "&:hover": {
+                        transform: "translateY(-5px)",
+                        boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+                      },
+                      marginBottom: "10px",
+                      cursor: "pointer",
                     }}
                   >
-                    <Button
-                      startIcon={<DeleteIcon />} // Add Delete Icon
+                    <CardContent
                       sx={{
-                        backgroundColor: "#e53935", // Red color for Delete
-                        color: "#fff",
-                        width: {
-                          xs: "100%",
-                          sm: "100%",
-                          md: "40%",
-                          lg: "30%",
-                        },
-                        padding: "5px 10px", // Adjust padding
-                        fontSize: "1rem",
-                        textTransform: "none",
-                        borderRadius: "50px",
-                        "&:hover": {
-                          backgroundColor: "#c62828", // Darker shade on hover
-                        },
-                        marginBottom: "10px",
-                        marginLeft: "10px",
+                        height: "130px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
                       }}
-                    //   onClick={(e) => handleDeleteClick(data?._id)}
                     >
-                      Delete
-                    </Button>
+                      <Typography variant="h6" sx={{ marginBottom: "10px" }}>
+                        <span
+                          style={{
+                            fontSize: "1.3rem",
+                            color: "blueviolet",
+                            fontWeight: "600",
+                          }}
+                        >
+                          #{index + 1}
+                        </span>{" "}
+                        {data.title}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        {data.description}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        component="div"
+                        sx={{ color: "text.secondary" }}
+                      >
+                        Created At:{" "}
+                        {dayjs(data?.createdAt).format("Do MMM YYYY")}
+                      </Typography>
+                    </CardContent>
 
-                  </Box>
-                </Card>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <Button
+                        startIcon={<DeleteIcon />} // Add Delete Icon
+                        sx={{
+                          backgroundColor: "#e53935", // Red color for Delete
+                          color: "#fff",
+                          width: {
+                            xs: "100%",
+                            sm: "100%",
+                            md: "40%",
+                            lg: "30%",
+                          },
+                          padding: "5px 10px", // Adjust padding
+                          fontSize: "1rem",
+                          textTransform: "none",
+                          borderRadius: "50px",
+                          "&:hover": {
+                            backgroundColor: "#c62828", // Darker shade on hover
+                          },
+                          marginBottom: "10px",
+                          marginLeft: "10px",
+                        }}
+                        //   onClick={(e) => handleDeleteClick(data?._id)}
+                      >
+                        Delete
+                      </Button>
+                    </Box>
+                  </Card>
+                </Grid>
+              ))
+            ) : (
+              <Grid container spacing={2} textAlign="center">
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <p style={{ marginTop: "50px" }}>No Exam forms found.</p>
+                </Grid>
               </Grid>
-            ))}
+            )}
           </Grid>
-
-         
-        </Box>)}
+        </Box>
+      )}
     </Box>
-    )
-}
+  );
+};
