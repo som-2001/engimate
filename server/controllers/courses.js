@@ -108,3 +108,157 @@ export const paymentVerification = Trycatch(async (req, res) => {
     });
   }
 });
+
+export const addItemToCart = Trycatch(async (req, res) => {
+  const { count } = req.body;
+  const courseId = req.params.id;
+
+  const course = await Course.findById(courseId);
+  if (!course) {
+    return res.status(404).json({
+      message: "Course not found.",
+    });
+  }
+  let cartItem = await Cart.findOne({
+    user: req.user._id,
+    cart_item: courseID,
+  });
+
+  if (cartItem) {
+    cartItem.count += count;
+    cartItem.totalPrice = cartItem.count * cartItem.price;
+    await cartItem.save();
+    return res.status(200).json({
+      message: "Cart item updated successfully.",
+      cartItem,
+    });
+  } else {
+    cartItem = new Cart({
+      user: req.user_id,
+      cart_item: courseID,
+      count,
+      price: course.price,
+    });
+    await cartItem.save();
+    return res.status(201).json({
+      message: "Item added to cart successfully.",
+      cartItem,
+    });
+  }
+});
+export const deleteItemFromCart = Trycatch(async (req, res) => {
+  const courseID = req.params.id;
+
+  const cartItem = await Cart.findOne({
+    user: req.user._id,
+    cart_item: courseID,
+  });
+
+  if (!cartItem) {
+    return res.status(404).json({
+      message: "Cart item not found.",
+    });
+  }
+
+  await cartItem.remove();
+
+  return res.status(200).json({
+    message: "Item removed from cart successfully.",
+  });
+});
+
+export const getCartItems = Trycatch(async (req, res) => {
+  const cartItems = await Cart.find({ user: req.user._id }).populate(
+    "cart_item",
+  );
+
+  if (!cartItems || cartItems.length === 0) {
+    return res.status(404).json({
+      message: "Your cart is empty. Please add items to your cart.",
+    });
+  }
+  return res.status(200).json({
+    message: "Cart items fetched successfully.",
+    cartItems,
+  });
+});
+export const checkoutWithCartItems = Trycatch(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  const cartItems = await Cart.find({ user: req.user._id }).populate(
+    "cart_item",
+  );
+  if (cartItems.length === 0) {
+    return res.status(400).json({
+      message:
+        "Your cart is empty. Please add items to the cart before proceeding.",
+    });
+  }
+  let totalPrice = 0;
+  for (let cartItem of cartItems) {
+    const course = cartItem.cart_item;
+
+    if (user.subscription.includes(course._id)) {
+      return res.status(400).json({
+        message: `You are already subscribed to the course: ${course.title}`,
+      });
+    }
+
+    totalPrice += course.price * cartItem.count;
+  }
+  const options = {
+    amount: totalPrice * 100, // Amount in paise (Razorpay expects this)
+    currency: "INR",
+    receipt: `order_rcptid_${Math.random()}`, // Optional receipt ID
+  };
+  const order = await instance.orders.create(options);
+  res.status(201).json({
+    message: "Checkout successful. Proceed to payment.",
+    order,
+    cartItems,
+  });
+});
+
+export const paymentVerificationForCart = Trycatch(async (req, res) => {
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+
+  const body = razorpay_order_id + "|" + razorpay_payment_id;
+
+
+  const expectedSignature = crypto
+    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+    .update(body)
+    .digest("hex");
+
+  const isAuthentic = expectedSignature === razorpay_signature;
+
+  if (isAuthentic) {
+
+    await Order.create({
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+    });
+
+    const user = await User.findById(req.user._id);
+    const cartItems = await Cart.find({ user: req.user._id }).populate("cart_item");
+
+    for (let cartItem of cartItems) {
+      const course = cartItem.cart_item;
+      user.subscription.push(course._id);
+    }
+
+    await user.save();
+
+
+    await Cart.deleteMany({ user: req.user._id });
+
+    res.status(200).json({
+      message: "Courses purchased successfully.",
+    });
+  } else {
+    res.status(400).json({
+      message: "Payment verification failed. Please try again.",
+    });
+  }
+});
+

@@ -9,6 +9,9 @@ import trycatch from "../middlewares/trycatch.js";
 import { Exam } from "../models/exam.js";
 import user from "../routes/user.js";
 import { Exam_Application_ref } from "../models/exam-applications-ref.js";
+import { response } from "express";
+import Certificate from "../models/certificate.js";
+import certificate from "../models/certificate.js";
 
 export const registerUser = TryCatch(async (req, res) => {
   const {
@@ -426,5 +429,83 @@ export const getExamApplicationId = trycatch(async (req, res) => {
   res.status(200).json({
     message: "Application ID retrieved successfully",
     applicationId: applicationRef.exam_application,
+  });
+});
+
+export const getCertificate = trycatch(async (req, res) => {
+  const examID = req.params.id;
+  const application = await ExamApplication.find({
+    applicant: req.user._id,
+    exam: examID,
+  });
+
+  if (!application) {
+    return res.status(404).json({
+      message: "Application not found.",
+    });
+  }
+  if (application.status === "failed") {
+    return res.status(404).json({
+      message: "You cannot apply for the certificate as you failed the exam",
+    });
+  }
+  if (application.status !== "passed") {
+    const exam = await Exam.findById(examID).populate("course");
+    if (!exam) {
+      return res.status(404).json({
+        message: "Exam not found",
+      });
+    }
+    const courseName = exam.course.title;
+    const existingCertificate = await Certificate.findOne({
+      user: req.user._id,
+      exam: examID,
+      course: courseName,
+    });
+    if (existingCertificate) {
+      return res.status(400).json({
+        message: "Certificate already issued.",
+      });
+    }
+    const certificate = await Certificate.create({
+      user: req.user._id,
+      exam: examID,
+      course: courseName,
+    });
+    return res.status(201).json({
+      message: "Certificate generated successfully.",
+      certificate,
+    });
+  }
+  return res.status(400).json({
+    message: "You are not eligible to get a certificate.",
+  });
+});
+export const getAllCertificate = trycatch(async (req, res) => {
+  const certificates = await Certificate.findById(req.user._id);
+  if (certificates.length === 0) {
+    return res.status(404).json({
+      message: "certificates not found for this user",
+    });
+  }
+  return res.status.json({
+    message: "certificates fetch successfully",
+    certificates,
+  });
+});
+
+export const getCertificateDetail = trycatch(async (req, res) => {
+  const certificate = await Certificate.findById(req.params.id).populate(
+    "exam",
+    "title",
+  );
+  if (!certificate || certificate.length === 0) {
+    return res.status(404).json({
+      message: "certificate not found.",
+    });
+  }
+  return res.status.json({
+    message: "certificate fetch successfully",
+    certificate,
   });
 });
