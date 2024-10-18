@@ -2,6 +2,9 @@ import express from "express";
 import { isAuth } from "../middlewares/isAuth.js";
 import {
   applyExam,
+  getAllCertificate,
+  getCertificate,
+  getCertificateDetail,
   getExamApplicationId,
   getExamPdf,
   knowExamstatus,
@@ -21,4 +24,7 @@ router.get("/exam/ongoing/all", isAuth, listAllExams);
 router.get("/exam/list-by-course/:id", isAuth, listExamsByCourse);
 router.get("/exam/applications/", isAuth, listExamApplications);
 router.get("/exam/applicationId/:id", isAuth, getExamApplicationId);
+router.post("/exam/getcertificate/:id", isAuth, getCertificate);
+router.get("/exam/getcertificate/all", isAuth, getAllCertificate);
+router.get("/exam/getcertificate/detail/:id", isAuth, getCertificateDetail);
 export default router;
