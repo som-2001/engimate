@@ -16,7 +16,7 @@ import {
 import axios from "axios";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
@@ -45,6 +45,8 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
   const [name, setName] = useState("");
   const [hide,setHide]=useState(true);
   const [id, setId] = useState(null);
+  const [load,setLoad]=useState(false);
+  const [applyLoad,setApplyLoad]=useState([]);
 
   const {
     handleSubmit,
@@ -54,6 +56,10 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
+
+  useEffect(()=>{
+    setApplyLoad(Array(exam.length).fill(false));
+  },[]);
 
   const handleCloseDialog1 = () => {
     setOpenpdfDialog(false);
@@ -113,7 +119,13 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
     setOpenpdfDialog(true);
   };
 
-  const ApplyExamForm = (id) => {
+  const ApplyExamForm = (id,index) => {
+
+    console.log(applyLoad);
+    const updateApply=[...applyLoad];
+    updateApply[index]=true;
+    setApplyLoad(updateApply);
+
     axios
       .post(
         `${process.env.REACT_APP_BASEURl}/exam/apply/`,
@@ -126,9 +138,13 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
       )
       .then((res) => {
         console.log(res.data);
+        updateApply[index]=false;
+        setApplyLoad(updateApply);
         toast.success(res?.data?.message, { autoClose: 3000 });
       })
       .catch((error) => {
+        updateApply[index]=false;
+        setApplyLoad(updateApply);
         console.error("Error fetching courses", error);
         toast.error(error?.response?.data?.message, { autoClose: 3000 });
         if (error?.response?.data?.message === "login first or token expired") {
@@ -141,7 +157,7 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
   };
 
   const onSubmit1 = (data) => {
-
+   
     axios
       .get(
         `${process.env.REACT_APP_BASEURl}/exam/applicationId/${id}`,{
@@ -153,6 +169,7 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
         const formData = new FormData();
         console.log(data.file);
         formData.append("file", data.file[0]);
+        setLoad(true);
         axios
           .post(
             `${process.env.REACT_APP_BASEURl}/submitExam/${res.data.applicationId}`,formData,{
@@ -167,14 +184,17 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
             toast.success(res.data.message, { autoClose: 3000 });
             reset();
             setValue("file", "");
+            setLoad(false);
           })
           .catch((error) => {
             console.log(error);
+            setLoad(false);
             toast.error(error?.response?.data?.message,{autoClose:3000});
             if (error?.response?.data?.message === "login first or token expired") {
               if (sessionStorage?.getItem("token")) {
                 sessionStorage?.removeItem("token");
               }
+            
               navigate("/login");
             }
           });
@@ -262,31 +282,7 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
                   >
                     #{index + 1}
                   </span>
-                  {/* <Box
-                    sx={{
-                      minWidth: "40px",
-                      minHeight: "40px",
-                      backgroundColor: "#d32f2f", // Red background to resemble PDF
-                      borderRadius: "8px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginRight: "12px", // Space between icon and title
-                    }}
-                  >
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: "12px",
-                      }}
-                    >
-                      PDF
-                    </Typography>
-                  </Box> */}
-
-                  {/* Title */}
+                 
                   <Box sx={{ display: "flex", flexDirection: "column" }}>
                     <Typography
                       variant="h6"
@@ -315,7 +311,8 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
                       </Button>
                       <Button
                         variant="standard"
-                        onClick={(e) => ApplyExamForm(data?._id)}
+                        onClick={(e) => ApplyExamForm(data?._id,index)}
+                        disabled={applyLoad[index]}
                       >
                         Apply
                       </Button>
@@ -415,6 +412,7 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
                     variant="contained"
                     color="primary"
                     sx={{ height: "40px", width: "100%" }} // Full width for smaller screens
+                    disabled={load}
                   >
                     Submit
                   </Button>
