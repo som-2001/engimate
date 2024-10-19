@@ -65,14 +65,11 @@ const Footer = () => {
             <FooterLink onClick={(e) => (window.location.href = "/")}>
               Home
             </FooterLink>
-            <FooterLink onClick={(e) => (window.location.href = "/about")}>
-              About
-            </FooterLink>
-            <FooterLink onClick={(e) => (window.location.href = "/contact")}>
+            <FooterLink onClick={(e) => (window.location.href = "/contact-us")}>
               Contact Us
             </FooterLink>
-            <FooterLink onClick={(e) => (window.location.href = "/gallary")}>
-              Gallary
+            <FooterLink onClick={(e) => (window.location.href = "/profile")}>
+              profile
             </FooterLink>
           </Grid>
 
