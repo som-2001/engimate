@@ -41,28 +41,3 @@ jobs:
       working-directory: ./frontend
       run: |
         npm run build
-    - name: Deploy Backend and Restart PM2
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} '
-          pm2 stop all || true  # Stop all running pm2 processes
-          pm2 start server/index.js --name "mern-backend"  # Start the backend server
-        '
-
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SERVER_IP: ${{ secrets.SERVER_IP }}
-        SERVER_USER: ${{ secrets.SERVER_USER }}
-      
-      # Deploy to server (SSH)
-    - name: Deploy Frontend and Restart Nginx
-      run: |
-          # Copy React build files to the server's Nginx web root
-          scp -r ./frontend/build/* user@your-server-ip:/var/www/html/
-
-          # Restart Nginx on the server to serve updated build
-          ssh ubuntu@ip-172-31-0-179 'sudo systemctl reload nginx'
-      env:
-        # These secrets are stored securely in GitHub Secrets
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SERVER_IP: ${{ secrets.SERVER_IP }}
-        SERVER_USER: ${{ secrets.SERVER_USER }}
