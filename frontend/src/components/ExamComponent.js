@@ -294,25 +294,27 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
                     "&:hover": {
                       boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
                     },
+                    
                   }}
                 >
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} md={6}>
-                      <Box display="flex" alignItems="center">
+                  <Grid container spacing={2} sx={{justifyContent:"center",alignContent:"center",textAlign:"center"}}>
+                    <Grid item xs={12} md={6} sx={{justifyContent:"center",alignContent:"center",  textAlign:"center"}}>
+                      <Box display="flex" alignItems="center" >
                         <Typography
                           variant="h6"
                           sx={{
                             fontWeight: "bold",
-                            fontSize: { xs: "1.2rem", md: "1.5rem" },
+                            fontSize: { xs: "1.4rem", md: "1.6rem" },
                             color: "white",
                             marginRight: "10px",
+                          
                           }}
                         >
                           #{index + 1}
                         </Typography>
                         <Typography
                           variant="body1"
-                          sx={{ fontWeight: "500", color: "white" }}
+                          sx={{ fontWeight: "500", color: "white",fontSize:"1.1rem" }}
                         >
                           {data.title}
                         </Typography>
@@ -346,8 +348,8 @@ export const ExamComponent = ({ exam, setExam, loadExam, setLoadExam }) => {
                         </Button>
                       </Box>
                     </Grid>
-                    <Grid item xs={12} md={6}>
-                      <Grid container spacing={2} alignItems="center">
+                    <Grid item xs={12} md={6} sx={{alignContent:"center"}}>
+                      <Grid container spacing={2}>
                         <Grid item xs={12} sm={4}>
                           <Typography variant="body2" >
                             Exam posted on<br/><span style={{fontWeight:"700"}}>04 Oct, 2023</span> 

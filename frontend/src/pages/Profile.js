@@ -1,4 +1,4 @@
-import { Box, Typography, Avatar, Button, Grid, DialogActions, DialogContentText, DialogContent, DialogTitle, Dialog } from "@mui/material";
+import { Box, Typography, Avatar, Button, Grid, DialogActions, DialogContentText, DialogContent, DialogTitle, Dialog, Skeleton } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UserNavbar from "../components/userNavbar";
@@ -166,10 +166,13 @@ export const Profile = () => {
 
           {/* Profile Information */}
           <Typography variant="h4" fontWeight="bold" sx={{ mb: 1 }}>
-            {profile?.name || "Your Name"}
+            {profile?.name || <Skeleton animation={"wave"}/>}
+          </Typography>
+          <Typography variant="h6" fontWeight="bold" sx={{ mb: 1 }}>
+            Total points earned: {profile?.points ?? <Skeleton animation={"wave"}/>}
           </Typography>
           <Typography variant="body1" sx={{ mb: 3, color: "gray" }}>
-            {profile?.email || "email@example.com"}
+            {profile?.email || <Skeleton animation={"wave"}/>}
           </Typography>
 
           {/* Grid for additional information */}
@@ -179,7 +182,7 @@ export const Profile = () => {
                 Phone Number
               </Typography>
               <Typography variant="body1">
-                {profile?.phone_number || "Not provided"}
+                {profile?.phone_number || <Skeleton animation={"wave"}/>}
               </Typography>
             </Grid>
             <Grid item xs={6} sm={6}>
@@ -187,7 +190,7 @@ export const Profile = () => {
                 Course Enrolled
               </Typography>
               <Typography variant="body1">
-                {profile?.course_enrolled || "No address specified"}
+                {profile?.course_enrolled || <Skeleton animation={"wave"}/>}
               </Typography>
             </Grid>
           </Grid>
@@ -198,7 +201,7 @@ export const Profile = () => {
                 Specialization
               </Typography>
               <Typography variant="body1">
-                {profile?.specialization || "Not provided"}
+                {profile?.specialization || <Skeleton animation={"wave"}/>}
               </Typography>
             </Grid>
             
@@ -214,7 +217,7 @@ export const Profile = () => {
             }}
           >
             {/* Edit Profile Button */}
-            <Button
+            {/* <Button
               variant="contained"
               color="primary"
               sx={{
@@ -233,7 +236,7 @@ export const Profile = () => {
             //   onClick={() => (window.location.href = "/edit-profile")}
             >
               Edit Profile
-            </Button>
+            </Button> */}
 
             {/* Logout Button */}
             <Button
