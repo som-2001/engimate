@@ -391,9 +391,11 @@ export const addMarksToSubmission = Trycatch(async (req, res) => {
       message: "Exam application not found for this submission.",
     });
   }
-  const refApplication = await Exam_Application_ref.findById(
-    submission.examApplication._id,
-  );
+  //console.log("Exam Application ID:", submission.examApplication._id.toString());
+  const refApplication = await Exam_Application_ref.findOne({
+    exam_application: submission.examApplication._id.toString(),
+  });
+  //console.log(refApplication);
   if (!refApplication) {
     return res.status(404).json({
       message: "Exam Ref application not found for this submission.",

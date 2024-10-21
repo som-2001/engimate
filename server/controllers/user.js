@@ -385,7 +385,9 @@ export const listAllExams = trycatch(async (req, res) => {
 });
 
 export const listExamsByCourse = trycatch(async (req, res) => {
-  const exams = await Exam.find({ course: req.params.id }).select("title _id");
+  const exams = await Exam.find({ course: req.params.id }).select(
+    "title _id createdAt",
+  );
 
   if (!exams || exams.length === 0) {
     return res.status(404).json({
@@ -434,7 +436,7 @@ export const getExamApplicationId = trycatch(async (req, res) => {
 
 export const getCertificate = trycatch(async (req, res) => {
   const examID = req.params.id;
-  const application = await ExamApplication.find({
+  const application = await ExamApplication.findOne({
     applicant: req.user._id,
     exam: examID,
   });
@@ -445,11 +447,11 @@ export const getCertificate = trycatch(async (req, res) => {
     });
   }
   if (application.status === "failed") {
-    return res.status(404).json({
+    return res.status(403).json({
       message: "You cannot apply for the certificate as you failed the exam",
     });
   }
-  if (application.status !== "passed") {
+  if (application.status === "passed") {
     const exam = await Exam.findById(examID).populate("course");
     if (!exam) {
       return res.status(404).json({
@@ -483,7 +485,7 @@ export const getCertificate = trycatch(async (req, res) => {
 });
 export const getAllCertificate = trycatch(async (req, res) => {
   const certificates = await Certificate.findById(req.user._id);
-  if (certificates.length === 0) {
+  if (!certificates || certificates.length === 0) {
     return res.status(404).json({
       message: "certificates not found for this user",
     });
