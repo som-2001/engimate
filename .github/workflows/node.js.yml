@@ -24,6 +24,13 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Cache Server Dependencies
+      uses: actions/cache@v3
+      with:
+        path: ./server/node_modules
+        key: server-dependencies-${{ runner.os }}-node-${{ hashFiles('server/package-lock.json') }}
+        restore-keys: |
+          server-dependencies-${{ runner.os }}-node-
         
     - name: Install Server Dependencies
       working-directory: ./server
@@ -31,6 +38,14 @@ jobs:
       env:
           NODE_ENV: production
           API_URL: ${{ secrets.SERVER_ENV }}
+              # Cache for frontend dependencies
+    - name: Cache Frontend Dependencies
+      uses: actions/cache@v3
+      with:
+        path: ./frontend/node_modules
+        key: frontend-dependencies-${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
+        restore-keys: |
+          frontend-dependencies-${{ runner.os }}-node-
           
     - name: Install Frontend Dependencies
       working-directory: ./frontend
