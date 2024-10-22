@@ -49,7 +49,7 @@ jobs:
           
     - name: Install Frontend Dependencies
       working-directory: ./frontend
-      run: npm install
+      run: npm ci
       env:
           NODE_ENV: production
           API_URL: ${{ secrets.FRONTEND_ENV }}
