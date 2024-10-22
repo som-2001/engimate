@@ -27,7 +27,7 @@ jobs:
         cache: 'npm'
     - name: Install Server Dependencies
       working-directory: ./server
-    - run: npm install
+      run: npm install
       env:
           NODE_ENV: production
           API_URL: ${{ secrets.SERVER_ENV }}
