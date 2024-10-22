@@ -24,21 +24,34 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        check-latest: true
         cache: 'npm'
+        
     - name: Install Server Dependencies
       working-directory: ./server
       run: npm install
       env:
           NODE_ENV: production
           API_URL: ${{ secrets.SERVER_ENV }}
+          
     - name: Install Frontend Dependencies
       working-directory: ./frontend
       run: npm install
       env:
           NODE_ENV: production
           API_URL: ${{ secrets.FRONTEND_ENV }}
+          
     - name: Build React App
       working-directory: ./frontend
       run: |
         npm run build
+        
+    # Debug step to check contents of directories
+    - name: Check Server Directory Contents
+      working-directory: ./server
+      run: ls -la
+
+    - name: Check Frontend Directory Contents
+      working-directory: ./frontend
+      run: ls -la
+
+        
