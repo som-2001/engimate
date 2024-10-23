@@ -39,6 +39,10 @@ jobs:
           NODE_ENV: production
           API_URL: ${{ secrets.SERVER_ENV }}
               # Cache for frontend dependencies
+    - name: restart pm2
+      working-directory: ./server
+      run: pm2 reload BackendApi
+      
     - name: Cache Frontend Dependencies
       uses: actions/cache@v3
       with:
@@ -67,4 +71,7 @@ jobs:
       working-directory: ./frontend
       run: ls -la
 
+    - name: Reload nginx 
+      run: systemctl reload nginx
+     
         
