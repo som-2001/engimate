@@ -72,6 +72,6 @@ jobs:
       run: ls -la
 
     - name: Reload nginx 
-      run: systemctl reload nginx
+      run: sudo systemctl reload nginx
      
         
