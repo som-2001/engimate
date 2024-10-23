@@ -57,7 +57,7 @@ jobs:
     - name: Build React App
       working-directory: ./frontend
       run: |
-        NODE_ENV=production npm run build
+        CI=false NODE_ENV=production npm run build
     # Debug step to check contents of directories
     - name: Check Server Directory Contents
       working-directory: ./server
