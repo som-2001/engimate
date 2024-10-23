@@ -3,7 +3,7 @@ import { Box, Container, Grid, Typography, Button, Grid2 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer"; 
 import CourseCard from "../components/CourseCard";
 
 // Styled components
