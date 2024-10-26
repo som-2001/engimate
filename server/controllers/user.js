@@ -484,7 +484,10 @@ export const getCertificate = trycatch(async (req, res) => {
   });
 });
 export const getAllCertificate = trycatch(async (req, res) => {
-  const certificates = await Certificate.findById(req.user._id);
+  const certificates = await Certificate.find({ user: req.user._id }).populate(
+    "exam",
+    "title",
+  );
   if (!certificates || certificates.length === 0) {
     return res.status(404).json({
       message: "certificates not found for this user",
