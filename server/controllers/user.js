@@ -509,7 +509,7 @@ export const getCertificateDetail = trycatch(async (req, res) => {
       message: "certificate not found.",
     });
   }
-  return res.status.json({
+  return res.status(200).json({
     message: "certificate fetch successfully",
     certificate,
   });

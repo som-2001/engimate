@@ -1,4 +1,19 @@
-import { Box, Typography, Avatar, Button, Grid, DialogActions, DialogContentText, DialogContent, DialogTitle, Dialog, Skeleton } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Avatar,
+  Button,
+  Grid,
+  DialogActions,
+  DialogContentText,
+  DialogContent,
+  DialogTitle,
+  Dialog,
+  Skeleton,
+  Card,
+  CardContent,
+  CardActions,
+} from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UserNavbar from "../components/userNavbar";
@@ -10,7 +25,8 @@ import { useNavigate } from "react-router-dom";
 
 export const Profile = () => {
   const [profile, setProfile] = useState({});
-  const navigate=useNavigate();
+  const [result, setResult] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = sessionStorage?.getItem("token");
@@ -38,10 +54,27 @@ export const Profile = () => {
       .then((res) => {
         console.log(res.data.user);
         setProfile(res.data.user);
-        sessionStorage.setItem("name",res.data.user.name);
+        sessionStorage.setItem("name", res.data.user.name);
       })
       .catch((error) => {
         console.log(error);
+        if (error?.response?.data?.message === "login first or token expired") {
+          window.location.href = "/login";
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASEURl}/exam/getcertificate/all`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setResult(res.data.certificates);
+      })
+      .catch((error) => {
         if (error?.response?.data?.message === "login first or token expired") {
           window.location.href = "/login";
         }
@@ -53,19 +86,16 @@ export const Profile = () => {
     setOpenDialog(false);
   };
 
-  const Logout=()=>{
-
-    toast.success("Logging out",{autoClose:3000});
-    window.location.href='/';
-    if(sessionStorage.getItem('token'))
-      sessionStorage.removeItem('token');
-  
-   }
+  const Logout = () => {
+    toast.success("Logging out", { autoClose: 3000 });
+    window.location.href = "/";
+    if (sessionStorage.getItem("token")) sessionStorage.removeItem("token");
+  };
 
   return (
     <Box sx={{ overflowX: "hidden" }}>
       <UserNavbar />
-      <ToastContainer/>
+      <ToastContainer />
       <Box
         sx={{
           width: "100vw",
@@ -129,7 +159,8 @@ export const Profile = () => {
                 color: "white",
               }}
             >
-             Your personal hub for all your personal details, settings, and updates.
+              Your personal hub for all your personal details, settings, and
+              updates.
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12} lg={6} md={6}></Grid>
@@ -142,19 +173,22 @@ export const Profile = () => {
           alignItems: "center",
           p: 4,
           minHeight: "80vh",
-         
         }}
       >
         <Box
-          
           sx={{
-            boxShadow:{xs:0,lg:2,md:2,sm:2},
+            boxShadow: { xs: 0, lg: 2, md: 2, sm: 2 },
             p: 4,
             maxWidth: "800px",
             width: "100%",
             borderRadius: 2,
             textAlign: "center",
-             backgroundColor:{lg:"whitesmoke",md:"whitesmoke",xs:"transparent",sm:"whitesmoke"}
+            backgroundColor: {
+              lg: "whitesmoke",
+              md: "whitesmoke",
+              xs: "transparent",
+              sm: "whitesmoke",
+            },
           }}
         >
           {/* Profile Avatar */}
@@ -166,13 +200,14 @@ export const Profile = () => {
 
           {/* Profile Information */}
           <Typography variant="h4" fontWeight="bold" sx={{ mb: 1 }}>
-            {profile?.name || <Skeleton animation={"wave"}/>}
+            {profile?.name || <Skeleton animation={"wave"} />}
           </Typography>
           <Typography variant="h6" fontWeight="bold" sx={{ mb: 1 }}>
-            Total points earned: {profile?.points ?? <Skeleton animation={"wave"}/>}
+            Total points earned:{" "}
+            {profile?.points ?? <Skeleton animation={"wave"} />}
           </Typography>
           <Typography variant="body1" sx={{ mb: 3, color: "gray" }}>
-            {profile?.email || <Skeleton animation={"wave"}/>}
+            {profile?.email || <Skeleton animation={"wave"} />}
           </Typography>
 
           {/* Grid for additional information */}
@@ -182,7 +217,7 @@ export const Profile = () => {
                 Phone Number
               </Typography>
               <Typography variant="body1">
-                {profile?.phone_number || <Skeleton animation={"wave"}/>}
+                {profile?.phone_number || <Skeleton animation={"wave"} />}
               </Typography>
             </Grid>
             <Grid item xs={6} sm={6}>
@@ -190,21 +225,20 @@ export const Profile = () => {
                 Course Enrolled
               </Typography>
               <Typography variant="body1">
-                {profile?.course_enrolled || <Skeleton animation={"wave"}/>}
+                {profile?.course_enrolled || <Skeleton animation={"wave"} />}
               </Typography>
             </Grid>
           </Grid>
 
-          <Grid container spacing={2} justifyContent="center" >
+          <Grid container spacing={2} justifyContent="center">
             <Grid item xs={12} sm={6} margin="15px">
-              <Typography variant="body2" fontWeight="bold" >
+              <Typography variant="body2" fontWeight="bold">
                 Specialization
               </Typography>
               <Typography variant="body1">
-                {profile?.specialization || <Skeleton animation={"wave"}/>}
+                {profile?.specialization || <Skeleton animation={"wave"} />}
               </Typography>
             </Grid>
-            
           </Grid>
 
           {/* Additional Sections */}
@@ -245,7 +279,7 @@ export const Profile = () => {
               sx={{
                 backgroundColor: "#0d47a1", // Matching button color with main heading
                 color: "#fff",
-                width:{lg:"25%",md:"25%",sm:"25%",xs:"90%"},
+                width: { lg: "25%", md: "25%", sm: "25%", xs: "90%" },
                 padding: "10px 24px",
                 fontSize: "1rem",
                 textTransform: "none",
@@ -253,7 +287,7 @@ export const Profile = () => {
                 "&:hover": {
                   backgroundColor: "#08306b", // Darker shade on hover
                 },
-                }}
+              }}
               onClick={() => {
                 setOpenDialog(true);
               }}
@@ -263,27 +297,64 @@ export const Profile = () => {
           </Box>
         </Box>
         <Dialog
-            open={openDialog}
-            onClose={handleCloseDialog}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"Logout"}</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Are you sure you want to Logout?
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseDialog} color="primary">
-                No
-              </Button>
-              <Button onClick={Logout} color="primary" autoFocus>
-                Yes, Logout
-              </Button>
-            </DialogActions>
-          </Dialog>
+          open={openDialog}
+          onClose={handleCloseDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Logout"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to Logout?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDialog} color="primary">
+              No
+            </Button>
+            <Button onClick={Logout} color="primary" autoFocus>
+              Yes, Logout
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Box>
+      <Box sx={{ padding: 3 }}>
+  <Typography variant="h5" align="center" marginBottom="20px" gutterBottom>Your Certificates</Typography>
+  
+  {result.length === 0 ? (
+    <Typography variant="body1" align="center">No certificates available.</Typography>
+  ) : (
+    <Grid container spacing={3} justifyContent="center">
+      {result.map((data, index) => (
+        <Grid item xs={12} sm={6} md={4} key={index}>
+          <Card 
+            sx={{
+              boxShadow: 3,
+              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              '&:hover': {
+               
+                boxShadow: 6,
+              },
+            }}
+            
+          >
+            <CardContent>
+              <Typography variant="h6" color="primary" gutterBottom>
+                {data?.exam?.title || "Certificate Title"}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {data?.course || "Course Name"}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button>View</Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
+  )}
+</Box>
       <Footer />
     </Box>
   );
