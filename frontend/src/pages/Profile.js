@@ -4,15 +4,11 @@ import {
   Avatar,
   Button,
   Grid,
-  DialogActions,
-  DialogContentText,
-  DialogContent,
-  DialogTitle,
-  Dialog,
   Skeleton,
   Card,
   CardContent,
   CardActions,
+  CircularProgress,
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -22,10 +18,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import jsPDF from "jspdf";
 
 export const Profile = () => {
   const [profile, setProfile] = useState({});
   const [result, setResult] = useState([]);
+  const [load, setLoad] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,17 +50,15 @@ export const Profile = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.user);
         setProfile(res.data.user);
         sessionStorage.setItem("name", res.data.user.name);
       })
       .catch((error) => {
-        console.log(error);
         if (error?.response?.data?.message === "login first or token expired") {
           window.location.href = "/login";
         }
       });
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     axios
@@ -73,23 +69,113 @@ export const Profile = () => {
       })
       .then((res) => {
         setResult(res.data.certificates);
+        setLoad(false);
       })
       .catch((error) => {
         if (error?.response?.data?.message === "login first or token expired") {
           window.location.href = "/login";
+          setLoad(false);
         }
       });
-  }, []);
-
-  const [openDialog, setOpenDialog] = useState(false); // For the confirmation dialog
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
+  }, [navigate]);
 
   const Logout = () => {
     toast.success("Logging out", { autoClose: 3000 });
     window.location.href = "/";
     if (sessionStorage.getItem("token")) sessionStorage.removeItem("token");
+  };
+
+  // Function to handle PDF download
+  const handleDownloadPdf = async (id) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASEURl}/exam/getcertificate/detail/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      const certificateData = response.data.certificate;
+      const { title } = certificateData.exam;
+      const course = certificateData.course;
+      const certificateId = certificateData.certificate_id;
+
+      const doc = new jsPDF({
+        orientation: "landscape",
+        unit: "px",
+        format: [600, 400],
+      });
+
+      // Add border
+      doc.setDrawColor(0, 0, 0);
+      doc.setLineWidth(1.5);
+      doc.rect(10, 10, 580, 380);
+
+      // Add company logo at the top center
+      const logoUrl = "https://engimate-pt2s.vercel.app/images/logo.png"; // Replace with actual logo URL or base64 string
+      const imgWidth = 180;
+      const imgHeight = 80;
+      doc.addImage(logoUrl, "PNG", 260, 20, imgWidth, imgHeight);
+
+      // Certificate title
+      doc.setFontSize(26);
+      doc.setFont("helvetica", "bold");
+      doc.text("Certificate of Achievement", 300, 120, { align: "center" });
+
+      // Subtitle text
+      doc.setFontSize(14);
+      doc.setFont("helvetica", "normal");
+      doc.text(
+        `This certifies that ${profile.name} has successfully completed the course in`,
+        300,
+        150,
+        { align: "center" }
+      );
+
+      // Course title (Dynamic field)
+      doc.setFontSize(18);
+      doc.setFont("helvetica", "bold");
+      doc.text(`${course}`, 300, 170, { align: "center" });
+
+      // Static congratulatory message
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "italic");
+      doc.text(
+        "Awarded this day with distinction for demonstrated skills and accomplishments.",
+        300,
+        270,
+        { align: "center" }
+      );
+
+      // Certificate ID (Dynamic field)
+      doc.setFontSize(10);
+      doc.text(`Certificate ID: ${certificateId}`, 300, 300, {
+        align: "center",
+      });
+
+      // Authorized Signature section
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "italic");
+      doc.text("Authorized Signature", 490, 350);
+
+      // Draw line for signature
+      doc.line(420, 340, 570, 340);
+
+      // Company footer
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.text("Lyss.in | +91 7905682392 | www.lyss.in", 300, 380, {
+        align: "center",
+      });
+
+      // Save the PDF
+      doc.save(`${title}_certificate.pdf`);
+    } catch (error) {
+      console.error("Failed to download certificate", error);
+      toast.error("Failed to download certificate");
+    }
   };
 
   return (
@@ -191,14 +277,12 @@ export const Profile = () => {
             },
           }}
         >
-          {/* Profile Avatar */}
           <Avatar
             src={profile?.profileImage || "/default-avatar.png"}
             alt="Profile Image"
             sx={{ width: 120, height: 120, mx: "auto", mb: 2 }}
           />
 
-          {/* Profile Information */}
           <Typography variant="h4" fontWeight="bold" sx={{ mb: 1 }}>
             {profile?.name || <Skeleton animation={"wave"} />}
           </Typography>
@@ -210,7 +294,6 @@ export const Profile = () => {
             {profile?.email || <Skeleton animation={"wave"} />}
           </Typography>
 
-          {/* Grid for additional information */}
           <Grid container spacing={2} justifyContent="center">
             <Grid item xs={6} sm={6}>
               <Typography variant="body2" fontWeight="bold">
@@ -241,7 +324,6 @@ export const Profile = () => {
             </Grid>
           </Grid>
 
-          {/* Additional Sections */}
           <Box
             sx={{
               mt: 4,
@@ -250,111 +332,61 @@ export const Profile = () => {
               gap: 2,
             }}
           >
-            {/* Edit Profile Button */}
-            {/* <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                backgroundColor: "#0d47a1", // Matching button color with main heading
-                color: "#fff",
-                width:{lg:"25%",md:"25%",sm:"25%",xs:"95%"},
-                padding: "10px 24px",
-                fontSize: "1rem",
-                textTransform: "none",
-                borderRadius: "50px",
-                "&:hover": {
-                  backgroundColor: "#08306b", // Darker shade on hover
-                },
-                
-              }}
-            //   onClick={() => (window.location.href = "/edit-profile")}
-            >
-              Edit Profile
-            </Button> */}
-
-            {/* Logout Button */}
             <Button
               variant="outlined"
               color="secondary"
               sx={{
-                backgroundColor: "#0d47a1", // Matching button color with main heading
+                backgroundColor: "#0d47a1",
                 color: "#fff",
-                width: { lg: "25%", md: "25%", sm: "25%", xs: "90%" },
-                padding: "10px 24px",
-                fontSize: "1rem",
-                textTransform: "none",
-                borderRadius: "50px",
+                width: { xs: "50%", sm: "auto" },
+                border: "none",
                 "&:hover": {
-                  backgroundColor: "#08306b", // Darker shade on hover
+                  backgroundColor: "#0a5dd7",
                 },
               }}
-              onClick={() => {
-                setOpenDialog(true);
-              }}
+              onClick={Logout}
             >
               Logout
             </Button>
           </Box>
         </Box>
-        <Dialog
-          open={openDialog}
-          onClose={handleCloseDialog}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{"Logout"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Are you sure you want to Logout?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDialog} color="primary">
-              No
-            </Button>
-            <Button onClick={Logout} color="primary" autoFocus>
-              Yes, Logout
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <Box sx={{ mt: 4, width: "100%" }}>
+          <Typography variant="h5" fontWeight="bold" align="center" sx={{ mb: 2,mt:2 }}>
+            Your Certificates
+          </Typography>
+          <Grid container spacing={2}>
+            {load ? (
+             <Box sx={{padding:"40px"}}><center><CircularProgress size={35} /></center> </Box>
+            ) : result.length === 0 ? (
+              <p>No Certificates.</p>
+            ) : (
+              result?.map((certificate) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={certificate._id} marginTop={"50px"}>
+                  <Card>
+                    <CardContent>
+                      <Typography variant="h6" gutterBottom>
+                        {certificate?.exam?.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {certificate?.course}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        size="small"
+                        color="primary"
+                        onClick={() => handleDownloadPdf(certificate._id)}
+                      >
+                        Download
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))
+            )}
+          </Grid>
+        </Box>
       </Box>
-      <Box sx={{ padding: 3 }}>
-  <Typography variant="h5" align="center" marginBottom="20px" gutterBottom>Your Certificates</Typography>
-  
-  {result.length === 0 ? (
-    <Typography variant="body1" align="center">No certificates available.</Typography>
-  ) : (
-    <Grid container spacing={3} justifyContent="center">
-      {result.map((data, index) => (
-        <Grid item xs={12} sm={6} md={4} key={index}>
-          <Card 
-            sx={{
-              boxShadow: 3,
-              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              '&:hover': {
-               
-                boxShadow: 6,
-              },
-            }}
-            
-          >
-            <CardContent>
-              <Typography variant="h6" color="primary" gutterBottom>
-                {data?.exam?.title || "Certificate Title"}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {data?.course || "Course Name"}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button>View</Button>
-            </CardActions>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
-  )}
-</Box>
       <Footer />
     </Box>
   );
