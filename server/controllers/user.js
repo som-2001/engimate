@@ -493,7 +493,7 @@ export const getAllCertificate = trycatch(async (req, res) => {
       message: "certificates not found for this user",
     });
   }
-  return res.status.json({
+  return res.status(200).json({
     message: "certificates fetch successfully",
     certificates,
   });
