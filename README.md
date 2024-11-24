@@ -57,57 +57,67 @@ Yantraved is a MERN (MongoDB, Express, React, Node.js) stack project designed fo
 * Node.js (v16 or higher)
 * MongoDB
 * npm or yarn package manager
-
-Steps
+  
+## Steps
 1. Clone the repository:
-` git clone https://github.com/som-2001/engimate.git
-cd yantraved `
-2. Install dependencies:
-Backend:
-` cd backend 
-npm install `
-Frontend:
-` cd ../frontend
-npm install `
-3. Configure environment variables: Create a .env file in the backend directory with the following variables:
+```bash
+git clone https://github.com/som-2001/engimate.git
+cd yantraved
+```
 
-` # MongoDB Configuration
-    MONGOUSERNAME=yourMongoUsername
-    MONOGOPASS=yourMongoPassword
-    MONGODBURL=mongodb+srv://<username>:<password>@clustername.mongodb.net/database-name
-  
-  # Server Configuration
-  PORT=8000
-  
-  # Authentication Secrets
-  ACTIVATION_SECRET=yourActivationSecret
-  JWT_SECRET=yourJWTSecret
-  
-  # SMTP Configuration
-  SMTP_MAIL=yourEmail@example.com
-  SMTP_USERNAME=yourSMTPUsername
-  SMTP_PASSWORD=yourSMTPPassword
-  SMTP_HOST=smtp.example.com
-  SMTP_PORT=2525
-  
-  # Razorpay API Keys
-  RAZORPAY_KEY_ID=yourRazorpayKeyId
-  RAZORPAY_KEY_SECRET=yourRazorpayKeySecret
-  
-  # Twilio API Keys
-  TWILIO_ACCOUNT_SID=yourTwilioAccountSID
-  TWILIO_AUTH_TOKEN=yourTwilioAuthToken
-  TWILIO_PHONE_NUMBER=yourTwilioPhoneNumber 
-`
+2. Install dependencies:
+```bash
+# Backend
+cd backend 
+npm install
+
+# Frontend
+cd ../frontend
+npm install
+```
+
+3. Configure environment variables:
+Create a `.env` file in the backend directory with the following variables:
+
+```env
+# MongoDB Configuration
+MONGOUSERNAME=yourMongoUsername
+MONOGOPASS=yourMongoPassword
+MONGODBURL=mongodb+srv://<username>:<password>@clustername.mongodb.net/database-name
+
+# Server Configuration
+PORT=8000
+
+# Authentication Secrets
+ACTIVATION_SECRET=yourActivationSecret
+JWT_SECRET=yourJWTSecret
+
+# SMTP Configuration
+SMTP_MAIL=yourEmail@example.com
+SMTP_USERNAME=yourSMTPUsername
+SMTP_PASSWORD=yourSMTPPassword
+SMTP_HOST=smtp.example.com
+SMTP_PORT=2525
+
+# Razorpay API Keys
+RAZORPAY_KEY_ID=yourRazorpayKeyId
+RAZORPAY_KEY_SECRET=yourRazorpayKeySecret
+
+# Twilio API Keys
+TWILIO_ACCOUNT_SID=yourTwilioAccountSID
+TWILIO_AUTH_TOKEN=yourTwilioAuthToken
+TWILIO_PHONE_NUMBER=yourTwilioPhoneNumber
+```
 
 4. Run the project:
+```bash
+# Backend
+cd backend
+npm start
 
-Backend:
-`cd backend
-npm start`
-Frontend:
-`cd ../frontend
-npm start`
+# Frontend
+cd ../frontend
+npm start
+```
 
-5. Open your browser and navigate to `http://localhost:3000`.
-
+5. Open your browser and navigate to `http://localhost:3000`
