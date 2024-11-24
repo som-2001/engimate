@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+# Yantraved
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Yantraved is a MERN (MongoDB, Express, React, Node.js) stack project designed for e-learning, course management, and user engagement. It includes features like course enrollment, lectures, materials, daily practice problems, payment handling, user management, and more.
 
-## Available Scripts
+# Features
 
-In the project directory, you can run:
+## Frontend
 
-### `npm start`
+* Home Page: A user-friendly homepage showcasing available courses and features.
+* Dashboard: User dashboard for managing personal and academic information.
+* Course Management:
+  * View, browse, and enroll in courses.
+  * Access course details and lectures.
+* Examinations: Apply for exams, submit exams, and download certificates.
+* Profile Management: Update personal information and manage preferences.
+* Gallery: Showcase events and activities.
+* Refer and Earn: Reward system for user referrals.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Backend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* Course Management:
+  * Add, update, and delete courses and lectures.
+  * Manage course categories and materials.
+* Examination System:
+  * Exam application, submission, and certificate generation.
+  * Download exam PDFs and view statuses.
+* Daily Practice Problems (DPP):
+  * Add, fetch, and delete DPPs.
+* User Management:
+  * Role-based access control for admin, instructor, and users.
+  * CRUD operations on user profiles.
+* E-commerce:
+  * Add to cart, checkout, and payment handling with verification.
+* Reporting and Analytics:
+  * Fetch detailed statistics and user activity reports.
 
-### `npm test`
+# Technology Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Frontend
+* React.js: For building user interfaces and routing.
+* React Router: For managing frontend routes.
+* CSS/SCSS: For styling components.
+## Backend
+* Node.js: Server-side runtime.
+* Express.js: Framework for handling routes and middleware.
+* MongoDB: Database for storing user data, courses, and more.
+## Middleware
+* Multer: For handling file uploads.
+* JWT: For authentication and user session management.
+* Custom Middlewares:
+  * isAuth.js: Authentication middleware.
+  * isAdminOrInstructor.js: Role-based authorization middleware.
+  * trycatch.js: Error handling.
 
-### `npm run build`
+# Installation and Setup
+## Prerequisites
+* Node.js (v16 or higher)
+* MongoDB
+* npm or yarn package manager
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Steps
+1. Clone the repository:
+` git clone https://github.com/som-2001/engimate.git
+cd yantraved `
+2. Install dependencies:
+Backend:
+` cd backend 
+npm install `
+Frontend:
+` cd ../frontend
+npm install `
+3. Configure environment variables: Create a .env file in the backend directory with the following variables:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+` # MongoDB Configuration
+    MONGOUSERNAME=yourMongoUsername
+    MONOGOPASS=yourMongoPassword
+    MONGODBURL=mongodb+srv://<username>:<password>@clustername.mongodb.net/database-name
+  
+  # Server Configuration
+  PORT=8000
+  
+  # Authentication Secrets
+  ACTIVATION_SECRET=yourActivationSecret
+  JWT_SECRET=yourJWTSecret
+  
+  # SMTP Configuration
+  SMTP_MAIL=yourEmail@example.com
+  SMTP_USERNAME=yourSMTPUsername
+  SMTP_PASSWORD=yourSMTPPassword
+  SMTP_HOST=smtp.example.com
+  SMTP_PORT=2525
+  
+  # Razorpay API Keys
+  RAZORPAY_KEY_ID=yourRazorpayKeyId
+  RAZORPAY_KEY_SECRET=yourRazorpayKeySecret
+  
+  # Twilio API Keys
+  TWILIO_ACCOUNT_SID=yourTwilioAccountSID
+  TWILIO_AUTH_TOKEN=yourTwilioAuthToken
+  TWILIO_PHONE_NUMBER=yourTwilioPhoneNumber 
+`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Run the project:
 
-### `npm run eject`
+Backend:
+`cd backend
+npm start`
+Frontend:
+`cd ../frontend
+npm start`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. Open your browser and navigate to `http://localhost:3000`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
